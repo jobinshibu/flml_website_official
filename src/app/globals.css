@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  /* Blue + White Brand Identity */
+  --color-brand-blue: #0A369D; /* Strong corporate engineering blue */
+  --color-brand-blue-dark: #061A45; /* Deep navy for technical sections */
+  --color-brand-blue-light: #E6F0FF; /* Very subtle blue tint */
+  
+  --color-background: #FFFFFF;
+  --color-foreground: #111111;
+  
+  --color-surface-100: #F8F9FA;
+  --color-surface-200: #F0F2F5;
+  
+  --color-border-subtle: #E2E8F0;
+  --color-border-strong: #CBD5E1;
+  
+  --color-accent: var(--color-brand-blue);
+  --color-accent-hover: #08297A;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
