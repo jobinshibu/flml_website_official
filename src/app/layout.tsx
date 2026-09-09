@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Cinzel, Cormorant_Garamond } from "next/font/google";
+import { Geist, Geist_Mono, Cinzel, Cormorant_Garamond, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/Footer";
@@ -27,6 +27,12 @@ const cormorant = Cormorant_Garamond({
   weight: ["300", "400", "500", "600", "700"],
 });
 
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
+
 export const metadata: Metadata = {
   title: "First Logic Meta Lab",
   description: "Building highly scalable, unbreakable software architectures.",
@@ -41,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${cinzel.variable} ${cormorant.variable} dark`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${cinzel.variable} ${cormorant.variable} ${playfair.variable} dark`}>
 
       <body className="antialiased min-h-full flex flex-col font-sans bg-gradient-to-b from-brand-blue-dark to-black transition-colors">
         <Navigation />

@@ -108,10 +108,22 @@ export default function HeroCanvas({
       // Widescreen desktop: fit full viewport height seamlessly
       renderHeight = canvasHeight;
       renderWidth = Math.round(canvasHeight * imgRatio);
-      offsetX = Math.round((canvasWidth - renderWidth) / 2);
+      
+      // Desktop two-zone composition: place character in center/right (approx 40-75% viewport width)
+      // leaving left 7-42% completely clear for editorial typography
+      if (canvasWidth >= 1024) {
+        const targetCenterX = canvasWidth * 0.58;
+        const computedOffset = Math.round(targetCenterX - renderWidth * 0.48);
+        // Ensure within bounds
+        const maxOffset = canvasWidth - Math.round(renderWidth * 0.88);
+        const minOffset = Math.round((canvasWidth - renderWidth) * 0.5);
+        offsetX = Math.min(maxOffset, Math.max(minOffset, computedOffset));
+      } else {
+        offsetX = Math.round((canvasWidth - renderWidth) / 2);
+      }
       offsetY = 0;
     } else {
-      // Mobile / Portrait: fit full height
+      // Mobile / Portrait: fit full height and center
       renderHeight = canvasHeight;
       renderWidth = Math.round(canvasHeight * imgRatio);
       offsetX = Math.round((canvasWidth - renderWidth) / 2);
@@ -128,7 +140,7 @@ export default function HeroCanvas({
 
     // 3. Seamlessly feather the left and right boundaries so no box or seam is visible
     if (canvasRatio > imgRatio && offsetX > 0) {
-      const featherW = Math.min(110, Math.round(renderWidth * 0.14));
+      const featherW = Math.min(130, Math.round(renderWidth * 0.15));
 
       // Left edge feather
       const leftGrad = ctx.createLinearGradient(offsetX - 2, 0, offsetX + featherW, 0);

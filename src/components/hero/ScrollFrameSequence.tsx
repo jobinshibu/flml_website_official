@@ -37,7 +37,7 @@ export default function ScrollFrameSequence() {
       className="relative h-[350vh] bg-[#061A45] selection:bg-brand-blue selection:text-white"
     >
       {/* Sticky Pinned 100vh Viewport */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#061A45]">
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-white">
         
         {/* 1. Canvas Frame Sequence Engine */}
         <HeroCanvas
