@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
@@ -88,6 +88,9 @@ const buildItems = [
 ];
 
 export default function WhatWeBuild() {
+  // Ref to store timeout IDs for cleanup
+  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const itemRefs = useRef<Record<string, HTMLDivElement | null>>({});
@@ -98,7 +101,7 @@ export default function WhatWeBuild() {
     } else {
       setExpandedId(id);
       
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         const el = itemRefs.current[id];
         if (el) {
           const yOffset = -120;
@@ -106,8 +109,16 @@ export default function WhatWeBuild() {
           window.scrollTo({ top: y, behavior: 'smooth' });
         }
       }, 50);
+      timersRef.current.push(timer);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      timersRef.current.forEach((id) => clearTimeout(id));
+      timersRef.current = [];
+    };
+  }, []);
 
   return (
     <section id="capabilities" className="pt-12 pb-32 px-8 bg-white border-t border-border-subtle relative">

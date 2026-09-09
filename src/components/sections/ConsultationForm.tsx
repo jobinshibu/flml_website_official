@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const questions = [
@@ -22,6 +22,9 @@ const questions = [
 ];
 
 export default function ConsultationForm() {
+  // Refs to store timeout IDs for cleanup
+  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [email, setEmail] = useState("");
@@ -31,7 +34,8 @@ export default function ConsultationForm() {
   const handleSelect = (option: string) => {
     if (step < questions.length) {
       setAnswers({ ...answers, [questions[step].id]: option });
-      setTimeout(() => setStep(step + 1), 300);
+      const timer = setTimeout(() => setStep(step + 1), 300);
+      timersRef.current.push(timer);
     }
   };
 
@@ -39,11 +43,20 @@ export default function ConsultationForm() {
     e.preventDefault();
     setIsSubmitting(true);
     // Simulate network request
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setIsSubmitting(false);
       setIsSuccess(true);
     }, 1500);
+    timersRef.current.push(timer);
   };
+
+  useEffect(() => {
+    // Cleanup timers on unmount to prevent state updates after component is gone
+    return () => {
+      timersRef.current.forEach((id) => clearTimeout(id));
+      timersRef.current = [];
+    };
+  }, []);
 
   return (
     <section id="consultation" className="py-32 px-4 md:px-8 bg-brand-blue-dark text-white relative overflow-hidden border-t border-white/10">
