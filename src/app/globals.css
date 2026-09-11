@@ -1,28 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-  /* Blue + White Brand Identity */
-  --color-brand-blue: #0A369D; /* Strong corporate engineering blue */
-  --color-brand-blue-dark: #061A45; /* Deep navy for technical sections */
-  --color-brand-blue-light: #E6F0FF; /* Very subtle blue tint */
+  /* Pitch Black & Crisp OpenAI Astra Palette */
+  --color-brand-blue: #3B82F6; /* Vibrant accent cyan/blue */
+  --color-brand-blue-dark: #000000; /* Pure pitch black */
+  --color-brand-blue-light: #60A5FA;
   
-  --color-background: #FFFFFF;
-  --color-foreground: #111111;
+  --color-background: #000000;
+  --color-foreground: #FFFFFF;
   
-  --color-surface-100: #F8F9FA;
-  --color-surface-200: #F0F2F5;
+  --color-surface-100: #0A0A0A;
+  --color-surface-200: #121212;
   
-  --color-border-subtle: #E2E8F0;
-  --color-border-strong: #CBD5E1;
+  --color-border-subtle: rgba(255, 255, 255, 0.1);
+  --color-border-strong: rgba(255, 255, 255, 0.2);
   
-  --color-accent: var(--color-brand-blue);
-  --color-accent-hover: #08297A;
+  --color-accent: #FFFFFF;
+  --color-accent-hover: #E5E5E5;
 }
 
 @layer base {
+  html {
+    color-scheme: dark;
+    background-color: #000000;
+  }
+  
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    background-color: #000000;
+    color: #FFFFFF;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -39,3 +44,18 @@
     text-wrap: balance;
   }
 }
+
+/* Sleek dark scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: #262626;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #404040;
+}

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/Footer";
+import ChatWidget from "@/components/ChatWidget";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,14 +29,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="antialiased min-h-full flex flex-col font-sans bg-white">
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} dark`}>
+      <body className="antialiased min-h-full flex flex-col font-sans bg-black text-white selection:bg-white selection:text-black">
         <Navigation />
-        <main className="flex-grow">
+        <main className="flex-grow bg-black">
           {children}
         </main>
         <Footer />
+        <ChatWidget />
       </body>
     </html>
   );
 }
+

@@ -1,73 +1,72 @@
 import Link from "next/link";
 import Image from "next/image";
 import Navigation from "@/components/navigation";
+import Footer from "@/components/Footer";
 
 export default function GalleryPage() {
   const images = [
-    "/GAL_1.jpg",
-    "/GAL_2.jpg",
-    "/GAL_3.jpg",
-    "/GAL_4.jpg",
+    { src: "/GAL_1.jpg", title: "RESEARCH & INFRASTRUCTURE // PERINTHALMANNA" },
+    { src: "/GAL_2.jpg", title: "SYSTEM ARCHITECTS" },
+    { src: "/GAL_3.jpg", title: "DEEP CORE SESSIONS" },
+    { src: "/GAL_4.jpg", title: "GLOBAL TEAM COLLABORATION" },
   ];
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-black text-white selection:bg-blue-500 selection:text-white">
       <Navigation />
       
       {/* Inner Page Header */}
-      <div className="pt-24 pb-6 px-8 bg-surface-100 border-b border-border-subtle relative overflow-hidden">
-        {/* Subtle grid background */}
-        <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
-          <svg className="absolute w-full h-full" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="grid-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
-                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#000" strokeWidth="1" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid-pattern)" />
-          </svg>
-        </div>
-
+      <div className="pt-28 pb-12 px-6 md:px-12 border-b border-white/10 relative overflow-hidden">
         <div className="max-w-[1400px] mx-auto relative z-10">
-          <Link href="/#gallery" className="inline-flex items-center gap-2 text-sm font-mono tracking-widest text-brand-blue hover:text-brand-blue-dark transition-colors mb-4">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <Link 
+            href="/#gallery" 
+            className="inline-flex items-center gap-2 text-xs font-mono tracking-widest text-white/50 hover:text-white transition-colors mb-8 uppercase"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M19 12H5M12 19l-7-7 7-7" />
             </svg>
-            BACK
+            BACK TO MAIN SITE
           </Link>
-          <div className="mb-16">
-            <h1 className="text-sm font-bold tracking-[0.2em] uppercase text-brand-blue mb-4">
-              LIFE @FLML
-            </h1>
-            <p className="text-2xl md:text-4xl font-light text-foreground/80 max-w-3xl leading-relaxed">
-              A curated visual archive of our development environments, physical infrastructure, and team operations.
-            </p>
+
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-2 h-2 rounded-full bg-blue-500" />
+              <h1 className="text-xs font-mono tracking-[0.3em] uppercase text-white/50">
+                LIFE @FLML
+              </h1>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Gallery Grid */}
-      <div className="pt-8 pb-24 px-8 max-w-[1400px] mx-auto">
+      <div className="py-16 px-6 md:px-12 max-w-[1400px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-          {images.map((src, idx) => (
+          {images.map((item, idx) => (
             <div
               key={idx}
-              className={`relative bg-surface-200 border border-border-subtle rounded flex items-center justify-center overflow-hidden group ${
+              className={`relative bg-neutral-950 border border-white/15 rounded-2xl flex items-center justify-center overflow-hidden group shadow-2xl ${
                 idx === 0 || idx === 3 ? "md:col-span-2 lg:col-span-2 aspect-video lg:aspect-[21/9]" : "aspect-square lg:aspect-video"
               }`}
             >
               <Image 
-                src={src}
-                alt={`Life at FLML Record ${idx + 1}`}
+                src={item.src}
+                alt={item.title}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100"
               />
-              <div className="absolute inset-0 bg-brand-blue-dark/10 group-hover:bg-transparent transition-colors duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-6 left-6 font-mono text-xs text-white/70 tracking-widest uppercase">
+                {item.title}
+              </div>
             </div>
           ))}
         </div>
       </div>
+
+      <Footer />
     </main>
   );
 }
+

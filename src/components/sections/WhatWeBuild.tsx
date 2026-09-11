@@ -1,88 +1,88 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 const buildItems = [
   {
     id: "applications",
-    title: "APPLICATIONS",
+    title: "BESPOKE APPLICATIONS",
     description: "Bespoke application development focusing on robust architectures and seamless user experiences across web and mobile ecosystems.",
-    details: ["Web", "Mobile", "Customer-facing", "Internal"],
+    details: ["React Native", "Next.js", "Node.js", "WebSockets", "Omnichannel"],
     align: "start",
     margin: "mt-0 ml-0",
     projects: [
-      { title: "KARIKKU APP", description: "A high-traffic media application built with React Native and Node.js. Designed to handle massive concurrent user spikes during content drops with real-time push notifications.", image: "/client/Karikku.svg" },
-      { title: "FOODZER", description: "Cross-platform consumer food delivery application featuring real-time driver tracking, geolocation routing algorithms, and seamless payment gateway integrations.", image: "/client/foodzer.png" }
+      { title: "KARIKKU APP", description: "High-traffic media application handling massive concurrent user spikes with real-time push notifications.", image: "/client/Karikku.svg" },
+      { title: "FOODZER", description: "Consumer food delivery platform featuring driver tracking & geolocation routing algorithms.", image: "/client/foodzer.png" }
     ]
   },
   {
     id: "systems",
-    title: "SYSTEMS",
+    title: "ENTERPRISE SYSTEMS",
     description: "Deep, interconnected architectures built to handle immense data loads and complex business logic across multiple physical locations.",
-    details: ["ERP", "POS", "Workflow", "Multi-location", "Reporting"],
+    details: ["PostgreSQL", "Edge Caching", "HIPAA Compliance", "Local-first DB"],
     align: "end",
-    margin: "mt-12 mr-12",
+    margin: "mt-16 md:mt-24 mr-0",
     projects: [
-      { title: "HEALINE ERP", description: "A comprehensive healthcare management system developed in Next.js and PostgreSQL, routing patient data securely across multiple clinic locations with strict HIPAA compliance.", image: "/client/healine.png" },
-      { title: "MYVAAHAN", description: "Automotive service management system built to track vehicle lifecycles, service workflows, and inventory using local edge-caching for uninterrupted garage operations.", image: "/client/myvaahan.png" }
+      { title: "HEALINE ERP", description: "Healthcare management system routing patient data securely across multi-clinic locations.", image: "/client/healine.png" },
+      { title: "MYVAAHAN", description: "Automotive service management system tracking vehicle lifecycles and inventory.", image: "/client/myvaahan.png" }
     ]
   },
   {
     id: "platforms",
-    title: "PLATFORMS",
+    title: "SCALABLE PLATFORMS",
     description: "Scalable platform architectures designed for SaaS providers, B2B marketplaces, and complex partner ecosystems.",
-    details: ["SaaS", "Marketplaces", "B2B Portals", "Ecosystems"],
-    align: "center",
-    margin: "mt-24",
+    details: ["Multi-Tenant", "Microservices", "Stripe API", "AWS ECS"],
+    align: "start",
+    margin: "mt-16 md:mt-24 ml-0",
     projects: [
-      { title: "THARA CART", description: "Multi-tenant B2B e-commerce platform orchestrating thousands of vendors and SKUs. Built on a scalable AWS microservices architecture to ensure zero downtime.", image: "/client/thara_cart.png" },
-      { title: "VIVLINO", description: "Global learning and community marketplace connecting educators with students, featuring live video streaming infrastructure and automated billing systems.", image: "/client/vivlino.svg" }
+      { title: "THARA CART", description: "Multi-tenant B2B e-commerce platform orchestrating thousands of vendors and SKUs.", image: "/client/thara_cart.png" },
+      { title: "VIVLINO", description: "Global learning marketplace featuring live video streaming and automated billing.", image: "/client/vivlino.svg" }
     ]
   },
   {
     id: "automation",
-    title: "AUTOMATION",
+    title: "PROCESS AUTOMATION",
     description: "Intelligent process automation that eliminates manual bottlenecks, integrates disparate tools, and accelerates business velocity.",
-    details: ["Process Design", "RPA", "Event-driven", "Integrations"],
-    align: "start",
-    margin: "mt-24 ml-24",
+    details: ["Event-Driven", "RPA Pipelines", "Legacy ERP Sync", "Webhook Mesh"],
+    align: "center",
+    margin: "mt-16 md:mt-24 mx-auto",
     projects: [
-      { title: "AMERICAN BOARD", description: "Event-driven robotic process automation (RPA) integrating legacy educational compliance databases with modern CRM systems, saving thousands of manual entry hours.", image: "/client/american board.png" }
+      { title: "AMERICAN BOARD", description: "Robotic process automation integrating legacy educational databases with modern CRM systems.", image: "/client/american board.png" }
     ]
   },
   {
     id: "intelligence",
-    title: "INTELLIGENCE",
+    title: "PREDICTIVE INTELLIGENCE",
     description: "Advanced analytics and machine learning integrations that turn raw organizational data into actionable, predictive insights.",
-    details: ["AI", "Analytics", "Machine Learning", "Predictive"],
-    align: "start",
-    margin: "mt-32 ml-0",
+    details: ["TensorFlow", "BigQuery", "Vector Embeddings", "Predictive ML"],
+    align: "end",
+    margin: "mt-16 md:mt-24 mr-0",
     projects: [
-      { title: "3MS ANALYTICS", description: "Predictive intelligence dashboard utilizing TensorFlow and BigQuery to analyze historical business metrics, forecasting operational bottlenecks weeks in advance.", image: "/client/3ms.png" }
+      { title: "3MS ANALYTICS", description: "Predictive intelligence dashboard forecasting operational bottlenecks weeks in advance.", image: "/client/3ms.png" }
     ]
   },
   {
     id: "infrastructure",
-    title: "INFRASTRUCTURE",
+    title: "CLOUD INFRASTRUCTURE",
     description: "Secure, highly available, and globally distributed infrastructure setups utilizing modern DevOps practices and cloud-native services.",
-    details: ["Cloud", "AWS/Azure", "DevOps", "Security", "Scaling"],
-    align: "end",
-    margin: "mt-12 mr-0",
+    details: ["Kubernetes", "AWS / GCP", "Terraform", "Zero-Trust Mesh"],
+    align: "start",
+    margin: "mt-16 md:mt-24 ml-0",
     projects: [
-      { title: "QARO CLOUD", description: "Complete zero-downtime migration of monolithic architectures into a highly secure, containerized Kubernetes environment, achieving auto-scaling capabilities.", image: "/client/qaro.png" }
+      { title: "QARO CLOUD", description: "Zero-downtime migration of monolithic architectures into auto-scaling Kubernetes clusters.", image: "/client/qaro.png" }
     ]
   },
   {
     id: "blockchain",
-    title: "DECENTRALIZED",
+    title: "DECENTRALIZED PROTOCOLS",
     description: "Smart contract development and decentralized application architectures for high-security, immutable business requirements.",
-    details: ["Blockchain", "Smart Contracts", "DeFi", "Web3"],
+    details: ["Solidity", "Ethereum", "Smart Contracts", "Audit Protocols"],
     align: "center",
-    margin: "mt-24",
+    margin: "mt-16 md:mt-24 mx-auto",
     projects: [
-      { title: "EDHWI PROTOCOL", description: "Custom smart contract infrastructure deployed on Ethereum mainnet. Ensures immutable record-keeping and highly secure tokenized asset transfers.", image: "/client/Edhwi.svg" }
+      { title: "EDHWI PROTOCOL", description: "Smart contract infrastructure deployed on Ethereum mainnet for immutable record keeping.", image: "/client/Edhwi.svg" }
     ]
   },
 ];
@@ -90,109 +90,169 @@ const buildItems = [
 export default function WhatWeBuild() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [expandedId, setExpandedId] = useState<string | null>(null);
-  const itemRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const titleRefs = useRef<Record<string, HTMLHeadingElement | null>>({});
+  const animFrameRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+    };
+  }, []);
+
+  const lockTitleToNavbar = (id: string) => {
+    if (animFrameRef.current) {
+      cancelAnimationFrame(animFrameRef.current);
+    }
+
+    const startTime = performance.now();
+    const duration = 450; // Match Framer Motion transition duration
+
+    const animateScrollLock = (now: number) => {
+      const elapsed = now - startTime;
+      const el = titleRefs.current[id];
+
+      if (el) {
+        const navbarOffset = 96; // Exact 96px offset (80px navbar + 16px padding)
+        const currentRect = el.getBoundingClientRect();
+        const absoluteTop = currentRect.top + window.scrollY;
+        const targetY = absoluteTop - navbarOffset;
+
+        window.scrollTo(0, Math.max(0, targetY));
+      }
+
+      if (elapsed < duration) {
+        animFrameRef.current = requestAnimationFrame(animateScrollLock);
+      }
+    };
+
+    animFrameRef.current = requestAnimationFrame(animateScrollLock);
+  };
 
   const handleClick = (id: string) => {
     if (expandedId === id) {
       setExpandedId(null);
     } else {
       setExpandedId(id);
-      
-      setTimeout(() => {
-        const el = itemRefs.current[id];
-        if (el) {
-          const yOffset = -120;
-          const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        }
-      }, 50);
+      lockTitleToNavbar(id);
     }
   };
 
   return (
-    <section id="capabilities" className="pt-12 pb-32 px-8 bg-white border-t border-border-subtle relative">
-      <div className="max-w-[1400px] mx-auto">
-        <h2 className="text-sm font-bold tracking-[0.2em] uppercase text-brand-blue mb-16">
-          # WHAT WE BUILD
-        </h2>
+    <section id="capabilities" className="py-12 md:py-20 px-6 md:px-12 bg-black text-white border-b border-white/10 relative overflow-hidden">
+      <div className="max-w-[1700px] mx-auto">
+        
+        {/* Section Header */}
+        <div className="flex items-center gap-3 mb-16">
+          <span className="w-2 h-2 rounded-full bg-blue-500" />
+          <h2 className="text-xs font-mono tracking-[0.3em] uppercase text-white/50">
+            03 // CAPABILITIES & ARCHITECTURES
+          </h2>
+        </div>
 
-        <div className="relative w-full flex flex-col space-y-8 md:space-y-0">
+        <div className="relative w-full flex flex-col space-y-12 md:space-y-0">
           {buildItems.map((item) => {
+            const isHovered = hoveredId === item.id;
+            const isExpanded = expandedId === item.id;
+
             return (
               <div 
                 key={item.id} 
-                ref={(el) => { itemRefs.current[item.id] = el; }}
                 className={`flex flex-col ${
                   item.align === "start" ? "items-start" : item.align === "end" ? "items-end" : "items-center"
                 } ${item.margin} w-full`}
               >
                 <div 
-                  className="relative cursor-pointer group py-12 px-12 -my-12 -mx-12 z-10 hover:z-20"
+                  className="relative cursor-pointer group py-6 px-4 -my-3 -mx-4 z-10 hover:z-20 w-full md:w-auto"
                   onMouseEnter={() => setHoveredId(item.id)}
                   onMouseLeave={() => setHoveredId(null)}
                   onClick={() => handleClick(item.id)}
                 >
+                  {/* Gigantic Asymmetrically Scattered Title (Direct Scroll Ref Target) */}
                   <motion.h3 
-                    className={`text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter transition-colors duration-500 ${
-                      expandedId === item.id || hoveredId === item.id 
-                        ? "text-brand-blue" 
-                        : (hoveredId ? "text-foreground/10" : "text-foreground")
+                    ref={(el) => { titleRefs.current[item.id] = el; }}
+                    className={`text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter transition-all duration-300 ${
+                      isExpanded || isHovered 
+                        ? "text-blue-500 drop-shadow-[0_0_30px_rgba(59,130,246,0.35)]" 
+                        : (hoveredId ? "text-white/20" : "text-white/90 group-hover:text-white")
                     }`}
                   >
                     {item.title}
                   </motion.h3>
 
+                  {/* Hover Tag Marquee / Pill */}
                   <AnimatePresence>
-                    {hoveredId === item.id && expandedId !== item.id && (
+                    {isHovered && !isExpanded && (
                       <motion.div
-                        initial={{ opacity: 0, y: -10, height: 0 }}
+                        initial={{ opacity: 0, y: -8, height: 0 }}
                         animate={{ opacity: 1, y: 0, height: "auto" }}
-                        exit={{ opacity: 0, y: -10, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className={`absolute top-full mt-4 overflow-hidden ${item.align === "start" ? "left-12" : item.align === "end" ? "right-12" : "left-1/2 -translate-x-1/2"}`}
+                        exit={{ opacity: 0, y: -8, height: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className={`absolute top-full mt-3 overflow-hidden ${
+                          item.align === "start" ? "left-4" : item.align === "end" ? "right-4" : "left-1/2 -translate-x-1/2"
+                        }`}
                       >
-                        <ul className="flex flex-nowrap gap-4 items-center whitespace-nowrap bg-white/80 backdrop-blur-sm p-1 rounded">
+                        <div className="flex flex-nowrap gap-3 items-center whitespace-nowrap bg-neutral-900/90 border border-white/15 backdrop-blur-md px-4 py-2 rounded-xl shadow-xl">
                           {item.details.map((detail, idx) => (
-                            <li key={idx} className="text-sm font-mono tracking-widest text-brand-blue uppercase flex items-center gap-4 whitespace-nowrap">
+                            <span key={idx} className="text-xs font-mono tracking-widest text-blue-400 uppercase flex items-center gap-3 whitespace-nowrap">
                               {detail}
-                              {idx < item.details.length - 1 && <span className="w-1 h-1 bg-brand-blue/30 rounded-full inline-block" />}
-                            </li>
+                              {idx < item.details.length - 1 && <span className="w-1 h-1 bg-white/20 rounded-full inline-block" />}
+                            </span>
                           ))}
-                        </ul>
+                        </div>
                       </motion.div>
                     )}
                   </AnimatePresence>
 
+                  {/* Click Expanded Details & Projects */}
                   <AnimatePresence>
-                    {expandedId === item.id && (
+                    {isExpanded && (
                       <motion.div
                         initial={{ opacity: 0, height: 0, y: 10 }}
                         animate={{ opacity: 1, height: "auto", y: 0 }}
                         exit={{ opacity: 0, height: 0, y: 10 }}
-                        transition={{ duration: 0.4 }}
+                        transition={{ duration: 0.35 }}
                         className={`overflow-hidden ${item.align === 'center' ? 'max-w-4xl mx-auto' : 'max-w-2xl'}`}
                       >
-                        <div className={`flex flex-col gap-6 pt-8 pb-8 ${item.align === 'center' ? 'items-center text-center' : item.align === 'end' ? 'items-end text-right' : 'items-start text-left'}`}>
-                          <p className="text-xl md:text-2xl text-foreground/80 leading-relaxed font-medium">
+                        <div className={`flex flex-col gap-6 pt-8 pb-4 ${
+                          item.align === 'center' ? 'items-center text-center' : item.align === 'end' ? 'items-end text-right' : 'items-start text-left'
+                        }`}>
+                          <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light">
                             {item.description}
                           </p>
-                          
-                          <div 
-                            className="flex flex-wrap gap-8 mt-4"
-                            style={{ justifyContent: item.align === 'center' ? 'center' : item.align === 'end' ? 'flex-end' : 'flex-start' }}
-                          >
+
+                          {/* System Parameter Tech Pills */}
+                          <div className={`flex flex-wrap gap-2 ${
+                            item.align === 'center' ? 'justify-center' : item.align === 'end' ? 'justify-end' : 'justify-start'
+                          }`}>
+                            {item.details.map((detail, idx) => (
+                              <span key={idx} className="bg-white/5 border border-white/15 px-3 py-1 rounded text-xs font-mono text-white/70">
+                                {detail}
+                              </span>
+                            ))}
+                          </div>
+
+                          {/* Featured Projects */}
+                          <div className={`w-full flex flex-col gap-4 mt-4 ${
+                            item.align === 'center' ? 'items-center' : item.align === 'end' ? 'items-end' : 'items-start'
+                          }`}>
                             {item.projects.map((project, idx) => (
-                              <div key={idx} className={`flex items-center gap-4 group/project ${item.align === 'end' ? 'flex-row-reverse text-right' : 'text-left'}`}>
-                                <div className="relative w-20 h-20 shrink-0 bg-surface-100 overflow-hidden border border-border-subtle rounded shadow-sm">
-                                  <Image src={project.image} alt={project.title} fill className="object-contain p-2 transition-all duration-500" sizes="80px" />
+                              <div 
+                                key={idx} 
+                                className={`flex items-center gap-4 bg-white/[0.03] border border-white/10 p-4 rounded-xl max-w-xl ${
+                                  item.align === 'end' ? 'flex-row-reverse text-right' : 'text-left'
+                                }`}
+                              >
+                                <div className="relative w-14 h-14 shrink-0 bg-white/10 border border-white/15 rounded-xl p-2">
+                                  <Image src={project.image} alt={project.title} fill className="object-contain p-1" sizes="56px" />
                                 </div>
-                                <div className="flex flex-col justify-center max-w-[280px]">
-                                  <h5 className="font-bold text-sm mb-1">{project.title}</h5>
-                                  <p className="text-xs text-foreground/60 leading-relaxed">{project.description}</p>
+                                <div>
+                                  <h5 className="font-bold text-sm text-white mb-0.5">{project.title}</h5>
+                                  <p className="text-xs text-white/60 leading-relaxed font-light">{project.description}</p>
                                 </div>
                               </div>
                             ))}
                           </div>
+
                         </div>
                       </motion.div>
                     )}
@@ -203,7 +263,10 @@ export default function WhatWeBuild() {
             );
           })}
         </div>
+
       </div>
     </section>
   );
 }
+
+

@@ -8,7 +8,7 @@ import ConsultationForm from "@/components/sections/ConsultationForm";
 
 export default function Home() {
   return (
-    <div className="flex flex-col w-full bg-white selection:bg-brand-blue selection:text-white">
+    <div className="flex flex-col w-full bg-black text-white selection:bg-white selection:text-black">
       <Opening />
       <About />
       <Clients />
@@ -19,3 +19,4 @@ export default function Home() {
     </div>
   );
 }
+

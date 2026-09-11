@@ -1,62 +1,62 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const layers = [
   {
     id: "experience",
-    name: "EXPERIENCE",
+    name: "EXPERIENCE LAYER",
     desc: "WEB / MOBILE / INTERFACES",
-    tech: ["Micro-frontends", "Omnichannel", "Native iOS/Android", "Web3 Wallets"],
-    color: "from-brand-blue/20 to-transparent",
-    borderColor: "border-brand-blue/50",
+    tech: ["Micro-frontends", "Omnichannel Mesh", "Native iOS & Android", "Web3 Embedded Wallets"],
+    status: "OPTIMIZED",
+    latency: "< 24ms",
   },
   {
     id: "application",
-    name: "APPLICATION",
-    desc: "SERVICES / WORKFLOWS",
-    tech: ["Microservices", "Event-Driven", "Serverless", "Smart Contracts"],
-    color: "from-brand-blue/10 to-transparent",
-    borderColor: "border-brand-blue/40",
+    name: "APPLICATION LAYER",
+    desc: "SERVICES / WORKFLOW ENGINES",
+    tech: ["Microservices Orchestrations", "Event-Driven Bus", "Serverless Edge Workers", "Smart Contracts"],
+    status: "ACTIVE",
+    latency: "< 12ms",
   },
   {
     id: "api",
-    name: "API",
-    desc: "INTEGRATION / COMMUNICATION",
-    tech: ["GraphQL", "RESTful", "gRPC", "WebSockets", "tRPC"],
-    color: "from-white/5 to-transparent",
-    borderColor: "border-white/20",
+    name: "API LAYER",
+    desc: "INTEGRATION / COMMUNICATION PROTOCOLS",
+    tech: ["GraphQL Gateway", "RESTful Core API", "gRPC Binary Streams", "WebSocket Feeds", "tRPC Routes"],
+    status: "ONLINE",
+    latency: "< 8ms",
   },
   {
     id: "data",
-    name: "DATA",
-    desc: "DATABASE / ANALYTICS / AI",
-    tech: ["Relational (SQL)", "NoSQL / Document", "Graph Databases", "Blockchain Ledgers", "Vector (AI)"],
-    color: "from-black/20 to-transparent",
-    borderColor: "border-white/10",
+    name: "DATA LAYER",
+    desc: "DATABASE / ANALYTICS / VECTOR NEURAL",
+    tech: ["Relational (PostgreSQL)", "NoSQL / Document Store", "Graph Databases", "Vector Embeddings (AI)", "Blockchain Ledgers"],
+    status: "SYNCHRONIZED",
+    latency: "< 18ms",
   },
   {
     id: "integration",
-    name: "INTEGRATION",
-    desc: "PAYMENTS / EXTERNAL SYSTEMS",
-    tech: ["Enterprise Service Bus", "IoT Gateways", "Decentralized Oracles", "Payment Gateways"],
-    color: "from-black/40 to-transparent",
-    borderColor: "border-white/5",
+    name: "INTEGRATION LAYER",
+    desc: "PAYMENTS / EXTERNAL GATEWAYS",
+    tech: ["Enterprise Service Bus", "IoT Gateways", "Decentralized Oracles", "Multi-Currency Gateways"],
+    status: "ENCRYPTED",
+    latency: "< 35ms",
   },
   {
     id: "infrastructure",
-    name: "INFRASTRUCTURE",
-    desc: "CLOUD / DEPLOYMENT / SECURITY",
-    tech: ["Multi-Cloud", "Kubernetes", "Zero-Trust Security", "CI/CD Pipelines"],
-    color: "from-black/60 to-transparent",
-    borderColor: "border-black/50",
+    name: "INFRASTRUCTURE LAYER",
+    desc: "CLOUD / DEPLOYMENT / ZERO-TRUST SECURITY",
+    tech: ["Multi-Cloud (AWS/GCP)", "Kubernetes Clusters", "Zero-Trust Security Mesh", "CI/CD Deployment Pipelines"],
+    status: "UNBREAKABLE",
+    latency: "99.999% UPTIME",
   },
 ];
 
 export default function Engineering() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [activeLayer, setActiveLayer] = useState<string | null>(layers[0].id);
+  const [activeLayer, setActiveLayer] = useState<string>(layers[0].id);
   const [isHovering, setIsHovering] = useState(false);
   
   useEffect(() => {
@@ -64,51 +64,39 @@ export default function Engineering() {
 
     const interval = setInterval(() => {
       setActiveLayer((current) => {
-        if (!current) return layers[0].id;
         const currentIndex = layers.findIndex((l) => l.id === current);
         const nextIndex = (currentIndex + 1) % layers.length;
         return layers[nextIndex].id;
       });
-    }, 2500);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [isHovering]);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
+  const currentLayerObj = layers.find((l) => l.id === activeLayer) || layers[0];
 
   return (
-    <section id="technology" ref={containerRef} className="py-20 px-8 bg-[#020817] relative overflow-hidden text-white">
-      
-      {/* Deep technical background */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-blue-dark/50 via-[#020817] to-[#020817]" />
-        <svg className="absolute w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
-      </div>
+    <section id="technology" ref={containerRef} className="py-24 md:py-36 px-6 md:px-12 bg-black relative border-b border-white/10 text-white">
       
       <div className="max-w-[1400px] mx-auto relative z-10">
-        <h2 className="text-sm font-bold tracking-[0.2em] uppercase text-brand-blue mb-4">
-          # BUILT FROM THE INSIDE OUT.
-        </h2>
         
-        <p className="text-xl md:text-2xl font-bold text-white/90 max-w-3xl mb-12 text-balance leading-tight">
-          True engineering depth. We build scalable systems layer by layer, ensuring security, performance, and operational adaptability.
+        {/* Header */}
+        <div className="flex items-center gap-3 mb-6">
+          <span className="w-2 h-2 rounded-full bg-blue-500" />
+          <h2 className="text-xs font-mono tracking-[0.3em] uppercase text-white/50">
+            04 // BUILT FROM THE INSIDE OUT
+          </h2>
+        </div>
+        
+        <p className="text-2xl md:text-4xl font-extrabold text-white max-w-3xl mb-16 tracking-tight leading-tight">
+          True engineering depth. We construct scalable systems layer by layer for maximum resilience.
         </p>
 
-        {/* High-End Interactive Architecture Visual */}
-        <div className="flex flex-col xl:flex-row gap-8 relative">
+        {/* Diagnostic Terminal Playground Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
-          {/* Left: The Stack */}
-          <div className="flex-1 space-y-3">
+          {/* Left Column: Stack Layers List */}
+          <div className="lg:col-span-6 space-y-3">
             {layers.map((layer, idx) => {
               const isActive = activeLayer === layer.id;
               
@@ -120,99 +108,96 @@ export default function Engineering() {
                     setIsHovering(true);
                   }}
                   onMouseLeave={() => setIsHovering(false)}
-                  className={`relative overflow-hidden group cursor-pointer rounded border transition-all duration-300 ${
-                    isActive ? "border-brand-blue bg-brand-blue/10 scale-[1.01]" : `${layer.borderColor} bg-white/[0.02] hover:bg-white/[0.04]`
+                  className={`p-5 rounded-xl border transition-all duration-300 cursor-pointer flex items-center justify-between ${
+                    isActive 
+                      ? "border-blue-500 bg-white/5 scale-[1.01]" 
+                      : "border-white/10 bg-neutral-950/60 hover:border-white/20 hover:bg-neutral-900/50"
                   }`}
                 >
-                  <div className={`absolute inset-0 bg-gradient-to-r ${layer.color} opacity-50`} />
-                  
-                  <div className="relative p-4 md:p-5 flex items-center justify-between z-10">
+                  <div className="flex items-center gap-4">
+                    <span className={`font-mono text-xs ${isActive ? "text-blue-500" : "text-white/30"}`}>
+                      0{idx + 1}
+                    </span>
                     <div>
-                      <h3 className={`text-lg md:text-xl font-black tracking-tight transition-colors ${isActive ? "text-white" : "text-white/70"}`}>
+                      <h3 className={`text-base md:text-lg font-bold tracking-tight transition-colors ${
+                        isActive ? "text-white" : "text-white/70"
+                      }`}>
                         {layer.name}
                       </h3>
-                      <p className="text-[10px] font-mono tracking-widest uppercase mt-1 text-brand-blue-light/70">
+                      <p className="text-[10px] font-mono tracking-widest text-white/40 uppercase mt-0.5">
                         {layer.desc}
                       </p>
                     </div>
-                    
-                    <div className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-500 ${isActive ? "border-brand-blue bg-brand-blue/20" : "border-white/10"}`}>
-                      <span className={`text-[10px] font-mono transition-opacity ${isActive ? "opacity-100 text-brand-blue-light" : "opacity-30"}`}>
-                        0{idx + 1}
-                      </span>
-                    </div>
                   </div>
+
+                  <span className={`font-mono text-[10px] tracking-widest px-2.5 py-1 rounded border ${
+                    isActive ? "border-blue-500/50 text-blue-400 bg-blue-500/10" : "border-white/10 text-white/30"
+                  }`}>
+                    {layer.status}
+                  </span>
                 </div>
               );
             })}
           </div>
 
-          {/* Right: The Dynamic Tech HUD */}
-          <div className="flex-1 hidden xl:block relative">
-             <div className="h-[460px] w-full border border-white/5 rounded-xl bg-black/40 backdrop-blur-md p-8 flex flex-col justify-center">
-                
-                <AnimatePresence mode="wait">
-                  {activeLayer ? (
-                    <motion.div
-                      key={activeLayer}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -20 }}
-                      transition={{ duration: 0.2 }}
-                      className="w-full h-full flex flex-col justify-center"
-                    >
-                      <div className="text-brand-blue font-mono text-[10px] tracking-[0.2em] uppercase mb-4 animate-pulse">
-                        Analyzing Layer: {activeLayer}
+          {/* Right Column: Diagnostic HUD Terminal Inspector */}
+          <div className="lg:col-span-6 flex flex-col">
+            <div className="h-full border border-white/15 bg-neutral-950 rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden shadow-2xl">
+              
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentLayerObj.id}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.25 }}
+                  className="space-y-6 my-auto"
+                >
+                  {/* Top Status Header */}
+                  <div className="flex items-center justify-between border-b border-white/10 pb-4 font-mono text-xs text-white/40 uppercase tracking-widest">
+                    <span className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-blue-500 animate-ping" />
+                      TERMINAL // {currentLayerObj.id.toUpperCase()}
+                    </span>
+                    <span className="text-white/70">{currentLayerObj.latency}</span>
+                  </div>
+                  
+                  {/* Tech Stack Modules */}
+                  <div className="space-y-3 py-2">
+                    <div className="font-mono text-[10px] tracking-widest text-white/40 uppercase mb-4">
+                      REGISTERED MICROSERVICES & PROTOCOLS
+                    </div>
+                    {currentLayerObj.tech.map((t, i) => (
+                      <div key={i} className="flex items-center gap-4 bg-white/[0.02] border border-white/10 p-3 rounded-lg">
+                        <div className="w-8 h-px bg-blue-500/50 relative">
+                          <motion.div 
+                            className="absolute top-1/2 -translate-y-1/2 left-0 w-1.5 h-1.5 bg-blue-400 rounded-full"
+                            animate={{ left: ["0%", "100%", "0%"] }}
+                            transition={{ duration: 1.5 + (i * 0.2), repeat: Infinity, ease: "linear" }}
+                          />
+                        </div>
+                        <span className="text-sm font-mono tracking-wide text-white/90">
+                          {t}
+                        </span>
                       </div>
-                      
-                      <div className="space-y-4">
-                        {layers.find(l => l.id === activeLayer)?.tech.map((t, i) => (
-                          <div key={i} className="flex items-center gap-4">
-                            <div className="w-12 h-px bg-brand-blue/30 relative">
-                              <motion.div 
-                                className="absolute top-1/2 -translate-y-1/2 left-0 w-1.5 h-1.5 bg-brand-blue rounded-full shadow-[0_0_10px_rgba(10,54,157,0.8)]"
-                                animate={{ left: ["0%", "100%", "0%"] }}
-                                transition={{ duration: 1.5 + (i * 0.2), repeat: Infinity, ease: "linear" }}
-                              />
-                            </div>
-                            <span className="text-base md:text-lg font-light tracking-wide text-white/90">
-                              {t}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                      
-                      <div className="mt-auto pt-6 border-t border-white/10 flex justify-between items-end">
-                         <div className="font-mono text-[10px] text-white/30">STATUS: OPTIMIZED</div>
-                         <div className="flex gap-1.5">
-                            <div className="w-1.5 h-6 bg-brand-blue/40" />
-                            <div className="w-1.5 h-4 bg-brand-blue/60" />
-                            <div className="w-1.5 h-8 bg-brand-blue" />
-                         </div>
-                      </div>
-                    </motion.div>
-                  ) : (
-                    <motion.div 
-                      key="idle"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="w-full h-full flex items-center justify-center flex-col text-center"
-                    >
-                      <div className="w-24 h-24 rounded-full border border-white/10 flex items-center justify-center mb-6 relative">
-                        <motion.div 
-                          className="absolute inset-0 border border-brand-blue rounded-full border-t-transparent"
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                        />
-                        <span className="font-mono text-[9px] tracking-widest text-white/30">STANDBY</span>
-                      </div>
-                      <p className="text-white/40 font-mono text-[10px] tracking-widest">INTERACT WITH ARCHITECTURE LAYERS</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-                
-             </div>
+                    ))}
+                  </div>
+                  
+                  {/* Bottom Metrics Bar */}
+                  <div className="pt-6 border-t border-white/10 flex justify-between items-end">
+                    <div className="font-mono text-[10px] text-white/40">
+                      TELEMETRY: ALL NODES OPERATIONAL
+                    </div>
+                    <div className="flex gap-1.5 items-end">
+                      <div className="w-1.5 h-6 bg-blue-500/40" />
+                      <div className="w-1.5 h-4 bg-blue-500/60" />
+                      <div className="w-1.5 h-8 bg-blue-500" />
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+
+            </div>
           </div>
           
         </div>
@@ -220,3 +205,4 @@ export default function Engineering() {
     </section>
   );
 }
+

@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Image from "next/image";
 
 const clientLogos = [
@@ -31,45 +30,44 @@ const clientLogos = [
 
 export default function Clients() {
   return (
-    <section id="clients" className="pt-12 pb-4 bg-white border-t border-border-subtle overflow-hidden">
-      <div className="max-w-[1600px] mx-auto px-4 md:px-8">
-        <h2 className="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-blue mb-4 text-center">
-          # TRUSTED BY SERIOUS ORGANISATIONS
-        </h2>
+    <section id="clients" className="py-8 bg-black border-b border-white/10 overflow-hidden">
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 mb-6 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <span className="w-2 h-2 rounded-full bg-blue-500" />
+          <h2 className="text-xs font-mono tracking-[0.3em] uppercase text-white/50">
+            02 // ENTERPRISE DEPLOYMENTS & PARTNERSHIPS
+          </h2>
+        </div>
+        <span className="font-mono text-[10px] text-white/30 uppercase tracking-widest hidden sm:block">
+          200+ ACTIVE BACKBONES
+        </span>
       </div>
 
-      <div className="relative w-full flex overflow-hidden group py-4 bg-surface-100">
+      {/* Infinite Original Color Marquee */}
+      <div className="relative w-full flex overflow-hidden group py-5 border-y border-white/10 bg-neutral-950/60">
         <style dangerouslySetInnerHTML={{
           __html: `
           @keyframes marquee {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
+            100% { transform: translateX(-50%); }
           }
-          .animate-marquee {
-            animation: marquee 40s linear infinite;
+          .animate-marquee-slow {
+            animation: marquee 35s linear infinite;
           }
-          .group:hover .animate-marquee {
+          .group:hover .animate-marquee-slow {
             animation-play-state: paused;
           }
         `}} />
 
-        <div className="flex w-fit">
-          <div className="flex animate-marquee shrink-0 items-center">
-            {clientLogos.map((client, idx) => (
-              <div key={idx} className="relative w-32 h-16 mx-8 shrink-0 flex items-center justify-center">
-                <Image src={client.src} alt={client.name} fill className="object-contain" sizes="128px" />
-              </div>
-            ))}
-          </div>
-          <div className="flex animate-marquee shrink-0 items-center" aria-hidden="true">
-            {clientLogos.map((client, idx) => (
-              <div key={idx} className="relative w-32 h-16 mx-8 shrink-0 flex items-center justify-center">
-                <Image src={client.src} alt={client.name} fill className="object-contain" sizes="128px" />
-              </div>
-            ))}
-          </div>
+        <div className="flex w-max animate-marquee-slow shrink-0 items-center">
+          {clientLogos.concat(clientLogos).map((client, idx) => (
+            <div key={idx} className="relative w-36 h-14 mx-6 shrink-0 flex items-center justify-center bg-white/10 border border-white/15 p-2 rounded-xl opacity-90 hover:opacity-100 transition-all hover:scale-105 shadow-lg">
+              <Image src={client.src} alt={client.name} fill className="object-contain p-1.5" sizes="144px" />
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
+
