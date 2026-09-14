@@ -292,8 +292,6 @@ export default function WhatWeBuild() {
           </div>
 
           <div className="flex items-center gap-4 text-[#061A45]/60">
-            <span className="hidden lg:inline">COORDINATES: 09°58&apos;N 76°17&apos;E</span>
-            <span className="hidden lg:inline text-gray-300">•</span>
             <span className="text-[#0A369D] font-bold">07 CORE DISCIPLINES</span>
             <span className="text-gray-300">•</span>
             <span className="font-semibold text-[#061A45]">10 PRODUCTION BUILDS</span>

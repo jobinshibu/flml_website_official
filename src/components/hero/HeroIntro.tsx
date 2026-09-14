@@ -85,14 +85,6 @@ export default function HeroIntro({ scrollYProgress }: HeroIntroProps) {
             }}
             className="w-full flex flex-col items-start"
           >
-            {/* Eyebrow Label */}
-            <div className="inline-flex items-center gap-3 mb-5 sm:mb-7">
-              <span className="w-2 h-2 rounded-full bg-[#0A369D] animate-pulse" />
-              <span className="font-mono text-[10px] sm:text-[11px] tracking-[0.28em] text-[#061A45]/80 uppercase font-semibold">
-                First Logic Meta Lab &nbsp;/&nbsp; Cognitive Systems
-              </span>
-            </div>
-
             {/* Strongest Typographic Element: High-Contrast Editorial Headline */}
             <h1 className="font-[family-name:var(--font-playfair)] text-4xl sm:text-6xl md:text-7xl lg:text-[68px] xl:text-[80px] font-medium uppercase text-[#061A45] leading-[0.92] tracking-[-0.02em]">
               Architecture<br />
@@ -130,15 +122,6 @@ export default function HeroIntro({ scrollYProgress }: HeroIntroProps) {
                 </span>
               </button>
             </div>
-
-            {/* Institutional Metadata Pill */}
-            <div className="hidden sm:flex items-center gap-4 mt-8 sm:mt-10 font-mono text-[9px] tracking-[0.26em] text-[#061A45]/50 uppercase">
-              <span>Sovereign Intelligence</span>
-              <span>•</span>
-              <span>Autonomous Protocol</span>
-              <span>•</span>
-              <span>Ver. 2.4.0</span>
-            </div>
           </motion.div>
 
           {/* ================================================================= */}
@@ -153,14 +136,6 @@ export default function HeroIntro({ scrollYProgress }: HeroIntroProps) {
             }}
             className="absolute inset-0 w-full flex flex-col items-start justify-center"
           >
-            {/* Act 2 Eyebrow */}
-            <div className="inline-flex items-center gap-3 mb-5 sm:mb-7">
-              <span className="w-2 h-2 rounded-full bg-[#0A369D]" />
-              <span className="font-mono text-[10px] sm:text-[11px] tracking-[0.28em] text-[#0A369D] uppercase font-semibold">
-                System Doctrine &nbsp;/&nbsp; Cognitive Core
-              </span>
-            </div>
-
             {/* Act 2 Headline */}
             <h2 className="font-[family-name:var(--font-playfair)] text-4xl sm:text-6xl md:text-7xl lg:text-[68px] xl:text-[80px] font-medium uppercase text-[#061A45] leading-[0.92] tracking-[-0.02em]">
               Engineering<br />
@@ -197,13 +172,6 @@ export default function HeroIntro({ scrollYProgress }: HeroIntroProps) {
                   View Systems
                 </span>
               </button>
-            </div>
-
-            {/* Act 2 Architectural Specs */}
-            <div className="hidden sm:flex items-center gap-4 mt-8 sm:mt-10 font-mono text-[9px] tracking-[0.26em] text-[#061A45]/50 uppercase">
-              <span>Mathematical Invariance</span>
-              <span>•</span>
-              <span>Sub-millisecond Epochs</span>
             </div>
           </motion.div>
 

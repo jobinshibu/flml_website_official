@@ -33,10 +33,10 @@ export default function HeroAtmosphere({ scrollYProgress }: HeroAtmosphereProps)
       {/* 2. Soft Architectural Lighting (Subtle Vignette at extreme perimeter) */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_60%,rgba(6,26,69,0.04)_100%)]" />
 
-      {/* 3. Refined Section Bridge: Softly ramps to #061A45 only as user reaches transition (0.85 - 1.00) */}
+      {/* 3. Refined Section Bridge: Softly ramps to #050608 only as user reaches transition (0.85 - 1.00) */}
       <motion.div
         style={{ opacity: bottomGradientOpacity }}
-        className="absolute bottom-0 left-0 w-full h-56 sm:h-72 md:h-96 bg-gradient-to-t from-[#061A45] via-[#061A45]/85 to-transparent"
+        className="absolute bottom-0 left-0 w-full h-56 sm:h-72 md:h-96 bg-gradient-to-t from-[#050608] via-[#050608]/85 to-transparent"
       />
 
       {/* 4. Film Grain / Subtle Micro-texture Layer */}

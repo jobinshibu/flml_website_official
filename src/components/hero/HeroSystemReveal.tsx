@@ -63,14 +63,7 @@ export default function HeroSystemReveal({ scrollYProgress }: HeroSystemRevealPr
         
         {/* LEFT ZONE: Monumental Editorial System Architecture (7% - 44% width) */}
         <div className="lg:col-span-6 xl:col-span-5 flex flex-col items-start text-left">
-          
-          {/* Eyebrow Stamp */}
-          <div className="inline-flex items-center gap-3 mb-5 sm:mb-6">
-            <span className="w-2 h-2 rounded-full bg-[#0A369D] animate-pulse" />
-            <span className="font-mono text-[10px] sm:text-[11px] tracking-[0.28em] text-[#0A369D] uppercase font-semibold">
-              System Reveal &nbsp;/&nbsp; Architecture 01
-            </span>
-          </div>
+
 
           {/* High-Contrast Editorial Headline */}
           <h2 className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl md:text-6xl lg:text-[62px] xl:text-[72px] font-medium uppercase text-[#061A45] leading-[0.94] tracking-[-0.015em]">
@@ -83,34 +76,6 @@ export default function HeroSystemReveal({ scrollYProgress }: HeroSystemRevealPr
           <p className="mt-5 sm:mt-6 text-sm sm:text-base md:text-lg text-[#061A45]/75 leading-relaxed font-sans max-w-md">
             Multi-layered cognitive fabric engineered to govern mission-critical enterprise workflows with mathematical precision.
           </p>
-
-          {/* Architectural Telemetry Matrix (Integrated Hairline Grid) */}
-          <div className="w-full max-w-md mt-6 pt-5 border-t border-[#061A45]/15 grid grid-cols-3 gap-4">
-            <div className="flex flex-col">
-              <span className="font-mono text-[9px] tracking-[0.22em] text-[#061A45]/45 uppercase mb-1">
-                Throughput
-              </span>
-              <span className="font-mono text-xs sm:text-sm font-bold text-[#061A45] tracking-tight">
-                1.2M OPS/S
-              </span>
-            </div>
-            <div className="flex flex-col border-l border-[#061A45]/12 pl-4">
-              <span className="font-mono text-[9px] tracking-[0.22em] text-[#061A45]/45 uppercase mb-1">
-                Latency
-              </span>
-              <span className="font-mono text-xs sm:text-sm font-bold text-[#0A369D] tracking-tight">
-                &lt; 1.2 MS
-              </span>
-            </div>
-            <div className="flex flex-col border-l border-[#061A45]/12 pl-4">
-              <span className="font-mono text-[9px] tracking-[0.22em] text-[#061A45]/45 uppercase mb-1">
-                Consensus
-              </span>
-              <span className="font-mono text-xs sm:text-sm font-bold text-[#061A45] tracking-tight">
-                99.999%
-              </span>
-            </div>
-          </div>
 
           {/* Dual Enterprise CTAs */}
           <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-7 sm:mt-8 pointer-events-auto">

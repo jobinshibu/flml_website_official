@@ -58,17 +58,12 @@ export default function Navigation() {
         {/* Top-Left: Institutional Brand Identifier */}
         <Link
           href="/"
-          className="pointer-events-auto flex flex-col items-start select-none group"
+          className="pointer-events-auto flex items-center select-none group"
         >
           <span className={`font-sans font-bold text-xs sm:text-sm tracking-[0.24em] uppercase leading-tight transition-colors ${
             isPastHero ? "text-white group-hover:text-brand-blue-light" : "text-[#061A45] group-hover:text-brand-blue"
           }`}>
             First Logic Meta Lab
-          </span>
-          <span className={`font-mono text-[9px] sm:text-[10px] tracking-[0.28em] uppercase font-semibold mt-0.5 ${
-            isPastHero ? "text-brand-blue-light/80" : "text-[#0A369D]"
-          }`}>
-            Cognitive Systems
           </span>
         </Link>
 

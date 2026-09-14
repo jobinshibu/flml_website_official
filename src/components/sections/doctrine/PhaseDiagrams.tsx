@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-// Phase 01 Diagram - One Operation Branching into Individual Atomic Nodes (Matching Hero Sovereign Navy Theme)
+// Phase 01 Diagram - One Operation Branching into Individual Atomic Nodes (Obsidian Dark Theme)
 export function BranchingNodesDiagram() {
   const branches = [
     { id: "node-1", label: "AUTH_GATE", y: 35, delay: 0 },
@@ -14,15 +14,15 @@ export function BranchingNodesDiagram() {
   ];
 
   return (
-    <div className="relative w-full h-[260px] bg-[#040e26]/90 rounded-xl border border-white/10 p-4 overflow-hidden flex items-center justify-center shadow-[inset_0_0_30px_rgba(10,54,157,0.15)]">
-      {/* Background blueprint grid matching hero */}
-      <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px]" />
+    <div className="relative w-full h-[260px] bg-[#0A0D15]/95 rounded-xl border border-white/[0.08] p-4 overflow-hidden flex items-center justify-center shadow-[inset_0_0_30px_rgba(0,0,0,0.5)]">
+      {/* Background blueprint grid matching dark theme */}
+      <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px]" />
 
       <svg className="w-full h-full" viewBox="0 0 460 260" fill="none">
         {/* Central Origin Node */}
         <g transform="translate(45, 130)">
-          <circle r="22" fill="#061A45" stroke="#38bdf8" strokeWidth="1.5" />
-          <circle r="14" fill="#0A369D" fillOpacity="0.4" />
+          <circle r="22" fill="#111624" stroke="#38bdf8" strokeWidth="1.5" />
+          <circle r="14" fill="#0A369D" fillOpacity="0.5" />
           <circle r="6" fill="#38bdf8" className="animate-ping" style={{ transformOrigin: "0 0" }} />
           <circle r="5" fill="#FFFFFF" />
           <text x="-20" y="38" fill="#93c5fd" fontSize="9" fontFamily="monospace" letterSpacing="0.1em">
@@ -38,7 +38,7 @@ export function BranchingNodesDiagram() {
               {/* Base static path */}
               <path
                 d={pathD}
-                stroke="rgba(255, 255, 255, 0.12)"
+                stroke="rgba(255, 255, 255, 0.1)"
                 strokeWidth="1.5"
                 strokeDasharray="3 3"
               />
@@ -62,7 +62,7 @@ export function BranchingNodesDiagram() {
 
               {/* Endpoint Atomic Node */}
               <g transform={`translate(320, ${b.y})`}>
-                <circle r="12" fill="#061A45" stroke="#38bdf8" strokeWidth="1.2" />
+                <circle r="12" fill="#111624" stroke="#38bdf8" strokeWidth="1.2" />
                 <circle r="4" fill="#38bdf8" />
                 <circle r="2" fill="#FFFFFF" />
 
@@ -73,7 +73,7 @@ export function BranchingNodesDiagram() {
                   width="95"
                   height="22"
                   rx="4"
-                  fill="#061A45"
+                  fill="#111624"
                   stroke="rgba(56, 189, 248, 0.4)"
                   strokeWidth="1"
                 />
@@ -104,8 +104,8 @@ export function BranchingNodesDiagram() {
 // Phase 02 Diagram - Multiple Flows Converging at a Bottleneck
 export function BottleneckConvergenceDiagram() {
   return (
-    <div className="relative w-full h-[260px] bg-[#040e26]/90 rounded-xl border border-white/10 p-4 overflow-hidden flex items-center justify-center shadow-[inset_0_0_30px_rgba(10,54,157,0.15)]">
-      <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px]" />
+    <div className="relative w-full h-[260px] bg-[#0A0D15]/95 rounded-xl border border-white/[0.08] p-4 overflow-hidden flex items-center justify-center shadow-[inset_0_0_30px_rgba(0,0,0,0.5)]">
+      <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px]" />
 
       <svg className="w-full h-full" viewBox="0 0 460 260" fill="none">
         {/* Guide flow contours funneling into bottleneck */}
@@ -116,12 +116,12 @@ export function BottleneckConvergenceDiagram() {
         />
         <path
           d="M 20 80 C 130 80, 180 122, 230 122 C 280 122, 330 80, 440 80"
-          stroke="rgba(56, 189, 248, 0.3)"
+          stroke="rgba(56, 189, 248, 0.25)"
           strokeWidth="1.5"
         />
         <path
           d="M 20 180 C 130 180, 180 138, 230 138 C 280 138, 330 180, 440 180"
-          stroke="rgba(56, 189, 248, 0.3)"
+          stroke="rgba(56, 189, 248, 0.25)"
           strokeWidth="1.5"
         />
         <path
@@ -138,7 +138,7 @@ export function BottleneckConvergenceDiagram() {
             width="40"
             height="80"
             rx="8"
-            fill="#120e0e"
+            fill="#16120D"
             stroke="#f59e0b"
             strokeWidth="1.5"
             strokeDasharray="4 2"
@@ -203,8 +203,8 @@ export function AlignedArchitectureDiagram() {
   ];
 
   return (
-    <div className="relative w-full h-[260px] bg-[#040e26]/90 rounded-xl border border-white/10 p-4 overflow-hidden flex items-center justify-center shadow-[inset_0_0_30px_rgba(10,54,157,0.15)]">
-      <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px]" />
+    <div className="relative w-full h-[260px] bg-[#0A0D15]/95 rounded-xl border border-white/[0.08] p-4 overflow-hidden flex items-center justify-center shadow-[inset_0_0_30px_rgba(0,0,0,0.5)]">
+      <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px]" />
 
       <svg className="w-full h-full" viewBox="0 0 460 260" fill="none">
         {/* Vertical Synchronization Laser Bus Channels */}
@@ -229,7 +229,7 @@ export function AlignedArchitectureDiagram() {
               width="340"
               height="50"
               rx="6"
-              fill="#061A45"
+              fill="#111624"
               stroke={layer.color}
               strokeWidth="1.2"
               strokeOpacity="0.7"
