@@ -8,7 +8,7 @@ import ConsultationForm from "@/components/sections/ConsultationForm";
 
 export default function Home() {
   return (
-    <div className="flex flex-col w-full bg-white selection:bg-brand-blue selection:text-white">
+    <div className="flex flex-col w-full bg-white selection:bg-[#0A369D] selection:text-white">
       <HeroSection />
       <About />
       <Clients />

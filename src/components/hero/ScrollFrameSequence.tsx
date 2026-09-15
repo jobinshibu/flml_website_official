@@ -74,7 +74,7 @@ export default function ScrollFrameSequence() {
                 First Logic Meta Lab
               </div>
               <div className="text-[10px] sm:text-[11px] font-mono tracking-[0.25em] text-brand-blue-light/70 uppercase mb-5">
-                Calibrating Sovereign Optical Sequence • {loadPercentage}%
+                Loading Experience • {loadPercentage}%
               </div>
               <div className="w-48 sm:w-64 h-[2px] bg-white/10 rounded-full overflow-hidden">
                 <div

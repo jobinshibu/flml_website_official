@@ -5,27 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 /**
- * WHAT WE BUILD - FIRSTLOGIC META LAB
+ * WHAT WE BUILD - FIRSTLOGIC META LAB (High-End Architectural Kinetic Typography)
  * 
- * Signature Kinetic Typographic Architecture (Modern • Unique • Neat)
- * 
- * Design Features:
- * 1. Precision Architectural Baseline:
- *    - Preserves the signature oversized, staggered sculptural layout.
- *    - Strict geometric lanes with subtle hairline guide rails, corner crosshairs (+),
- *      and monospace telemetry coordinates for a neat, engineered layout.
- * 2. Modern Neo-Grotesque Typography:
- *    - Ultra-bold, punchy modern sans with negative letter-tracking (-0.04em).
- *    - Laser-crisp wireframe stroke transformation on non-hovered items,
- *      illuminating the active item in high-voltage royal electric blue (#0A369D).
- * 3. Floating Architectural HUD Lens:
- *    - Liquid spring hover lens displaying capability tags, client counts, and dossier trigger.
- * 4. Neat Architectural Dossier Panel:
- *    - Smooth in-place expansion revealing the technical thesis, engineering scope,
- *      and production-verified client case studies in pristine bento tiles.
- * 5. Interactive Discipline Filter:
- *    - Quick-navigation chips at the top allow immediate focus/jumping to any discipline,
- *      plus an Expand/Collapse All toggle for power browsing.
+ * Signature Kinetic Typographic Architecture (Modern • Unique • High-Contrast Blue & White)
  */
 
 interface Project {
@@ -257,73 +239,49 @@ export default function WhatWeBuild() {
 
   return (
     <section
-      id="capabilities"
-      className="relative w-full bg-[#FFFFFF] text-[#061A45] pt-16 sm:pt-24 pb-28 sm:pb-36 px-4 sm:px-8 md:px-12 border-t border-gray-200/90 overflow-hidden select-none"
+      id="what-we-build"
+      className="relative w-full bg-[#FFFFFF] text-[#061A45] pt-20 sm:pt-28 pb-28 sm:pb-36 px-4 sm:px-8 md:px-12 border-t border-slate-200/90 overflow-hidden select-none"
     >
-      {/* Precision Blueprint Architectural Grid Overlay */}
+      {/* Subtle Blueprint Grid Overlay */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.035] z-0">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern id="what-we-build-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#061A45" strokeWidth="1" />
+            <pattern id="what-we-build-light-grid" width="48" height="48" patternUnits="userSpaceOnUse">
+              <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#061A45" strokeWidth="1" />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#what-we-build-grid)" />
+          <rect width="100%" height="100%" fill="url(#what-we-build-light-grid)" />
         </svg>
       </div>
 
-      {/* Decorative Subtle Corner Crosshairs */}
-      <div className="absolute top-6 left-6 font-mono text-gray-300 text-xs select-none pointer-events-none">+</div>
-      <div className="absolute top-6 right-6 font-mono text-gray-300 text-xs select-none pointer-events-none">+</div>
-      <div className="absolute bottom-6 left-6 font-mono text-gray-300 text-xs select-none pointer-events-none">+</div>
-      <div className="absolute bottom-6 right-6 font-mono text-gray-300 text-xs select-none pointer-events-none">+</div>
-
       <div className="relative max-w-[1480px] mx-auto z-10">
         
-        {/* ==================================================================== */}
-        {/* TOP PROTOCOL HEADER STRIP                                            */}
-        {/* ==================================================================== */}
-        <div className="pb-4 mb-10 sm:mb-14 border-b border-gray-200 flex flex-col md:flex-row md:items-center justify-between gap-4 text-[10px] sm:text-[11px] font-mono tracking-[0.24em] uppercase text-[#061A45]/70">
-          <div className="flex items-center gap-3">
-            <span className="w-2 h-2 rounded-full bg-[#0A369D] animate-pulse" aria-hidden="true" />
-            <span className="font-bold text-[#061A45]">FIRST LOGIC META LAB</span>
-            <span className="text-gray-300">/</span>
-            <span className="text-[#0A369D] font-semibold">CAPABILITIES ARCHITECTURE</span>
-          </div>
-
-          <div className="flex items-center gap-4 text-[#061A45]/60">
-            <span className="text-[#0A369D] font-bold">07 CORE DISCIPLINES</span>
-            <span className="text-gray-300">•</span>
-            <span className="font-semibold text-[#061A45]">10 PRODUCTION BUILDS</span>
-          </div>
-        </div>
-
-        {/* ==================================================================== */}
-        {/* SECTION HERO + INTERACTIVE DISCIPLINE SELECTOR BAR                   */}
-        {/* ==================================================================== */}
+        {/* SECTION HEADER + DISCIPLINE SELECTOR BAR */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16 sm:mb-20">
           <div>
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-blue-50/80 border border-blue-100 text-[#0A369D] font-mono text-[10px] tracking-widest uppercase font-bold mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-[#0A369D] font-mono text-[10.5px] tracking-widest uppercase font-bold mb-3">
+              <span className="w-2 h-2 rounded-full bg-[#0A369D] animate-pulse" />
               <span># WHAT WE BUILD</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-[#061A45] uppercase">
-              Engineering Disciplines & Systems
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-['Space_Grotesk'] font-bold tracking-tight text-[#061A45] uppercase">
+              Engineering Disciplines &amp; Systems
             </h2>
-            <p className="text-sm sm:text-base text-gray-500 max-w-xl mt-1.5 font-normal">
-              Hover to deconstruct technical scope. Click any discipline to unlock verified client production dossiers.
+            <p className="text-sm sm:text-base text-slate-600 max-w-xl mt-2 font-normal">
+              Hover over any discipline to deconstruct technical scope. Click to unlock verified client production dossiers.
             </p>
           </div>
 
-          {/* Quick Filter / Navigation Pills (Modern & Neat) */}
+          {/* Filter Pills */}
           <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
             {buildItems.map((item) => (
               <button
                 key={item.id}
+                suppressHydrationWarning
                 onClick={() => handleFilterClick(item.id)}
                 className={`px-3 py-1.5 rounded-lg text-[10px] font-mono tracking-wider uppercase font-semibold transition-all duration-200 border ${
                   expandedId === item.id
-                    ? "bg-[#0A369D] text-white border-[#0A369D] shadow-sm"
-                    : "bg-gray-50/90 text-gray-600 border-gray-200 hover:border-gray-300 hover:text-[#061A45] hover:bg-white"
+                    ? "bg-[#0A369D] text-white border-[#0A369D] shadow-sm font-bold"
+                    : "bg-slate-50 text-slate-600 border-slate-200 hover:border-slate-300 hover:text-[#061A45] hover:bg-white"
                 }`}
               >
                 <span className="text-[#0A369D] font-bold mr-1.5">{item.index}</span>
@@ -333,9 +291,7 @@ export default function WhatWeBuild() {
           </div>
         </div>
 
-        {/* ==================================================================== */}
-        {/* SCULPTURAL KINETIC TYPOGRAPHY SYSTEM (MODERN • UNIQUE • NEAT)         */}
-        {/* ==================================================================== */}
+        {/* SCULPTURAL KINETIC TYPOGRAPHY SYSTEM */}
         <div className="relative w-full flex flex-col space-y-10 sm:space-y-12 md:space-y-14">
           {buildItems.map((item, idx) => {
             const isHovered = hoveredId === item.id;
@@ -357,54 +313,45 @@ export default function WhatWeBuild() {
                   onMouseLeave={() => setHoveredId(null)}
                   onClick={() => handleToggle(item.id)}
                 >
-                  {/* Neat Monospace Metadata Eyebrow */}
+                  {/* Monospace Metadata Eyebrow */}
                   <div className="flex items-center gap-2.5 mb-1.5 transition-opacity duration-300">
-                    <span className="font-mono text-[11px] sm:text-xs tracking-widest text-[#0A369D] font-black">
+                    <span className="font-mono text-[11px] sm:text-xs tracking-widest text-[#0A369D] font-bold">
                       [{item.index}]
                     </span>
-                    <span className="w-1 h-1 rounded-full bg-gray-300" />
-                    <span className="font-mono text-[10px] sm:text-[11px] tracking-wider uppercase text-gray-400 font-medium group-hover:text-gray-600 transition-colors">
+                    <span className="w-1 h-1 rounded-full bg-slate-300" />
+                    <span className="font-mono text-[10px] sm:text-[11px] tracking-wider uppercase text-slate-400 font-medium group-hover:text-slate-600 transition-colors">
                       {item.domain}
                     </span>
-                    <span className="hidden sm:inline-flex items-center gap-1 ml-2 text-[9px] font-mono tracking-widest text-blue-600/80 bg-blue-50/90 px-1.5 py-0.5 rounded border border-blue-100">
+                    <span className="hidden sm:inline-flex items-center gap-1 ml-2 text-[9.5px] font-mono tracking-widest text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-100">
                       {item.projects.length} {item.projects.length === 1 ? "BUILD" : "BUILDS"}
                     </span>
                   </div>
 
-                  {/* 
-                    KINETIC MODERN SCULPTURAL HEADLINE
-                    - Ultra-bold modern grotesque (Geist/Sans) with tight tracking
-                    - Normal: Deep crisp Navy (#061A45)
-                    - Hovered / Expanded: Vibrant Royal Cobalt Blue (#0A369D)
-                    - Other items when one is hovered: Razor-sharp architectural wireframe stroke
-                  */}
+                  {/* KINETIC MODERN SCULPTURAL HEADLINE */}
                   <div className="relative">
                     <motion.h3
-                      className={`text-4xl sm:text-6xl md:text-7xl lg:text-[88px] xl:text-[98px] font-black uppercase tracking-[-0.04em] transition-all duration-300 leading-[0.9] select-none ${
+                      className={`text-4xl sm:text-6xl md:text-7xl lg:text-[88px] xl:text-[98px] font-black uppercase tracking-[-0.04em] transition-all duration-300 leading-[0.9] select-none font-['Space_Grotesk'] ${
                         isExpanded || isHovered
-                          ? "text-[#0A369D] drop-shadow-[0_2px_12px_rgba(10,54,157,0.15)]"
+                          ? "text-[#0A369D]"
                           : hasAnyHover
-                          ? "text-transparent [-webkit-text-stroke:1.25px_rgba(6,26,69,0.18)] opacity-40 hover:opacity-100"
+                          ? "text-transparent [-webkit-text-stroke:1.25px_rgba(6,26,69,0.18)] opacity-35 hover:opacity-100"
                           : "text-[#061A45]"
                       }`}
                     >
                       {item.title}
                     </motion.h3>
 
-                    {/* Subtle hairline guide line extending from the title */}
+                    {/* Hairline guide line */}
                     <div
                       className={`h-[1px] mt-2 transition-all duration-500 ${
                         isHovered || isExpanded
                           ? "w-full bg-[#0A369D]/40"
-                          : "w-12 bg-gray-200 group-hover:w-24 group-hover:bg-[#0A369D]/20"
+                          : "w-12 bg-slate-200 group-hover:w-24 group-hover:bg-[#0A369D]/20"
                       }`}
                     />
                   </div>
 
-                  {/* 
-                    FLOATING ARCHITECTURAL HUD LENS (ON HOVER)
-                    - Slides in smoothly right under the word
-                  */}
+                  {/* FLOATING ARCHITECTURAL HUD LENS (ON HOVER) */}
                   <AnimatePresence>
                     {isHovered && !isExpanded && (
                       <motion.div
@@ -414,7 +361,7 @@ export default function WhatWeBuild() {
                         transition={{ duration: 0.2, ease: "easeOut" }}
                         className="mt-3.5 z-30"
                       >
-                        <div className="inline-flex flex-wrap items-center gap-2.5 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-blue-200/90 shadow-[0_6px_20px_rgba(10,54,157,0.08)]">
+                        <div className="inline-flex flex-wrap items-center gap-2.5 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full border border-blue-200/90 shadow-[0_6px_20px_rgba(10,54,157,0.08)]">
                           {item.details.slice(0, 3).map((detail, dIdx) => (
                             <span
                               key={dIdx}
@@ -426,8 +373,8 @@ export default function WhatWeBuild() {
                               )}
                             </span>
                           ))}
-                          <span className="w-1 h-1 bg-gray-300 rounded-full inline-block" />
-                          <span className="text-[10px] font-mono font-bold text-gray-500 flex items-center gap-1 group-hover:text-[#0A369D]">
+                          <span className="w-1 h-1 bg-slate-300 rounded-full inline-block" />
+                          <span className="text-[10px] font-mono font-bold text-slate-500 flex items-center gap-1 group-hover:text-[#0A369D]">
                             OPEN SPEC ↗
                           </span>
                         </div>
@@ -435,11 +382,7 @@ export default function WhatWeBuild() {
                     )}
                   </AnimatePresence>
 
-                  {/* 
-                    ==============================================================
-                    EXPANDED IN-PLACE ARCHITECTURAL DOSSIER
-                    ==============================================================
-                  */}
+                  {/* EXPANDED IN-PLACE ARCHITECTURAL DOSSIER */}
                   <AnimatePresence>
                     {isExpanded && (
                       <motion.div
@@ -449,16 +392,16 @@ export default function WhatWeBuild() {
                         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                         className="overflow-hidden mt-6 w-full max-w-4xl text-left"
                       >
-                        <div className="rounded-2xl bg-white border border-gray-200/95 shadow-[0_12px_40px_rgba(6,26,69,0.07)] p-6 sm:p-8 lg:p-10 relative">
+                        <div className="rounded-2xl bg-white border border-slate-200/95 shadow-[0_12px_40px_rgba(6,26,69,0.08)] p-6 sm:p-8 lg:p-10 relative">
                           
                           {/* Dossier Header Bar */}
-                          <div className="pb-4 mb-6 border-b border-gray-100 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+                          <div className="pb-4 mb-6 border-b border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
                             <div className="flex items-center gap-3">
-                              <span className="px-2 py-0.5 rounded bg-blue-50 text-[#0A369D] font-bold border border-blue-100">
+                              <span className="px-2.5 py-0.5 rounded bg-blue-50 text-[#0A369D] font-bold border border-blue-100">
                                 SPEC {item.index}.0
                               </span>
-                              <span className="text-gray-400">/</span>
-                              <span className="text-gray-700 font-semibold">{item.domain}</span>
+                              <span className="text-slate-400">/</span>
+                              <span className="text-slate-700 font-semibold">{item.domain}</span>
                             </div>
 
                             <div className="flex items-center gap-3">
@@ -467,37 +410,38 @@ export default function WhatWeBuild() {
                                 PRODUCTION VERIFIED
                               </span>
                               <button
+                                suppressHydrationWarning
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   setExpandedId(null);
                                 }}
-                                className="ml-2 px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 text-gray-600 text-[10px] font-bold transition-colors"
+                                className="ml-2 px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-600 text-[10px] font-bold transition-colors cursor-pointer"
                               >
                                 CLOSE ✕
                               </button>
                             </div>
                           </div>
 
-                          {/* Top Section: Architectural Thesis */}
+                          {/* Architectural Thesis */}
                           <div className="mb-6">
                             <h4 className="text-xs font-mono uppercase tracking-widest text-[#0A369D] font-bold mb-2">
                               ARCHITECTURAL THESIS
                             </h4>
-                            <p className="text-base sm:text-lg text-gray-700 leading-relaxed font-normal">
+                            <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal">
                               {item.description}
                             </p>
                           </div>
 
-                          {/* Technical Scope Tag Matrix */}
+                          {/* Engineering Competencies Tags */}
                           <div className="mb-8">
-                            <h5 className="text-[11px] font-mono uppercase tracking-widest text-gray-400 font-semibold mb-2.5">
+                            <h5 className="text-[11px] font-mono uppercase tracking-widest text-slate-400 font-semibold mb-2.5">
                               ENGINEERING COMPETENCIES
                             </h5>
                             <div className="flex flex-wrap gap-2">
                               {item.details.map((detail, dIdx) => (
                                 <span
                                   key={dIdx}
-                                  className="px-3 py-1 rounded-md bg-gray-50 border border-gray-200 text-gray-700 font-mono text-[11px] font-medium"
+                                  className="px-3 py-1 rounded-md bg-slate-50 border border-slate-200 text-slate-700 font-mono text-[11px] font-medium"
                                 >
                                   {detail}
                                 </span>
@@ -510,11 +454,11 @@ export default function WhatWeBuild() {
                             <div className="flex items-center justify-between mb-4">
                               <h5 className="text-[11px] font-mono uppercase tracking-widest text-[#0A369D] font-bold flex items-center gap-2">
                                 <span>VERIFIED PRODUCTION BUILDS</span>
-                                <span className="px-1.5 py-0.2 rounded bg-blue-100 text-[#0A369D] text-[10px]">
+                                <span className="px-2 py-0.5 rounded bg-blue-100 text-[#0A369D] text-[10px] font-bold">
                                   {item.projects.length}
                                 </span>
                               </h5>
-                              <span className="text-[10px] font-mono text-gray-400">
+                              <span className="text-[10px] font-mono text-slate-400">
                                 ACTIVE CLIENT PLATFORMS
                               </span>
                             </div>
@@ -523,12 +467,12 @@ export default function WhatWeBuild() {
                               {item.projects.map((project, pIdx) => (
                                 <div
                                   key={pIdx}
-                                  className="group/card rounded-xl bg-gray-50/70 border border-gray-200 p-5 hover:bg-white hover:border-[#0A369D]/40 hover:shadow-md transition-all duration-200 flex flex-col justify-between"
+                                  className="group/card rounded-xl bg-slate-50/80 border border-slate-200 p-5 hover:bg-white hover:border-[#0A369D]/40 hover:shadow-md transition-all duration-200 flex flex-col justify-between"
                                 >
                                   <div>
                                     {/* Client Header Tile */}
                                     <div className="flex items-center justify-between gap-3 mb-4">
-                                      <div className="relative w-12 h-12 shrink-0 rounded-lg bg-white border border-gray-200 p-1.5 flex items-center justify-center overflow-hidden shadow-2xs">
+                                      <div className="relative w-12 h-12 shrink-0 rounded-lg bg-white border border-slate-200 p-1.5 flex items-center justify-center overflow-hidden shadow-2xs">
                                         <Image
                                           src={project.image}
                                           alt={project.title}
@@ -539,11 +483,11 @@ export default function WhatWeBuild() {
                                       </div>
 
                                       <div className="flex flex-col items-end">
-                                        <span className="font-mono text-[10px] uppercase tracking-wider px-2 py-0.5 rounded bg-white text-[#0A369D] font-bold border border-gray-200">
+                                        <span className="font-mono text-[10px] uppercase tracking-wider px-2 py-0.5 rounded bg-white text-[#0A369D] font-bold border border-slate-200">
                                           {project.tag}
                                         </span>
                                         {project.stack && (
-                                          <span className="font-mono text-[9px] text-gray-400 mt-1">
+                                          <span className="font-mono text-[9px] text-slate-400 mt-1">
                                             {project.stack}
                                           </span>
                                         )}
@@ -557,13 +501,13 @@ export default function WhatWeBuild() {
                                         →
                                       </span>
                                     </h6>
-                                    <p className="text-xs text-gray-600 leading-relaxed">
+                                    <p className="text-xs text-slate-600 leading-relaxed font-normal">
                                       {project.description}
                                     </p>
                                   </div>
 
-                                  {/* Bottom Verification Status */}
-                                  <div className="mt-4 pt-3 border-t border-gray-200/80 flex items-center justify-between text-[10px] font-mono text-gray-500">
+                                  {/* Bottom Status */}
+                                  <div className="mt-4 pt-3 border-t border-slate-200/80 flex items-center justify-between text-[10px] font-mono text-slate-500">
                                     <span className="flex items-center gap-1.5 text-emerald-600 font-semibold">
                                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                                       DEPLOYED IN PRODUCTION
@@ -584,28 +528,13 @@ export default function WhatWeBuild() {
 
                 </div>
 
-                {/* Fine subtle architectural horizontal hairline between staggered levels */}
+                {/* Horizontal divider */}
                 {idx < buildItems.length - 1 && (
-                  <div className="w-full border-b border-gray-100/80 my-2 pointer-events-none" />
+                  <div className="w-full border-b border-slate-100 my-2 pointer-events-none" />
                 )}
               </div>
             );
           })}
-        </div>
-
-        {/* ==================================================================== */}
-        {/* BOTTOM TELEMETRY FOOTER                                              */}
-        {/* ==================================================================== */}
-        <div className="mt-20 pt-6 border-t border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.24em] text-gray-400">
-          <div className="flex items-center gap-2">
-            <span className="text-[#0A369D] font-bold">ALL ARCHITECTURES</span>
-            <span>PROPRIETARY & FIRST LOGIC META LAB CERTIFIED</span>
-          </div>
-          <div className="flex items-center gap-4 text-gray-400">
-            <span>ZERO UNVERIFIED REPOSITORIES</span>
-            <span>•</span>
-            <span className="text-[#0A369D] font-semibold">SECURE KERNEL</span>
-          </div>
         </div>
 
       </div>

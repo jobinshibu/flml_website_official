@@ -1,37 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@300..700&display=swap');
 @import "tailwindcss";
- 
+
 @theme {
   --font-cinzel: var(--font-cinzel), 'Cinzel', serif;
   --font-serif-classic: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
   --font-space-grotesk: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-dm-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 
-
-  /* Blue + White Brand Identity */
-  --color-brand-blue: #0A369D; /* Strong corporate engineering blue */
-  --color-brand-blue-dark: #061A45; /* Deep navy for technical sections */
-  --color-brand-blue-light: #E6F0FF; /* Very subtle blue tint */
-  
-  --color-background: #FFFFFF;
-  --color-foreground: #111111;
-  
-  --color-surface-100: #F8F9FA;
-  --color-surface-200: #F0F2F5;
-  
-  --color-border-subtle: #E2E8F0;
-  --color-border-strong: #CBD5E1;
-  
-  --color-accent: var(--color-brand-blue);
-  --color-accent-hover: #08297A;
+  /* Elevated Corporate & Engineering Blue Palette */
+  --color-brand-blue: #0A369D;
+  --color-brand-blue-dark: #061A45;
+  --color-brand-blue-light: #E6F0FF;
+  --color-brand-blue-accent: #2563EB;
+  --color-brand-blue-bright: #3B82F6;
+  --color-obsidian-900: #030712;
+  --color-obsidian-800: #060D1E;
+  --color-obsidian-700: #0B132B;
 }
 
 @layer base {
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    background-color: #030712;
+    color: #F0F6FF;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   * {
@@ -39,10 +32,88 @@
     margin: 0;
     padding: 0;
   }
+
+  /* Custom Sleek Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #030712;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1E293B;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2563EB;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  
+  .glow-blue-box {
+    box-shadow: 0 0 30px -5px rgba(10, 54, 157, 0.35);
+  }
+}
+
+/* Global Keyframes & Smooth Looping Animations */
+@keyframes marqueeLoop {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marqueeLoopReverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+@keyframes scrollUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+@keyframes scrollDown {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(0); }
+}
+
+.animate-column-up {
+  animation: scrollUp 44s linear infinite;
+}
+
+.animate-column-down {
+  animation: scrollDown 49s linear infinite;
+}
+
+.gallery-viewport {
+  mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+}
+
+.gallery-viewport:hover .animate-column-up,
+.gallery-viewport:hover .animate-column-down {
+  animation-play-state: paused;
+}
+
+.gallery-perspective {
+  perspective: 900px;
+  transform: perspective(900px) rotateY(6deg) rotateZ(5deg);
+  transform-style: preserve-3d;
+}
+
+@media (min-width: 1024px) {
+  .gallery-perspective {
+    transform: perspective(900px) rotateY(8deg) rotateZ(6deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-column-up,
+  .animate-column-down {
+    animation: none !important;
   }
 }

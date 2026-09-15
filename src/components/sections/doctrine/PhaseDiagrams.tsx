@@ -3,30 +3,30 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-// Phase 01 Diagram - One Operation Branching into Individual Atomic Nodes (Obsidian Dark Theme)
+// Phase 01 Diagram - Deconstructing Core Processes into Modular Services
 export function BranchingNodesDiagram() {
   const branches = [
-    { id: "node-1", label: "AUTH_GATE", y: 35, delay: 0 },
-    { id: "node-2", label: "STATE_ENGINE", y: 80, delay: 0.4 },
-    { id: "node-3", label: "LEDGER_TX", y: 130, delay: 0.8 },
-    { id: "node-4", label: "EVENT_STREAM", y: 180, delay: 1.2 },
-    { id: "node-5", label: "EDGE_SYNAPSE", y: 225, delay: 1.6 },
+    { id: "node-1", label: "Authentication", y: 35, delay: 0 },
+    { id: "node-2", label: "State Engine", y: 80, delay: 0.4 },
+    { id: "node-3", label: "Data Ledger", y: 130, delay: 0.8 },
+    { id: "node-4", label: "Event Pipeline", y: 180, delay: 1.2 },
+    { id: "node-5", label: "Edge Gateway", y: 225, delay: 1.6 },
   ];
 
   return (
     <div className="relative w-full h-[260px] bg-[#0A0D15]/95 rounded-xl border border-white/[0.08] p-4 overflow-hidden flex items-center justify-center shadow-[inset_0_0_30px_rgba(0,0,0,0.5)]">
-      {/* Background blueprint grid matching dark theme */}
-      <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px]" />
+      {/* Background blueprint grid */}
+      <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(#2563eb_1px,transparent_1px)] [background-size:16px_16px]" />
 
       <svg className="w-full h-full" viewBox="0 0 460 260" fill="none">
         {/* Central Origin Node */}
         <g transform="translate(45, 130)">
-          <circle r="22" fill="#111624" stroke="#38bdf8" strokeWidth="1.5" />
+          <circle r="22" fill="#111624" stroke="#2563eb" strokeWidth="1.5" />
           <circle r="14" fill="#0A369D" fillOpacity="0.5" />
-          <circle r="6" fill="#38bdf8" className="animate-ping" style={{ transformOrigin: "0 0" }} />
+          <circle r="6" fill="#3B82F6" className="animate-ping" style={{ transformOrigin: "0 0" }} />
           <circle r="5" fill="#FFFFFF" />
-          <text x="-20" y="38" fill="#93c5fd" fontSize="9" fontFamily="monospace" letterSpacing="0.1em">
-            ROOT_OP
+          <text x="-22" y="38" fill="#93c5fd" fontSize="9" fontFamily="sans-serif" fontWeight="600">
+            Core Process
           </text>
         </g>
 
@@ -46,7 +46,7 @@ export function BranchingNodesDiagram() {
               {/* Animated pulse highlight line */}
               <path
                 d={pathD}
-                stroke="#38bdf8"
+                stroke="#3B82F6"
                 strokeWidth="2"
                 strokeDasharray="20 180"
                 className="opacity-90"
@@ -62,19 +62,19 @@ export function BranchingNodesDiagram() {
 
               {/* Endpoint Atomic Node */}
               <g transform={`translate(320, ${b.y})`}>
-                <circle r="12" fill="#111624" stroke="#38bdf8" strokeWidth="1.2" />
-                <circle r="4" fill="#38bdf8" />
+                <circle r="12" fill="#111624" stroke="#2563eb" strokeWidth="1.2" />
+                <circle r="4" fill="#3B82F6" />
                 <circle r="2" fill="#FFFFFF" />
 
                 {/* Tag pill */}
                 <rect
                   x="20"
                   y="-11"
-                  width="95"
+                  width="105"
                   height="22"
                   rx="4"
                   fill="#111624"
-                  stroke="rgba(56, 189, 248, 0.4)"
+                  stroke="rgba(37, 99, 235, 0.3)"
                   strokeWidth="1"
                 />
                 <text
@@ -82,8 +82,8 @@ export function BranchingNodesDiagram() {
                   y="4"
                   fill="#F0F6FF"
                   fontSize="9.5"
-                  fontFamily="monospace"
-                  letterSpacing="0.08em"
+                  fontFamily="sans-serif"
+                  fontWeight="500"
                 >
                   {b.label}
                 </text>
@@ -92,11 +92,6 @@ export function BranchingNodesDiagram() {
           );
         })}
       </svg>
-
-      <div className="absolute top-3 right-4 flex items-center gap-1.5 text-[10px] font-mono text-sky-300 uppercase tracking-wider">
-        <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
-        Surgical Dissection Map
-      </div>
     </div>
   );
 }
@@ -105,7 +100,7 @@ export function BranchingNodesDiagram() {
 export function BottleneckConvergenceDiagram() {
   return (
     <div className="relative w-full h-[260px] bg-[#0A0D15]/95 rounded-xl border border-white/[0.08] p-4 overflow-hidden flex items-center justify-center shadow-[inset_0_0_30px_rgba(0,0,0,0.5)]">
-      <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px]" />
+      <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(#2563eb_1px,transparent_1px)] [background-size:16px_16px]" />
 
       <svg className="w-full h-full" viewBox="0 0 460 260" fill="none">
         {/* Guide flow contours funneling into bottleneck */}
@@ -116,12 +111,12 @@ export function BottleneckConvergenceDiagram() {
         />
         <path
           d="M 20 80 C 130 80, 180 122, 230 122 C 280 122, 330 80, 440 80"
-          stroke="rgba(56, 189, 248, 0.25)"
+          stroke="rgba(37, 99, 235, 0.25)"
           strokeWidth="1.5"
         />
         <path
           d="M 20 180 C 130 180, 180 138, 230 138 C 280 138, 330 180, 440 180"
-          stroke="rgba(56, 189, 248, 0.25)"
+          stroke="rgba(37, 99, 235, 0.25)"
           strokeWidth="1.5"
         />
         <path
@@ -152,10 +147,10 @@ export function BottleneckConvergenceDiagram() {
             textAnchor="middle"
             fill="#f59e0b"
             fontSize="9"
-            fontFamily="monospace"
-            letterSpacing="0.1em"
+            fontFamily="sans-serif"
+            fontWeight="600"
           >
-            FRICTION ZONE
+            Bottleneck Zone
           </text>
         </g>
 
@@ -164,7 +159,7 @@ export function BottleneckConvergenceDiagram() {
           <path
             key={idx}
             d={`M 20 ${yStart} Q 160 ${125 + (idx - 1.5) * 8}, 230 130 Q 300 ${125 + (idx - 1.5) * 8}, 440 ${yStart}`}
-            stroke={idx % 2 === 0 ? "#38bdf8" : "#60a5fa"}
+            stroke={idx % 2 === 0 ? "#3B82F6" : "#60a5fa"}
             strokeWidth="2"
             strokeDasharray="14 160"
           >
@@ -177,19 +172,14 @@ export function BottleneckConvergenceDiagram() {
           </path>
         ))}
 
-        {/* Procedural Drag Labels */}
-        <text x="30" y="28" fill="#93c5fd" fontSize="9" fontFamily="monospace">
-          INCOMING TRANSACTION BURSTS
+        {/* Procedural Flow Labels */}
+        <text x="30" y="28" fill="#93c5fd" fontSize="9" fontFamily="sans-serif" fontWeight="500">
+          Incoming Traffic &amp; Workflows
         </text>
-        <text x="300" y="242" fill="#38bdf8" fontSize="9" fontFamily="monospace">
-          REGULATED STABILIZED FLOW
+        <text x="300" y="242" fill="#3B82F6" fontSize="9" fontFamily="sans-serif" fontWeight="500">
+          Optimized &amp; Regulated Flow
         </text>
       </svg>
-
-      <div className="absolute top-3 right-4 flex items-center gap-1.5 text-[10px] font-mono text-amber-400 uppercase tracking-wider">
-        <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-        Bottleneck Diagnostic
-      </div>
     </div>
   );
 }
@@ -197,22 +187,22 @@ export function BottleneckConvergenceDiagram() {
 // Phase 03 Diagram - Aligned Architecture Layers Forming a Complete System
 export function AlignedArchitectureDiagram() {
   const layers = [
-    { title: "L03 / SYNAPSE INTERFACE", desc: "Decoupled Web, Mobile & Realtime WebSockets", y: 40, color: "#60a5fa" },
-    { title: "L02 / ORCHESTRATION KERNEL", desc: "Stateless Micro-Services & Event Bus", y: 105, color: "#38bdf8" },
-    { title: "L01 / IMMUTABLE DATA LEDGER", desc: "High-Throughput Partitioned Storage Mesh", y: 170, color: "#0A369D" },
+    { title: "Application & Interface Layer", desc: "Decoupled Web, Mobile & Realtime WebSockets", y: 40, color: "#60a5fa" },
+    { title: "Services & Logic Layer", desc: "Stateless Micro-Services & Event Bus", y: 105, color: "#3B82F6" },
+    { title: "Data & Storage Layer", desc: "High-Throughput Partitioned Storage Mesh", y: 170, color: "#0A369D" },
   ];
 
   return (
     <div className="relative w-full h-[260px] bg-[#0A0D15]/95 rounded-xl border border-white/[0.08] p-4 overflow-hidden flex items-center justify-center shadow-[inset_0_0_30px_rgba(0,0,0,0.5)]">
-      <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px]" />
+      <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(#2563eb_1px,transparent_1px)] [background-size:16px_16px]" />
 
       <svg className="w-full h-full" viewBox="0 0 460 260" fill="none">
         {/* Vertical Synchronization Laser Bus Channels */}
-        <line x1="80" y1="25" x2="80" y2="235" stroke="#38bdf8" strokeWidth="1.5" strokeOpacity="0.5" strokeDasharray="3 3" />
-        <line x1="380" y1="25" x2="380" y2="235" stroke="#38bdf8" strokeWidth="1.5" strokeOpacity="0.5" strokeDasharray="3 3" />
+        <line x1="80" y1="25" x2="80" y2="235" stroke="#2563eb" strokeWidth="1.5" strokeOpacity="0.5" strokeDasharray="3 3" />
+        <line x1="380" y1="25" x2="380" y2="235" stroke="#2563eb" strokeWidth="1.5" strokeOpacity="0.5" strokeDasharray="3 3" />
 
         {/* Traveling Vertical Synch Energy Packets */}
-        <circle r="4" fill="#38bdf8">
+        <circle r="4" fill="#3B82F6">
           <animateMotion path="M 80 25 L 80 235" dur="2.4s" repeatCount="indefinite" />
         </circle>
         <circle r="4" fill="#60a5fa">
@@ -238,30 +228,25 @@ export function AlignedArchitectureDiagram() {
             <rect x="0" y="0" width="4" height="50" rx="2" fill={layer.color} />
 
             {/* Content text */}
-            <text x="18" y="21" fill="#FFFFFF" fontSize="10.5" fontFamily="monospace" fontWeight="bold" letterSpacing="0.08em">
+            <text x="18" y="21" fill="#FFFFFF" fontSize="10" fontFamily="sans-serif" fontWeight="bold">
               {layer.title}
             </text>
             <text x="18" y="38" fill="#93c5fd" fontSize="9" fontFamily="sans-serif">
               {layer.desc}
             </text>
 
-            {/* Lock Status indicator */}
+            {/* Status indicator */}
             <g transform="translate(305, 25)">
-              <circle r="8" fill="#0A369D" fillOpacity="0.4" stroke="#38bdf8" strokeWidth="1" />
-              <circle r="3" fill="#67e8f9" />
+              <circle r="8" fill="#0A369D" fillOpacity="0.4" stroke="#2563eb" strokeWidth="1" />
+              <circle r="3" fill="#93c5fd" />
             </g>
           </g>
         ))}
 
-        <text x="130" y="244" fill="#38bdf8" fontSize="9" fontFamily="monospace" letterSpacing="0.12em">
-          UNIFIED ARCHITECTURAL BACKBONE
+        <text x="140" y="244" fill="#3B82F6" fontSize="9" fontFamily="sans-serif" fontWeight="600" letterSpacing="0.08em">
+          UNIFIED SYSTEM ARCHITECTURE
         </text>
       </svg>
-
-      <div className="absolute top-3 right-4 flex items-center gap-1.5 text-[10px] font-mono text-sky-300 uppercase tracking-wider">
-        <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
-        Synthesis Verification: Complete
-      </div>
     </div>
   );
 }

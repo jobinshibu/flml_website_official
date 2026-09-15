@@ -11,11 +11,7 @@ import {
 } from "./doctrine/PhaseDiagrams";
 
 // ============================================================================
-// THE DOCTRINE SECTION — REDESIGNED OBSIDIAN DARK COMMAND CONSOLE
-// - Background: Ultra-sleek Obsidian Midnight (#050608 -> #080B12 -> #040406)
-// - Hero Text Colors: Preserved exact signature palette (Crisp White + Sky-Cyan #38BDF8 + Italic Sky-200)
-// - Interactive Operational Studio: 3-Phase Interactive Console with real-time schematic switching
-// - Compact, zero-waste layout with high information density & enterprise deeptech aesthetics
+// THE DOCTRINE SECTION — OBSIDIAN COMMAND CONSOLE
 // ============================================================================
 
 interface WordToken {
@@ -68,7 +64,7 @@ function ScrollIlluminatedWord({
       style={{ opacity }}
       className={`inline-block mr-[0.24em] transition-colors duration-200 ${
         token.isHighlight
-          ? "text-[#38BDF8] font-medium drop-shadow-[0_0_14px_rgba(56,189,248,0.55)]"
+          ? "text-[#3B82F6] font-medium"
           : "text-[#F0F6FF]"
       }`}
     >
@@ -147,8 +143,8 @@ export default function About() {
       subtitle: "Dissecting flows into foundational atomic elements.",
       description:
         "Before a line of code is written, our architects map the living nervous system of your business — isolating every node, touchpoint, and transaction synapse.",
-      badgeColor: "text-sky-400 border-sky-400/30 bg-sky-400/10",
-      accent: "#38BDF8",
+      badgeColor: "text-blue-400 border-blue-400/30 bg-blue-400/10",
+      accent: "#2563EB",
     },
     {
       num: 2,
@@ -171,8 +167,8 @@ export default function About() {
       subtitle: "Engineering tailor-made solutions for scale.",
       description:
         "Only upon achieving absolute operational clarity do we engineer the code: a custom, unbreakable technological backbone built to dominate.",
-      badgeColor: "text-sky-400 border-sky-400/30 bg-sky-400/10",
-      accent: "#38BDF8",
+      badgeColor: "text-blue-400 border-blue-400/30 bg-blue-400/10",
+      accent: "#2563EB",
     },
   ];
 
@@ -194,16 +190,16 @@ export default function About() {
           <defs>
             <pattern id="doctrine-obsidian-grid" width="48" height="48" patternUnits="userSpaceOnUse">
               <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#FFFFFF" strokeWidth="0.75" />
-              <circle cx="24" cy="24" r="0.75" fill="#38BDF8" opacity="0.6" />
+              <circle cx="24" cy="24" r="0.75" fill="#2563EB" opacity="0.6" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#doctrine-obsidian-grid)" />
         </svg>
       </div>
 
-      {/* Subtle Atmospheric Precision Lighting (Deep Obsidian & Cyan undertones) */}
-      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#0A369D]/10 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute top-1/2 left-0 w-[450px] h-[450px] bg-[#38BDF8]/5 rounded-full blur-[170px] pointer-events-none" />
+      {/* Subtle Atmospheric Precision Lighting */}
+      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#0A369D]/15 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/2 left-0 w-[450px] h-[450px] bg-[#2563EB]/10 rounded-full blur-[170px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-0 w-[450px] h-[450px] bg-[#0A369D]/10 rounded-full blur-[180px] pointer-events-none" />
 
       {/* ==================================================================== */}
@@ -213,30 +209,26 @@ export default function About() {
         
         {/* Top Header Pill */}
         <div className="flex items-center gap-3.5 mb-6 z-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-sky-400/30 bg-[#0B101C]/80 text-sky-300 text-[10.5px] font-mono tracking-[0.24em] uppercase backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-400" />
-            </span>
-            THE DOCTRINE
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-blue-400/20 bg-[#0B101C]/80 text-blue-300 text-[10.5px] font-mono tracking-[0.2em] uppercase backdrop-blur-md shadow-sm">
+            OUR PHILOSOPHY
           </div>
         </div>
 
-        {/* Main Hero Body: Preserved Headline Colors + 3D Particle Visualizer */}
+        {/* Main Hero Body */}
         <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center z-20 my-auto">
           
-          {/* Left Column: Signature Typography preserved */}
+          {/* Left Column: Signature Typography */}
           <div className="lg:col-span-7 z-20">
             <h1 className="font-['Space_Grotesk',sans-serif] font-bold text-4xl sm:text-6xl lg:text-[4.5rem] tracking-tight leading-[0.98] text-[#F0F6FF]">
               <span className="block">OPERATIONAL</span>
               <span className="block mt-1">ANATOMY</span>
               <span className="block mt-1 sm:mt-2">
-                <span className="text-[#38BDF8] drop-shadow-[0_0_24px_rgba(56,189,248,0.45)]">
+                <span className="text-[#3B82F6]">
                   FIRST.
                 </span>{" "}
                 <span className="text-2xl sm:text-4xl lg:text-5xl font-normal text-white/90">
                   Code{" "}
-                  <span className="font-[family-name:var(--font-serif-classic)] italic text-sky-200">
+                  <span className="font-[family-name:var(--font-serif-classic)] italic text-blue-200">
                     Second.
                   </span>
                 </span>
@@ -251,58 +243,27 @@ export default function About() {
             {/* Quick Action Navigation */}
             <div className="mt-8 flex items-center gap-5">
               <button
+                suppressHydrationWarning
                 onClick={scrollToStudio}
-                className="group relative px-5 py-2.5 rounded-full border border-sky-400/30 hover:border-sky-300 bg-[#0C1220]/80 hover:bg-[#0A369D]/40 flex items-center gap-3 transition-all duration-300 shadow-[0_4px_16px_rgba(0,0,0,0.4)] backdrop-blur-md active:scale-95 text-xs font-mono tracking-widest text-sky-200 uppercase"
+                className="group relative px-5 py-2.5 rounded-full border border-blue-400/30 hover:border-blue-300 bg-[#0C1220]/80 hover:bg-[#0A369D]/40 flex items-center gap-3 transition-all duration-300 shadow-[0_4px_16px_rgba(0,0,0,0.4)] backdrop-blur-md active:scale-95 text-xs font-mono tracking-widest text-blue-200 uppercase"
               >
                 <span>EXPLORE OPERATIONAL PHASES</span>
-                <ArrowDown className="w-4 h-4 text-sky-300 group-hover:translate-y-0.5 transition-transform duration-300" />
+                <ArrowDown className="w-4 h-4 text-blue-300 group-hover:translate-y-0.5 transition-transform duration-300" />
               </button>
-
-              <div className="hidden sm:flex items-center gap-2 text-[10px] font-mono tracking-widest text-white/40 uppercase">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                <span>SYSTEM LIVE</span>
-              </div>
             </div>
           </div>
 
-          {/* Right Area: Morphic Topology Engine in Sleek Tech Frame */}
+          {/* Right Area: Morphic Topology Engine Visualizer */}
           <div className="lg:col-span-5 relative h-[320px] sm:h-[380px] lg:h-[420px] flex items-center justify-center pointer-events-auto">
-            {/* Ambient luminous halo behind particles */}
+            {/* Ambient halo behind particles */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <div className="w-64 h-64 rounded-full bg-[#0A369D]/20 blur-[90px]" />
             </div>
 
             {/* 3D Hardware Accelerated Canvas */}
             <ParticleMorphCanvas className="z-10" />
-
-            {/* Corner Tech Crosshairs */}
-            <div className="absolute top-2 left-2 font-mono text-[10px] text-white/20 select-none pointer-events-none">+</div>
-            <div className="absolute top-2 right-2 font-mono text-[10px] text-white/20 select-none pointer-events-none">+</div>
-            <div className="absolute bottom-2 left-2 font-mono text-[10px] text-white/20 select-none pointer-events-none">+</div>
-
-            {/* Overlay Geometry Mode Readout */}
-            <div className="absolute bottom-2 right-2 px-3 py-1 rounded-full border border-white/[0.08] bg-[#07090F]/90 backdrop-blur-md text-[9.5px] font-mono text-sky-300/70 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
-              <span>TOPOLOGY ENGINE</span>
-            </div>
           </div>
 
-        </div>
-
-        {/* Compact FLML Status Telemetry Strip */}
-        <div className="mt-8 pt-4 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-white/40 z-20">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
-            <span className="text-white font-semibold tracking-wider">FLML CORE</span>
-            <span className="text-white/20">|</span>
-            <span className="tracking-widest text-sky-200/60">SOVEREIGN ARCHITECTURE</span>
-          </div>
-
-          <div className="flex items-center gap-4 tracking-wider text-[11px]">
-            <span className="text-sky-300 font-semibold">SYS_STATUS: OPTIMAL</span>
-            <span>•</span>
-            <span className="text-white/60">HIGH-SCALE PROTOCOL</span>
-          </div>
         </div>
 
       </div>
@@ -314,33 +275,21 @@ export default function About() {
         <div className="flex w-max select-none animate-[marqueeLoop_28s_linear_infinite]">
           {[0, 1, 2, 3].map((rep) => (
             <div key={rep} className="flex items-center text-white font-['Space_Grotesk',sans-serif] font-bold text-xs tracking-[0.24em] uppercase shrink-0">
-              <span className="mx-6 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">
-                SOVEREIGN ARCHITECTURE
+              <span className="mx-6 text-white">
+                ENTERPRISE ARCHITECTURE
               </span>
-              <span className="text-sky-400">✳</span>
-              <span className="mx-6 text-sky-200">BESPOKE CODE</span>
-              <span className="text-sky-400">✳</span>
-              <span className="mx-6 text-white">OPERATIONAL ANATOMY FIRST</span>
-              <span className="text-sky-400">✳</span>
+              <span className="text-blue-400">✳</span>
+              <span className="mx-6 text-blue-200">BESPOKE ENGINEERING</span>
+              <span className="text-blue-400">✳</span>
+              <span className="mx-6 text-white">OPERATIONAL EXCELLENCE</span>
+              <span className="text-blue-400">✳</span>
             </div>
           ))}
         </div>
       </div>
 
-      {/* CSS Keyframe for continuous zero-gap ticker */}
-      <style jsx global>{`
-        @keyframes marqueeLoop {
-          0% {
-            transform: translateX(0%);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-      `}</style>
-
       {/* ==================================================================== */}
-      {/* 3. INTEGRATED FIRST PRINCIPLE EPIGRAPH (Streamlined Vertical Depth)  */}
+      {/* 3. INTEGRATED FIRST PRINCIPLE EPIGRAPH                               */}
       {/* ==================================================================== */}
       <div
         id="first-principle"
@@ -352,14 +301,11 @@ export default function About() {
           {/* Left: Small Section Label */}
           <div className="lg:col-span-3">
             <div className="flex items-center gap-3 mb-2">
-              <span className="w-2 h-2 bg-sky-400 rounded-full" />
-              <span className="font-mono text-xs tracking-[0.25em] text-sky-300 uppercase font-semibold">
+              <span className="w-2 h-2 bg-blue-500 rounded-full" />
+              <span className="font-mono text-xs tracking-[0.25em] text-blue-300 uppercase font-semibold">
                 01 / FIRST PRINCIPLE
               </span>
             </div>
-            <p className="text-xs text-white/40 font-mono tracking-wider hidden lg:block mt-2">
-              PRIMA RATIO METHODICA
-            </p>
           </div>
 
           {/* Right: The Quotation with Scroll Illumination */}
@@ -385,7 +331,7 @@ export default function About() {
       </div>
 
       {/* ==================================================================== */}
-      {/* 4. INTERACTIVE OPERATIONAL STUDIO (Tabbed Console: Zero Space Waste)  */}
+      {/* 4. INTERACTIVE OPERATIONAL STUDIO                                    */}
       {/* ==================================================================== */}
       <div
         id="operational-studio"
@@ -394,9 +340,9 @@ export default function About() {
         {/* Studio Top Control Strip */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
-            <div className="inline-flex items-center gap-2 font-mono text-[11px] text-sky-400 uppercase tracking-[0.25em] font-semibold mb-2">
-              <Activity className="w-3.5 h-3.5 text-sky-400" />
-              METHODOLOGY CONSOLE
+            <div className="inline-flex items-center gap-2 font-mono text-[11px] text-blue-400 uppercase tracking-[0.25em] font-semibold mb-2">
+              <Activity className="w-3.5 h-3.5 text-blue-400" />
+              OUR METHODOLOGY
             </div>
             <h2 className="font-['Space_Grotesk',sans-serif] text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Understand. Uncover. Engineer.
@@ -408,10 +354,11 @@ export default function About() {
             {phases.map((p) => (
               <button
                 key={p.id}
+                suppressHydrationWarning
                 onClick={() => setActivePhase(p.num)}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-mono tracking-wider transition-all duration-200 ${
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-mono tracking-wider transition-all duration-200 cursor-pointer ${
                   activePhase === p.num
-                    ? "bg-[#38BDF8] text-[#050608] font-bold shadow-[0_0_12px_rgba(56,189,248,0.4)]"
+                    ? "bg-[#2563EB] text-white font-bold"
                     : "text-white/60 hover:text-white hover:bg-white/[0.05]"
                 }`}
               >
@@ -431,18 +378,18 @@ export default function About() {
               return (
                 <button
                   key={p.id}
+                  suppressHydrationWarning
                   onClick={() => setActivePhase(p.num)}
-                  className={`text-left p-5 rounded-xl border transition-all duration-300 relative group overflow-hidden ${
+                  className={`text-left p-5 rounded-xl border transition-all duration-300 relative group overflow-hidden cursor-pointer ${
                     isActive
-                      ? "border-[#38BDF8]/40 bg-[#0C101A]/90 shadow-[0_4px_24px_rgba(0,0,0,0.5)]"
+                      ? "border-[#2563EB]/50 bg-[#0C101A]/90 shadow-md"
                       : "border-white/[0.06] bg-[#07090E]/60 hover:bg-[#0A0D16]/80 hover:border-white/[0.12]"
                   }`}
                 >
-                  {/* Left luminous active indicator bar */}
                   {isActive && (
                     <motion.div
                       layoutId="activePhaseIndicator"
-                      className="absolute left-0 top-0 bottom-0 w-1 bg-[#38BDF8] shadow-[0_0_10px_#38BDF8]"
+                      className="absolute left-0 top-0 bottom-0 w-1 bg-[#2563EB]"
                       transition={{ duration: 0.25 }}
                     />
                   )}
@@ -452,7 +399,7 @@ export default function About() {
                       <span
                         className={`font-mono text-xs font-bold px-2 py-0.5 rounded ${
                           isActive
-                            ? "bg-[#38BDF8]/20 text-[#38BDF8]"
+                            ? "bg-[#2563EB]/20 text-[#3B82F6]"
                             : "bg-white/[0.05] text-white/40 group-hover:text-white/70"
                         }`}
                       >
@@ -465,7 +412,7 @@ export default function About() {
 
                     <ChevronRight
                       className={`w-4 h-4 transition-transform duration-200 ${
-                        isActive ? "text-[#38BDF8] translate-x-0.5" : "text-white/20 group-hover:text-white/50"
+                        isActive ? "text-[#3B82F6] translate-x-0.5" : "text-white/20 group-hover:text-white/50"
                       }`}
                     />
                   </div>
@@ -478,7 +425,7 @@ export default function About() {
                     {p.title}
                   </h3>
 
-                  <p className="font-[family-name:var(--font-serif-classic)] italic text-xs sm:text-sm text-sky-200/80 mt-1">
+                  <p className="font-[family-name:var(--font-serif-classic)] italic text-xs sm:text-sm text-blue-200/80 mt-1">
                     {p.subtitle}
                   </p>
 
@@ -503,14 +450,14 @@ export default function About() {
           {/* Right Column: Live Schematic Viewport */}
           <div className="lg:col-span-7 flex flex-col justify-between rounded-xl border border-white/[0.08] bg-[#07090F]/90 backdrop-blur-md p-5 sm:p-6 shadow-[0_8px_32px_rgba(0,0,0,0.6)]">
             
-            {/* Viewport HUD Header */}
+            {/* Viewport Clean Header */}
             <div className="flex items-center justify-between pb-3 mb-4 border-b border-white/[0.08] text-xs font-mono">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-white font-semibold">LIVE SCHEMATIC VIEWPORT</span>
+                <span className="w-2 h-2 rounded-full bg-blue-500" />
+                <span className="text-white font-semibold">Architectural Overview</span>
               </div>
-              <span className="text-sky-300 font-mono text-[11px] tracking-wider">
-                PHASE 0{activePhase} ACTIVE
+              <span className="text-blue-400 font-mono text-[11px] tracking-wider">
+                Phase 0{activePhase}
               </span>
             </div>
 
@@ -532,11 +479,6 @@ export default function About() {
               </AnimatePresence>
             </div>
 
-            {/* Viewport Diagnostic Footer */}
-            <div className="pt-3 mt-4 border-t border-white/[0.08] flex items-center justify-center text-[11px] font-mono text-sky-300/80 tracking-wider">
-              <span>OPERATIONAL EXCELLENCE GUARANTEED</span>
-            </div>
-
           </div>
 
         </div>
@@ -544,42 +486,21 @@ export default function About() {
       </div>
 
       {/* ==================================================================== */}
-      {/* 5. SYSTEM ANATOMY AND STATISTICS (Compact Executive Grid)             */}
+      {/* 5. SYSTEM ANATOMY AND STATISTICS                                     */}
       {/* ==================================================================== */}
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 py-12 lg:py-16 relative z-10 border-t border-white/[0.08]">
         
-        {/* Header Block with Segmented Cyan Integrity Bar */}
+        {/* Header Block */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div>
-            <div className="inline-flex items-center gap-2 font-mono text-xs text-sky-400 uppercase tracking-[0.25em] font-semibold mb-2">
-              <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
-              SYSTEM ANATOMY — PHASE ACTIVE
+            <div className="inline-flex items-center gap-2 font-mono text-xs text-blue-400 uppercase tracking-[0.25em] font-semibold mb-2">
+              <span className="w-2 h-2 rounded-full bg-blue-500" />
+              PROVEN SCALE &amp; EXPERTISE
             </div>
             <h2 className="font-['Space_Grotesk',sans-serif] text-2xl sm:text-4xl font-bold text-[#F0F6FF] tracking-tight max-w-xl leading-[1.15]">
               Built on experience. <br />
-              <span className="text-sky-200/60">Engineered for what’s next.</span>
+              <span className="text-blue-200/60">Engineered for what’s next.</span>
             </h2>
-          </div>
-
-          {/* Segmented Integrity Bar Indicator */}
-          <div className="p-3.5 rounded-xl border border-white/[0.08] bg-[#07090E]/90 backdrop-blur-md shrink-0 shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
-            <div className="flex items-center justify-between gap-6 mb-2">
-              <span className="font-mono text-[9.5px] tracking-widest text-[#F0F6FF] font-semibold uppercase">
-                ANATOMICAL INTEGRITY: 100%
-              </span>
-              <span className="text-[9.5px] font-mono text-emerald-400 font-semibold">
-                VERIFIED
-              </span>
-            </div>
-            {/* 12 Sky-Cyan Segmented Bars */}
-            <div className="flex items-center gap-1.5">
-              {[...Array(12)].map((_, i) => (
-                <div
-                  key={i}
-                  className="w-3.5 sm:w-4 h-1.5 rounded-[2px] bg-[#38BDF8] shadow-[0_0_6px_rgba(56,189,248,0.7)]"
-                />
-              ))}
-            </div>
           </div>
         </div>
 
@@ -621,9 +542,9 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-30px" }}
               transition={{ duration: 0.5, delay: idx * 0.08 }}
-              className="p-5 sm:p-6 rounded-xl border border-white/[0.08] bg-[#07090F]/70 hover:bg-[#0C101A]/90 hover:border-sky-400/30 transition-all duration-300 backdrop-blur-sm group"
+              className="p-5 sm:p-6 rounded-xl border border-white/[0.08] bg-[#07090F]/70 hover:bg-[#0C101A]/90 hover:border-blue-500/30 transition-all duration-300 backdrop-blur-sm group"
             >
-              <div className="font-['Space_Grotesk',sans-serif] text-3xl sm:text-4xl font-bold text-white group-hover:text-[#38BDF8] transition-colors tracking-tight">
+              <div className="font-['Space_Grotesk',sans-serif] text-3xl sm:text-4xl font-bold text-white group-hover:text-[#3B82F6] transition-colors tracking-tight">
                 <AnimatedStatCounter
                   target={stat.valueNum}
                   suffix={stat.suffix}
@@ -642,20 +563,11 @@ export default function About() {
           ))}
         </div>
 
-        {/* Heritage & FLML Protocol Strip */}
+        {/* Heritage & Foundation */}
         <div className="pt-6 border-t border-white/[0.08] flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-white/40">
           <p className="font-[family-name:var(--font-serif-classic)] italic text-xs sm:text-sm text-slate-400 text-center md:text-left max-w-2xl">
             Established 2016. Evolved into First Logic Meta Lab in 2018. Operating globally with a relentless pursuit of architectural perfection.
           </p>
-
-          <div className="flex items-center gap-2.5 shrink-0 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-[#07090F]/80 backdrop-blur-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
-            <span className="text-white font-semibold tracking-wider text-[11px]">FLML CORE</span>
-            <span className="text-white/20">/</span>
-            <span className="text-sky-300 tracking-wider font-semibold text-[11px]">
-              HIGH-SCALE PROTOCOL
-            </span>
-          </div>
         </div>
 
       </div>

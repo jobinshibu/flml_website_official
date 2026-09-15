@@ -231,11 +231,11 @@ export default function ParticleMorphCanvas({ className = "" }: { className?: st
         ctx.beginPath();
         ctx.arc(screenX, screenY, radius, 0, Math.PI * 2);
 
-        // Brand blue #0A369D with cyan #38bdf8 and core ice-white highlight (Matching Hero Section)
+        // Brand blue #0A369D with tech blue #3B82F6 and core ice-white highlight (Matching Hero Section)
         if (depthNorm > 0.72) {
           ctx.fillStyle = `rgba(230, 242, 255, ${alpha})`;
         } else if (depthNorm > 0.4) {
-          ctx.fillStyle = `rgba(56, 189, 248, ${alpha})`;
+          ctx.fillStyle = `rgba(59, 130, 246, ${alpha})`;
         } else {
           ctx.fillStyle = `rgba(10, 54, 157, ${alpha * 0.85})`;
         }

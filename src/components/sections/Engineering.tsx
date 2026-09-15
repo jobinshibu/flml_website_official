@@ -1,221 +1,166 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import React from "react";
+import {
+  Globe,
+  Cpu,
+  Network,
+  Database,
+  Cable,
+  ShieldCheck,
+  Zap,
+} from "lucide-react";
 
 const layers = [
   {
-    id: "experience",
-    name: "EXPERIENCE",
-    desc: "WEB / MOBILE / INTERFACES",
-    tech: ["Micro-frontends", "Omnichannel", "Native iOS/Android", "Web3 Wallets"],
-    color: "from-brand-blue/20 to-transparent",
-    borderColor: "border-brand-blue/50",
+    number: "01",
+    title: "EXPERIENCE",
+    subtitle: "Web / Mobile / Spatial Interfaces",
+    description: "Ultra-responsive frontends engineered for instant paint, fluid 120 FPS interactions, and native hardware optimization.",
+    icon: Globe,
+    tech: ["Micro-Frontends", "Omnichannel Sync", "Native iOS & Android", "Web3 Wallets"],
   },
   {
-    id: "application",
-    name: "APPLICATION",
-    desc: "SERVICES / WORKFLOWS",
-    tech: ["Microservices", "Event-Driven", "Serverless", "Smart Contracts"],
-    color: "from-brand-blue/10 to-transparent",
-    borderColor: "border-brand-blue/40",
+    number: "02",
+    title: "APPLICATION",
+    subtitle: "Services / Workflows / Logic",
+    description: "High-concurrency microservice meshes and deterministic smart contract engines operating with zero single point of failure.",
+    icon: Cpu,
+    tech: ["Microservices", "Event-Driven Fabric", "Serverless Compute", "Smart Contracts"],
   },
   {
-    id: "api",
-    name: "API",
-    desc: "INTEGRATION / COMMUNICATION",
-    tech: ["GraphQL", "RESTful", "gRPC", "WebSockets", "tRPC"],
-    color: "from-white/5 to-transparent",
-    borderColor: "border-white/20",
+    number: "03",
+    title: "API & MESH",
+    subtitle: "Routing / Gateways / Protocols",
+    description: "Universal communication fabric with strict schema enforcement, rate-limiting shields, and binary streaming.",
+    icon: Network,
+    tech: ["GraphQL Subgraphs", "gRPC Streaming", "WebSockets / SSE", "Type-Safe tRPC"],
   },
   {
-    id: "data",
-    name: "DATA",
-    desc: "DATABASE / ANALYTICS / AI",
-    tech: ["Relational (SQL)", "NoSQL / Document", "Graph Databases", "Blockchain Ledgers", "Vector (AI)"],
-    color: "from-black/20 to-transparent",
-    borderColor: "border-white/10",
+    number: "04",
+    title: "DATA & AI",
+    subtitle: "Databases / Analytics / Vectors",
+    description: "Polyglot storage architecture combining ACID transactional guarantees with high-dimensional vector similarity for AI.",
+    icon: Database,
+    tech: ["PostgreSQL / SQL", "Redis In-Memory", "Vector Embeddings", "Immutable Ledgers"],
   },
   {
-    id: "integration",
-    name: "INTEGRATION",
-    desc: "PAYMENTS / EXTERNAL SYSTEMS",
-    tech: ["Enterprise Service Bus", "IoT Gateways", "Decentralized Oracles", "Payment Gateways"],
-    color: "from-black/40 to-transparent",
-    borderColor: "border-white/5",
+    number: "05",
+    title: "INTEGRATION",
+    subtitle: "Middleware / Oracles / Payments",
+    description: "Resilient interoperability layer connecting legacy enterprise cores, real-world IoT telemetry, and payment rails.",
+    icon: Cable,
+    tech: ["Enterprise Service Bus", "IoT Gateways", "Decentralized Oracles", "Banking & ISO 20022"],
   },
   {
-    id: "infrastructure",
-    name: "INFRASTRUCTURE",
-    desc: "CLOUD / DEPLOYMENT / SECURITY",
-    tech: ["Multi-Cloud", "Kubernetes", "Zero-Trust Security", "CI/CD Pipelines"],
-    color: "from-black/60 to-transparent",
-    borderColor: "border-black/50",
+    number: "06",
+    title: "INFRASTRUCTURE",
+    subtitle: "Cloud / Kubernetes / Zero-Trust",
+    description: "Hyperscale multi-cloud foundation managed as code with automated self-healing and zero-trust security perimeters.",
+    icon: ShieldCheck,
+    tech: ["Multi-Cloud (AWS/GCP)", "Kubernetes (K8s)", "Zero-Trust Perimeter", "GitOps & CI/CD"],
   },
 ];
 
 export default function Engineering() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [activeLayer, setActiveLayer] = useState<string | null>(layers[0].id);
-  const [isHovering, setIsHovering] = useState(false);
-  
-  useEffect(() => {
-    if (isHovering) return;
-
-    const interval = setInterval(() => {
-      setActiveLayer((current) => {
-        if (!current) return layers[0].id;
-        const currentIndex = layers.findIndex((l) => l.id === current);
-        const nextIndex = (currentIndex + 1) % layers.length;
-        return layers[nextIndex].id;
-      });
-    }, 2500);
-
-    return () => clearInterval(interval);
-  }, [isHovering]);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
   return (
-    <section id="technology" ref={containerRef} className="py-20 px-8 bg-[#020817] relative overflow-hidden text-white">
-      
-      {/* Deep technical background */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-blue-dark/50 via-[#020817] to-[#020817]" />
-        <svg className="absolute w-full h-full" xmlns="http://www.w3.org/2000/svg">
+    <section
+      id="technology"
+      className="py-24 sm:py-32 px-6 sm:px-10 lg:px-16 bg-gradient-to-b from-[#F8FAFC] via-[#F0F6FF] to-[#EBF3FC] text-[#061A45] relative overflow-hidden border-t border-slate-200/90"
+    >
+      {/* Precision Blueprint Grid */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.035] z-0">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
+            <pattern id="engineering-light-grid" width="48" height="48" patternUnits="userSpaceOnUse">
+              <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#061A45" strokeWidth="1" />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
+          <rect width="100%" height="100%" fill="url(#engineering-light-grid)" />
         </svg>
       </div>
-      
-      <div className="max-w-[1400px] mx-auto relative z-10">
-        <h2 className="text-sm font-bold tracking-[0.2em] uppercase text-brand-blue mb-4">
-          # BUILT FROM THE INSIDE OUT.
-        </h2>
-        
-        <p className="text-xl md:text-2xl font-bold text-white/90 max-w-3xl mb-12 text-balance leading-tight">
-          True engineering depth. We build scalable systems layer by layer, ensuring security, performance, and operational adaptability.
-        </p>
 
-        {/* High-End Interactive Architecture Visual */}
-        <div className="flex flex-col xl:flex-row gap-8 relative">
-          
-          {/* Left: The Stack */}
-          <div className="flex-1 space-y-3">
-            {layers.map((layer, idx) => {
-              const isActive = activeLayer === layer.id;
-              
-              return (
-                <div
-                  key={layer.id}
-                  onMouseEnter={() => {
-                    setActiveLayer(layer.id);
-                    setIsHovering(true);
-                  }}
-                  onMouseLeave={() => setIsHovering(false)}
-                  className={`relative overflow-hidden group cursor-pointer rounded border transition-all duration-300 ${
-                    isActive ? "border-brand-blue bg-brand-blue/10 scale-[1.01]" : `${layer.borderColor} bg-white/[0.02] hover:bg-white/[0.04]`
-                  }`}
-                >
-                  <div className={`absolute inset-0 bg-gradient-to-r ${layer.color} opacity-50`} />
-                  
-                  <div className="relative p-4 md:p-5 flex items-center justify-between z-10">
-                    <div>
-                      <h3 className={`text-lg md:text-xl font-black tracking-tight transition-colors ${isActive ? "text-white" : "text-white/70"}`}>
-                        {layer.name}
-                      </h3>
-                      <p className="text-[10px] font-mono tracking-widest uppercase mt-1 text-brand-blue-light/70">
-                        {layer.desc}
-                      </p>
-                    </div>
-                    
-                    <div className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-500 ${isActive ? "border-brand-blue bg-brand-blue/20" : "border-white/10"}`}>
-                      <span className={`text-[10px] font-mono transition-opacity ${isActive ? "opacity-100 text-brand-blue-light" : "opacity-30"}`}>
-                        0{idx + 1}
-                      </span>
+      <div className="max-w-[1400px] mx-auto relative z-10">
+        
+        {/* Section Header */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16 sm:mb-20">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 mb-4">
+              <span className="w-2 h-2 rounded-full bg-[#0A369D] animate-pulse" />
+              <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#0A369D]">
+                # BUILT FROM THE INSIDE OUT
+              </span>
+            </div>
+
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-['Space_Grotesk'] font-bold text-[#061A45] tracking-tight uppercase leading-tight">
+              True Engineering <span className="text-[#0A369D]">Depth.</span>
+            </h2>
+
+            <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed mt-3">
+              We build scalable systems layer by layer, ensuring unbreakable security, lightning performance, and multi-generational adaptability.
+            </p>
+          </div>
+
+          {/* Architecture Pipeline Telemetry Badge */}
+          <div className="hidden lg:flex items-center gap-3 px-4 py-2.5 rounded-xl bg-white border border-slate-200 shadow-sm font-mono text-xs text-[#0A369D]">
+            <Zap className="w-4 h-4 text-[#0A369D]" />
+            <span className="font-semibold">6/6 CORE ARCHITECTURAL LAYERS ACTIVE</span>
+          </div>
+        </div>
+
+        {/* 6-Card Deep-Tech Matrix Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {layers.map((layer) => {
+            const Icon = layer.icon;
+
+            return (
+              <div
+                key={layer.number}
+                className="group relative bg-white rounded-2xl border border-slate-200/90 hover:border-[#0A369D]/50 p-6 sm:p-7 shadow-[0_4px_16px_rgba(10,54,157,0.04)] hover:shadow-[0_12px_32px_rgba(10,54,157,0.12)] transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 overflow-hidden"
+              >
+                <div>
+                  {/* Card Header with Number and Icon */}
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="font-mono text-xs font-bold text-[#0A369D] bg-blue-50 border border-blue-100 px-3 py-1 rounded-lg">
+                      LAYER {layer.number}
+                    </span>
+                    <div className="w-11 h-11 rounded-xl bg-slate-50 border border-slate-200 group-hover:border-[#0A369D]/40 flex items-center justify-center text-[#0A369D] group-hover:scale-110 transition-all duration-300 shadow-xs">
+                      <Icon className="w-5 h-5" />
                     </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
 
-          {/* Right: The Dynamic Tech HUD */}
-          <div className="flex-1 hidden xl:block relative">
-             <div className="h-[460px] w-full border border-white/5 rounded-xl bg-black/40 backdrop-blur-md p-8 flex flex-col justify-center">
-                
-                <AnimatePresence mode="wait">
-                  {activeLayer ? (
-                    <motion.div
-                      key={activeLayer}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -20 }}
-                      transition={{ duration: 0.2 }}
-                      className="w-full h-full flex flex-col justify-center"
-                    >
-                      <div className="text-brand-blue font-mono text-[10px] tracking-[0.2em] uppercase mb-4 animate-pulse">
-                        Analyzing Layer: {activeLayer}
-                      </div>
-                      
-                      <div className="space-y-4">
-                        {layers.find(l => l.id === activeLayer)?.tech.map((t, i) => (
-                          <div key={i} className="flex items-center gap-4">
-                            <div className="w-12 h-px bg-brand-blue/30 relative">
-                              <motion.div 
-                                className="absolute top-1/2 -translate-y-1/2 left-0 w-1.5 h-1.5 bg-brand-blue rounded-full shadow-[0_0_10px_rgba(10,54,157,0.8)]"
-                                animate={{ left: ["0%", "100%", "0%"] }}
-                                transition={{ duration: 1.5 + (i * 0.2), repeat: Infinity, ease: "linear" }}
-                              />
-                            </div>
-                            <span className="text-base md:text-lg font-light tracking-wide text-white/90">
-                              {t}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                      
-                      <div className="mt-auto pt-6 border-t border-white/10 flex justify-between items-end">
-                         <div className="font-mono text-[10px] text-white/30">STATUS: OPTIMIZED</div>
-                         <div className="flex gap-1.5">
-                            <div className="w-1.5 h-6 bg-brand-blue/40" />
-                            <div className="w-1.5 h-4 bg-brand-blue/60" />
-                            <div className="w-1.5 h-8 bg-brand-blue" />
-                         </div>
-                      </div>
-                    </motion.div>
-                  ) : (
-                    <motion.div 
-                      key="idle"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="w-full h-full flex items-center justify-center flex-col text-center"
-                    >
-                      <div className="w-24 h-24 rounded-full border border-white/10 flex items-center justify-center mb-6 relative">
-                        <motion.div 
-                          className="absolute inset-0 border border-brand-blue rounded-full border-t-transparent"
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                        />
-                        <span className="font-mono text-[9px] tracking-widest text-white/30">STANDBY</span>
-                      </div>
-                      <p className="text-white/40 font-mono text-[10px] tracking-widest">INTERACT WITH ARCHITECTURE LAYERS</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-                
-             </div>
-          </div>
-          
+                  {/* Title & Subtitle */}
+                  <h3 className="text-2xl font-['Space_Grotesk'] font-bold text-[#061A45] tracking-tight mb-1 group-hover:text-[#0A369D] transition-colors">
+                    {layer.title}
+                  </h3>
+                  <p className="text-xs font-mono uppercase text-slate-400 tracking-wider mb-4">
+                    // {layer.subtitle}
+                  </p>
+
+                  {/* Description */}
+                  <p className="text-sm text-slate-600 leading-relaxed mb-6 font-normal">
+                    {layer.description}
+                  </p>
+                </div>
+
+                {/* Tech Stack Pills */}
+                <div className="pt-4 border-t border-slate-100">
+                  <div className="flex flex-wrap gap-1.5">
+                    {layer.tech.map((item, idx) => (
+                      <span
+                        key={idx}
+                        className="text-[11px] font-mono text-slate-700 bg-slate-100/80 border border-slate-200/60 px-2.5 py-1 rounded-md"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
+
       </div>
     </section>
   );

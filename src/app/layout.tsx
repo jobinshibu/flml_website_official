@@ -47,9 +47,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${cinzel.variable} ${cormorant.variable} ${playfair.variable} dark`}>
+    <html lang="en" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable} ${cinzel.variable} ${cormorant.variable} ${playfair.variable} dark`}>
 
-      <body className="antialiased min-h-full flex flex-col font-sans bg-gradient-to-b from-brand-blue-dark to-black transition-colors">
+      <body suppressHydrationWarning className="antialiased min-h-full flex flex-col font-sans bg-gradient-to-b from-brand-blue-dark to-black transition-colors">
         <Navigation />
         <main className="flex-grow">
           {children}

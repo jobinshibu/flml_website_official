@@ -85,7 +85,7 @@ export default function HeroSystemReveal({ scrollYProgress }: HeroSystemRevealPr
               className="group inline-flex items-center gap-2.5 px-6 sm:px-8 py-3 sm:py-3.5 rounded-[4px] bg-[#061A45] hover:bg-[#0A369D] text-white shadow-[0_4px_16px_rgba(6,26,69,0.18)] hover:shadow-[0_6px_22px_rgba(10,54,157,0.28)] transition-all duration-200 active:scale-95"
             >
               <span className="font-mono text-[10px] sm:text-[11px] tracking-[0.24em] uppercase font-semibold">
-                Initialize Doctrine
+                Our Philosophy
               </span>
               <span className="font-mono text-sm transition-transform duration-200 group-hover:translate-y-0.5">
                 ↓

@@ -29,7 +29,7 @@ export default function CareerPage() {
             BACK
           </Link>
           <h2 className="text-sm font-bold tracking-[0.2em] uppercase text-brand-blue-light/50 mb-2">
-            # RECRUITMENT PROTOCOL
+            # CAREERS & OPPORTUNITIES
           </h2>
           <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-2 uppercase leading-tight">
             BUILD SYSTEMS THAT ACTUALLY MATTER.
