@@ -15,7 +15,7 @@ module.exports = {
         'brand-blue-light': '#E6F0FF',
       },
       fontFamily: {
-        sans: ['var(--font-geist-sans)', 'system-ui'],
+        sans: ['var(--font-plus-jakarta)', 'var(--font-geist-sans)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-geist-mono)', 'monospace'],
         classic: ['var(--font-playfair)', 'serif'],
       },

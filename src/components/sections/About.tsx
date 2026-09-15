@@ -181,7 +181,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative w-full bg-[#050811] text-white selection:bg-[#0A369D] selection:text-white font-['DM_Sans',sans-serif] overflow-hidden py-20 sm:py-28"
+      className="relative w-full bg-[#050811] text-white selection:bg-[#0A369D] selection:text-white font-sans antialiased overflow-hidden py-20 sm:py-28"
     >
       {/* Precision Background Grid */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.03]">
@@ -200,12 +200,12 @@ export default function About() {
       <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-[#2563EB]/10 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="relative max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16 z-10">
-        
+
         {/* ==================================================================== */}
         {/* 1. HEADER SECTION                                                    */}
         {/* ==================================================================== */}
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          
+
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-400/25 bg-blue-950/40 text-blue-300 text-xs font-mono tracking-[0.2em] uppercase backdrop-blur-md mb-6 shadow-[0_0_15px_rgba(37,99,235,0.15)]">
             <Sparkles className="w-3.5 h-3.5 text-blue-400" />
@@ -213,19 +213,19 @@ export default function About() {
           </div>
 
           {/* Headline */}
-          <h2 className="font-['Space_Grotesk',sans-serif] font-bold text-3xl sm:text-5xl lg:text-6xl tracking-tight text-white leading-[1.1] mb-6">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12] mb-6">
             Operational Anatomy{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-300">
               First.
             </span>
             <br />
-            <span className="text-slate-300 font-medium">Code Second.</span>
+            <span className="text-slate-300 font-semibold">Code Second.</span>
           </h2>
 
           {/* Subtitle */}
-          <p className="text-slate-300/90 text-base sm:text-lg leading-relaxed font-light">
-            We don’t just write code — we dissect how your enterprise actually operates. 
-            By mapping workflows, removing bottlenecks, and diagnosing friction first, we engineer tailored 
+          <p className="text-slate-300/90 text-base sm:text-lg leading-relaxed font-normal">
+            We don’t just write code — we dissect how your enterprise actually operates.
+            By mapping workflows, removing bottlenecks, and diagnosing friction first, we engineer tailored
             digital systems that scale without compromise.
           </p>
 
@@ -255,28 +255,28 @@ export default function About() {
                     <div className="w-12 h-12 rounded-xl bg-blue-600/10 border border-blue-500/20 group-hover:border-blue-500/50 group-hover:bg-blue-600/20 flex items-center justify-center transition-colors">
                       <Icon className="w-6 h-6 text-blue-400 group-hover:text-blue-300 transition-colors" />
                     </div>
-                    <span className="font-mono text-xs font-semibold px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/[0.08] text-blue-300 tracking-wider">
+                    <span className="font-mono text-xs font-semibold px-2.5 py-1 rounded-md bg-blue-950/40 border border-blue-500/20 text-blue-300 tracking-wider">
                       PHASE {phase.num}
                     </span>
                   </div>
 
                   {/* Title & Tagline */}
-                  <h3 className="font-['Space_Grotesk',sans-serif] text-xl sm:text-2xl font-bold text-white group-hover:text-blue-100 transition-colors mb-1">
+                  <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white group-hover:text-blue-200 transition-colors mb-1.5">
                     {phase.title}
                   </h3>
-                  <p className="text-xs font-mono text-blue-400 uppercase tracking-wider mb-4">
+                  <p className="text-xs font-mono font-medium text-blue-400 uppercase tracking-wider mb-4">
                     {phase.tagline}
                   </p>
 
                   {/* Description */}
-                  <p className="text-slate-300 text-sm leading-relaxed mb-6 font-light">
+                  <p className="text-slate-300 text-sm leading-relaxed mb-6 font-normal">
                     {phase.desc}
                   </p>
 
                   {/* Key Highlights */}
                   <ul className="space-y-2.5 mb-6 pt-4 border-t border-white/[0.06]">
                     {phase.points.map((point, pIdx) => (
-                      <li key={pIdx} className="flex items-start gap-2.5 text-xs text-slate-300/90">
+                      <li key={pIdx} className="flex items-start gap-2.5 text-xs text-slate-300/90 leading-normal">
                         <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
                         <span>{point}</span>
                       </li>
@@ -286,7 +286,7 @@ export default function About() {
 
                 {/* Bottom Metric Pill */}
                 <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs">
-                  <span className="text-slate-400 font-mono text-[11px]">Outcome</span>
+                  <span className="text-slate-400 font-mono text-[11px] uppercase tracking-wider">Outcome</span>
                   <span className="font-mono font-medium text-blue-300 bg-blue-950/60 border border-blue-500/20 px-2.5 py-0.5 rounded-full">
                     {phase.metric}
                   </span>
@@ -300,39 +300,39 @@ export default function About() {
         {/* 3. MODERN APPROACH COMPARISON MATRIX                                 */}
         {/* ==================================================================== */}
         <div className="rounded-2xl border border-white/[0.08] bg-[#080C17]/90 p-6 sm:p-10 mb-20 shadow-[0_12px_40px_rgba(0,0,0,0.5)] backdrop-blur-md">
-          
+
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 pb-6 border-b border-white/[0.08]">
             <div>
               <div className="inline-flex items-center gap-2 font-mono text-xs text-blue-400 uppercase tracking-[0.2em] font-semibold mb-2">
                 <Workflow className="w-3.5 h-3.5" />
                 THE ARCHITECTURAL DIFFERENCE
               </div>
-              <h3 className="font-['Space_Grotesk',sans-serif] text-2xl sm:text-3xl font-bold text-white tracking-tight">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                 Why Anatomy-First Changes Everything
               </h3>
             </div>
-            <p className="text-xs sm:text-sm text-slate-400 max-w-md font-light">
+            <p className="text-xs sm:text-sm text-slate-400 max-w-md font-normal leading-relaxed">
               See how our diagnostic engineering process solves core inefficiencies that traditional development models overlook.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            
+
             {/* Left Box: Traditional Software Agencies */}
             <div className="rounded-xl border border-rose-500/20 bg-rose-950/[0.12] p-5 sm:p-6">
               <div className="flex items-center gap-2.5 mb-5 pb-3 border-b border-rose-500/20">
                 <XCircle className="w-5 h-5 text-rose-400" />
-                <h4 className="font-['Space_Grotesk',sans-serif] text-base font-bold text-rose-200">
+                <h4 className="text-base font-bold text-rose-200 tracking-tight">
                   Standard Generic Development
                 </h4>
               </div>
               <div className="space-y-4">
                 {comparisonPoints.map((item, idx) => (
                   <div key={idx} className="flex flex-col gap-1">
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-rose-300/70">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-rose-300/80">
                       {item.label}
                     </span>
-                    <p className="text-xs sm:text-sm text-slate-300/80 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-300/90 leading-relaxed font-normal">
                       {item.traditional}
                     </p>
                   </div>
@@ -344,14 +344,14 @@ export default function About() {
             <div className="rounded-xl border border-blue-500/30 bg-blue-950/[0.2] p-5 sm:p-6 shadow-[0_0_30px_rgba(37,99,235,0.1)]">
               <div className="flex items-center gap-2.5 mb-5 pb-3 border-b border-blue-500/20">
                 <CheckCircle2 className="w-5 h-5 text-blue-400" />
-                <h4 className="font-['Space_Grotesk',sans-serif] text-base font-bold text-blue-200">
+                <h4 className="text-base font-bold text-blue-200 tracking-tight">
                   First Logic Anatomy-First Engineering
                 </h4>
               </div>
               <div className="space-y-4">
                 {comparisonPoints.map((item, idx) => (
                   <div key={idx} className="flex flex-col gap-1">
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-blue-300">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-blue-300 font-medium">
                       {item.label}
                     </span>
                     <p className="text-xs sm:text-sm text-white font-normal leading-relaxed">
@@ -379,14 +379,14 @@ export default function About() {
               transition={{ duration: 0.5, delay: idx * 0.08 }}
               className="p-6 rounded-2xl border border-white/[0.08] bg-[#0A0E1A]/60 hover:bg-[#0E1528]/80 hover:border-blue-500/30 transition-all duration-300 backdrop-blur-sm group"
             >
-              <div className="font-['Space_Grotesk',sans-serif] text-3xl sm:text-4xl lg:text-5xl font-bold text-white group-hover:text-blue-400 transition-colors tracking-tight">
+              <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white group-hover:text-blue-400 transition-colors tracking-tight">
                 <AnimatedStatCounter
                   target={stat.valueNum}
                   suffix={stat.suffix}
                   decimals={stat.decimals}
                 />
               </div>
-              <div className="font-['Space_Grotesk',sans-serif] text-sm sm:text-base font-semibold text-slate-200 mt-2">
+              <div className="text-sm sm:text-base font-semibold text-slate-200 mt-2 tracking-tight">
                 {stat.label}
               </div>
               <div className="font-mono text-[10px] sm:text-[11px] text-slate-400 uppercase tracking-wider mt-1">
@@ -401,12 +401,12 @@ export default function About() {
         {/* ==================================================================== */}
         <div className="relative rounded-2xl border border-blue-500/20 bg-gradient-to-r from-blue-950/30 via-[#0C1222]/80 to-blue-950/30 p-8 sm:p-10 text-center overflow-hidden">
           <div className="max-w-3xl mx-auto relative z-10">
-            <blockquote className="font-['Space_Grotesk',sans-serif] text-lg sm:text-2xl lg:text-2xl font-medium text-slate-100 leading-relaxed mb-4">
+            <blockquote className="text-lg sm:text-xl md:text-2xl font-medium text-slate-100 leading-relaxed mb-4 tracking-tight">
               “Before a single line of code is written, our architects surgically dissect the anatomy of your operations to eliminate friction, prevent technical debt, and ensure lasting impact.”
             </blockquote>
             <div className="flex items-center justify-center gap-3 text-xs font-mono text-blue-300">
               <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
-              <span>FIRST LOGIC META LAB · ENGINEERING DOCTRINE</span>
+              <span className="tracking-widest font-semibold">FIRST LOGIC META LAB · ENGINEERING DOCTRINE</span>
               <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
             </div>
           </div>

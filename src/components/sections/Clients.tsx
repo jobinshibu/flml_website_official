@@ -105,7 +105,7 @@ export default function Clients() {
                 </span>
               </div>
 
-              <h2 className="font-['Space_Grotesk',sans-serif] text-4xl sm:text-6xl md:text-7xl font-bold uppercase text-[#061A45] leading-[0.94] tracking-tight mb-5">
+              <h2 className="text-4xl sm:text-6xl md:text-7xl font-extrabold uppercase text-[#061A45] leading-[0.94] tracking-tight mb-5">
                 Trusted by <br />
                 <span className="text-[#0A369D]">
                   Serious Enterprises.
@@ -198,7 +198,7 @@ export default function Clients() {
               </div>
 
               {/* Editorial Headline */}
-              <h2 className="font-['Space_Grotesk',sans-serif] text-4xl sm:text-6xl md:text-7xl lg:text-[58px] xl:text-[66px] font-bold uppercase text-[#061A45] leading-[0.95] tracking-tight mb-5 sm:mb-6">
+              <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-[58px] xl:text-[66px] font-extrabold uppercase text-[#061A45] leading-[0.95] tracking-tight mb-5 sm:mb-6">
                 Trusted by<br />
                 serious<br />
                 <span className="text-[#0A369D]">
@@ -215,7 +215,7 @@ export default function Clients() {
               {/* Client Metric Counter Pill */}
               <div className="flex items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white shadow-sm w-fit">
                 <div className="flex items-baseline gap-1">
-                  <span className="font-['Space_Grotesk',sans-serif] text-3xl sm:text-4xl font-bold text-[#061A45]">
+                  <span className="text-3xl sm:text-4xl font-extrabold text-[#061A45] tracking-tight">
                     {clientCount}
                   </span>
                   <span className="text-[#0A369D] font-bold text-xl">+</span>

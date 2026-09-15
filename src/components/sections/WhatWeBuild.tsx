@@ -263,7 +263,7 @@ export default function WhatWeBuild() {
               <span className="w-2 h-2 rounded-full bg-[#0A369D] animate-pulse" />
               <span># WHAT WE BUILD</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-['Space_Grotesk'] font-bold tracking-tight text-[#061A45] uppercase">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#061A45] uppercase">
               Engineering Disciplines &amp; Systems
             </h2>
             <p className="text-sm sm:text-base text-slate-600 max-w-xl mt-2 font-normal">
@@ -330,7 +330,7 @@ export default function WhatWeBuild() {
                   {/* KINETIC MODERN SCULPTURAL HEADLINE */}
                   <div className="relative">
                     <motion.h3
-                      className={`text-4xl sm:text-6xl md:text-7xl lg:text-[88px] xl:text-[98px] font-black uppercase tracking-[-0.04em] transition-all duration-300 leading-[0.9] select-none font-['Space_Grotesk'] ${
+                      className={`text-4xl sm:text-6xl md:text-7xl lg:text-[88px] xl:text-[98px] font-black uppercase tracking-[-0.04em] transition-all duration-300 leading-[0.9] select-none ${
                         isExpanded || isHovered
                           ? "text-[#0A369D]"
                           : hasAnyHover

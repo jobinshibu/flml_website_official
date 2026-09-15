@@ -243,7 +243,7 @@ export default function Navigation() {
                 <div>
                   <a
                     href="mailto:info@firstlogicmetalab.com"
-                    className="text-lg sm:text-2xl font-bold hover:text-[#3B82F6] transition-colors block mb-2 font-['Space_Grotesk']"
+                    className="text-lg sm:text-2xl font-bold hover:text-[#3B82F6] transition-colors block mb-2"
                   >
                     info@firstlogicmetalab.com
                   </a>

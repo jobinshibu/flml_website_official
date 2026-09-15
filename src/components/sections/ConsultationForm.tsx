@@ -65,7 +65,7 @@ export default function ConsultationForm() {
               </span>
             </div>
 
-            <h2 className="text-3xl sm:text-5xl md:text-5xl font-['Space_Grotesk'] font-bold text-white tracking-tight uppercase leading-tight mb-4">
+            <h2 className="text-3xl sm:text-5xl md:text-5xl font-extrabold text-white tracking-tight uppercase leading-tight mb-4">
               System <br />
               <span className="text-[#3B82F6]">
                 Transformation.
@@ -114,7 +114,7 @@ export default function ConsultationForm() {
               {!isSuccess ? (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white font-['Space_Grotesk'] uppercase tracking-tight mb-1">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white uppercase tracking-tight mb-1">
                       Request Architectural Review
                     </h3>
                     <p className="text-xs text-slate-400 font-light mb-6">
@@ -253,7 +253,7 @@ export default function ConsultationForm() {
                     <Check className="w-8 h-8" />
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight uppercase mb-3 font-['Space_Grotesk']">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight uppercase mb-3">
                     Request Transmitted.
                   </h3>
 

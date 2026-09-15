@@ -94,7 +94,7 @@ export default function Gallery() {
               </span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-['Space_Grotesk'] font-bold text-[#061A45] tracking-tight uppercase leading-tight mb-3">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#061A45] tracking-tight uppercase leading-tight mb-3">
               Glimpses of <span className="text-[#0A369D]">Our Craft.</span>
             </h2>
 
@@ -191,7 +191,7 @@ export default function Gallery() {
                   <span>{item.location}</span>
                 </div>
 
-                <h3 className="text-xl font-bold tracking-tight text-white uppercase mb-1 font-['Space_Grotesk']">
+                <h3 className="text-xl font-bold tracking-tight text-white uppercase mb-1">
                   {item.title}
                 </h3>
 
@@ -262,7 +262,7 @@ export default function Gallery() {
                     <span>&bull;</span>
                     <span>{selectedItem.location}</span>
                   </div>
-                  <h4 className="text-xl sm:text-2xl font-bold text-[#061A45] tracking-tight uppercase font-['Space_Grotesk']">
+                  <h4 className="text-xl sm:text-2xl font-bold text-[#061A45] tracking-tight uppercase">
                     {selectedItem.title}
                   </h4>
                   <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl font-normal">

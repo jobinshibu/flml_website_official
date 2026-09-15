@@ -23,7 +23,7 @@ export default function Footer() {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#3B82F6]" />
-                <span className="font-['Space_Grotesk'] font-bold text-lg tracking-[0.25em] uppercase text-white">
+                <span className="font-bold text-lg tracking-[0.25em] uppercase text-white">
                   First Logic <span className="text-[#3B82F6]">Meta Lab</span>
                 </span>
               </div>
