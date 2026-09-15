@@ -101,8 +101,9 @@ export default function HeroIntro({ scrollYProgress }: HeroIntroProps) {
             <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-7 sm:mt-9 pointer-events-auto">
               <button
                 type="button"
+                suppressHydrationWarning
                 onClick={() => handleScrollTo("about")}
-                className="group inline-flex items-center gap-2.5 px-6 sm:px-8 py-3 sm:py-3.5 rounded-[4px] bg-[#061A45] hover:bg-[#0A369D] text-white shadow-[0_4px_16px_rgba(6,26,69,0.18)] hover:shadow-[0_6px_22px_rgba(10,54,157,0.28)] transition-all duration-200 active:scale-95"
+                className="group inline-flex items-center gap-2.5 px-6 sm:px-8 py-3 sm:py-3.5 rounded-[4px] bg-[#061A45] hover:bg-[#0A369D] text-white shadow-[0_4px_16px_rgba(6,26,69,0.18)] hover:shadow-[0_6px_22px_rgba(10,54,157,0.28)] transition-all duration-200 active:scale-95 cursor-pointer"
               >
                 <span className="font-mono text-[10px] sm:text-[11px] tracking-[0.24em] uppercase font-semibold">
                   Explore Our Approach
@@ -114,8 +115,9 @@ export default function HeroIntro({ scrollYProgress }: HeroIntroProps) {
 
               <button
                 type="button"
+                suppressHydrationWarning
                 onClick={() => handleScrollTo("clients")}
-                className="inline-flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 rounded-[4px] border border-[#061A45]/25 hover:border-[#061A45] bg-white/40 hover:bg-white/80 text-[#061A45] backdrop-blur-sm transition-all duration-200 active:scale-95 shadow-[0_2px_8px_rgba(6,26,69,0.04)]"
+                className="inline-flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 rounded-[4px] border border-[#061A45]/25 hover:border-[#061A45] bg-white/40 hover:bg-white/80 text-[#061A45] backdrop-blur-sm transition-all duration-200 active:scale-95 shadow-[0_2px_8px_rgba(6,26,69,0.04)] cursor-pointer"
               >
                 <span className="font-mono text-[10px] sm:text-[11px] tracking-[0.24em] uppercase font-semibold">
                   Watch Our Story
@@ -152,8 +154,9 @@ export default function HeroIntro({ scrollYProgress }: HeroIntroProps) {
             <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-7 sm:mt-9 pointer-events-auto">
               <button
                 type="button"
+                suppressHydrationWarning
                 onClick={() => handleScrollTo("about")}
-                className="group inline-flex items-center gap-2.5 px-6 sm:px-8 py-3 sm:py-3.5 rounded-[4px] bg-[#061A45] hover:bg-[#0A369D] text-white shadow-[0_4px_16px_rgba(6,26,69,0.18)] hover:shadow-[0_6px_22px_rgba(10,54,157,0.28)] transition-all duration-200 active:scale-95"
+                className="group inline-flex items-center gap-2.5 px-6 sm:px-8 py-3 sm:py-3.5 rounded-[4px] bg-[#061A45] hover:bg-[#0A369D] text-white shadow-[0_4px_16px_rgba(6,26,69,0.18)] hover:shadow-[0_6px_22px_rgba(10,54,157,0.28)] transition-all duration-200 active:scale-95 cursor-pointer"
               >
                 <span className="font-mono text-[10px] sm:text-[11px] tracking-[0.24em] uppercase font-semibold">
                   Our Philosophy
@@ -165,8 +168,9 @@ export default function HeroIntro({ scrollYProgress }: HeroIntroProps) {
 
               <button
                 type="button"
+                suppressHydrationWarning
                 onClick={() => handleScrollTo("what-we-build")}
-                className="inline-flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 rounded-[4px] border border-[#061A45]/25 hover:border-[#061A45] bg-white/40 hover:bg-white/80 text-[#061A45] backdrop-blur-sm transition-all duration-200 active:scale-95 shadow-[0_2px_8px_rgba(6,26,69,0.04)]"
+                className="inline-flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 rounded-[4px] border border-[#061A45]/25 hover:border-[#061A45] bg-white/40 hover:bg-white/80 text-[#061A45] backdrop-blur-sm transition-all duration-200 active:scale-95 shadow-[0_2px_8px_rgba(6,26,69,0.04)] cursor-pointer"
               >
                 <span className="font-mono text-[10px] sm:text-[11px] tracking-[0.24em] uppercase font-semibold">
                   View Systems

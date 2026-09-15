@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { useScroll, AnimatePresence, motion } from "framer-motion";
+import { useScroll, useSpring, AnimatePresence, motion } from "framer-motion";
 import HeroCanvas from "./HeroCanvas";
 import HeroAtmosphere from "./HeroAtmosphere";
 import HeroArchitecturalMarks from "./HeroArchitecturalMarks";
@@ -17,7 +17,7 @@ import HeroProgress from "./HeroProgress";
  * - 120 WebP high-DPI canvas frame sequence with sub-frame dual-layer optical blending
  * - 5-phase cinematic journey (Silent Arrival -> Identity Reveal -> Cinematic Immersion ->
  *   Intelligence / System Reveal -> Doctrine Transition)
- * - Zero React re-renders on kinetic scrub
+ * - Zero React re-renders on kinetic scrub with spring-smoothed interpolation
  */
 export default function ScrollFrameSequence() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -25,9 +25,17 @@ export default function ScrollFrameSequence() {
   const [loadPercentage, setLoadPercentage] = useState(0);
 
   // Master scroll mapping across 350vh track
-  const { scrollYProgress } = useScroll({
+  const { scrollYProgress: rawScrollProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end end"],
+  });
+
+  // Silk-smooth kinetic spring physics to buffer rapid scroll notches & touchpad swipes
+  const scrollYProgress = useSpring(rawScrollProgress, {
+    stiffness: 95,
+    damping: 28,
+    mass: 0.35,
+    restDelta: 0.0001,
   });
 
   return (

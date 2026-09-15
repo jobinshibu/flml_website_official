@@ -59,17 +59,15 @@ export default function HeroCanvas({
     if (canvasWidth === 0 || canvasHeight === 0) return;
 
     const clamped = Math.min(TOTAL_FRAMES - 1, Math.max(0, frameFloat));
-    const floorIdx = Math.floor(clamped);
-    const ceilIdx = Math.min(TOTAL_FRAMES - 1, floorIdx + 1);
-    const blendAlpha = clamped - floorIdx;
+    const targetIdx = Math.round(clamped);
 
     // Resolve primary image (monotonic fallback if not yet decoded)
-    let primaryImg = imagesRef.current[floorIdx];
-    if (!primaryImg || !imagesDecodedRef.current[floorIdx]) {
+    let primaryImg = imagesRef.current[targetIdx];
+    if (!primaryImg || !imagesDecodedRef.current[targetIdx]) {
       // Use last known successfully rendered image to avoid cutting/jumping
       primaryImg = imagesRef.current[lastSuccessfulIdxRef.current];
     } else {
-      lastSuccessfulIdxRef.current = floorIdx;
+      lastSuccessfulIdxRef.current = targetIdx;
     }
 
     if (!primaryImg || !primaryImg.complete || primaryImg.naturalWidth === 0) {
@@ -134,7 +132,7 @@ export default function HeroCanvas({
     ctx.fillStyle = edgeColor;
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-    // 2. Direct draw primary frame (100% razor-sharp, zero ghosting)
+    // 2. Direct draw primary frame (100% crisp, zero ghosting, zero vibration)
     ctx.globalAlpha = 1.0;
     ctx.drawImage(primaryImg, offsetX, offsetY, renderWidth, renderHeight);
 
@@ -339,15 +337,14 @@ export default function HeroCanvas({
       const targetFloat = clamped * (TOTAL_FRAMES - 1);
       targetFrameRef.current = targetFloat;
 
-      preloadNeighborhood(Math.round(targetFloat), 18);
+      preloadNeighborhood(Math.round(targetFloat), 22);
     });
 
     return () => unsubscribe();
   }, [scrollYProgress, preloadNeighborhood]);
 
   // ---------------------------------------------------------------------------
-  // SILKY KINETIC LERP RENDER LOOP
-  // Exponential smoothing (0.11) eliminates mouse-wheel notches and jerky drag
+  // SILKY CRITICALLY-DAMPED LERP LOOP (ZERO VIBRATION)
   // ---------------------------------------------------------------------------
   useEffect(() => {
     const loop = () => {
@@ -355,16 +352,15 @@ export default function HeroCanvas({
       const current = currentFrameRef.current;
       const diff = target - current;
 
-      if (Math.abs(diff) > 0.0005) {
-        // Tuned damping factor for filmic momentum
-        currentFrameRef.current += diff * 0.11;
+      if (Math.abs(diff) > 0.001) {
+        currentFrameRef.current += diff * 0.12;
       } else {
         currentFrameRef.current = target;
       }
 
       const deltaRender = Math.abs(currentFrameRef.current - lastRenderedFloatRef.current);
-      // Redraw whenever the fractional frame moves significantly (sub-pixel precision)
-      if (deltaRender > 0.02 || lastRenderedFloatRef.current === -1) {
+      // Redraw only when frame actually advances, eliminating micro-jitter
+      if (deltaRender >= 0.25 || lastRenderedFloatRef.current === -1) {
         drawFrameSubpixel(currentFrameRef.current);
       }
 
