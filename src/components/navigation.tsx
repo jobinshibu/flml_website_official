@@ -10,12 +10,13 @@ export default function Navigation() {
 
   const navItems = [
     { name: "THE LAB", path: "/", number: "00" },
-    { name: "DOCTRINE", path: "/#about", number: "01" },
-    { name: "CAPABILITIES", path: "/#capabilities", number: "02" },
-    { name: "ARCHITECTURE", path: "/#technology", number: "03" },
-    { name: "DEPLOYMENTS", path: "/#clients", number: "04" },
-    { name: "LIFE @ FLML", path: "/gallery", number: "05" },
-    { name: "RECRUITMENT", path: "/career", number: "06" },
+    { name: "PRODUCTS", path: "/products", number: "01" },
+    { name: "DOCTRINE", path: "/#about", number: "02" },
+    { name: "CAPABILITIES", path: "/#capabilities", number: "03" },
+    { name: "ARCHITECTURE", path: "/#technology", number: "04" },
+    { name: "DEPLOYMENTS", path: "/#clients", number: "05" },
+    { name: "LIFE @ FLML", path: "/gallery", number: "06" },
+    { name: "RECRUITMENT", path: "/career", number: "07" },
   ];
 
   return (
@@ -46,6 +47,9 @@ export default function Navigation() {
 
         {/* Center Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-8 text-xs font-mono tracking-widest text-white/70">
+          <Link href="/products" className="hover:text-white transition-colors text-cyan-400 font-bold">
+            PRODUCTS
+          </Link>
           <Link href="/#about" className="hover:text-white transition-colors">
             DOCTRINE
           </Link>
