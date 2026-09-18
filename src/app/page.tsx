@@ -9,7 +9,7 @@ import ConsultationForm from "@/components/sections/ConsultationForm";
 
 export default function Home() {
   return (
-    <div className="relative flex flex-col w-full bg-black text-white selection:bg-white selection:text-black">
+    <div className="relative flex flex-col w-full bg-black text-white select-none">
       {/* Homepage Ambient Particle Galaxy Background */}
       <GalaxyCanvas />
 

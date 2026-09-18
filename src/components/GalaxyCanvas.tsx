@@ -92,6 +92,10 @@ export default function GalaxyCanvas() {
     };
 
     const onMouseDown = (e: MouseEvent) => {
+      const targetTag = (e.target as HTMLElement)?.tagName?.toLowerCase();
+      if (targetTag !== "input" && targetTag !== "textarea" && targetTag !== "button" && targetTag !== "a") {
+        e.preventDefault();
+      }
       mouseRef.current.isDragging = true;
       mouseRef.current.lastX = e.clientX;
       mouseRef.current.lastY = e.clientY;
@@ -297,7 +301,7 @@ export default function GalaxyCanvas() {
           if (!p.isBackgroundStar) {
             // Dispersion & Organic Ambient Floating when scrolled down
             const scatterDistance = scrollProgress * Math.min(width, height) * 0.75;
-            
+
             const floatX = Math.sin(time * 0.9 + p.homeX * 0.03) * 20 * scrollProgress;
             const floatY = Math.cos(time * 0.7 + p.homeY * 0.03) * 20 * scrollProgress;
             const floatZ = Math.sin(time * 0.5 + p.homeZ * 0.05) * 25 * scrollProgress;

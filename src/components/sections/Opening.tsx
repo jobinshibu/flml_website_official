@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export default function Opening() {
   return (
     <section className="relative z-10 h-screen min-h-[750px] bg-transparent text-white overflow-hidden pt-20 pb-16 flex flex-col justify-between items-center">
-      
+
       {/* Subtle Hero Radial Vignette */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(0,0,0,0)_0%,_rgba(0,0,0,0.3)_85%,_rgba(0,0,0,0.6)_100%)] pointer-events-none z-[1]" />
 
