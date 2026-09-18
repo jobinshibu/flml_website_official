@@ -76,7 +76,7 @@ export default function Engineering() {
   const currentLayerObj = layers.find((l) => l.id === activeLayer) || layers[0];
 
   return (
-    <section id="technology" ref={containerRef} className="py-24 md:py-36 px-6 md:px-12 bg-black relative border-b border-white/10 text-white">
+    <section id="technology" ref={containerRef} className="pt-10 md:pt-14 pb-8 md:pb-12 px-6 md:px-12 bg-transparent relative z-10 text-white">
       
       <div className="max-w-[1400px] mx-auto relative z-10">
         
@@ -84,7 +84,7 @@ export default function Engineering() {
         <div className="flex items-center gap-3 mb-6">
           <span className="w-2 h-2 rounded-full bg-blue-500" />
           <h2 className="text-xs font-mono tracking-[0.3em] uppercase text-white/50">
-            04 // BUILT FROM THE INSIDE OUT
+            BUILT FROM THE INSIDE OUT
           </h2>
         </div>
         

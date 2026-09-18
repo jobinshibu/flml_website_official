@@ -138,14 +138,14 @@ export default function WhatWeBuild() {
   };
 
   return (
-    <section id="capabilities" className="py-12 md:py-20 px-6 md:px-12 bg-black text-white border-b border-white/10 relative overflow-hidden">
+    <section id="capabilities" className="pt-4 md:pt-6 pb-12 md:pb-20 px-6 md:px-12 bg-transparent text-white relative z-10 overflow-hidden">
       <div className="max-w-[1700px] mx-auto">
         
         {/* Section Header */}
         <div className="flex items-center gap-3 mb-16">
           <span className="w-2 h-2 rounded-full bg-blue-500" />
           <h2 className="text-xs font-mono tracking-[0.3em] uppercase text-white/50">
-            03 // CAPABILITIES & ARCHITECTURES
+            CAPABILITIES & ARCHITECTURES
           </h2>
         </div>
 

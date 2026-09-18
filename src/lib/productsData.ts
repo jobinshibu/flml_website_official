@@ -401,5 +401,325 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
       { title: "High-Definition Low-Latency WebRTC Audio Engine", description: "Crystal-clear real-time peer-to-peer audio streaming with adaptive jitter buffering and low-bandwidth network optimization." },
       { title: "Anonymous Profile & Safety Moderation Vault", description: "Protects user privacy with customizable avatar profiles, live user reporting, blocklists, and automated safety moderation filters." }
     ]
+  },
+  dcost: {
+    id: "dcost",
+    name: "DCost Merchant & Discount Platform",
+    category: "OMNICHANNEL LOCAL DISCOVERY & DISCOUNT REWARDS PLATFORM",
+    client: "DCost",
+    clientLogo: "/client/dcost.jpeg",
+    screenshot: "/screenshots/karikku.jpg",
+    headline: "Omnichannel Merchant Directory, Tourist Discovery & Exclusive Discount Rewards Engine",
+    tagline: "Connecting users with local retail shops, shopping malls, restaurants, and tourist attractions featuring exclusive instant discount redemption.",
+    year: "",
+    overview: "DCost is a comprehensive local business discovery and discount redemption platform. First Logic Meta Lab architected an omnichannel mobile ecosystem enabling users to explore local retail stores, shopping malls, dining venues, and tourist spots while unlocking exclusive digital discount vouchers and cashback offers.",
+    challenge: "Building a geo-location aware merchant directory capable of indexing thousands of retail shops, restaurants, malls, and tourist destinations while ensuring instant offline/online QR code discount voucher redemption and real-time vendor offer management.",
+    solution: "FLML engineered a high-performance cross-platform mobile application using Flutter, backed by Firebase cloud infrastructure (Cloud Firestore, Realtime DB, Firebase Auth, Cloud Functions, and Firebase Cloud Messaging) with integrated Google Maps API location services for proximity merchant discovery.",
+    impact: "Boosted foot traffic for local merchants, retail malls, and tourist destinations while delivering instant savings for consumers via QR code discount redemption.",
+    stats: [
+      { label: "Platform Architecture", value: "Merchant Discovery & Rewards" },
+      { label: "Mobile Framework", value: "Flutter Cross-Platform" },
+      { label: "Cloud Engine", value: "Firebase Real-Time Infrastructure" },
+      { label: "Core Services", value: "Directory, Geo-Deals, QR Discounts" }
+    ],
+    techStack: [
+      { category: "Mobile Application", items: ["Flutter (iOS & Android)"] },
+      { category: "Merchant & Admin Portals", items: ["Flutter Web", "React", "JavaScript / TypeScript"] },
+      { category: "Cloud Database & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB", "Firebase Storage"] },
+      { category: "Serverless & Geo Services", items: ["Firebase Cloud Functions", "Firebase Auth", "Firebase Cloud Messaging (FCM)", "Google Maps API"] }
+    ],
+    features: [
+      { title: "Geo-Location Merchant & Tourist Spot Directory", description: "Proximity-based discovery tool listing local shops, shopping centers, top restaurants, and tourist landmarks with interactive map navigation." },
+      { title: "Instant QR Code Discount & Voucher Redemption Engine", description: "In-app digital coupon wallet allowing users to generate and scan QR codes at checkout to redeem exclusive merchant discounts instantly." },
+      { title: "Merchant Offer Management & Analytics Portal", description: "Empowers business vendors to publish seasonal discount deals, set campaign limits, track customer redemptions, and view foot-traffic analytics." }
+    ]
+  },
+  flexifold: {
+    id: "flexifold",
+    name: "Flexifold Interior Design Studio Platform",
+    category: "INTERIOR DESIGN PROJECT MANAGEMENT & WORKFLOW SAAS",
+    client: "Flexifold",
+    clientLogo: "/client/flexifold.jpeg",
+    screenshot: "/screenshots/healine.jpg",
+    headline: "End-to-End Project Management & Workflow Automation Platform for Interior Design Teams",
+    tagline: "Empowering interior designers, architects, and site contractors to collaborate on Moodboards, CAD Drawings, Material Estimates, and Client Approvals.",
+    year: "",
+    overview: "Flexifold is an enterprise SaaS workflow and project management system tailored specifically for interior design studios and architectural teams. First Logic Meta Lab architected a collaborative workspace enabling interior designers, project managers, client stakeholders, and site contractors to streamline design concepts, material procurement, site progress logs, and client milestone sign-offs.",
+    challenge: "Replacing fragmented communication channels and manual spreadsheets used by interior design firms with a unified digital workspace that synchronizes CAD drawing approvals, material cost estimates, site milestone tracking, and client feedback in real time.",
+    solution: "FLML engineered a multi-platform web and mobile SaaS platform using React, Node.js, and Flutter, backed by cloud storage repositories for high-resolution 3D renders, automated invoice generators, and interactive moodboard annotation tools.",
+    impact: "Accelerated interior project completion timelines, eliminated material miscommunications between office designers and site contractors, and elevated client presentation transparency.",
+    stats: [
+      { label: "Platform Architecture", value: "Interior Design SaaS ERP" },
+      { label: "System Framework", value: "React & Flutter Cross-Platform" },
+      { label: "Core Modules", value: "Moodboards, CAD Approval, Expenses, Site Logs" },
+      { label: "Target Audience", value: "Interior Designers & Architects" }
+    ],
+    techStack: [
+      { category: "Web Platform & Studio Portal", items: ["React", "JavaScript / TypeScript"] },
+      { category: "Mobile Apps (Site Contractor & Client)", items: ["Flutter (iOS & Android)"] },
+      { category: "Backend Engine", items: ["Node.js", "Express.js"] },
+      { category: "Cloud Storage & Database", items: ["AWS S3 / Firebase Storage", "Cloud Firestore", "PostgreSQL / MongoDB"] }
+    ],
+    features: [
+      { title: "Interactive Moodboard & CAD Revision Hub", description: "Designers can upload high-res renders, material swatches, and CAD blueprints with pin-point client annotation and revision approval features." },
+      { title: "Material Procurement & Expense Estimator", description: "Automated bill-of-quantities (BOQ) calculator, vendor quotation tracking, and real-time project expense budgeting." },
+      { title: "Site Execution Progress & Timeline Logs", description: "Mobile photo progress logs, contractor task assignment cards, and milestone completion alerts for seamless site-to-studio synchronization." }
+    ]
+  },
+  "relax-call": {
+    id: "relax-call",
+    name: "Relax Call Voice Social Platform",
+    category: "REAL-TIME ANONYMOUS AUDIO & SOCIAL CALLING PLATFORM",
+    client: "Relax Call",
+    clientLogo: "/client/relax call.jpeg",
+    screenshot: "/screenshots/karikku_1.jpg",
+    headline: "Real-Time Anonymous Audio Calling & Matchmaking Platform",
+    tagline: "Connecting people worldwide through high-quality 1-on-1 stranger voice calls, mood-based matchmaking, and real-time audio rooms.",
+    year: "",
+    overview: "Relax Call is a popular audio social networking mobile application. First Logic Meta Lab architected a real-time voice matchmaking platform allowing users to discover and chat anonymously with new friends across the globe in a stress-free environment.",
+    challenge: "Handling instant low-latency audio matchmaking across high concurrent active user calls, managing connection stability over varying mobile networks, and enforcing strict user privacy and community safety guidelines.",
+    solution: "FLML engineered a high-performance cross-platform application built with Flutter and WebRTC signaling protocols, backed by Firebase cloud infrastructure (Cloud Firestore, Realtime DB, Firebase Auth, Cloud Functions, and Firebase Cloud Messaging).",
+    impact: "Facilitated millions of global voice conversations with zero latency buffering, delivering an intuitive anonymous calling experience with end-to-end privacy.",
+    stats: [
+      { label: "Platform Architecture", value: "Real-Time Audio Matchmaking" },
+      { label: "Mobile Framework", value: "Flutter Cross-Platform" },
+      { label: "Streaming Engine", value: "WebRTC Audio Protocol" },
+      { label: "Cloud Engine", value: "Firebase Real-Time Infrastructure" }
+    ],
+    techStack: [
+      { category: "Mobile Application", items: ["Flutter (iOS & Android)"] },
+      { category: "Real-Time Audio & Signaling", items: ["WebRTC Voice Protocol", "RTC Engine"] },
+      { category: "Cloud Database & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB"] },
+      { category: "Serverless & Notifications", items: ["Firebase Cloud Functions", "Firebase Auth", "Firebase Cloud Messaging (FCM)"] }
+    ],
+    features: [
+      { title: "Mood-Based Stranger Voice Matchmaking", description: "Algorithmic matchmaking engine pairing users instantly based on topic tags, language filters, and mood categories for 1-on-1 voice calls." },
+      { title: "Adaptive Low-Bandwidth WebRTC Audio Engine", description: "Crystal-clear real-time audio streaming optimized for 3G, 4G, 5G, and Wi-Fi networks with dynamic noise suppression." },
+      { title: "User Privacy & Safety Moderation Guard", description: "Anonymous voice profiles, instant block/report features, and AI-assisted safety moderation to ensure a respectful user environment." }
+    ]
+  },
+  "vestido-nation": {
+    id: "vestido-nation",
+    name: "Vestido Nation Fashion E-Commerce",
+    category: "D2C FASHION & APPAREL E-COMMERCE STORE",
+    client: "Vestido Nation",
+    clientLogo: "/client/vestido nation.jpeg",
+    screenshot: "/screenshots/karikku.jpg",
+    headline: "Omnichannel D2C Fashion & Apparel E-Commerce Platform",
+    tagline: "Curating premium boutique dresses, seasonal fashion collections, and personalized styling recommendations.",
+    year: "",
+    overview: "Vestido Nation is a premier Direct-to-Consumer (D2C) fashion and apparel e-commerce brand. First Logic Meta Lab architected a modern digital storefront featuring high-resolution fashion lookbooks, size recommendation guides, real-time inventory management, and an executive administration console.",
+    challenge: "Engineering a high-performance fashion shopping web platform with low image load latency, dynamic size/color variant matrix management, real-time cart state synchronization, and secure checkout integration.",
+    solution: "FLML engineered a responsive web storefront using React, backed by Node.js microservices and Firebase real-time infrastructure (Cloud Firestore, Firebase Auth, Firebase Storage) for instant inventory updates and order fulfillment management.",
+    impact: "Elevated fashion brand presentation, reduced cart abandonment with fast checkout pipelines, and provided store managers with live catalog control.",
+    stats: [
+      { label: "Platform Architecture", value: "D2C Fashion E-Commerce" },
+      { label: "Frontend Framework", value: "React & TypeScript" },
+      { label: "Backend Engine", value: "Node.js & Express" },
+      { label: "Cloud & Database", value: "Firebase Real-Time DB" }
+    ],
+    techStack: [
+      { category: "Frontend Web Storefront", items: ["React", "JavaScript / TypeScript"] },
+      { category: "Backend Microservices", items: ["Node.js", "Express.js"] },
+      { category: "Cloud Infrastructure & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB", "Firebase Storage"] },
+      { category: "Security & Authentication", items: ["Firebase Auth", "SSL Cloud Vault"] }
+    ],
+    features: [
+      { title: "Dynamic Fashion Catalog & Variant Matrix", description: "Interactive fashion catalog displaying multi-angle product photography, size/color variant matrices, and real-time stock availability." },
+      { title: "Lookbook & Style Recommendation Engine", description: "Curated seasonal fashion lookbooks allowing customers to shop entire outfits with one-click cart additions." },
+      { title: "Centralized Admin & Fulfillment Portal", description: "Comprehensive management console for store administrators to manage product drops, discount codes, customer orders, and dispatch logs." }
+    ]
+  },
+  kootukari: {
+    id: "kootukari",
+    name: "Kootukari Regional Voice Platform",
+    category: "REAL-TIME REGIONAL AUDIO & VOICE MATCHMAKING PLATFORM",
+    client: "Kootukari",
+    clientLogo: "/client/kootukari.jpeg",
+    screenshot: "/screenshots/karikku_1.jpg",
+    headline: "Regional Audio Social Networking & Voice Calling Platform for Connecting with Strangers",
+    tagline: "Connecting people through 1-on-1 voice calling, regional language matchmaking, and real-time audio rooms.",
+    year: "",
+    overview: "Kootukari is a regional voice social networking mobile application. First Logic Meta Lab architected a real-time audio matchmaking platform enabling users to connect and converse anonymously with new friends speaking their native languages.",
+    challenge: "Building a fast regional language-aware voice matchmaking engine capable of handling high concurrent live calls, low-latency audio transmission over 3G/4G networks, and real-time community safety moderation.",
+    solution: "FLML engineered a high-performance cross-platform application built with Flutter and WebRTC protocols, backed by Firebase cloud infrastructure (Cloud Firestore, Realtime DB, Firebase Auth, Cloud Functions, and Firebase Cloud Messaging).",
+    impact: "Fostered vibrant regional social communities with seamless low-latency voice calling, privacy protection, and automated safety moderation.",
+    stats: [
+      { label: "Platform Architecture", value: "Regional Voice Matchmaking" },
+      { label: "Mobile Framework", value: "Flutter Cross-Platform" },
+      { label: "Streaming Engine", value: "WebRTC Audio Protocol" },
+      { label: "Cloud Engine", value: "Firebase Real-Time Infrastructure" }
+    ],
+    techStack: [
+      { category: "Mobile Application", items: ["Flutter (iOS & Android)"] },
+      { category: "Real-Time Audio & Signaling", items: ["WebRTC Voice Protocol", "RTC Engine"] },
+      { category: "Cloud Database & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB"] },
+      { category: "Serverless & Notifications", items: ["Firebase Cloud Functions", "Firebase Auth", "Firebase Cloud Messaging (FCM)"] }
+    ],
+    features: [
+      { title: "Regional Language Voice Matchmaking", description: "Algorithmic matchmaking pairing users based on native language preferences, regional dialects, and common interests for 1-on-1 audio calls." },
+      { title: "High-Quality Low-Bandwidth WebRTC Engine", description: "Ultra-low latency audio streaming optimized for smooth voice clarity even on low-bandwidth mobile network connections." },
+      { title: "Anonymous Profiles & Community Safety Shield", description: "Custom avatar profiles, instant user block/report mechanisms, and automated safety filters ensuring a safe social calling environment." }
+    ]
+  },
+  "live-to-smile": {
+    id: "live-to-smile",
+    name: "Live to Smile Healthcare Platform",
+    category: "DENTAL CARE & HEALTHCARE PATIENT MANAGEMENT PLATFORM",
+    client: "Live to Smile",
+    clientLogo: "/client/live_to_smile.jpeg",
+    screenshot: "/screenshots/healine.jpg",
+    headline: "Omnichannel Dental Consultation, Smile Design & Patient Care Ecosystem",
+    tagline: "Connecting patients with certified dental clinics, specialist orthodontists, and digital treatment plan tracking.",
+    year: "",
+    overview: "Live to Smile is a dedicated healthcare and dental wellness platform. First Logic Meta Lab architected an end-to-end patient care ecosystem enabling users to book dental consultations, explore cosmetic smile design packages, manage appointment schedules, and access digital treatment records.",
+    challenge: "Building a patient-centric healthcare platform capable of handling real-time dentist availability schedules, treatment plan tracking, pre/post-procedure guidelines, and multi-clinic appointment management with secure health record encryption.",
+    solution: "FLML engineered a high-performance cross-platform mobile and web application built with Flutter and powered by Firebase cloud services (Cloud Firestore, Realtime DB, Firebase Auth, Cloud Functions, and Firebase Storage) with end-to-end data security.",
+    impact: "Streamlined dental appointment bookings, reduced patient waiting times, and provided clinics with a unified patient relationship management tool.",
+    stats: [
+      { label: "Platform Architecture", value: "Healthcare & Dental Care" },
+      { label: "Mobile Framework", value: "Flutter Cross-Platform" },
+      { label: "Cloud Engine", value: "Firebase Real-Time DB" },
+      { label: "Core Services", value: "Bookings, Records, Smile Design" }
+    ],
+    techStack: [
+      { category: "Mobile Applications", items: ["Flutter (iOS & Android)"] },
+      { category: "Clinic Management Portal", items: ["Flutter Web", "React", "JavaScript / TypeScript"] },
+      { category: "Cloud Database & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB", "Firebase Storage"] },
+      { category: "Serverless & Reminders", items: ["Firebase Cloud Functions", "Firebase Auth", "Firebase Cloud Messaging (FCM)"] }
+    ],
+    features: [
+      { title: "Online Dentist & Specialist Consultation Booking", description: "Seamless appointment scheduling for general dentistry, orthodontics, and cosmetic smile transformation procedures." },
+      { title: "Digital Treatment Plan & Medical Records Vault", description: "Enables patients to access digital prescription records, treatment progress timelines, and post-procedure care instructions." },
+      { title: "Clinic Management & Automated Appointment Reminders", description: "Empowers dental clinics to manage doctor rosters, track patient visit histories, and send automated FCM appointment reminder alerts." }
+    ]
+  },
+  "first-tap": {
+    id: "first-tap",
+    name: "First Tap NFC & Digital Card Platform",
+    category: "NFC BUSINESS CARD WRITER & DIGITAL PROFILE PLATFORM",
+    client: "First Tap",
+    clientLogo: "/client/first_tap.jpeg",
+    screenshot: "/screenshots/karikku.jpg",
+    headline: "Smart NFC Card Writing, Digital Business Card & Dynamic QR Code Engine",
+    tagline: "Transforming physical networking with contact-free NFC smart cards, dynamic QR profile generators, and lead capture analytics.",
+    year: "",
+    overview: "First Tap is a modern contact-free networking and smart business card platform. First Logic Meta Lab architected an end-to-end hardware-to-software ecosystem allowing professionals and enterprise teams to write custom contact profiles onto NFC smart cards, generate dynamic QR codes, and capture sales leads instantly upon tap.",
+    challenge: "Bridging physical NFC card writing hardware protocols (NDEF encoding) with real-time digital profile web pages, dynamic QR code generators, and contact book vCard downloads across iOS and Android devices.",
+    solution: "FLML engineered a cross-platform mobile application using Flutter with native NFC reader/writer hardware bindings, paired with a web digital profile rendering engine built with React and backed by Firebase cloud services (Cloud Firestore, Firebase Auth, Cloud Functions).",
+    impact: "Eliminated paper business card waste, enabled instant touchless contact exchange via NFC & QR codes, and empowered corporate sales teams to track networking lead conversion analytics.",
+    stats: [
+      { label: "Platform Architecture", value: "NFC Smart Card & QR Engine" },
+      { label: "Mobile Framework", value: "Flutter & Native NFC (NDEF)" },
+      { label: "Web Profile Portal", value: "React & TypeScript" },
+      { label: "Cloud Infrastructure", value: "Firebase Real-Time DB" }
+    ],
+    techStack: [
+      { category: "Mobile Apps (NFC Writer & App)", items: ["Flutter (iOS & Android)", "Native CoreNFC / Android NFC (NDEF)"] },
+      { category: "Digital Profile Web Storefront", items: ["React", "JavaScript / TypeScript"] },
+      { category: "Cloud Database & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB", "Firebase Storage"] },
+      { category: "Serverless & Analytics", items: ["Firebase Cloud Functions", "Firebase Auth", "Google Cloud Analytics"] }
+    ],
+    features: [
+      { title: "Native NFC Smart Card Reader & Writer", description: "Enables users to program NDEF records, social links, contact vCards, and portfolio URLs directly onto physical NFC plastic, wood, or metal cards." },
+      { title: "Dynamic QR Code Generator & Digital Profile", description: "Generates real-time customizable QR codes linked to rich digital landing pages showcasing contact info, social handles, lead forms, and media links." },
+      { title: "Contact Book Auto-Save & Lead Capture Analytics", description: "Allows recipients to save contacts directly into their phonebook (.vcf) with one tap, while tracking profile view metrics and tap analytics for business teams." }
+    ]
+  },
+  ebotto: {
+    id: "ebotto",
+    name: "Ebotto AI Conversational Engine",
+    category: "AI CHATBOT AUTOMATION & OMNICHANNEL MESSAGING SAAS",
+    client: "Ebotto",
+    clientLogo: "/client/ebotto.jpeg",
+    screenshot: "/screenshots/healine.jpg",
+    headline: "Omnichannel AI Chatbot & Conversational Automation Engine for Business Messaging",
+    tagline: "Automating customer support, lead qualification, and order updates across WhatsApp, Web Chat, and Mobile Apps.",
+    year: "",
+    overview: "Ebotto is an enterprise AI chatbot and conversational automation SaaS platform. First Logic Meta Lab architected an intelligent messaging engine enabling businesses to deploy automated AI chatbots across WhatsApp API, website widgets, and mobile apps to handle customer inquiries, capture sales leads, and route complex support tickets.",
+    challenge: "Building a low-latency conversational AI engine capable of handling high-volume concurrent chat sessions, contextual NLP query resolution, multi-channel webhook integrations, and seamless human agent handoffs.",
+    solution: "FLML engineered a multi-tenant cloud SaaS platform built with React and Node.js microservices, powered by Firebase real-time messaging, Cloud Firestore session persistence, and NLP AI conversational models.",
+    impact: "Reduced customer support response times by 80%, automated 24/7 lead qualification for sales teams, and streamlined WhatsApp business notifications.",
+    stats: [
+      { label: "Platform Architecture", value: "AI Conversational SaaS" },
+      { label: "Frontend Framework", value: "React & TypeScript" },
+      { label: "Backend Microservices", value: "Node.js & Python AI" },
+      { label: "Cloud Messaging", value: "Firebase & WhatsApp API" }
+    ],
+    techStack: [
+      { category: "Web Dashboard & Bot Studio", items: ["React", "JavaScript / TypeScript"] },
+      { category: "Backend & AI Engine", items: ["Node.js", "Express.js", "Python NLP Services"] },
+      { category: "Cloud Database & Session Vault", items: ["Cloud Firestore", "Firebase Realtime DB", "Redis Cache"] },
+      { category: "Messaging Channels", items: ["WhatsApp Business API", "Firebase Cloud Messaging", "WebSockets"] }
+    ],
+    features: [
+      { title: "Visual AI Chatbot Flow Builder", description: "Drag-and-drop conversational bot builder allowing non-technical managers to create custom decision trees, auto-reply logic, and FAQ workflows." },
+      { title: "WhatsApp & Omnichannel Integration Engine", description: "Seamless deployment across WhatsApp Business API, live website chat widgets, and mobile apps with a unified conversation inbox." },
+      { title: "Live Human Agent Handoff & Analytics Studio", description: "Intelligent ticket routing that automatically escalates complex customer queries to live support agents with complete conversation history." }
+    ]
+  },
+  schosys: {
+    id: "schosys",
+    name: "Schosys School Management ERP",
+    category: "ENTERPRISE SCHOOL MANAGEMENT ERP & EDTECH PLATFORM",
+    client: "Schosys",
+    clientLogo: "/client/schosys.jpeg",
+    screenshot: "/screenshots/healine.jpg",
+    headline: "Omnichannel School Management ERP, Attendance, Exam Grading & Fee Collection Engine",
+    tagline: "Connecting school administrators, teachers, students, and parents under a unified educational ERP platform.",
+    year: "",
+    overview: "Schosys is a comprehensive enterprise School Management ERP and EdTech platform. First Logic Meta Lab architected an end-to-end educational management ecosystem supporting Student Portals, Teacher Gradebooks, Parent Communication Portals, Attendance Tracking, Fee Collection Pipelines, and Academic Performance Analytics.",
+    challenge: "Unifying multi-role school workflows—synchronizing daily student attendance, teacher mark entry, term report card generation, digital fee payment reconciliation, and real-time parent notifications across desktop and mobile devices.",
+    solution: "FLML engineered a multi-tenant cross-platform mobile and web ERP suite built with Flutter and powered by Firebase cloud infrastructure (Cloud Firestore, Realtime DB, Firebase Auth, Cloud Functions, and Firebase Storage) with role-based access control (RBAC).",
+    impact: "Digitized school administrative workflows, eliminated report card errors, accelerated fee collection cycles, and enhanced parent-teacher transparency.",
+    stats: [
+      { label: "Platform Architecture", value: "School Management ERP" },
+      { label: "Mobile & Web Framework", value: "Flutter Cross-Platform" },
+      { label: "Cloud Infrastructure", value: "Firebase Real-Time DB" },
+      { label: "Core Modules", value: "Attendance, Marks, Fees, Parents" }
+    ],
+    techStack: [
+      { category: "Mobile Apps (Parents & Students)", items: ["Flutter (iOS & Android)"] },
+      { category: "School Admin & Teacher Web Portals", items: ["Flutter Web", "React", "JavaScript / TypeScript"] },
+      { category: "Cloud Database & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB", "Firebase Storage"] },
+      { category: "Serverless & Messaging", items: ["Firebase Cloud Functions", "Firebase Auth", "Firebase Cloud Messaging (FCM)"] }
+    ],
+    features: [
+      { title: "Daily Attendance & Leave Management", description: "Biometric and teacher mobile attendance marking with instant FCM push notification alerts sent to parents upon student check-in/absence." },
+      { title: "Teacher Gradebook & Automated Report Cards", description: "Empowers teachers to enter exam marks, compute GPA grades automatically, generate downloadable PDF report cards, and track student academic progress." },
+      { title: "Online Fee Collection & Financial Invoicing", description: "Digital fee payment portal supporting online payment gateways, automated fee receipts, installment schedules, and overdue balance alerts." }
+    ]
+  },
+  finalfx: {
+    id: "finalfx",
+    name: "FinalFX Multi-Restaurant POS Platform",
+    category: "MULTI-TENANT RESTAURANT POS & KITCHEN DISPATCH SAAS",
+    client: "FinalFX",
+    clientLogo: "/client/finalfx.png",
+    screenshot: "/screenshots/karikku.jpg",
+    headline: "Multi-Tenant Restaurant Point of Sale, KOT Routing & Table Management System",
+    tagline: "Powering several restaurant chains with instant POS billing, thermal KOT dispatch, and centralized multi-outlet analytics.",
+    year: "",
+    overview: "FinalFX is an enterprise multi-tenant Restaurant Point of Sale (POS) and Kitchen Order Token (KOT) management SaaS platform. First Logic Meta Lab architected a scalable hospitality operating system deployed across numerous restaurant branches, fine-dining establishments, and quick-service food chains.",
+    challenge: "Architecting a multi-tenant cloud POS platform capable of operating synchronously across hundreds of restaurant outlets—ensuring zero-latency cashier billing, multi-kitchen KOT printing, offline payment queueing, and centralized chain-level inventory management.",
+    solution: "FLML engineered a high-concurrency cloud and desktop POS platform built with React, Node.js microservices, and Flutter, backed by Firebase real-time sync infrastructure, Cloud Firestore tenant isolation, and thermal printer hardware integrations.",
+    impact: "Accelerated checkout speeds across partner restaurants, eliminated order miscommunication between dining rooms and kitchens, and provided restaurant chain owners with real-time multi-branch sales analytics.",
+    stats: [
+      { label: "Platform Architecture", value: "Multi-Tenant Restaurant POS" },
+      { label: "System Framework", value: "React & Flutter Cross-Platform" },
+      { label: "Backend Architecture", value: "Node.js Microservices & Cloud DB" },
+      { label: "Deployment Scope", value: "Multi-Outlet Restaurant Chains" }
+    ],
+    techStack: [
+      { category: "POS Terminal & Tablet Apps", items: ["Flutter (Desktop & Mobile POS)", "React"] },
+      { category: "Backend Microservices", items: ["Node.js", "Express.js"] },
+      { category: "Cloud Database & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB", "Redis Cache"] },
+      { category: "Hardware & Integration", items: ["Thermal ESC/POS Printers", "Barcode Scanners", "Payment Terminals"] }
+    ],
+    features: [
+      { title: "High-Speed Touch POS & Multi-Kitchen KOT Routing", description: "Ultra-fast billing interface with table layout mapping, split payments, and intelligent KOT routing to specific kitchen stations (Grill, Bar, Pastry)." },
+      { title: "Multi-Outlet Chain Management & Centralized Inventory", description: "Centralized admin dashboard enabling multi-branch restaurant owners to manage global menu items, recipe ingredient stock, and transfer inventory across branches." },
+      { title: "Offline Transaction Caching & Automated Sync", description: "Ensures uninterrupted restaurant billing during internet outages, automatically reconciling transactions with cloud servers once connectivity is restored." }
+    ]
   }
 };

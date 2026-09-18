@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Gallery() {
   return (
-    <section id="gallery" className="py-24 md:py-36 px-6 md:px-12 bg-black text-white relative border-b border-white/10">
+    <section id="gallery" className="pt-10 md:pt-14 pb-8 md:pb-12 px-6 md:px-12 bg-transparent text-white relative z-10">
       <div className="max-w-[1400px] mx-auto">
         
         {/* Section Header */}
@@ -14,7 +14,7 @@ export default function Gallery() {
           <div className="flex items-center gap-3">
             <span className="w-2 h-2 rounded-full bg-blue-500" />
             <h2 className="text-xs font-mono tracking-[0.3em] uppercase text-white/50">
-              05 // THE LAB IN ACTION
+              THE LAB IN ACTION
             </h2>
           </div>
           <Link 

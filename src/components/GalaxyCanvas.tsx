@@ -35,7 +35,7 @@ export default function GalaxyCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rotationRef = useRef({ rotX: 0, rotY: 0, velX: 0, velY: 0 });
   const scrollRef = useRef({ targetProgress: 0, currentProgress: 0 });
-  const loadRef = useRef({ progress: 0 }); // 0 to 1 smooth cinematic load
+  const loadRef = useRef({ progress: 0 });
   const mouseRef = useRef({
     x: -9999,
     y: -9999,
@@ -52,13 +52,13 @@ export default function GalaxyCanvas() {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let width = (canvas.width = canvas.parentElement?.clientWidth || window.innerWidth);
-    let height = (canvas.height = canvas.parentElement?.clientHeight || 600);
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
 
     const handleResize = () => {
-      if (!canvas || !canvas.parentElement) return;
-      width = canvas.width = canvas.parentElement.clientWidth;
-      height = canvas.height = canvas.parentElement.clientHeight || 600;
+      if (!canvas) return;
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
     };
 
     const handleScroll = () => {
@@ -73,9 +73,8 @@ export default function GalaxyCanvas() {
 
     // Mouse Handlers
     const onMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseRef.current.x = e.clientX - rect.left;
-      mouseRef.current.y = e.clientY - rect.top;
+      mouseRef.current.x = e.clientX;
+      mouseRef.current.y = e.clientY;
 
       if (mouseRef.current.isDragging) {
         const deltaX = e.clientX - mouseRef.current.lastX;
@@ -135,11 +134,12 @@ export default function GalaxyCanvas() {
 
       const scaleMultiplier = Math.min(width, height) < 640 ? 1.6 : 2.2;
       const colors = [
-        "rgba(255, 255, 255, ", 
-        "rgba(224, 242, 254, ", 
-        "rgba(186, 230, 253, ", 
-        "rgba(96, 165, 250, ",  
-        "rgba(147, 197, 253, ", 
+        "rgba(255, 255, 255, ",
+        "rgba(224, 242, 254, ",
+        "rgba(186, 230, 253, ",
+        "rgba(96, 165, 250, ",
+        "rgba(147, 197, 253, ",
+        "rgba(56, 189, 248, ",
       ];
 
       const step = 4;
@@ -154,7 +154,6 @@ export default function GalaxyCanvas() {
             const homeY = (y - imgHeight / 2) * scaleMultiplier;
             const homeZ = (Math.random() - 0.5) * 30;
 
-            // Outer spawn coordinates for graceful fly-in entry
             const angle = Math.random() * Math.PI * 2;
             const spawnDist = Math.random() * 900 + 700;
             const spawnX = Math.cos(angle) * spawnDist;
@@ -162,12 +161,12 @@ export default function GalaxyCanvas() {
             const spawnZ = (Math.random() - 0.5) * 800;
 
             const len = Math.hypot(homeX, homeY) || 1;
-            const scatterDirX = (homeX / len) + (Math.random() - 0.5) * 0.6;
-            const scatterDirY = (homeY / len) + (Math.random() - 0.5) * 0.6;
-            const scatterDirZ = (Math.random() - 0.5) * 2.2;
+            const scatterDirX = (homeX / len) * (Math.random() * 0.8 + 0.6) + (Math.random() - 0.5) * 0.8;
+            const scatterDirY = (homeY / len) * (Math.random() * 0.8 + 0.6) + (Math.random() - 0.5) * 0.8;
+            const scatterDirZ = (Math.random() - 0.5) * 2.5;
 
             const color = colors[Math.floor(Math.random() * colors.length)];
-            const baseAlpha = Math.random() * 0.2 + 0.8;
+            const baseAlpha = Math.random() * 0.3 + 0.7;
 
             particles.push({
               x: spawnX,
@@ -195,13 +194,13 @@ export default function GalaxyCanvas() {
         }
       }
 
-      // Background ambient stars
-      for (let i = 0; i < 350; i++) {
+      // Background ambient stars distributed across the screen viewport
+      for (let i = 0; i < 600; i++) {
         const angle = Math.random() * Math.PI * 2;
-        const dist = Math.random() * width * 0.45 + 80;
+        const dist = Math.random() * width * 0.75 + 50;
         const homeX = Math.cos(angle) * dist;
-        const homeY = Math.sin(angle) * dist * 0.6;
-        const homeZ = (Math.random() - 0.5) * 200;
+        const homeY = Math.sin(angle) * dist * 0.75;
+        const homeZ = (Math.random() - 0.5) * 300;
 
         particles.push({
           x: homeX,
@@ -213,16 +212,16 @@ export default function GalaxyCanvas() {
           spawnX: homeX,
           spawnY: homeY,
           spawnZ: homeZ,
-          scatterDirX: (Math.random() - 0.5) * 1.5,
-          scatterDirY: (Math.random() - 0.5) * 1.5,
-          scatterDirZ: (Math.random() - 0.5) * 1.5,
+          scatterDirX: (Math.random() - 0.5) * 1.8,
+          scatterDirY: (Math.random() - 0.5) * 1.8,
+          scatterDirZ: (Math.random() - 0.5) * 1.8,
           vx: 0,
           vy: 0,
           vz: 0,
-          radius: Math.random() * 2.0 + 0.8,
+          radius: Math.random() * 2.2 + 0.9,
           color: colors[Math.floor(Math.random() * colors.length)],
-          alpha: Math.random() * 0.4 + 0.15,
-          baseAlpha: Math.random() * 0.4 + 0.15,
+          alpha: Math.random() * 0.45 + 0.25,
+          baseAlpha: Math.random() * 0.45 + 0.25,
           twinkleSpeed: Math.random() * 0.03 + 0.005,
           isBackgroundStar: true,
         });
@@ -234,40 +233,36 @@ export default function GalaxyCanvas() {
     let time = 0;
 
     const render = () => {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.95)";
-      ctx.fillRect(0, 0, width, height);
+      ctx.clearRect(0, 0, width, height);
 
       const centerX = width / 2;
       const centerY = height / 2;
       time += 0.015;
 
-      // 1. Cinematic Initial Load Assembly (Slower, silky smooth 2.5s duration)
+      // 1. Cinematic Initial Load Assembly
       if (loadRef.current.progress < 1) {
-        loadRef.current.progress += 0.0075; // Slower progress step for majestic entry
+        loadRef.current.progress += 0.008;
         if (loadRef.current.progress > 1) loadRef.current.progress = 1;
       }
 
       const t = loadRef.current.progress;
-      // Smooth easeInOutCubic curve
       const loadEase = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-      // 2. Smooth Scroll Inertia (Inertia lerp for fluid scroll scatter)
+      // 2. Smooth Scroll Inertia
       scrollRef.current.currentProgress +=
         (scrollRef.current.targetProgress - scrollRef.current.currentProgress) * 0.08;
       const scrollProgress = scrollRef.current.currentProgress;
 
-      // Radial Glow Fading
-      const glowAlpha = Math.max(0, 0.14 * (1 - scrollProgress));
-      if (glowAlpha > 0.01) {
-        const bgGlow = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, width * 0.4);
-        bgGlow.addColorStop(0, `rgba(255, 255, 255, ${glowAlpha})`);
-        bgGlow.addColorStop(0.25, `rgba(59, 130, 246, ${glowAlpha * 0.45})`);
-        bgGlow.addColorStop(1, "rgba(0, 0, 0, 0)");
-        ctx.fillStyle = bgGlow;
-        ctx.fillRect(0, 0, width, height);
-      }
+      // Ambient Radial Glow at center
+      const glowAlpha = Math.max(0.04, 0.16 * (1 - scrollProgress * 0.5));
+      const bgGlow = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, width * 0.45);
+      bgGlow.addColorStop(0, `rgba(255, 255, 255, ${glowAlpha})`);
+      bgGlow.addColorStop(0.25, `rgba(59, 130, 246, ${glowAlpha * 0.45})`);
+      bgGlow.addColorStop(1, "rgba(0, 0, 0, 0)");
+      ctx.fillStyle = bgGlow;
+      ctx.fillRect(0, 0, width, height);
 
-      // Rotation Damping & Auto-Righting
+      // Rotation Damping & Auto-Righting when mouse isn't dragging
       if (!mouseRef.current.isDragging) {
         rotationRef.current.velX *= 0.9;
         rotationRef.current.velY *= 0.9;
@@ -294,27 +289,23 @@ export default function GalaxyCanvas() {
       const fov = 500;
 
       if (isLoaded) {
-        // Vortex Swirl Rotation Angle during fly-in entry
         const swirlAngle = (1 - loadEase) * 0.75;
         const swirlCos = Math.cos(swirlAngle);
         const swirlSin = Math.sin(swirlAngle);
 
         particles.forEach((p) => {
           if (!p.isBackgroundStar) {
-            // Scroll Dispersion with subtle spiral curve
-            const scatterDistance = scrollProgress * 750;
-            const scrollAngle = scrollProgress * 0.5;
-            const sCos = Math.cos(scrollAngle);
-            const sSin = Math.sin(scrollAngle);
+            // Dispersion & Organic Ambient Floating when scrolled down
+            const scatterDistance = scrollProgress * Math.min(width, height) * 0.75;
+            
+            const floatX = Math.sin(time * 0.9 + p.homeX * 0.03) * 20 * scrollProgress;
+            const floatY = Math.cos(time * 0.7 + p.homeY * 0.03) * 20 * scrollProgress;
+            const floatZ = Math.sin(time * 0.5 + p.homeZ * 0.05) * 25 * scrollProgress;
 
-            const rotScatterX = p.scatterDirX * sCos - p.scatterDirY * sSin;
-            const rotScatterY = p.scatterDirX * sSin + p.scatterDirY * sCos;
+            const targetX = p.homeX + p.scatterDirX * scatterDistance + floatX;
+            const targetY = p.homeY + p.scatterDirY * scatterDistance + floatY;
+            const targetZ = p.homeZ + p.scatterDirZ * scatterDistance + floatZ;
 
-            const targetX = p.homeX + rotScatterX * scatterDistance;
-            const targetY = p.homeY + rotScatterY * scatterDistance;
-            const targetZ = p.homeZ + p.scatterDirZ * scatterDistance;
-
-            // Swirl entry during initial load
             const rawX = p.spawnX + (targetX - p.spawnX) * loadEase;
             const rawY = p.spawnY + (targetY - p.spawnY) * loadEase;
             const rawZ = p.spawnZ + (targetZ - p.spawnZ) * loadEase;
@@ -362,6 +353,10 @@ export default function GalaxyCanvas() {
             p.x += (assembledX - p.x) * 0.04;
             p.y += (assembledY - p.y) * 0.04;
             p.z += (assembledZ - p.z) * 0.04;
+          } else {
+            // Background ambient stars organic float
+            p.x = p.homeX + Math.sin(time * 0.5 + p.homeY) * 14 * (1 + scrollProgress);
+            p.y = p.homeY + Math.cos(time * 0.4 + p.homeX) * 14 * (1 + scrollProgress);
           }
 
           // Projection & Render Setup
@@ -376,8 +371,9 @@ export default function GalaxyCanvas() {
           p.renderRadius = Math.max(0.5, p.radius * finalScale);
 
           p.alpha = p.baseAlpha + Math.sin(time * 2 + p.homeX * 0.03) * 0.2;
-          const scrollFade = Math.max(0.1, 1 - scrollProgress * 0.85);
-          p.renderAlpha = Math.min(1, Math.max(0.05, p.alpha * Math.pow(finalScale, 1.1) * scrollFade));
+          // Keep particles float ambient across all homepage sections
+          const scrollAlpha = Math.max(0.35, 1 - scrollProgress * 0.35);
+          p.renderAlpha = Math.min(1, Math.max(0.12, p.alpha * Math.pow(finalScale, 1.1) * scrollAlpha));
           p.transformedZ = rotZ2;
         });
 
@@ -393,7 +389,7 @@ export default function GalaxyCanvas() {
 
           ctx.beginPath();
           ctx.arc(sx, sy, Math.max(1.2, r), 0, Math.PI * 2);
-          ctx.fillStyle = `${p.color}${Math.min(1, Math.max(0.05, a)).toFixed(2)})`;
+          ctx.fillStyle = `${p.color}${Math.min(1, Math.max(0.1, a)).toFixed(2)})`;
           ctx.fill();
         });
       }
@@ -416,7 +412,7 @@ export default function GalaxyCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-auto cursor-grab active:cursor-grabbing z-0"
+      className="fixed inset-0 w-full h-full pointer-events-none z-0"
     />
   );
 }

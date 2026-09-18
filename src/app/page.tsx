@@ -1,3 +1,4 @@
+import GalaxyCanvas from "@/components/GalaxyCanvas";
 import Opening from "@/components/sections/Opening";
 import About from "@/components/sections/About";
 import Clients from "@/components/sections/Clients";
@@ -8,7 +9,10 @@ import ConsultationForm from "@/components/sections/ConsultationForm";
 
 export default function Home() {
   return (
-    <div className="flex flex-col w-full bg-black text-white selection:bg-white selection:text-black">
+    <div className="relative flex flex-col w-full bg-black text-white selection:bg-white selection:text-black">
+      {/* Homepage Ambient Particle Galaxy Background */}
+      <GalaxyCanvas />
+
       <Opening />
       <About />
       <Clients />
@@ -19,6 +23,3 @@ export default function Home() {
     </div>
   );
 }
-
-
-

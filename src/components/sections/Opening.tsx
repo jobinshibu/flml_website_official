@@ -1,19 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import GalaxyCanvas from "@/components/GalaxyCanvas";
 
 export default function Opening() {
   return (
-    <section className="relative h-screen min-h-[750px] bg-black text-white overflow-hidden pt-20 pb-16 border-b border-white/10 flex flex-col justify-between items-center">
+    <section className="relative z-10 h-screen min-h-[750px] bg-transparent text-white overflow-hidden pt-20 pb-16 flex flex-col justify-between items-center">
       
-      {/* Interactive FLML Logo 3D Particle Canvas */}
-      <div className="absolute inset-0 z-0 pointer-events-auto">
-        <GalaxyCanvas />
-      </div>
-
       {/* Subtle Hero Radial Vignette */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(0,0,0,0)_0%,_rgba(0,0,0,0.65)_85%,_#000000_100%)] pointer-events-none z-[1]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(0,0,0,0)_0%,_rgba(0,0,0,0.3)_85%,_rgba(0,0,0,0.6)_100%)] pointer-events-none z-[1]" />
 
       {/* Top Badge Identifier */}
       <div className="relative z-10 pt-8 pointer-events-none">

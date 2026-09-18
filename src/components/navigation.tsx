@@ -10,13 +10,12 @@ export default function Navigation() {
 
   const navItems = [
     { name: "THE LAB", path: "/", number: "00" },
-    { name: "PRODUCTS", path: "/products", number: "01" },
-    { name: "DOCTRINE", path: "/#about", number: "02" },
-    { name: "CAPABILITIES", path: "/#capabilities", number: "03" },
-    { name: "ARCHITECTURE", path: "/#technology", number: "04" },
-    { name: "DEPLOYMENTS", path: "/#clients", number: "05" },
-    { name: "LIFE @ FLML", path: "/gallery", number: "06" },
-    { name: "RECRUITMENT", path: "/career", number: "07" },
+    { name: "DOCTRINE", path: "/#about", number: "01" },
+    { name: "CAPABILITIES", path: "/#capabilities", number: "02" },
+    { name: "ARCHITECTURE", path: "/#technology", number: "03" },
+    { name: "DEPLOYMENTS", path: "/#clients", number: "04" },
+    { name: "LIFE @ FLML", path: "/gallery", number: "05" },
+    { name: "RECRUITMENT", path: "/career", number: "06" },
   ];
 
   return (
@@ -31,6 +30,7 @@ export default function Navigation() {
               src="/FLML-01.png"
               alt="FLML Logo"
               fill
+              sizes="(max-width: 768px) 32px, 36px"
               className="object-contain"
               priority
             />
@@ -47,9 +47,6 @@ export default function Navigation() {
 
         {/* Center Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-8 text-xs font-mono tracking-widest text-white/70">
-          <Link href="/products" className="hover:text-white transition-colors text-cyan-400 font-bold">
-            PRODUCTS
-          </Link>
           <Link href="/#about" className="hover:text-white transition-colors">
             DOCTRINE
           </Link>
@@ -59,7 +56,7 @@ export default function Navigation() {
           <Link href="/#technology" className="hover:text-white transition-colors">
             ARCHITECTURE
           </Link>
-          <Link href="/#clients" className="hover:text-white transition-colors">
+          <Link href="/#clients" className="hover:text-white transition-colors text-cyan-400 font-bold">
             DEPLOYMENTS
           </Link>
         </nav>
@@ -101,7 +98,7 @@ export default function Navigation() {
             <div className="flex items-center justify-between border-b border-white/10 pb-6">
               <div className="flex items-center gap-3">
                 <div className="relative w-8 h-8 filter brightness-0 invert">
-                  <Image src="/FLML-01.png" alt="FLML Logo" fill className="object-contain" />
+                  <Image src="/FLML-01.png" alt="FLML Logo" fill sizes="32px" className="object-contain" />
                 </div>
                 <span className="font-mono text-xs tracking-widest text-white/50">SYSTEM INDEX</span>
               </div>

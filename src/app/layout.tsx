@@ -4,6 +4,7 @@ import "./globals.css";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
+import ScrollRestorationFix from "@/components/ScrollRestorationFix";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} dark`}>
       <body className="antialiased min-h-full flex flex-col font-sans bg-black text-white selection:bg-white selection:text-black">
+        <ScrollRestorationFix />
         <Navigation />
         <main className="flex-grow bg-black">
           {children}

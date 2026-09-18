@@ -46,15 +46,15 @@ export default function ConsultationForm() {
 
   return (
     <section id="consultation" className="py-24 md:py-36 px-6 md:px-12 bg-black text-white relative border-b border-white/10">
-      
+
       <div className="max-w-[850px] mx-auto relative z-10">
-        
+
         {/* Header */}
         <div className="mb-12 text-center">
           <div className="inline-flex items-center gap-3 mb-4">
             <span className="w-2 h-2 rounded-full bg-blue-500" />
             <h2 className="text-xs font-mono tracking-[0.3em] uppercase text-white/50">
-              06 // INITIATE DIAGNOSTIC BRIEF
+              INITIATE DIAGNOSTIC BRIEF
             </h2>
           </div>
           <p className="text-3xl md:text-5xl font-extrabold tracking-tight mb-3 text-white">
@@ -67,11 +67,11 @@ export default function ConsultationForm() {
 
         {/* Container */}
         <div className="bg-neutral-950 border border-white/15 rounded-3xl p-8 md:p-12 shadow-2xl min-h-[420px] flex flex-col justify-between relative overflow-hidden">
-          
+
           {/* Progress Bar */}
           {!isSuccess && (
             <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden mb-10">
-              <motion.div 
+              <motion.div
                 className="h-full bg-blue-500"
                 initial={{ width: 0 }}
                 animate={{ width: `${(step / (questions.length + 1)) * 100}%` }}
@@ -82,7 +82,7 @@ export default function ConsultationForm() {
 
           <div className="flex-grow flex flex-col justify-center">
             <AnimatePresence mode="wait">
-              
+
               {/* Question Steps */}
               {step < questions.length && !isSuccess && (
                 <motion.div
@@ -97,7 +97,7 @@ export default function ConsultationForm() {
                     PARAMETER 0{step + 1} // 0{questions.length}
                   </div>
                   <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-8 text-white">{questions[step].title}</h3>
-                  
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {questions[step].options.map((option, idx) => (
                       <button
@@ -129,17 +129,17 @@ export default function ConsultationForm() {
                   <p className="text-white/60 text-xs font-mono tracking-widest uppercase mb-8">
                     Enter your secure work email to receive the evaluation brief.
                   </p>
-                  
+
                   <form onSubmit={handleSubmit} className="space-y-4">
-                    <input 
-                      type="email" 
+                    <input
+                      type="email"
                       required
                       placeholder="ENTER WORK EMAIL"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="w-full bg-black border border-white/20 rounded-xl px-6 py-4 text-center font-mono text-xs tracking-widest text-white placeholder-white/30 focus:outline-none focus:border-blue-500 transition-colors"
                     />
-                    <button 
+                    <button
                       type="submit"
                       disabled={isSubmitting}
                       className="w-full bg-white hover:bg-neutral-200 text-black font-bold text-xs tracking-widest uppercase py-4 rounded-xl transition-colors shadow-2xl disabled:opacity-50"
@@ -167,7 +167,7 @@ export default function ConsultationForm() {
                   <p className="text-white/60 text-xs font-mono tracking-widest uppercase mb-6 max-w-md mx-auto leading-relaxed">
                     A principal system architect will contact you within 24 hours to review your diagnostic parameters.
                   </p>
-                  <a 
+                  <a
                     href="/#clients"
                     className="text-xs font-mono tracking-widest text-blue-400 hover:text-white transition-colors inline-block"
                   >
@@ -175,7 +175,7 @@ export default function ConsultationForm() {
                   </a>
                 </motion.div>
               )}
-              
+
             </AnimatePresence>
           </div>
         </div>

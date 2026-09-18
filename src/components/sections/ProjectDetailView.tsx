@@ -15,6 +15,7 @@ import {
   Server,
   Activity
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { ProjectDetail, PROJECTS_DATA } from "@/lib/productsData";
 
 interface Props {
@@ -22,6 +23,7 @@ interface Props {
 }
 
 export default function ProjectDetailView({ project }: Props) {
+  const router = useRouter();
   const projectKeys = Object.keys(PROJECTS_DATA);
   const currentIndex = projectKeys.indexOf(project.id);
   const nextKey = projectKeys[(currentIndex + 1) % projectKeys.length];
@@ -29,8 +31,23 @@ export default function ProjectDetailView({ project }: Props) {
   const nextProject = PROJECTS_DATA[nextKey];
   const prevProject = PROJECTS_DATA[prevKey];
 
+  const handleBackToHome = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
+    router.push("/");
+  };
+
   return (
-    <article className="min-h-screen bg-[#030712] text-white pt-24 pb-20 px-6 md:px-12 relative overflow-hidden">
+    <motion.article 
+      initial={{ opacity: 0, y: 20, scale: 0.99 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      className="min-h-screen bg-[#030712] text-white pt-24 pb-20 px-6 md:px-12 relative overflow-hidden"
+    >
       
       {/* Background Radial Glow */}
       <div 
@@ -45,11 +62,15 @@ export default function ProjectDetailView({ project }: Props) {
         {/* Top Breadcrumb Navigation */}
         <div className="flex items-center justify-between border-b border-blue-900/30 pb-6">
           <Link
-            href="/products"
-            className="inline-flex items-center gap-2 text-xs font-mono text-cyan-400 hover:text-white uppercase tracking-widest transition-colors"
+            href="/"
+            prefetch={true}
+            scroll={true}
+            onMouseEnter={() => router.prefetch("/")}
+            onClick={handleBackToHome}
+            className="inline-flex items-center gap-2 text-xs font-mono text-cyan-400 hover:text-white uppercase tracking-widest transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Back to All Products</span>
+            <span>Back to Home</span>
           </Link>
 
           <div className="flex items-center gap-3">
@@ -281,6 +302,6 @@ export default function ProjectDetailView({ project }: Props) {
 
       </div>
 
-    </article>
+    </motion.article>
   );
 }

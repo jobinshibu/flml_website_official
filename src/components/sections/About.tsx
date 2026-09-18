@@ -4,15 +4,15 @@ import { motion } from "framer-motion";
 
 export default function About() {
   return (
-    <section id="about" className="py-12 md:py-20 px-6 md:px-12 bg-black text-white relative border-b border-white/10">
+    <section id="about" className="py-12 md:py-20 px-6 md:px-12 bg-transparent text-white relative z-10">
       
       <div className="max-w-[1400px] mx-auto">
 
         {/* Section Index Header */}
         <div className="flex items-center gap-3 mb-16">
-          <span className="w-2 h-2 rounded-full bg-blue-500" />
-          <h2 className="text-xs font-mono tracking-[0.3em] uppercase text-white/50">
-            01 // THE DOCTRINE
+          <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
+          <h2 className="text-xs font-mono tracking-[0.3em] uppercase text-cyan-300 font-semibold">
+            THE DOCTRINE
           </h2>
         </div>
 
@@ -29,7 +29,7 @@ export default function About() {
                 className="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-8 leading-[1.1] tracking-tight text-white"
               >
                 OPERATIONAL ANATOMY FIRST. <br />
-                <span className="text-white/40">CODE SECOND.</span>
+                <span className="text-cyan-400">CODE SECOND.</span>
               </motion.h2>
 
               <motion.div
@@ -37,7 +37,7 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="space-y-6 text-base md:text-xl text-white/70 leading-relaxed font-light"
+                className="space-y-6 text-base md:text-xl text-slate-200 leading-relaxed font-light"
               >
                 <p>
                   We do not sell off-the-shelf software. Generic technology forces a business to compromise its unique operational workflows to fit rigid platform limitations. We reverse that equation.
@@ -51,7 +51,7 @@ export default function About() {
               </motion.div>
             </div>
 
-            <div className="mt-12 pt-8 border-t border-white/10 flex items-center justify-between font-mono text-xs text-white/40 uppercase tracking-widest">
+            <div className="mt-12 pt-8 border-t border-white/15 flex items-center justify-between font-mono text-xs text-slate-300 uppercase tracking-widest font-medium">
               <span>ESTABLISHED 2016</span>
               <span>GLOBAL OPERATIONS</span>
             </div>
@@ -59,32 +59,32 @@ export default function About() {
 
           {/* Right Column: 1px Hairline Grid Stat Blocks */}
           <div className="lg:col-span-5 flex flex-col justify-center">
-            <div className="grid grid-cols-2 bg-white/10 gap-px border border-white/10 rounded-2xl overflow-hidden">
+            <div className="grid grid-cols-2 bg-white/15 gap-px border border-white/20 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md">
 
-              <div className="bg-black p-8 flex flex-col justify-center items-center text-center hover:bg-neutral-950 transition-colors">
-                <span className="text-4xl md:text-6xl font-extrabold text-white mb-2 tracking-tight">11<span className="text-blue-500">+</span></span>
-                <span className="font-mono text-[10px] tracking-widest text-white/50 uppercase">Years of Evolution</span>
+              <div className="bg-slate-950/80 p-8 flex flex-col justify-center items-center text-center hover:bg-slate-900/90 transition-colors">
+                <span className="text-4xl md:text-6xl font-extrabold text-white mb-2 tracking-tight">11<span className="text-cyan-400">+</span></span>
+                <span className="font-mono text-[11px] tracking-widest text-slate-300 uppercase font-semibold">Years of Evolution</span>
               </div>
 
-              <div className="bg-black p-8 flex flex-col justify-center items-center text-center hover:bg-neutral-950 transition-colors">
-                <span className="text-4xl md:text-6xl font-extrabold text-white mb-2 tracking-tight">50<span className="text-blue-500">+</span></span>
-                <span className="font-mono text-[10px] tracking-widest text-white/50 uppercase">Elite Architects</span>
+              <div className="bg-slate-950/80 p-8 flex flex-col justify-center items-center text-center hover:bg-slate-900/90 transition-colors">
+                <span className="text-4xl md:text-6xl font-extrabold text-white mb-2 tracking-tight">50<span className="text-cyan-400">+</span></span>
+                <span className="font-mono text-[11px] tracking-widest text-slate-300 uppercase font-semibold">Elite Architects</span>
               </div>
 
-              <div className="bg-black p-8 flex flex-col justify-center items-center text-center hover:bg-neutral-950 transition-colors">
-                <span className="text-4xl md:text-6xl font-extrabold text-white mb-2 tracking-tight">200<span className="text-blue-500">+</span></span>
-                <span className="font-mono text-[10px] tracking-widest text-white/50 uppercase">Global Deployments</span>
+              <div className="bg-slate-950/80 p-8 flex flex-col justify-center items-center text-center hover:bg-slate-900/90 transition-colors">
+                <span className="text-4xl md:text-6xl font-extrabold text-white mb-2 tracking-tight">200<span className="text-cyan-400">+</span></span>
+                <span className="font-mono text-[11px] tracking-widest text-slate-300 uppercase font-semibold">Global Deployments</span>
               </div>
 
-              <div className="bg-black p-8 flex flex-col justify-center items-center text-center hover:bg-neutral-950 transition-colors">
-                <span className="text-4xl md:text-6xl font-extrabold text-white mb-2 tracking-tight">10<span className="text-blue-500">+</span></span>
-                <span className="font-mono text-[10px] tracking-widest text-white/50 uppercase">Territories Active</span>
+              <div className="bg-slate-950/80 p-8 flex flex-col justify-center items-center text-center hover:bg-slate-900/90 transition-colors">
+                <span className="text-4xl md:text-6xl font-extrabold text-white mb-2 tracking-tight">10<span className="text-cyan-400">+</span></span>
+                <span className="font-mono text-[11px] tracking-widest text-slate-300 uppercase font-semibold">Territories Active</span>
               </div>
 
             </div>
 
-            <div className="mt-8 border-l border-white/20 pl-6">
-              <p className="font-mono text-xs tracking-widest text-white/40 leading-relaxed uppercase">
+            <div className="mt-8 border-l-2 border-cyan-400/80 pl-6">
+              <p className="font-mono text-xs tracking-widest text-slate-300 leading-relaxed uppercase font-medium">
                 First Logic Meta Lab builds mission-critical technology backbones for global enterprises, scaling ventures, and complex supply chain networks.
               </p>
             </div>

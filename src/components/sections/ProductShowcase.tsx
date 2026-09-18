@@ -274,7 +274,8 @@ export default function ProductShowcase() {
                     {/* Action Buttons */}
                     <div className="pt-4 flex flex-wrap items-center gap-4">
                       <Link
-                        href={`/products/${product.id}`}
+                        href={`/${product.id === 'thara_cart' ? 'thara-cart' : product.id}`}
+                        prefetch={true}
                         className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs md:text-sm px-6 py-3.5 rounded-full transition-all uppercase tracking-wider shadow-[0_0_20px_rgba(37,99,235,0.4)]"
                       >
                         <span>Explore Dedicated Page & Case Study</span>
