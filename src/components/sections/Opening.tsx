@@ -1,8 +1,53 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 export default function Opening() {
+  const [typedPart1, setTypedPart1] = useState("");
+  const [typedPart2, setTypedPart2] = useState("");
+  const [activeCursor, setActiveCursor] = useState<"none" | "left" | "right">("none");
+  const [typingComplete, setTypingComplete] = useState(false);
+
+  useEffect(() => {
+    const part1 = "WE ENGINEER";
+    const part2 = "OUTCOMES.";
+
+    // 1. Wait for 3D logo particle assembly (1.4s delay)
+    const startDelayTimer = setTimeout(() => {
+      setActiveCursor("left");
+      let idx1 = 0;
+
+      // 2. Type left side "WE ENGINEER" left-to-right at smooth 115ms pace
+      const typeTimer1 = setInterval(() => {
+        if (idx1 < part1.length) {
+          setTypedPart1(part1.slice(0, idx1 + 1));
+          idx1++;
+        } else {
+          clearInterval(typeTimer1);
+
+          // 3. Seamlessly move cursor to right block and type "OUTCOMES." left-to-right at smooth 115ms pace
+          setActiveCursor("right");
+          let idx2 = 0;
+          const typeTimer2 = setInterval(() => {
+            if (idx2 < part2.length) {
+              setTypedPart2(part2.slice(0, idx2 + 1));
+              idx2++;
+            } else {
+              clearInterval(typeTimer2);
+              setTypingComplete(true);
+              // Hide cursor after completion
+              setTimeout(() => setActiveCursor("none"), 1200);
+            }
+          }, 115);
+        }
+      }, 115);
+
+    }, 1400);
+
+    return () => clearTimeout(startDelayTimer);
+  }, []);
+
   return (
     <section className="relative z-10 h-screen min-h-[750px] bg-transparent text-white overflow-hidden pt-20 pb-16 flex flex-col justify-between items-center">
 
@@ -22,32 +67,28 @@ export default function Opening() {
         </motion.div>
       </div>
 
-      {/* Split Headlines Flanking Center Canvas (Zero Overlap Edge Anchored Layout) */}
-      <div className="absolute inset-0 z-10 pointer-events-none flex items-center justify-between px-6 sm:px-12 md:px-20 lg:px-28 xl:px-36">
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="text-left"
-        >
-          <h1 className="font-sans font-light tracking-[0.15em] text-xl sm:text-3xl md:text-4xl lg:text-5xl uppercase text-white/90 whitespace-nowrap select-none drop-shadow-2xl">
-            WE ENGINEER
+      {/* Split Headlines Flanking Center Canvas - Pushed Outward to Extreme Corners */}
+      <div className="absolute inset-0 z-10 pointer-events-none flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+        {/* Left Headline: WE ENGINEER (Pushed to Left Corner) */}
+        <div className="text-left w-[200px] sm:w-[280px] md:w-[340px] lg:w-[400px]">
+          <h1 className="font-sans font-light tracking-[0.18em] text-xl sm:text-3xl md:text-4xl lg:text-5xl uppercase text-white/95 whitespace-nowrap select-none drop-shadow-2xl flex items-center">
+            <span>{typedPart1}</span>
+            {activeCursor === "left" && (
+              <span className="inline-block w-[2px] h-[0.95em] bg-white/90 ml-1.5 animate-pulse" />
+            )}
           </h1>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="text-right"
-        >
-          <h1 className="font-sans font-light tracking-[0.15em] text-xl sm:text-3xl md:text-4xl lg:text-5xl uppercase text-white/90 whitespace-nowrap select-none drop-shadow-2xl">
-            OUTCOMES.
+        {/* Right Headline: OUTCOMES. (Pushed to Right Corner) */}
+        <div className="text-left w-[180px] sm:w-[240px] md:w-[280px] lg:w-[320px]">
+          <h1 className="font-sans font-light tracking-[0.18em] text-xl sm:text-3xl md:text-4xl lg:text-5xl uppercase text-white/90 whitespace-nowrap select-none drop-shadow-2xl flex items-center justify-start">
+            <span>{typedPart2}</span>
+            {activeCursor === "right" && (
+              <span className="inline-block w-[2px] h-[0.95em] bg-white/90 ml-1.5 animate-pulse" />
+            )}
           </h1>
-        </motion.div>
+        </div>
       </div>
-
-
 
       {/* Action Buttons */}
       <div className="relative z-10 pb-8 pointer-events-auto">

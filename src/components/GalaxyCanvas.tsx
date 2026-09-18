@@ -239,7 +239,7 @@ export default function GalaxyCanvas() {
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      const centerX = width / 2;
+      const centerX = width / 2 + 25;
       const centerY = height / 2;
       time += 0.015;
 

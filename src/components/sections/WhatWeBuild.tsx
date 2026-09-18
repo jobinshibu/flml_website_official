@@ -105,14 +105,14 @@ export default function WhatWeBuild() {
     }
 
     const startTime = performance.now();
-    const duration = 450; // Match Framer Motion transition duration
+    const duration = 450;
 
     const animateScrollLock = (now: number) => {
       const elapsed = now - startTime;
       const el = titleRefs.current[id];
 
       if (el) {
-        const navbarOffset = 96; // Exact 96px offset (80px navbar + 16px padding)
+        const navbarOffset = 96;
         const currentRect = el.getBoundingClientRect();
         const absoluteTop = currentRect.top + window.scrollY;
         const targetY = absoluteTop - navbarOffset;
@@ -143,20 +143,24 @@ export default function WhatWeBuild() {
         
         {/* Section Header */}
         <div className="flex items-center gap-3 mb-16">
-          <span className="w-2 h-2 rounded-full bg-blue-500" />
-          <h2 className="text-xs font-mono tracking-[0.3em] uppercase text-white/50">
+          <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
+          <h2 className="text-xs font-mono tracking-[0.3em] uppercase text-cyan-300 font-semibold">
             CAPABILITIES & ARCHITECTURES
           </h2>
         </div>
 
         <div className="relative w-full flex flex-col space-y-12 md:space-y-0">
-          {buildItems.map((item) => {
+          {buildItems.map((item, index) => {
             const isHovered = hoveredId === item.id;
             const isExpanded = expandedId === item.id;
 
             return (
-              <div 
+              <motion.div 
                 key={item.id} 
+                initial={{ opacity: 0, y: 35 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, margin: "-80px" }}
+                transition={{ duration: 0.7, delay: index * 0.08 }}
                 className={`flex flex-col ${
                   item.align === "start" ? "items-start" : item.align === "end" ? "items-end" : "items-center"
                 } ${item.margin} w-full`}
@@ -167,35 +171,40 @@ export default function WhatWeBuild() {
                   onMouseLeave={() => setHoveredId(null)}
                   onClick={() => handleClick(item.id)}
                 >
-                  {/* Gigantic Asymmetrically Scattered Title (Direct Scroll Ref Target) */}
+                  {/* Gigantic Title with Kinetic Hover & Spotlight */}
                   <motion.h3 
                     ref={(el) => { titleRefs.current[item.id] = el; }}
-                    className={`text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter transition-all duration-300 ${
+                    animate={{
+                      scale: isHovered ? 1.02 : 1,
+                      x: isHovered ? (item.align === "start" ? 8 : item.align === "end" ? -8 : 0) : 0,
+                    }}
+                    transition={{ duration: 0.25 }}
+                    className={`text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter transition-all duration-300 relative select-none ${
                       isExpanded || isHovered 
-                        ? "text-blue-500 drop-shadow-[0_0_30px_rgba(59,130,246,0.35)]" 
+                        ? "text-cyan-400 drop-shadow-[0_0_35px_rgba(34,211,238,0.45)]" 
                         : (hoveredId ? "text-white/20" : "text-white/90 group-hover:text-white")
                     }`}
                   >
                     {item.title}
                   </motion.h3>
 
-                  {/* Hover Tag Marquee / Pill */}
+                  {/* Hover Tag Marquee Pill */}
                   <AnimatePresence>
                     {isHovered && !isExpanded && (
                       <motion.div
-                        initial={{ opacity: 0, y: -8, height: 0 }}
-                        animate={{ opacity: 1, y: 0, height: "auto" }}
-                        exit={{ opacity: 0, y: -8, height: 0 }}
-                        transition={{ duration: 0.25 }}
-                        className={`absolute top-full mt-3 overflow-hidden ${
+                        initial={{ opacity: 0, y: -8, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -8, scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
+                        className={`absolute top-full mt-3 overflow-hidden pointer-events-none z-30 ${
                           item.align === "start" ? "left-4" : item.align === "end" ? "right-4" : "left-1/2 -translate-x-1/2"
                         }`}
                       >
-                        <div className="flex flex-nowrap gap-3 items-center whitespace-nowrap bg-neutral-900/90 border border-white/15 backdrop-blur-md px-4 py-2 rounded-xl shadow-xl">
+                        <div className="flex flex-nowrap gap-3 items-center whitespace-nowrap bg-slate-950/90 border border-cyan-400/30 backdrop-blur-xl px-4 py-2 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
                           {item.details.map((detail, idx) => (
-                            <span key={idx} className="text-xs font-mono tracking-widest text-blue-400 uppercase flex items-center gap-3 whitespace-nowrap">
+                            <span key={idx} className="text-xs font-mono tracking-widest text-cyan-300 uppercase flex items-center gap-3 whitespace-nowrap">
                               {detail}
-                              {idx < item.details.length - 1 && <span className="w-1 h-1 bg-white/20 rounded-full inline-block" />}
+                              {idx < item.details.length - 1 && <span className="w-1.5 h-1.5 bg-cyan-400/40 rounded-full inline-block" />}
                             </span>
                           ))}
                         </div>
@@ -203,53 +212,56 @@ export default function WhatWeBuild() {
                     )}
                   </AnimatePresence>
 
-                  {/* Click Expanded Details & Projects */}
+                  {/* Holographic Expanded Project Cards */}
                   <AnimatePresence>
                     {isExpanded && (
                       <motion.div
-                        initial={{ opacity: 0, height: 0, y: 10 }}
+                        initial={{ opacity: 0, height: 0, y: 15 }}
                         animate={{ opacity: 1, height: "auto", y: 0 }}
-                        exit={{ opacity: 0, height: 0, y: 10 }}
-                        transition={{ duration: 0.35 }}
+                        exit={{ opacity: 0, height: 0, y: 15 }}
+                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                         className={`overflow-hidden ${item.align === 'center' ? 'max-w-4xl mx-auto' : 'max-w-2xl'}`}
                       >
                         <div className={`flex flex-col gap-6 pt-8 pb-4 ${
                           item.align === 'center' ? 'items-center text-center' : item.align === 'end' ? 'items-end text-right' : 'items-start text-left'
                         }`}>
-                          <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light">
+                          <p className="text-lg md:text-xl text-slate-200 leading-relaxed font-light">
                             {item.description}
                           </p>
 
-                          {/* System Parameter Tech Pills */}
+                          {/* Tech Pills */}
                           <div className={`flex flex-wrap gap-2 ${
                             item.align === 'center' ? 'justify-center' : item.align === 'end' ? 'justify-end' : 'justify-start'
                           }`}>
                             {item.details.map((detail, idx) => (
-                              <span key={idx} className="bg-white/5 border border-white/15 px-3 py-1 rounded text-xs font-mono text-white/70">
+                              <span key={idx} className="bg-white/5 border border-cyan-400/20 px-3.5 py-1.5 rounded-full text-xs font-mono text-cyan-300/90 backdrop-blur-md">
                                 {detail}
                               </span>
                             ))}
                           </div>
 
-                          {/* Featured Projects */}
+                          {/* Featured Holographic Project Cards */}
                           <div className={`w-full flex flex-col gap-4 mt-4 ${
                             item.align === 'center' ? 'items-center' : item.align === 'end' ? 'items-end' : 'items-start'
                           }`}>
                             {item.projects.map((project, idx) => (
-                              <div 
+                              <motion.div 
                                 key={idx} 
-                                className={`flex items-center gap-4 bg-white/[0.03] border border-white/10 p-4 rounded-xl max-w-xl ${
+                                initial={{ opacity: 0, y: 12, scale: 0.97 }}
+                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                transition={{ duration: 0.3, delay: idx * 0.1 }}
+                                className={`flex items-center gap-5 bg-slate-950/80 border border-white/15 hover:border-cyan-400/50 p-5 rounded-2xl max-w-xl transition-all hover:bg-slate-900/90 shadow-2xl backdrop-blur-md group/card ${
                                   item.align === 'end' ? 'flex-row-reverse text-right' : 'text-left'
                                 }`}
                               >
-                                <div className="relative w-14 h-14 shrink-0 bg-white/10 border border-white/15 rounded-xl p-2">
-                                  <Image src={project.image} alt={project.title} fill className="object-contain p-1" sizes="56px" />
+                                <div className="relative w-16 h-16 shrink-0 bg-white/10 border border-white/20 rounded-xl p-2.5 transition-transform group-hover/card:scale-105">
+                                  <Image src={project.image} alt={project.title} fill className="object-contain p-1" sizes="64px" />
                                 </div>
                                 <div>
-                                  <h5 className="font-bold text-sm text-white mb-0.5">{project.title}</h5>
-                                  <p className="text-xs text-white/60 leading-relaxed font-light">{project.description}</p>
+                                  <h5 className="font-extrabold text-base text-white mb-1 tracking-tight group-hover/card:text-cyan-300 transition-colors">{project.title}</h5>
+                                  <p className="text-xs text-slate-300 leading-relaxed font-light">{project.description}</p>
                                 </div>
-                              </div>
+                              </motion.div>
                             ))}
                           </div>
 
@@ -259,7 +271,7 @@ export default function WhatWeBuild() {
                   </AnimatePresence>
 
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

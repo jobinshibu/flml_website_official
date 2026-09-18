@@ -1,6 +1,71 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, useInView } from "framer-motion";
+
+interface CounterProps {
+  value: number;
+  suffix?: string;
+  duration?: number;
+}
+
+function CounterNumber({ value, suffix = "+", duration = 2000 }: CounterProps) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let startTime: number | null = null;
+    let animationFrameId: number;
+
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const elapsedTime = timestamp - startTime;
+      const progress = Math.min(elapsedTime / duration, 1);
+      
+      // Smooth cubic ease-out so all numbers start together and settle softly at destination
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      const currentCount = Math.floor(easeOut * value);
+
+      setCount(currentCount);
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(animate);
+      } else {
+        setCount(value);
+      }
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isInView, value, duration]);
+
+  return (
+    <span ref={ref} className="text-4xl md:text-6xl font-extrabold text-white mb-2 tracking-tight">
+      {count}
+      <span className="text-cyan-400">{suffix}</span>
+    </span>
+  );
+}
+
+function HoverWordParagraph({ text }: { text: string }) {
+  const words = text.split(" ");
+  return (
+    <p>
+      {words.map((word, index) => (
+        <span
+          key={index}
+          className="inline-block transition-all duration-200 ease-out hover:text-cyan-300 hover:scale-105 hover:drop-shadow-[0_0_12px_rgba(34,211,238,0.9)] cursor-default mr-[0.28em]"
+        >
+          {word}
+        </span>
+      ))}
+    </p>
+  );
+}
 
 export default function About() {
   return (
@@ -39,15 +104,9 @@ export default function About() {
                 transition={{ delay: 0.1 }}
                 className="space-y-6 text-base md:text-xl text-slate-200 leading-relaxed font-light"
               >
-                <p>
-                  We do not sell off-the-shelf software. Generic technology forces a business to compromise its unique operational workflows to fit rigid platform limitations. We reverse that equation.
-                </p>
-                <p>
-                  Before a single line of code is written, our system architects surgically dissect the anatomy of your operations. We map every process node, data dependency, and bottleneck in your organization.
-                </p>
-                <p>
-                  Only after achieving total comprehension do we engineer a bespoke, high-scale technological backbone. The outcome is an unbreakable digital ecosystem designed exclusively to power your expansion.
-                </p>
+                <HoverWordParagraph text="We do not sell off-the-shelf software. Generic technology forces a business to compromise its unique operational workflows to fit rigid platform limitations. We reverse that equation." />
+                <HoverWordParagraph text="Before a single line of code is written, our system architects surgically dissect the anatomy of your operations. We map every process node, data dependency, and bottleneck in your organization." />
+                <HoverWordParagraph text="Only after achieving total comprehension do we engineer a bespoke, high-scale technological backbone. The outcome is an unbreakable digital ecosystem designed exclusively to power your expansion." />
               </motion.div>
             </div>
 
@@ -57,36 +116,34 @@ export default function About() {
             </div>
           </div>
 
-          {/* Right Column: 1px Hairline Grid Stat Blocks */}
+          {/* Right Column: 1px Hairline Grid Stat Blocks with Synchronized Counter Animation */}
           <div className="lg:col-span-5 flex flex-col justify-center">
             <div className="grid grid-cols-2 bg-white/15 gap-px border border-white/20 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md">
 
               <div className="bg-slate-950/80 p-8 flex flex-col justify-center items-center text-center hover:bg-slate-900/90 transition-colors">
-                <span className="text-4xl md:text-6xl font-extrabold text-white mb-2 tracking-tight">11<span className="text-cyan-400">+</span></span>
+                <CounterNumber value={11} duration={2000} />
                 <span className="font-mono text-[11px] tracking-widest text-slate-300 uppercase font-semibold">Years of Evolution</span>
               </div>
 
               <div className="bg-slate-950/80 p-8 flex flex-col justify-center items-center text-center hover:bg-slate-900/90 transition-colors">
-                <span className="text-4xl md:text-6xl font-extrabold text-white mb-2 tracking-tight">50<span className="text-cyan-400">+</span></span>
+                <CounterNumber value={50} duration={2000} />
                 <span className="font-mono text-[11px] tracking-widest text-slate-300 uppercase font-semibold">Elite Architects</span>
               </div>
 
               <div className="bg-slate-950/80 p-8 flex flex-col justify-center items-center text-center hover:bg-slate-900/90 transition-colors">
-                <span className="text-4xl md:text-6xl font-extrabold text-white mb-2 tracking-tight">200<span className="text-cyan-400">+</span></span>
+                <CounterNumber value={200} duration={2000} />
                 <span className="font-mono text-[11px] tracking-widest text-slate-300 uppercase font-semibold">Global Deployments</span>
               </div>
 
               <div className="bg-slate-950/80 p-8 flex flex-col justify-center items-center text-center hover:bg-slate-900/90 transition-colors">
-                <span className="text-4xl md:text-6xl font-extrabold text-white mb-2 tracking-tight">10<span className="text-cyan-400">+</span></span>
+                <CounterNumber value={10} duration={2000} />
                 <span className="font-mono text-[11px] tracking-widest text-slate-300 uppercase font-semibold">Territories Active</span>
               </div>
 
             </div>
 
             <div className="mt-8 border-l-2 border-cyan-400/80 pl-6">
-              <p className="font-mono text-xs tracking-widest text-slate-300 leading-relaxed uppercase font-medium">
-                First Logic Meta Lab builds mission-critical technology backbones for global enterprises, scaling ventures, and complex supply chain networks.
-              </p>
+              <HoverWordParagraph text="First Logic Meta Lab builds mission-critical technology backbones for global enterprises, scaling ventures, and complex supply chain networks." />
             </div>
           </div>
 
