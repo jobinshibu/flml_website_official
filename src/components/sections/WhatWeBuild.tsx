@@ -144,7 +144,7 @@ export default function WhatWeBuild() {
         {/* Section Header */}
         <div className="flex items-center gap-3 mb-16">
           <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
-          <h2 className="text-xs font-mono tracking-[0.3em] uppercase text-cyan-300 font-semibold">
+          <h2 className="text-xs md:text-sm font-mono tracking-[0.35em] uppercase text-cyan-400/80 font-bold">
             CAPABILITIES & ARCHITECTURES
           </h2>
         </div>

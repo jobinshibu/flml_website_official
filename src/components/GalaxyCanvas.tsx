@@ -31,10 +31,15 @@ interface ConstellationParticle {
   transformedZ?: number;
 }
 
-export default function GalaxyCanvas() {
+interface GalaxyCanvasProps {
+  activeTab?: "flml" | "architecture" | "life";
+}
+
+export default function GalaxyCanvas({ activeTab = "flml" }: GalaxyCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rotationRef = useRef({ rotX: 0, rotY: 0, velX: 0, velY: 0 });
   const scrollRef = useRef({ targetProgress: 0, currentProgress: 0 });
+  const scatterRef = useRef({ target: 0, current: 0 });
   const loadRef = useRef({ progress: 0 });
   const mouseRef = useRef({
     x: -9999,
@@ -43,6 +48,14 @@ export default function GalaxyCanvas() {
     lastX: 0,
     lastY: 0,
   });
+
+  useEffect(() => {
+    if (activeTab === "flml") {
+      scatterRef.current.target = 0;
+    } else {
+      scatterRef.current.target = 1;
+    }
+  }, [activeTab]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -198,7 +211,7 @@ export default function GalaxyCanvas() {
         }
       }
 
-      // Background ambient stars distributed across the screen viewport
+      // Background ambient stars distributed across viewport
       for (let i = 0; i < 600; i++) {
         const angle = Math.random() * Math.PI * 2;
         const dist = Math.random() * width * 0.75 + 50;
@@ -243,7 +256,7 @@ export default function GalaxyCanvas() {
       const centerY = height / 2;
       time += 0.015;
 
-      // 1. Cinematic Initial Load Assembly
+      // Initial Load Assembly
       if (loadRef.current.progress < 1) {
         loadRef.current.progress += 0.008;
         if (loadRef.current.progress > 1) loadRef.current.progress = 1;
@@ -252,13 +265,17 @@ export default function GalaxyCanvas() {
       const t = loadRef.current.progress;
       const loadEase = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-      // 2. Smooth Scroll Inertia
+      // Scroll & Tab Scatter Interpolation
       scrollRef.current.currentProgress +=
         (scrollRef.current.targetProgress - scrollRef.current.currentProgress) * 0.08;
-      const scrollProgress = scrollRef.current.currentProgress;
+      
+      scatterRef.current.current +=
+        (scatterRef.current.target - scatterRef.current.current) * 0.06;
+
+      const effectiveScatter = Math.max(scrollRef.current.currentProgress, scatterRef.current.current);
 
       // Ambient Radial Glow at center
-      const glowAlpha = Math.max(0.04, 0.16 * (1 - scrollProgress * 0.5));
+      const glowAlpha = Math.max(0.04, 0.16 * (1 - effectiveScatter * 0.5));
       const bgGlow = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, width * 0.45);
       bgGlow.addColorStop(0, `rgba(255, 255, 255, ${glowAlpha})`);
       bgGlow.addColorStop(0.25, `rgba(59, 130, 246, ${glowAlpha * 0.45})`);
@@ -266,20 +283,29 @@ export default function GalaxyCanvas() {
       ctx.fillStyle = bgGlow;
       ctx.fillRect(0, 0, width, height);
 
-      // Rotation Damping & Auto-Righting when mouse isn't dragging
+      // Subtle & Natural Mouse 3D Tilt Parallax Physics (Tilts towards cursor)
       if (!mouseRef.current.isDragging) {
+        let targetRotX = 0;
+        let targetRotY = 0;
+
+        if (mouseRef.current.x > 0 && effectiveScatter < 0.5) {
+          const mouseNormX = (mouseRef.current.x - width / 2) / (width / 2);
+          const mouseNormY = (mouseRef.current.y - height / 2) / (height / 2);
+
+          // Subtle tilt angle (~8 degrees max) leaning towards mouse location
+          targetRotY = -mouseNormX * 0.14;
+          targetRotX = mouseNormY * 0.14;
+        }
+
+        // Smooth spring interpolation towards target tilt angle
+        rotationRef.current.rotX += (targetRotX - rotationRef.current.rotX) * 0.045;
+        rotationRef.current.rotY += (targetRotY - rotationRef.current.rotY) * 0.045;
+      } else {
+        // Dragging velocity rotation
         rotationRef.current.velX *= 0.9;
         rotationRef.current.velY *= 0.9;
         rotationRef.current.rotX += rotationRef.current.velX;
         rotationRef.current.rotY += rotationRef.current.velY;
-
-        while (rotationRef.current.rotX > Math.PI) rotationRef.current.rotX -= Math.PI * 2;
-        while (rotationRef.current.rotX < -Math.PI) rotationRef.current.rotX += Math.PI * 2;
-        while (rotationRef.current.rotY > Math.PI) rotationRef.current.rotY -= Math.PI * 2;
-        while (rotationRef.current.rotY < -Math.PI) rotationRef.current.rotY += Math.PI * 2;
-
-        rotationRef.current.rotX += (0 - rotationRef.current.rotX) * 0.035;
-        rotationRef.current.rotY += (0 - rotationRef.current.rotY) * 0.035;
       }
 
       const cosX = Math.cos(rotationRef.current.rotX);
@@ -299,12 +325,11 @@ export default function GalaxyCanvas() {
 
         particles.forEach((p) => {
           if (!p.isBackgroundStar) {
-            // Dispersion & Organic Ambient Floating when scrolled down
-            const scatterDistance = scrollProgress * Math.min(width, height) * 0.75;
+            const scatterDistance = effectiveScatter * Math.min(width, height) * 0.75;
 
-            const floatX = Math.sin(time * 0.9 + p.homeX * 0.03) * 20 * scrollProgress;
-            const floatY = Math.cos(time * 0.7 + p.homeY * 0.03) * 20 * scrollProgress;
-            const floatZ = Math.sin(time * 0.5 + p.homeZ * 0.05) * 25 * scrollProgress;
+            const floatX = Math.sin(time * 0.9 + p.homeX * 0.03) * 20 * effectiveScatter;
+            const floatY = Math.cos(time * 0.7 + p.homeY * 0.03) * 20 * effectiveScatter;
+            const floatZ = Math.sin(time * 0.5 + p.homeZ * 0.05) * 25 * effectiveScatter;
 
             const targetX = p.homeX + p.scatterDirX * scatterDistance + floatX;
             const targetY = p.homeY + p.scatterDirY * scatterDistance + floatY;
@@ -318,8 +343,8 @@ export default function GalaxyCanvas() {
             const assembledY = rawX * swirlSin + rawY * swirlCos;
             const assembledZ = rawZ;
 
-            // Mouse Interaction Physics (active when near top)
-            if (!mouseRef.current.isDragging && scrollProgress < 0.3) {
+            // Mouse Interaction Physics (active when logo assembled)
+            if (!mouseRef.current.isDragging && effectiveScatter < 0.3) {
               const rotY1 = p.y * cosX - p.z * sinX;
               const rotZ1 = p.y * sinX + p.z * cosX;
               const rotX2 = p.x * cosY + rotZ1 * sinY;
@@ -359,8 +384,8 @@ export default function GalaxyCanvas() {
             p.z += (assembledZ - p.z) * 0.04;
           } else {
             // Background ambient stars organic float
-            p.x = p.homeX + Math.sin(time * 0.5 + p.homeY) * 14 * (1 + scrollProgress);
-            p.y = p.homeY + Math.cos(time * 0.4 + p.homeX) * 14 * (1 + scrollProgress);
+            p.x = p.homeX + Math.sin(time * 0.5 + p.homeY) * 14 * (1 + effectiveScatter);
+            p.y = p.homeY + Math.cos(time * 0.4 + p.homeX) * 14 * (1 + effectiveScatter);
           }
 
           // Projection & Render Setup
@@ -375,8 +400,7 @@ export default function GalaxyCanvas() {
           p.renderRadius = Math.max(0.5, p.radius * finalScale);
 
           p.alpha = p.baseAlpha + Math.sin(time * 2 + p.homeX * 0.03) * 0.2;
-          // Keep particles float ambient across all homepage sections
-          const scrollAlpha = Math.max(0.35, 1 - scrollProgress * 0.35);
+          const scrollAlpha = Math.max(0.35, 1 - effectiveScatter * 0.35);
           p.renderAlpha = Math.min(1, Math.max(0.12, p.alpha * Math.pow(finalScale, 1.1) * scrollAlpha));
           p.transformedZ = rotZ2;
         });
