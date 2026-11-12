@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="relative z-20 bg-black text-white pt-20 pb-12 px-6 md:px-12 border-t border-white/15">
-      <div className="max-w-[1400px] mx-auto">
+    <footer id="footer" className="relative z-20 bg-black text-white pt-20 pb-12 px-6 sm:px-12 lg:px-20 border-t border-white/15 w-full">
+      <div className="max-w-[1500px] mx-auto w-full">
         
         {/* OpenAI Multi-Column Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-white/15">

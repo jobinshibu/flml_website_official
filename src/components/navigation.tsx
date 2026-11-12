@@ -22,6 +22,18 @@ export default function Navigation({ activeTab = "flml", onSelectTab }: Navigati
 
   return (
     <>
+      {/* Top Header Mask / Blur Gradient (Content fades smoothly under navbar without visible navbar box) */}
+      {activeTab !== "flml" && (
+        <div 
+          className="fixed top-0 left-0 right-0 h-28 md:h-36 z-[50] pointer-events-none select-none backdrop-blur-md"
+          style={{
+            maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0) 100%)",
+            WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0) 100%)",
+            background: "linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 45%, rgba(0,0,0,0) 100%)"
+          }}
+        />
+      )}
+
       {/* Top Left: Cinematic Sentence Header ("flml architecture speaks life") */}
       <div className="fixed top-6 left-6 md:top-8 md:left-12 z-[60] flex items-center pointer-events-auto select-none">
         <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-neutral-400 tracking-normal leading-none font-normal flex items-baseline gap-3 sm:gap-4">

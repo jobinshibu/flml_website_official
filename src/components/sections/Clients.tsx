@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -42,8 +43,10 @@ const clientLogos: ClientLogo[] = [
 export default function Clients() {
   const router = useRouter();
   const [openingClient, setOpeningClient] = useState<ClientLogo | null>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     setOpeningClient(null);
   }, []);
 
@@ -110,76 +113,79 @@ export default function Clients() {
         </div>
       </div>
 
-      {/* Futuristic Expansion Page Opening Animation Overlay */}
-      <AnimatePresence>
-        {openingClient && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-[#030712]/95 backdrop-blur-2xl flex flex-col items-center justify-center p-6 text-white"
-          >
-            {/* Ambient Radial Flare */}
+      {/* Futuristic Expansion Page Opening Animation Overlay (Rendered directly to body via portal to avoid stacking context traps) */}
+      {mounted && typeof document !== "undefined" && createPortal(
+        <AnimatePresence>
+          {openingClient && (
             <motion.div
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ scale: 1.5, opacity: 0.3 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="absolute w-[600px] h-[600px] rounded-full bg-cyan-500/30 blur-[120px] pointer-events-none"
-            />
-
-            {/* Expanding Card Container */}
-            <motion.div
-              initial={{ scale: 0.7, y: 30, opacity: 0 }}
-              animate={{ scale: 1, y: 0, opacity: 1 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="relative max-w-md w-full bg-slate-950 border border-cyan-500/40 p-8 rounded-3xl shadow-[0_0_80px_rgba(6,182,212,0.3)] flex flex-col items-center text-center space-y-6 z-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[9999] bg-[#030712]/95 backdrop-blur-2xl flex flex-col items-center justify-center p-6 text-white"
             >
-              {/* Pulsing Logo Icon Container */}
-              <div className="relative w-24 h-24 bg-slate-900 border border-cyan-500/30 rounded-2xl p-3 shadow-inner flex items-center justify-center">
-                <Image
-                  src={openingClient.src}
-                  alt={openingClient.name}
-                  fill
-                  className="object-contain p-2"
-                  sizes="96px"
-                  priority
-                />
-                <motion.div
-                  animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.8, 0.3] }}
-                  transition={{ repeat: Infinity, duration: 1.5 }}
-                  className="absolute inset-0 rounded-2xl border border-cyan-400/60 pointer-events-none"
-                />
-              </div>
+              {/* Ambient Radial Flare */}
+              <motion.div
+                initial={{ scale: 0.5, opacity: 0 }}
+                animate={{ scale: 1.5, opacity: 0.3 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="absolute w-[600px] h-[600px] rounded-full bg-cyan-500/30 blur-[120px] pointer-events-none"
+              />
 
-              {/* Status Header & Project Title */}
-              <div className="space-y-2">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-[10px] font-mono text-cyan-300 font-bold uppercase tracking-widest">
-                  <Zap className="w-3 h-3 text-amber-400 animate-pulse" />
-                  <span>INITIALIZING CASE STUDY</span>
-                </div>
-                <h3 className="text-2xl font-extrabold uppercase tracking-tight text-white">
-                  {openingClient.name}
-                </h3>
-              </div>
-
-              {/* Animated Progress Bar */}
-              <div className="w-full space-y-2">
-                <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden relative">
+              {/* Expanding Card Container */}
+              <motion.div
+                initial={{ scale: 0.7, y: 30, opacity: 0 }}
+                animate={{ scale: 1, y: 0, opacity: 1 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="relative max-w-md w-full bg-slate-950 border border-cyan-500/40 p-8 rounded-3xl shadow-[0_0_80px_rgba(6,182,212,0.3)] flex flex-col items-center text-center space-y-6 z-10"
+              >
+                {/* Pulsing Logo Icon Container */}
+                <div className="relative w-24 h-24 bg-slate-900 border border-cyan-500/30 rounded-2xl p-3 shadow-inner flex items-center justify-center">
+                  <Image
+                    src={openingClient.src}
+                    alt={openingClient.name}
+                    fill
+                    className="object-contain p-2"
+                    sizes="96px"
+                    priority
+                  />
                   <motion.div
-                    initial={{ x: "-100%" }}
-                    animate={{ x: "0%" }}
-                    transition={{ duration: 0.6, ease: "easeInOut" }}
-                    className="h-full bg-gradient-to-r from-blue-600 via-cyan-400 to-emerald-400 rounded-full"
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.8, 0.3] }}
+                    transition={{ repeat: Infinity, duration: 1.5 }}
+                    className="absolute inset-0 rounded-2xl border border-cyan-400/60 pointer-events-none"
                   />
                 </div>
-                <p className="font-mono text-[10px] text-cyan-400/80 uppercase tracking-widest">
-                  LOADING DEPLOYMENT ARCHITECTURE...
-                </p>
-              </div>
+
+                {/* Status Header & Project Title */}
+                <div className="space-y-2">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-[10px] font-mono text-cyan-300 font-bold uppercase tracking-widest">
+                    <Zap className="w-3 h-3 text-amber-400 animate-pulse" />
+                    <span>INITIALIZING CASE STUDY</span>
+                  </div>
+                  <h3 className="text-2xl font-extrabold uppercase tracking-tight text-white">
+                    {openingClient.name}
+                  </h3>
+                </div>
+
+                {/* Animated Progress Bar */}
+                <div className="w-full space-y-2">
+                  <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden relative">
+                    <motion.div
+                      initial={{ x: "-100%" }}
+                      animate={{ x: "0%" }}
+                      transition={{ duration: 0.6, ease: "easeInOut" }}
+                      className="h-full bg-gradient-to-r from-blue-600 via-cyan-400 to-emerald-400 rounded-full"
+                    />
+                  </div>
+                  <p className="font-mono text-[10px] text-cyan-400/80 uppercase tracking-widest">
+                    LOADING DEPLOYMENT ARCHITECTURE...
+                  </p>
+                </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   );
 }

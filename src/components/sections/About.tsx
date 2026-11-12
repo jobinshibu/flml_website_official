@@ -97,22 +97,22 @@ export default function About() {
 
       </div>
 
-      {/* 2. Why Choose Us (Pillars Grid - Visual Distinction) */}
-      <div id="pillars" className="w-full max-w-5xl mx-auto pt-20 pb-16 space-y-10 scroll-mt-24">
+      {/* 2. Why Choose Us (Pillars - Single Sleek Horizontal Row) */}
+      <div id="pillars" className="w-full max-w-6xl mx-auto pt-20 pb-16 space-y-10 scroll-mt-24">
         <div className="text-center space-y-2">
           <span className="font-mono text-xs uppercase tracking-widest text-neutral-400">WHY CHOOSE US</span>
           <h3 className="font-sans text-2xl sm:text-3xl font-light text-white">Why We Are Your Best Choice</h3>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {pillars.map((item) => (
             <div 
               key={item.title} 
-              className="p-6 bg-neutral-950/80 rounded-2xl border border-neutral-800/80 hover:border-neutral-700 transition-all space-y-3 relative overflow-hidden group shadow-lg flex flex-col justify-between"
+              className="p-5 bg-gradient-to-b from-neutral-900/60 to-neutral-950/80 rounded-xl border border-neutral-800/60 hover:border-cyan-500/40 transition-all duration-300 relative group shadow-lg flex flex-col justify-between"
             >
-              <div className="space-y-3">
-                <span className="font-mono text-xs font-bold text-cyan-400">{item.num}</span>
-                <h4 className="font-sans text-base font-medium text-white group-hover:text-cyan-300 transition-colors leading-snug">
+              <div className="space-y-2.5">
+                <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 group-hover:shadow-[0_0_8px_#22D3EE] transition-all" />
+                <h4 className="font-sans text-sm font-semibold text-white group-hover:text-cyan-300 transition-colors leading-snug">
                   {item.title}
                 </h4>
                 <p className="font-sans text-xs text-neutral-400 font-light leading-relaxed">

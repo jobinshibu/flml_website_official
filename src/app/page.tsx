@@ -9,6 +9,7 @@ import Opening from "@/components/sections/Opening";
 import About from "@/components/sections/About";
 import Engineering from "@/components/sections/Engineering";
 import WhatWeBuild from "@/components/sections/WhatWeBuild";
+import FirstLogicInstrumentSuite from "@/components/sections/FirstLogicInstrumentSuite";
 import Clients from "@/components/sections/Clients";
 import Gallery from "@/components/sections/Gallery";
 import ConsultationForm from "@/components/sections/ConsultationForm";
@@ -84,15 +85,15 @@ export default function Home() {
               transition={{ duration: 0.45 }}
               className="w-full flex flex-col pt-16"
             >
-              {/* Architecture Suite: Story, Pillars, Chronology, Capabilities, System Anatomy */}
+              {/* Architecture Suite: Story, Pillars, Chronology, Capabilities, Exact FirstLogic Instrument Bays */}
               <div id="about">
                 <About />
               </div>
               <div id="capabilities">
                 <WhatWeBuild />
               </div>
-              <div id="technology">
-                <Engineering />
+              <div id="instrument-suite">
+                <FirstLogicInstrumentSuite />
               </div>
               {/* Footer at end of Architecture suite */}
               <Footer />

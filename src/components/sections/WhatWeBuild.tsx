@@ -23,7 +23,7 @@ const buildItems = [
     description: "Deep, interconnected architectures built to handle immense data loads and complex business logic across multiple physical locations.",
     details: ["PostgreSQL", "Edge Caching", "HIPAA Compliance", "Local-first DB"],
     align: "end",
-    margin: "mt-16 md:mt-24 mr-0",
+    margin: "mt-6 md:mt-8 mr-0",
     projects: [
       { title: "HEALINE ERP", description: "Healthcare management system routing patient data securely across multi-clinic locations.", image: "/client/healine.png" },
       { title: "MYVAAHAN", description: "Automotive service management system tracking vehicle lifecycles and inventory.", image: "/client/myvaahan.png" }
@@ -35,7 +35,7 @@ const buildItems = [
     description: "Scalable platform architectures designed for SaaS providers, B2B marketplaces, and complex partner ecosystems.",
     details: ["Multi-Tenant", "Microservices", "Stripe API", "AWS ECS"],
     align: "start",
-    margin: "mt-16 md:mt-24 ml-0",
+    margin: "mt-6 md:mt-8 ml-0",
     projects: [
       { title: "THARA CART", description: "Multi-tenant B2B e-commerce platform orchestrating thousands of vendors and SKUs.", image: "/client/thara_cart.png" },
       { title: "VIVLINO", description: "Global learning marketplace featuring live video streaming and automated billing.", image: "/client/vivlino.svg" }
@@ -47,7 +47,7 @@ const buildItems = [
     description: "Intelligent process automation that eliminates manual bottlenecks, integrates disparate tools, and accelerates business velocity.",
     details: ["Event-Driven", "RPA Pipelines", "Legacy ERP Sync", "Webhook Mesh"],
     align: "center",
-    margin: "mt-16 md:mt-24 mx-auto",
+    margin: "mt-6 md:mt-8 mx-auto",
     projects: [
       { title: "AMERICAN BOARD", description: "Robotic process automation integrating legacy educational databases with modern CRM systems.", image: "/client/american board.png" }
     ]
@@ -99,46 +99,48 @@ export default function WhatWeBuild() {
     };
   }, []);
 
-  const lockTitleToNavbar = (id: string) => {
+  const lockTitleToNavbar = () => {
     if (animFrameRef.current) {
       cancelAnimationFrame(animFrameRef.current);
     }
 
+    const sectionEl = document.getElementById("capabilities");
+    if (!sectionEl) return;
+
+    const startY = window.scrollY;
+    // Clear the fixed header nicely with a 130px offset
+    const targetY = Math.max(0, sectionEl.getBoundingClientRect().top + window.scrollY - 130);
+    const distance = targetY - startY;
+
+    if (Math.abs(distance) < 5) return;
+
     const startTime = performance.now();
-    const duration = 450;
+    const duration = 550; // Smooth 550ms transition
 
-    const animateScrollLock = (now: number) => {
-      const elapsed = now - startTime;
-      const el = titleRefs.current[id];
+    const easeInOutCubic = (t: number) =>
+      t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-      if (el) {
-        const navbarOffset = 96;
-        const currentRect = el.getBoundingClientRect();
-        const absoluteTop = currentRect.top + window.scrollY;
-        const targetY = absoluteTop - navbarOffset;
+    const step = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = easeInOutCubic(progress);
 
-        window.scrollTo(0, Math.max(0, targetY));
-      }
+      window.scrollTo(0, startY + distance * ease);
 
-      if (elapsed < duration) {
-        animFrameRef.current = requestAnimationFrame(animateScrollLock);
+      if (progress < 1) {
+        animFrameRef.current = requestAnimationFrame(step);
       }
     };
 
-    animFrameRef.current = requestAnimationFrame(animateScrollLock);
+    animFrameRef.current = requestAnimationFrame(step);
   };
 
   const handleClick = (id: string) => {
-    if (expandedId === id) {
-      setExpandedId(null);
-    } else {
-      setExpandedId(id);
-      lockTitleToNavbar(id);
-    }
+    setExpandedId(expandedId === id ? null : id);
   };
 
   return (
-    <section id="capabilities" className="pt-4 md:pt-6 pb-12 md:pb-20 px-6 md:px-12 bg-transparent text-white relative z-10 overflow-hidden">
+    <section id="capabilities" className="pt-4 md:pt-6 pb-12 md:pb-20 px-6 md:px-12 pl-6 lg:pl-36 bg-transparent text-white relative z-10 overflow-hidden">
       <div className="max-w-[1700px] mx-auto">
         
         {/* Section Header */}
@@ -157,10 +159,11 @@ export default function WhatWeBuild() {
             return (
               <motion.div 
                 key={item.id} 
+                layout
                 initial={{ opacity: 0, y: 35 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, margin: "-80px" }}
-                transition={{ duration: 0.7, delay: index * 0.08 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6, delay: index * 0.08 }}
                 className={`flex flex-col ${
                   item.align === "start" ? "items-start" : item.align === "end" ? "items-end" : "items-center"
                 } ${item.margin} w-full`}
@@ -171,17 +174,17 @@ export default function WhatWeBuild() {
                   onMouseLeave={() => setHoveredId(null)}
                   onClick={() => handleClick(item.id)}
                 >
-                  {/* Gigantic Title with Kinetic Hover & Spotlight */}
+                  {/* Title with balanced sizing */}
                   <motion.h3 
                     ref={(el) => { titleRefs.current[item.id] = el; }}
                     animate={{
-                      scale: isHovered ? 1.02 : 1,
-                      x: isHovered ? (item.align === "start" ? 8 : item.align === "end" ? -8 : 0) : 0,
+                      scale: isHovered && !isExpanded ? 1.01 : 1,
+                      x: isHovered && !isExpanded ? (item.align === "start" ? 6 : item.align === "end" ? -6 : 0) : 0,
                     }}
                     transition={{ duration: 0.25 }}
-                    className={`text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter transition-all duration-300 relative select-none ${
+                    className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight transition-all duration-300 relative select-none ${
                       isExpanded || isHovered 
-                        ? "text-cyan-400 drop-shadow-[0_0_35px_rgba(34,211,238,0.45)]" 
+                        ? "text-cyan-400 drop-shadow-[0_0_25px_rgba(34,211,238,0.35)]" 
                         : (hoveredId ? "text-white/20" : "text-white/90 group-hover:text-white")
                     }`}
                   >
@@ -216,10 +219,14 @@ export default function WhatWeBuild() {
                   <AnimatePresence>
                     {isExpanded && (
                       <motion.div
-                        initial={{ opacity: 0, height: 0, y: 15 }}
-                        animate={{ opacity: 1, height: "auto", y: 0 }}
-                        exit={{ opacity: 0, height: 0, y: 15 }}
-                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        initial={{ opacity: 0, height: 0, scale: 0.98 }}
+                        animate={{ opacity: 1, height: "auto", scale: 1 }}
+                        exit={{ opacity: 0, height: 0, scale: 0.98 }}
+                        transition={{ 
+                          height: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
+                          opacity: { duration: 0.35, ease: "easeInOut" },
+                          scale: { duration: 0.35 }
+                        }}
                         className={`overflow-hidden ${item.align === 'center' ? 'max-w-4xl mx-auto' : 'max-w-2xl'}`}
                       >
                         <div className={`flex flex-col gap-6 pt-8 pb-4 ${

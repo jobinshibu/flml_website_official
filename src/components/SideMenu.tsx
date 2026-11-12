@@ -17,67 +17,104 @@ export default function SideMenu({ activeTab = "flml" }: SideMenuProps) {
     { id: "pillars", label: "Pillars" },
     { id: "history", label: "History" },
     { id: "capabilities", label: "Capabilities" },
-    { id: "technology", label: "Anatomy" },
+    { id: "app-studio", label: "App Studio" },
+    { id: "design-system", label: "Design System" },
+    { id: "planner", label: "Planner" },
+    { id: "blueprint", label: "AI Blueprint" },
+    { id: "platform-demo", label: "Platforms" },
+    { id: "chain-demo", label: "Blockchain" },
+    { id: "bot-demo", label: "Trading Bot" },
+    { id: "scale-demo", label: "Realtime Scale" },
+    { id: "pay-demo", label: "Payments" },
   ];
 
-  const lifeItems: SideMenuItem[] = [
-    { id: "clients", label: "Deployments" },
-    { id: "gallery", label: "Life" },
-    { id: "consultation", label: "Brief" },
-  ];
+  if (activeTab !== "architecture") return null;
 
-  const currentItems = activeTab === "architecture" ? architectureItems : activeTab === "life" ? lifeItems : [];
-  const [activeSection, setActiveSection] = useState<string>(currentItems[0]?.id || "");
+  return <SideMenuInner items={architectureItems} />;
+}
+
+function SideMenuInner({ items }: { items: SideMenuItem[] }) {
+  const [activeSection, setActiveSection] = useState<string>(items[0]?.id || "");
+  const [hideMenu, setHideMenu] = useState(false);
 
   useEffect(() => {
-    if (currentItems.length === 0) return;
+    const determineActive = () => {
+      const footerEl = document.getElementById("footer");
+      if (footerEl) {
+        const footerRect = footerEl.getBoundingClientRect();
+        if (footerRect.top <= window.innerHeight * 0.6) {
+          setHideMenu(true);
+        } else {
+          setHideMenu(false);
+        }
+      } else {
+        setHideMenu(false);
+      }
 
-    setActiveSection(currentItems[0].id);
+      const offset = 220;
+      let currentActive = items[0]?.id || "";
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
+      for (const item of items) {
+        const el = document.getElementById(item.id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= offset) {
+            currentActive = item.id;
           }
-        });
-      },
-      {
-        rootMargin: "-10% 0px -50% 0px",
-        threshold: 0.1,
+        }
       }
-    );
 
-    currentItems.forEach((item) => {
-      const element = document.getElementById(item.id);
-      if (element) {
-        observer.observe(element);
-      }
-    });
+      setActiveSection(currentActive);
+    };
 
-    return () => observer.disconnect();
-  }, [activeTab, currentItems]);
+    determineActive();
+    window.addEventListener("scroll", determineActive, { passive: true });
+    window.addEventListener("resize", determineActive, { passive: true });
 
-  if (activeTab === "flml" || currentItems.length === 0) return null;
+    return () => {
+      window.removeEventListener("scroll", determineActive);
+      window.removeEventListener("resize", determineActive);
+    };
+  }, [items]);
 
   const handleScrollTo = (id: string) => {
     const elem = document.getElementById(id);
     if (elem) {
-      elem.scrollIntoView({ behavior: "smooth" });
+      let topOffset = 70;
+      if (
+        id === "design-system" ||
+        id === "planner" ||
+        id === "blueprint" ||
+        id === "platform-demo" ||
+        id === "chain-demo" ||
+        id === "bot-demo" ||
+        id === "scale-demo" ||
+        id === "pay-demo"
+      ) {
+        topOffset = 100;
+      } else if (id === "app-studio") {
+        topOffset = 25;
+      }
+      const targetY = elem.getBoundingClientRect().top + window.scrollY - topOffset;
+      window.scrollTo({ top: targetY, behavior: "smooth" });
     }
   };
 
   return (
-    <div className="fixed top-1/2 -translate-y-1/2 left-6 sm:left-10 md:left-12 z-[50] hidden lg:flex flex-col gap-2.5 font-sans text-xs select-none pointer-events-auto">
-      {currentItems.map((item) => {
+    <div
+      className={`fixed top-1/2 -translate-y-1/2 left-6 sm:left-10 md:left-12 z-[50] hidden lg:flex flex-col gap-2.5 font-sans text-xs select-none pointer-events-auto transition-opacity duration-300 ${
+        hideMenu ? "opacity-0 pointer-events-none" : "opacity-100"
+      }`}
+    >
+      {items.map((item) => {
         const isActive = activeSection === item.id;
         return (
           <button
             key={item.id}
             onClick={() => handleScrollTo(item.id)}
-            className={`text-left transition-colors duration-300 py-0.5 cursor-pointer ${
+            className={`text-left transition-all duration-300 py-0.5 cursor-pointer ${
               isActive
-                ? "text-white font-medium drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]"
+                ? "text-cyan-400 font-medium drop-shadow-[0_0_12px_rgba(34,211,238,0.85)] scale-105"
                 : "text-neutral-500 hover:text-neutral-300"
             }`}
           >
