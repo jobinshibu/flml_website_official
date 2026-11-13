@@ -12,6 +12,9 @@ export default function Navigation({ activeTab = "flml", onSelectTab }: Navigati
     // Fire instantaneous scatter transition on click
     if (typeof window !== "undefined") {
       window.dispatchEvent(new CustomEvent("flml:tab_transition", { detail: tab }));
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
     }
     if (onSelectTab) {
       onSelectTab(tab);
@@ -39,12 +42,12 @@ export default function Navigation({ activeTab = "flml", onSelectTab }: Navigati
       )}
 
       {/* Top Left: Cinematic Sentence Header ("flml architecture speaks life") */}
-      <div className="fixed top-6 left-6 md:top-8 md:left-12 z-[60] flex items-center pointer-events-auto select-none">
-        <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-neutral-400 tracking-normal leading-none font-normal flex items-baseline gap-3 sm:gap-4">
+      <div className="fixed top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-12 z-[60] flex items-center pointer-events-auto select-none max-w-[calc(100vw-120px)] sm:max-w-none">
+        <h1 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-neutral-400 tracking-normal leading-none font-normal flex items-baseline gap-2 sm:gap-3 md:gap-4 flex-wrap">
           {/* Word 1: FLML (High-tech bold uppercase) */}
           <button
             onClick={() => handleTabClick("flml")}
-            className={`transition-all duration-300 cursor-pointer font-sans font-black tracking-[0.16em] uppercase ${
+            className={`transition-all duration-300 cursor-pointer font-sans font-black tracking-[0.14em] sm:tracking-[0.16em] uppercase ${
               activeTab === "flml"
                 ? "text-white drop-shadow-[0_0_18px_rgba(255,255,255,0.9)] scale-105"
                 : "text-white/60 hover:text-white"
@@ -82,9 +85,9 @@ export default function Navigation({ activeTab = "flml", onSelectTab }: Navigati
       {/* Bottom Right: Clean Brand Logo & Name */}
       <button
         onClick={() => handleTabClick("flml")}
-        className="fixed bottom-6 right-6 md:bottom-8 md:right-12 z-[60] flex items-center gap-3 group pointer-events-auto cursor-pointer select-none"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-12 z-[60] flex items-center gap-2.5 sm:gap-3 group pointer-events-auto cursor-pointer select-none bg-black/40 backdrop-blur-md sm:bg-transparent p-2 sm:p-0 rounded-xl"
       >
-        <div className="relative w-8 h-8 md:w-9 md:h-9 filter brightness-0 invert transition-transform group-hover:scale-105">
+        <div className="relative w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 filter brightness-0 invert transition-transform group-hover:scale-105">
           <Image
             src="/FLML-01.png"
             alt="First Logic Meta Lab Logo"
@@ -95,10 +98,10 @@ export default function Navigation({ activeTab = "flml", onSelectTab }: Navigati
           />
         </div>
         <div className="flex flex-col text-left">
-          <span className="font-sans font-bold text-xs md:text-sm tracking-widest text-white leading-none group-hover:text-cyan-400 transition-colors">
+          <span className="font-sans font-bold text-[11px] sm:text-xs md:text-sm tracking-widest text-white leading-none group-hover:text-cyan-400 transition-colors">
             FIRST LOGIC
           </span>
-          <span className="font-mono text-[9px] md:text-[10px] tracking-[0.25em] text-white/50 leading-tight">
+          <span className="font-mono text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.22em] sm:tracking-[0.25em] text-white/50 leading-tight">
             META LAB
           </span>
         </div>

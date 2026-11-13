@@ -223,11 +223,11 @@ export default function AIBlueprintInstrument() {
             </div>
 
             <div className="bp" aria-live="polite">
-              <p className="sum">{blueprint.summary}</p>
+              <p className="bp-sum">{blueprint.summary}</p>
 
               <div>
                 <span className="lbl">Architecture modules</span>
-                <div className="mods">
+                <div className="bp-grid">
                   {blueprint.modules.map((m, i) => (
                     <div key={i} className="mod">
                       <b>{m.name}</b>
@@ -239,7 +239,7 @@ export default function AIBlueprintInstrument() {
 
               <div>
                 <span className="lbl">Technology stack</span>
-                <div className="stack">
+                <div className="stackrow">
                   {Object.entries(blueprint.stack).map(([k, v]) => (
                     <div key={k}>
                       <span>{k}</span>

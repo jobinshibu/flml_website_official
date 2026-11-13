@@ -140,11 +140,11 @@ export default function WhatWeBuild() {
   };
 
   return (
-    <section id="capabilities" className="pt-4 md:pt-6 pb-12 md:pb-20 px-6 md:px-12 pl-6 lg:pl-36 bg-transparent text-white relative z-10 overflow-hidden">
+    <section id="capabilities" className="pt-4 md:pt-6 pb-12 md:pb-20 px-4 sm:px-6 md:px-12 pl-4 sm:pl-6 lg:pl-36 bg-transparent text-white relative z-10 overflow-hidden">
       <div className="max-w-[1700px] mx-auto">
         
         {/* Section Header */}
-        <div className="flex items-center gap-3 mb-16">
+        <div className="flex items-center gap-3 mb-10 sm:mb-16">
           <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
           <h2 className="text-xs md:text-sm font-mono tracking-[0.35em] uppercase text-cyan-400/80 font-bold">
             CAPABILITIES & ARCHITECTURES
@@ -165,16 +165,16 @@ export default function WhatWeBuild() {
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.6, delay: index * 0.08 }}
                 className={`flex flex-col ${
-                  item.align === "start" ? "items-start" : item.align === "end" ? "items-end" : "items-center"
+                  item.align === "start" ? "items-start" : item.align === "end" ? "items-start md:items-end" : "items-start md:items-center"
                 } ${item.margin} w-full`}
               >
                 <div 
-                  className="relative cursor-pointer group py-6 px-4 -my-3 -mx-4 z-10 hover:z-20 w-full md:w-auto"
+                  className="relative cursor-pointer group py-4 sm:py-6 px-2 sm:px-4 -my-3 -mx-2 sm:-mx-4 z-10 hover:z-20 w-full md:w-auto"
                   onMouseEnter={() => setHoveredId(item.id)}
                   onMouseLeave={() => setHoveredId(null)}
                   onClick={() => handleClick(item.id)}
                 >
-                  {/* Title with balanced sizing */}
+                  {/* Title with responsive font sizing */}
                   <motion.h3 
                     ref={(el) => { titleRefs.current[item.id] = el; }}
                     animate={{
@@ -182,7 +182,7 @@ export default function WhatWeBuild() {
                       x: isHovered && !isExpanded ? (item.align === "start" ? 6 : item.align === "end" ? -6 : 0) : 0,
                     }}
                     transition={{ duration: 0.25 }}
-                    className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight transition-all duration-300 relative select-none ${
+                    className={`text-xl sm:text-2xl md:text-4xl lg:text-5xl font-extrabold tracking-tight transition-all duration-300 relative select-none break-words ${
                       isExpanded || isHovered 
                         ? "text-cyan-400 drop-shadow-[0_0_25px_rgba(34,211,238,0.35)]" 
                         : (hoveredId ? "text-white/20" : "text-white/90 group-hover:text-white")
@@ -227,29 +227,29 @@ export default function WhatWeBuild() {
                           opacity: { duration: 0.35, ease: "easeInOut" },
                           scale: { duration: 0.35 }
                         }}
-                        className={`overflow-hidden ${item.align === 'center' ? 'max-w-4xl mx-auto' : 'max-w-2xl'}`}
+                        className={`overflow-hidden w-full ${item.align === 'center' ? 'max-w-4xl md:mx-auto' : 'max-w-2xl'}`}
                       >
-                        <div className={`flex flex-col gap-6 pt-8 pb-4 ${
-                          item.align === 'center' ? 'items-center text-center' : item.align === 'end' ? 'items-end text-right' : 'items-start text-left'
+                        <div className={`flex flex-col gap-6 pt-6 sm:pt-8 pb-4 ${
+                          item.align === 'center' ? 'items-start md:items-center text-left md:text-center' : item.align === 'end' ? 'items-start md:items-end text-left md:text-right' : 'items-start text-left'
                         }`}>
-                          <p className="text-lg md:text-xl text-slate-200 leading-relaxed font-light">
+                          <p className="text-base sm:text-lg md:text-xl text-slate-200 leading-relaxed font-light">
                             {item.description}
                           </p>
 
                           {/* Tech Pills */}
                           <div className={`flex flex-wrap gap-2 ${
-                            item.align === 'center' ? 'justify-center' : item.align === 'end' ? 'justify-end' : 'justify-start'
+                            item.align === 'center' ? 'justify-start md:justify-center' : item.align === 'end' ? 'justify-start md:justify-end' : 'justify-start'
                           }`}>
                             {item.details.map((detail, idx) => (
-                              <span key={idx} className="bg-white/5 border border-cyan-400/20 px-3.5 py-1.5 rounded-full text-xs font-mono text-cyan-300/90 backdrop-blur-md">
+                              <span key={idx} className="bg-white/5 border border-cyan-400/20 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-mono text-cyan-300/90 backdrop-blur-md">
                                 {detail}
                               </span>
                             ))}
                           </div>
 
                           {/* Featured Holographic Project Cards */}
-                          <div className={`w-full flex flex-col gap-4 mt-4 ${
-                            item.align === 'center' ? 'items-center' : item.align === 'end' ? 'items-end' : 'items-start'
+                          <div className={`w-full flex flex-col gap-4 mt-2 sm:mt-4 ${
+                            item.align === 'center' ? 'items-start md:items-center' : item.align === 'end' ? 'items-start md:items-end' : 'items-start'
                           }`}>
                             {item.projects.map((project, idx) => (
                               <motion.div 
@@ -257,16 +257,16 @@ export default function WhatWeBuild() {
                                 initial={{ opacity: 0, y: 12, scale: 0.97 }}
                                 animate={{ opacity: 1, y: 0, scale: 1 }}
                                 transition={{ duration: 0.3, delay: idx * 0.1 }}
-                                className={`flex items-center gap-5 bg-slate-950/80 border border-white/15 hover:border-cyan-400/50 p-5 rounded-2xl max-w-xl transition-all hover:bg-slate-900/90 shadow-2xl backdrop-blur-md group/card ${
-                                  item.align === 'end' ? 'flex-row-reverse text-right' : 'text-left'
+                                className={`flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 bg-slate-950/80 border border-white/15 hover:border-cyan-400/50 p-4 sm:p-5 rounded-2xl w-full max-w-xl transition-all hover:bg-slate-900/90 shadow-2xl backdrop-blur-md group/card ${
+                                  item.align === 'end' ? 'sm:flex-row-reverse sm:text-right text-left' : 'text-left'
                                 }`}
                               >
-                                <div className="relative w-16 h-16 shrink-0 bg-white/10 border border-white/20 rounded-xl p-2.5 transition-transform group-hover/card:scale-105">
+                                <div className="relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 bg-white/10 border border-white/20 rounded-xl p-2 sm:p-2.5 transition-transform group-hover/card:scale-105">
                                   <Image src={project.image} alt={project.title} fill className="object-contain p-1" sizes="64px" />
                                 </div>
                                 <div>
-                                  <h5 className="font-extrabold text-base text-white mb-1 tracking-tight group-hover/card:text-cyan-300 transition-colors">{project.title}</h5>
-                                  <p className="text-xs text-slate-300 leading-relaxed font-light">{project.description}</p>
+                                  <h5 className="font-extrabold text-sm sm:text-base text-white mb-1 tracking-tight group-hover/card:text-cyan-300 transition-colors">{project.title}</h5>
+                                  <p className="text-xs sm:text-xs text-slate-300 leading-relaxed font-light">{project.description}</p>
                                 </div>
                               </motion.div>
                             ))}

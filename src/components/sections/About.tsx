@@ -53,38 +53,38 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="relative z-10 bg-transparent text-white px-6 md:px-12 pt-8 md:pt-12 pb-24 flex flex-col items-center select-none">
+    <section id="about" className="relative z-10 bg-transparent text-white px-4 sm:px-6 md:px-12 xl:px-20 pt-6 sm:pt-8 md:pt-12 pb-16 sm:pb-24 flex flex-col items-center select-none overflow-x-hidden">
       
       {/* 1. Doctrine Editorial Section */}
-      <div id="story" className="w-full max-w-5xl mx-auto py-6 sm:py-10 scroll-mt-24 space-y-10">
+      <div id="story" className="w-full max-w-5xl mx-auto py-4 sm:py-6 md:py-10 scroll-mt-24 space-y-6 sm:space-y-10">
         
         {/* Main Header with Left & Right Lines */}
-        <div className="flex flex-col items-center text-center space-y-3">
-          <div className="flex items-center justify-center space-x-6 w-full max-w-2xl">
+        <div className="flex flex-col items-center text-center space-y-3 px-2">
+          <div className="flex items-center justify-center space-x-3 sm:space-x-6 w-full max-w-2xl">
             <div className="h-px bg-gradient-to-r from-transparent via-cyan-500/60 to-neutral-600 flex-1" />
-            <h2 className="font-sans text-4xl sm:text-5xl md:text-6xl font-normal tracking-tight text-white shrink-0">
+            <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight text-white shrink-0">
               Doctrine
             </h2>
             <div className="h-px bg-gradient-to-l from-transparent via-cyan-500/60 to-neutral-600 flex-1" />
           </div>
-          <p className="font-sans text-lg sm:text-xl md:text-2xl font-semibold uppercase tracking-wider text-cyan-400 drop-shadow-[0_0_20px_rgba(56,189,248,0.35)] pt-1">
+          <p className="font-sans text-sm sm:text-lg md:text-xl lg:text-2xl font-semibold uppercase tracking-wider text-cyan-400 drop-shadow-[0_0_20px_rgba(56,189,248,0.35)] pt-1">
             OPERATIONAL ANATOMY FIRST. CODE SECOND.
           </p>
         </div>
 
         {/* 2-Column Distinct Editorial Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center pt-4">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 items-center pt-2 sm:pt-4">
           
           {/* Left Hero Quote Box (Preserved as requested) */}
-          <div className="lg:col-span-5 p-8 bg-neutral-950/80 rounded-2xl border-l-4 border-cyan-400 border-y border-r border-neutral-800 flex flex-col justify-center space-y-4 shadow-xl">
-            <span className="font-mono text-xs text-neutral-500 uppercase tracking-widest">THE PARADIGM SHIFT</span>
-            <blockquote className="font-sans text-lg sm:text-xl text-white font-medium leading-relaxed italic">
+          <div className="lg:col-span-5 p-5 sm:p-8 bg-neutral-950/80 rounded-2xl border-l-4 border-cyan-400 border-y border-r border-neutral-800 flex flex-col justify-center space-y-3 sm:space-y-4 shadow-xl">
+            <span className="font-mono text-[10px] sm:text-xs text-neutral-500 uppercase tracking-widest">THE PARADIGM SHIFT</span>
+            <blockquote className="font-sans text-base sm:text-lg md:text-xl text-white font-medium leading-relaxed italic">
               "We do not sell off-the-shelf software. Generic technology forces a business to compromise its unique workflows to fit rigid platform limitations. We reverse that equation."
             </blockquote>
           </div>
 
           {/* Right Dissection Story Paragraphs (Simple font, no box, no borders) */}
-          <div className="lg:col-span-7 flex flex-col justify-center space-y-6 text-neutral-300 font-light text-base sm:text-lg leading-relaxed">
+          <div className="lg:col-span-7 flex flex-col justify-center space-y-4 sm:space-y-6 text-neutral-300 font-light text-sm sm:text-base md:text-lg leading-relaxed">
             <p>
               Before a single line of code is written, our system architects surgically dissect the anatomy of your operations. We map every point, node, and feedback loop of your business model. We study the friction. We locate the leakage.
             </p>
@@ -98,19 +98,19 @@ export default function About() {
       </div>
 
       {/* 2. Why Choose Us (Pillars - Single Sleek Horizontal Row) */}
-      <div id="pillars" className="w-full max-w-6xl mx-auto pt-20 pb-16 space-y-10 scroll-mt-24">
+      <div id="pillars" className="w-full max-w-6xl mx-auto pt-14 sm:pt-20 pb-10 sm:pb-16 space-y-8 sm:space-y-10 scroll-mt-24">
         <div className="text-center space-y-2">
-          <span className="font-mono text-xs uppercase tracking-widest text-neutral-400">WHY CHOOSE US</span>
-          <h3 className="font-sans text-2xl sm:text-3xl font-light text-white">Why We Are Your Best Choice</h3>
+          <span className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-neutral-400">WHY CHOOSE US</span>
+          <h3 className="font-sans text-xl sm:text-2xl md:text-3xl font-light text-white">Why We Are Your Best Choice</h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           {pillars.map((item) => (
             <div 
               key={item.title} 
-              className="p-5 bg-gradient-to-b from-neutral-900/60 to-neutral-950/80 rounded-xl border border-neutral-800/60 hover:border-cyan-500/40 transition-all duration-300 relative group shadow-lg flex flex-col justify-between"
+              className="p-4 sm:p-5 bg-gradient-to-b from-neutral-900/60 to-neutral-950/80 rounded-xl border border-neutral-800/60 hover:border-cyan-500/40 transition-all duration-300 relative group shadow-lg flex flex-col justify-between"
             >
-              <div className="space-y-2.5">
+              <div className="space-y-2 sm:space-y-2.5">
                 <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 group-hover:shadow-[0_0_8px_#22D3EE] transition-all" />
                 <h4 className="font-sans text-sm font-semibold text-white group-hover:text-cyan-300 transition-colors leading-snug">
                   {item.title}
@@ -125,18 +125,18 @@ export default function About() {
       </div>
 
       {/* 3. History Chronology Section (Untouched Content) */}
-      <div id="history" className="w-full max-w-3xl mx-auto pt-12 pb-16 space-y-10 scroll-mt-24">
+      <div id="history" className="w-full max-w-3xl mx-auto pt-8 sm:pt-12 pb-12 sm:pb-16 space-y-8 sm:space-y-10 scroll-mt-24">
         <div className="text-center space-y-2">
-          <span className="font-mono text-xs uppercase tracking-widest text-neutral-400">OUR HISTORY</span>
-          <h3 className="font-sans text-2xl sm:text-3xl font-light text-white">We Create Dreams For The Future</h3>
+          <span className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-neutral-400">OUR HISTORY</span>
+          <h3 className="font-sans text-xl sm:text-2xl md:text-3xl font-light text-white">We Create Dreams For The Future</h3>
         </div>
 
-        <div className="border-l border-neutral-800 pl-8 space-y-10 ml-4">
+        <div className="border-l border-neutral-800 pl-6 sm:pl-8 space-y-8 sm:space-y-10 ml-4 sm:ml-6">
           {historyTimeline.map((item) => (
             <div key={item.date} className="relative space-y-2">
-              <span className="absolute -left-[37px] top-1.5 w-3 h-3 rounded-full bg-neutral-700 border border-black" />
-              <div className="font-mono text-xs text-neutral-400">{item.date}</div>
-              <h4 className="font-sans text-lg font-medium text-white">{item.title}</h4>
+              <span className="absolute -left-[31px] sm:-left-[37px] top-1.5 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-neutral-700 border border-black" />
+              <div className="font-mono text-[11px] sm:text-xs text-neutral-400">{item.date}</div>
+              <h4 className="font-sans text-base sm:text-lg font-medium text-white">{item.title}</h4>
               <p className="font-sans text-xs text-neutral-400 font-light leading-relaxed">{item.desc}</p>
             </div>
           ))}

@@ -102,7 +102,7 @@ function SideMenuInner({ items }: { items: SideMenuItem[] }) {
 
   return (
     <div
-      className={`fixed top-1/2 -translate-y-1/2 left-6 sm:left-10 md:left-12 z-[50] hidden lg:flex flex-col gap-2.5 font-sans text-xs select-none pointer-events-auto transition-opacity duration-300 ${
+      className={`fixed top-1/2 -translate-y-1/2 left-6 xl:left-10 2xl:left-12 z-[50] hidden xl:flex flex-col gap-2.5 font-sans text-xs select-none pointer-events-auto transition-opacity duration-300 ${
         hideMenu ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
     >

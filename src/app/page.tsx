@@ -36,17 +36,30 @@ export default function Home() {
       // Returning to hero: fade out page content immediately so particles assemble into logo
       setContentVisible(false);
       setActiveTab(tab);
-      if (typeof window !== "undefined") window.scrollTo(0, 0);
+      if (typeof window !== "undefined") {
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+      }
     } else {
       // Transitioning to Architecture or Life:
       // Keep content hidden initially, set tab state
       setContentVisible(false);
       setActiveTab(tab);
-      if (typeof window !== "undefined") window.scrollTo(0, 0);
+      if (typeof window !== "undefined") {
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+      }
       
       // Reveal page content smoothly mid-scatter once particles have burst outward
       setTimeout(() => {
         setContentVisible(true);
+        if (typeof window !== "undefined") {
+          window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
+        }
       }, 420);
     }
   };
