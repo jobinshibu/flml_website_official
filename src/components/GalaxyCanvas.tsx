@@ -49,13 +49,36 @@ export default function GalaxyCanvas({ activeTab = "flml" }: GalaxyCanvasProps) 
     lastY: 0,
   });
 
+  const activeTabRef = useRef(activeTab);
+
   useEffect(() => {
+    activeTabRef.current = activeTab;
     if (activeTab === "flml") {
       scatterRef.current.target = 0;
     } else {
       scatterRef.current.target = 1;
     }
   }, [activeTab]);
+
+  useEffect(() => {
+    const handleTriggerScatter = (e: Event) => {
+      const customEvent = e as CustomEvent<string>;
+      const targetTab = customEvent.detail;
+      activeTabRef.current = targetTab as any;
+      if (targetTab === "flml") {
+        scatterRef.current.target = 0;
+      } else {
+        scatterRef.current.target = 1;
+        // Instantly initiate momentum so the very next frame visibly disperses
+        if (scatterRef.current.current < 0.1) {
+          scatterRef.current.current = 0.12;
+        }
+      }
+    };
+
+    window.addEventListener("flml:tab_transition", handleTriggerScatter);
+    return () => window.removeEventListener("flml:tab_transition", handleTriggerScatter);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -249,7 +272,21 @@ export default function GalaxyCanvas({ activeTab = "flml" }: GalaxyCanvasProps) 
 
     let time = 0;
 
-    const render = () => {
+    let lastFrameTime = 0;
+    const isFlml = () => activeTabRef.current === "flml";
+
+    const render = (currentTime: number = 0) => {
+      // Throttle render frame rate ONLY after scatter is completely finished
+      // When scatter is active (scatterRef.current.current < 0.98), maintain a fluid 60 FPS
+      const isScattering = scatterRef.current.current < 0.98;
+      if (!isFlml() && !isScattering) {
+        if (currentTime - lastFrameTime < 33) { // Cap at ~30 FPS only after scatter settles
+          animationFrameId = requestAnimationFrame(render);
+          return;
+        }
+      }
+      lastFrameTime = currentTime;
+
       ctx.clearRect(0, 0, width, height);
 
       const centerX = width / 2 + 25;
@@ -270,7 +307,7 @@ export default function GalaxyCanvas({ activeTab = "flml" }: GalaxyCanvasProps) 
         (scrollRef.current.targetProgress - scrollRef.current.currentProgress) * 0.08;
       
       scatterRef.current.current +=
-        (scatterRef.current.target - scatterRef.current.current) * 0.06;
+        (scatterRef.current.target - scatterRef.current.current) * 0.085;
 
       const effectiveScatter = Math.max(scrollRef.current.currentProgress, scatterRef.current.current);
 
@@ -405,7 +442,10 @@ export default function GalaxyCanvas({ activeTab = "flml" }: GalaxyCanvasProps) 
           p.transformedZ = rotZ2;
         });
 
-        particles.sort((a, b) => (b.transformedZ || 0) - (a.transformedZ || 0));
+        // In background tabs (architecture / life), skip expensive 3D sorting and mouse physics
+        if (isFlml()) {
+          particles.sort((a, b) => (b.transformedZ || 0) - (a.transformedZ || 0));
+        }
 
         particles.forEach((p) => {
           const sx = p.screenX ?? 0;

@@ -721,5 +721,37 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
       { title: "Multi-Outlet Chain Management & Centralized Inventory", description: "Centralized admin dashboard enabling multi-branch restaurant owners to manage global menu items, recipe ingredient stock, and transfer inventory across branches." },
       { title: "Offline Transaction Caching & Automated Sync", description: "Ensures uninterrupted restaurant billing during internet outages, automatically reconciling transactions with cloud servers once connectivity is restored." }
     ]
+  },
+  "american-board": {
+    id: "american-board",
+    name: "American Board Educational Platform",
+    category: "EDTECH ACCREDITATION & RPA WORKFLOW AUTOMATION",
+    client: "American Board",
+    clientLogo: "/client/american board.png",
+    screenshot: "/screenshots/healine.jpg",
+    headline: "Robotic Process Automation & Educational Certification Engine",
+    tagline: "Automating international candidate certifications, verification audits, and legacy educational database synchronization.",
+    year: "2023 - Present",
+    overview: "American Board is an international educational certification and credentialing authority. First Logic Meta Lab architected an intelligent Robotic Process Automation (RPA) and accreditation platform integrating legacy educational databases with modern CRM systems, verification registries, and candidate certification workflows.",
+    challenge: "Eliminating manual processing bottlenecks for thousands of candidate verification records, integrating disparate legacy systems without breaking existing academic records, and providing tamper-evident digital credential verification.",
+    solution: "FLML engineered an event-driven RPA pipeline and web certification portal utilizing React, Next.js, Node.js microservices, and PostgreSQL, backed by automated webhook meshes, digital signature verification, and secure cloud storage.",
+    impact: "Reduced candidate credential verification turnaround from 14 days to under 30 seconds, integrated multi-system academic databases, and provided 100% auditable digital certifications.",
+    stats: [
+      { label: "Verification Latency", value: "< 30 Seconds" },
+      { label: "Automation Core", value: "Event-Driven RPA" },
+      { label: "Database Sync", value: "Legacy ERP Mesh" },
+      { label: "Compliance Status", value: "100% Auditable" }
+    ],
+    techStack: [
+      { category: "Web Application & Portal", items: ["React", "Next.js", "TypeScript"] },
+      { category: "Automation & Microservices", items: ["Node.js", "Python RPA Core", "Express.js"] },
+      { category: "Database & Security", items: ["PostgreSQL", "Redis", "Digital Signature Vault"] },
+      { category: "Cloud & Integrations", items: ["AWS Cloud", "Webhook Mesh", "CRM API Connectors"] }
+    ],
+    features: [
+      { title: "Robotic Process Automation (RPA) Verification", description: "Automated candidate record extraction, cross-referencing legacy institutional databases, and immediate verification issuance." },
+      { title: "Digital Credential & Tamper-Proof Registry", description: "Cryptographically verifiable digital certificates and student badges with live instant QR verification." },
+      { title: "Legacy ERP & Modern CRM Synchronization", description: "Two-way live synchronization bridging legacy registrar mainframe records with modern cloud student CRM portals." }
+    ]
   }
 };

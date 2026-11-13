@@ -18,6 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <link rel="stylesheet" href="/instruments.css" />
+      </head>
       <body className="antialiased min-h-full flex flex-col font-sans bg-black text-white selection:bg-white selection:text-black">
         <ScrollRestorationFix />
         <main className="flex-grow bg-black">

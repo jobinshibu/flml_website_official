@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import PhoneAppScreen from "./PhoneAppScreen";
 import {
   ArrowLeft,
   ArrowRight,
@@ -136,33 +137,27 @@ export default function ProjectDetailView({ project }: Props) {
           </div>
 
           {/* Right: Phone Device Mockup Frame */}
-          <div className="lg:col-span-5 flex justify-center">
+          <div className="lg:col-span-5 flex justify-center py-2">
 
-            {/* Realistic iPhone Device Frame */}
-            <div className="relative w-[210px] sm:w-[240px] md:w-[260px] aspect-[9/19] rounded-[38px] p-2.5 bg-slate-900 border-[4px] border-slate-800 shadow-[0_20px_60px_rgba(0,0,0,0.9)] overflow-hidden group hover:scale-[1.02] transition-transform duration-500">
+            {/* Realistic iPhone Titanium Device Frame */}
+            <div className="relative w-[240px] sm:w-[270px] md:w-[290px] aspect-[9/19.2] rounded-[46px] p-3 bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900 border-[3px] border-slate-700/80 shadow-[0_25px_70px_rgba(0,0,0,0.95),0_0_30px_rgba(59,130,246,0.15)] overflow-hidden group hover:scale-[1.01] transition-transform duration-500">
 
-              {/* Dynamic Island / Notch */}
-              <div className="absolute top-3 left-1/2 -translate-x-1/2 w-20 h-3.5 rounded-full bg-black z-30 flex items-center justify-end px-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-slate-900 border border-slate-700" />
+              {/* Speaker Earpiece Slit & Dynamic Island */}
+              <div className="absolute top-3.5 left-1/2 -translate-x-1/2 w-24 h-4 rounded-full bg-black z-30 flex items-center justify-between px-2.5 shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-[#0a1128] border border-blue-900/60" />
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-950 border border-slate-800" />
               </div>
 
-              {/* Screen Screenshot */}
-              <div className="relative w-full h-full rounded-[30px] overflow-hidden bg-black">
-                <Image
-                  src={project.screenshot}
-                  alt={project.name}
-                  fill
-                  className="object-cover object-top"
-                  sizes="260px"
-                  priority
-                />
+              {/* Realistic Mobile Screen Presentation with Live Dynamic Content */}
+              <div className="relative w-full h-full rounded-[38px] overflow-hidden bg-black flex flex-col">
+                <PhoneAppScreen project={project} />
 
-                {/* Glass Reflection */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none z-20" />
+                {/* Subtle Curved Glass Reflection */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.04] to-white/[0.09] pointer-events-none z-20" />
               </div>
 
-              {/* Home Bar */}
-              <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-24 h-1 rounded-full bg-white/40 z-30" />
+              {/* iOS Home Indicator Bar */}
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-28 h-1 rounded-full bg-white/50 z-30 pointer-events-none" />
             </div>
 
           </div>

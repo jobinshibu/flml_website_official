@@ -21,7 +21,7 @@ const clientLogos: ClientLogo[] = [
   { name: "3MS Analytics", src: "/client/3ms.png", link: "/3ms" },
   { name: "Qaro Automotive", src: "/client/qaro.png", link: "/qaro" },
   { name: "Edhwi", src: "/client/Edhwi.svg", link: "/edhwi" },
-  { name: "American Board", src: "/client/american board.png", link: "/#clients" },
+  { name: "American Board", src: "/client/american board.png", link: "/american-board" },
   { name: "Foodzer", src: "/client/foodzer.png", link: "/foodzer" },
   { name: "MyVaahan", src: "/client/myvaahan.png", link: "/myvaahan" },
   { name: "Vivlino", src: "/client/vivlino.svg", link: "/vivlino" },

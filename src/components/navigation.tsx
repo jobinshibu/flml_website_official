@@ -9,6 +9,10 @@ interface NavigationProps {
 
 export default function Navigation({ activeTab = "flml", onSelectTab }: NavigationProps) {
   const handleTabClick = (tab: "flml" | "architecture" | "life", path?: string) => {
+    // Fire instantaneous scatter transition on click
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("flml:tab_transition", { detail: tab }));
+    }
     if (onSelectTab) {
       onSelectTab(tab);
     }

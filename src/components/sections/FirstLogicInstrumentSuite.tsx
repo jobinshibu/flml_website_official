@@ -12,7 +12,6 @@ import PaymentsInstrument from "./instruments/PaymentsInstrument";
 export default function FirstLogicInstrumentSuite() {
   return (
     <div className="firstlogic-instrument-suite w-full text-left font-sans flex flex-col space-y-12">
-      <link rel="stylesheet" href="/instruments.css" />
       <AppStudioInstrument />
       <PlannerInstrument />
       <AIBlueprintInstrument />
