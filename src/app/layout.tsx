@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import ScrollRestorationFix from "@/components/ScrollRestorationFix";
+import GlobalLogiCopilot from "@/components/GlobalLogiCopilot";
 
 export const metadata: Metadata = {
   title: "First Logic Meta Lab",
@@ -26,8 +27,8 @@ export default function RootLayout({
         <main className="flex-grow bg-black">
           {children}
         </main>
-        {/* Chatbot commented out as requested */}
-        {/* <ChatWidget /> */}
+        {/* Global Logi Site-Wide AI Copilot */}
+        <GlobalLogiCopilot />
       </body>
     </html>
   );

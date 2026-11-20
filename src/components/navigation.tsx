@@ -46,6 +46,7 @@ export default function Navigation({ activeTab = "flml", onSelectTab }: Navigati
         <h1 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-neutral-400 tracking-normal leading-none font-normal flex items-baseline gap-2 sm:gap-3 md:gap-4 flex-wrap">
           {/* Word 1: FLML (High-tech bold uppercase) */}
           <button
+            id="nav-tab-flml"
             onClick={() => handleTabClick("flml")}
             className={`transition-all duration-300 cursor-pointer font-sans font-black tracking-[0.14em] sm:tracking-[0.16em] uppercase ${
               activeTab === "flml"
@@ -58,6 +59,7 @@ export default function Navigation({ activeTab = "flml", onSelectTab }: Navigati
 
           {/* Word 2: Architecture (Serif italic) */}
           <button
+            id="nav-tab-architecture"
             onClick={() => handleTabClick("architecture")}
             className={`transition-all duration-300 cursor-pointer font-serif italic tracking-wide ${
               activeTab === "architecture"
@@ -70,6 +72,7 @@ export default function Navigation({ activeTab = "flml", onSelectTab }: Navigati
 
           {/* Word 3: Life (Exact same font style as Architecture) */}
           <button
+            id="nav-tab-life"
             onClick={() => handleTabClick("life")}
             className={`transition-all duration-300 cursor-pointer font-serif italic tracking-wide ${
               activeTab === "life"

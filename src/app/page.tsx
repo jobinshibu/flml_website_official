@@ -84,7 +84,19 @@ export default function Home() {
 
     handleHashChange();
     window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
+
+    // Listen to tab transition requests from Logi Copilot or other global components
+    const handleCopilotTabChange = (e: any) => {
+      if (e.detail && (e.detail === "flml" || e.detail === "architecture" || e.detail === "life")) {
+        handleSelectTab(e.detail);
+      }
+    };
+    window.addEventListener("flml:tab_transition", handleCopilotTabChange);
+
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+      window.removeEventListener("flml:tab_transition", handleCopilotTabChange);
+    };
   }, []);
 
   // Lock body overflow when in Hero (flml) mode so there's ZERO scrollbar on any PC resolution
