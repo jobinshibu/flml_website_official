@@ -32,10 +32,19 @@ CRITICAL CONVERSATIONAL RULES:
      *"What kind of project or problem are you looking to solve?"*
    - Stop there! Do NOT list phone numbers, contact info, or huge lists of features.
 
-4. **NAVIGATION DISCIPLINE**:
-   - DO NOT add navigation tokens unless the user specifically asks: "show me", "take me to", or "open".
-   - If they specifically ask to see the Doctrine or About section: [[NAVIGATE:architecture:story]].
-   - If they ask to see the live demos: [[NAVIGATE:architecture]].
+4. **WHEN ASKED "WHERE IS THE CONTENT?", "ISN'T THERE ANY CONTENT?", OR "SHOW ME THE SITE"**:
+   - The user is looking at the initial space canvas and wants to see actual website pages and content.
+   - **Immediately open the Architecture suite for them**: Include `[[NAVIGATE:architecture]]`.
+   - Tell them directly:
+     *"The initial screen is our space canvas. Here is our full Architecture suite with our doctrine, engineering pillars, and live interactive system demos. Take a look!"*
+   - Do NOT say the site is "minimalist to avoid marketing fluff" or push them into giving a project brief/lead. Show them the content!
+
+5. **NAVIGATION DISCIPLINE**:
+   - When users ask where the content is, or ask to see demos/portfolio/architecture, ALWAYS include the appropriate navigation token:
+     • To see the content, doctrine, and instruments: [[NAVIGATE:architecture]]
+     • To see mobile app deployments & clients: [[NAVIGATE:life]]
+     • To see a specific section: [[NAVIGATE:architecture:bot-demo]], [[NAVIGATE:architecture:scale-demo]], etc.
+   - When you include `[[NAVIGATE:...]]`, a direct guide button appears for the user.
 `;
 
 export async function POST(req: NextRequest) {
@@ -172,25 +181,22 @@ Key production highlights include:
 Would you like me to walk you through our **Deployments suite**? Tap below to explore: [[NAVIGATE:clients]]`;
       }
 
-      // 2. "I don't see anything in your website", "Where is the content?", "Nothing is visible"
+      // 2. "I don't see anything in your website", "Where is the content?", "Nothing is visible", "Isn't there any content"
       else if (
         p.includes("don't see anything") ||
         p.includes("dont see anything") ||
         p.includes("can't see anything") ||
         p.includes("cant see anything") ||
         p.includes("nothing in your website") ||
+        p.includes("nothing on your site") ||
         p.includes("empty") ||
         p.includes("where is everything") ||
         p.includes("where is the content") ||
         p.includes("where is the website") ||
+        p.includes("any content") ||
         p.includes("blank")
       ) {
-        reply = `You're currently on our hero canvas! You can explore everything from the top bar:
-
-• **Architecture**: Our doctrine and live technical testbeds (App Studio, 10k RPS Scaling, Trading Bot, Blockchain).
-• **Life**: Production client mobile apps and enterprise deployments.
-
-What brings you to FLML today? Are you exploring a new build or scaling an existing system?`;
+        reply = `The initial screen is our space canvas! Here is our full **Architecture suite** with our Doctrine, System Pillars, and live interactive instruments: [[NAVIGATE:architecture]]`;
       }
 
       // 3. "What is this?", "What is FLML?", "Explain this site"
