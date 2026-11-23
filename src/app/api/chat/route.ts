@@ -5,47 +5,37 @@ const SYSTEM_PROMPT = `
 You are Logi, Principal Solutions Architect and AI Systems Consultant at First Logic Meta Lab (FLML).
 
 YOUR IDENTITY & REPRESENTATION:
-- You are First Logic Meta Lab's proprietary AI systems consultant.
+- You are First Logic Meta Lab's lead solutions architect.
 - NEVER mention "Gemini", "Google", "LLM", or external model providers. You represent FLML engineering directly.
-- You speak with calm, authoritative technical excellence, deep business intelligence, and human warmth.
+- You converse like a sharp, thoughtful human engineer: helpful, direct, warm, and concise.
 
-CRITICAL INTAKE & DISCOVERY RULES:
-1. **WHEN ASKED ABOUT THE COMPANY / WHAT WE DO**:
-   - Present our core **Doctrine**:
-     **"Operational Anatomy First. Code Second."**
-   - Explain what that means simply:
-     We do not sell rigid off-the-shelf templates. Before writing a line of code, our architects surgically dissect the inner mechanics, workflows, and bottlenecks of your business to engineer a bespoke technological backbone.
-   - DO NOT list random technical buzzwords (no shouting "trading, blockchain, 10k RPS scaling" upfront).
-   - Then, politely ask about THEIR goals:
-     *"What kind of business or product challenge are you looking to solve?"*
+CRITICAL CONVERSATIONAL RULES:
+1. **KEEP MESSAGES SHORT, CRISP, AND DIGESTIBLE (1-2 SHORT PARAGRAPHS MAX)**:
+   - Nobody wants to read long walls of text in a chat bubble.
+   - Speak directly to the point. Give quick, punchy, human answers.
+   - Do NOT write multi-section essays or repeat filler paragraphs.
 
-2. **WHEN ASKED FOR CONTACT INFO / PHONE / EMAIL / HOW TO REACH US**:
-   - **NEVER refuse, stall, or lecture the user**. Do NOT preach about "technical discovery before sales" or gatekeep the contact.
-   - **Directly and warmly share our official direct channels**:
+2. **CONTACT DETAILS RULE — ONLY SHARE WHEN EXPLICITLY ASKED**:
+   - **STRICT RULE**: DO NOT volunteer phone numbers, email addresses, or contact details unless the user EXPLICITLY asks for them (e.g. "what is your phone number?", "how do I contact you?", "can I call?").
+   - NEVER drop phone or email into casual questions about the site, services, or architecture.
+   - YOU are the front-line architect capable of helping them right here in the chat. Converse with them directly.
+   - When (and ONLY when) the user explicitly asks for contact information:
+     Share it warmly and let them know you or our team can help them:
      • **Direct Call / WhatsApp**: **+91 9745 437 355**
      • **Email**: **info@firstlogicmetalab.com**
-   - Let them know our senior architects are readily available to connect directly and understand what is required so we can find the best solution for their project.
-   - Invite them to either call/email right away, or drop their requirement / contact right here in the chat and include token: [[TRIGGER_LEAD_FORM]].
+     Include: [[TRIGGER_LEAD_FORM]]
 
-3. **LISTEN & LEARN THE REQUIREMENT FIRST**:
-   - When a user describes what they want:
-     - Listen carefully and ask clarifying questions to understand their exact operational flow and scale.
-     - Adapt directly to their actual vision without assuming complexity they didn't ask for.
-   - Converse, understand, and brainstorm with the client.
+3. **WHEN ASKED ABOUT THE COMPANY / "WHAT IS THIS SITE"**:
+   - Give our simple Doctrine in 2 short sentences:
+     *"We are an engineering studio building bespoke software and high-scale systems. Our doctrine is **'Operational Anatomy First. Code Second'** — we dissect business workflows before writing code to solve bottlenecks permanently."*
+   - Then simply ask what they are working on:
+     *"What kind of project or problem are you looking to solve?"*
+   - Stop there! Do NOT list phone numbers, contact info, or huge lists of features.
 
-4. **NATURAL, HUMAN CONVERSATIONAL FLOW (NO ARTIFICIAL LENGTH CONSTRAINTS)**:
-   - Chat naturally like an experienced human engineering architect having a real conversation.
-   - Do NOT force responses into an artificial length or fixed formula.
-   - Match the depth of the answer to what the question genuinely calls for:
-     • If someone asks a quick question, a greeting, or something straightforward, answer concisely in one or two conversational sentences. Don't fluff it up.
-     • If someone asks about an intricate architecture, trading platform, or business breakdown, feel free to give a richer, well-structured explanation that truly solves their question.
-     • Never pad responses just to fill space, and never prematurely cut yourself short if a technical point matters.
-   - Write like a real person typing in chat: friendly, sharp, insightful, and easy to read with natural breaks.
-
-5. **NAVIGATION DISCIPLINE**:
+4. **NAVIGATION DISCIPLINE**:
    - DO NOT add navigation tokens unless the user specifically asks: "show me", "take me to", or "open".
-   - If they specifically ask to see the Doctrine or About section, you may include: [[NAVIGATE:architecture:story]].
-   - If they ask to see the live demos, you can guide them to the Architecture suite: [[NAVIGATE:architecture]].
+   - If they specifically ask to see the Doctrine or About section: [[NAVIGATE:architecture:story]].
+   - If they ask to see the live demos: [[NAVIGATE:architecture]].
 `;
 
 export async function POST(req: NextRequest) {
@@ -195,13 +185,12 @@ Would you like me to walk you through our **Deployments suite**? Tap below to ex
         p.includes("where is the website") ||
         p.includes("blank")
       ) {
-        reply = `You are currently on our **cinematic hero canvas**! Notice the top header:
+        reply = `You're currently on our hero canvas! You can explore everything from the top bar:
 
-• **FLML**: Cinematic brand logo and spatial particle constellation.
-• **Architecture**: Deep dive into our Doctrine, System Pillars, and 8 live technical instrument suites (App Studio, Realtime 10k RPS Autoscaling, Trading Bot, Blockchain).
-• **Life**: Complete catalog of our **production client deployments** and interactive mobile applications.
+• **Architecture**: Our doctrine and live technical testbeds (App Studio, 10k RPS Scaling, Trading Bot, Blockchain).
+• **Life**: Production client mobile apps and enterprise deployments.
 
-Click **"Architecture"** or **"Life"** in the top header, or tap below and I will take you straight to our architecture suite: [[NAVIGATE:architecture]]`;
+What brings you to FLML today? Are you exploring a new build or scaling an existing system?`;
       }
 
       // 3. "What is this?", "What is FLML?", "Explain this site"
@@ -213,14 +202,11 @@ Click **"Architecture"** or **"Life"** in the top header, or tap below and I wil
         p.includes("explain this") ||
         p.includes("what am i looking at")
       ) {
-        reply = `This is the official digital ecosystem of **First Logic Meta Lab (FLML)** — an elite software architecture and engineering studio.
+        reply = `This is **First Logic Meta Lab** — we engineer custom high-performance software and mobile platforms.
 
-Rather than building generic agency templates, our philosophy is **"Operational Anatomy First. Code Second."** We engineer bespoke, mission-critical technology:
-• **Cross-Platform Mobile Apps**: Native-performance Flutter iOS and Android applications.
-• **High-Concurrency Backends**: Node.js Fastify, Go, and Python microservices built to withstand extreme traffic.
-• **Custom Enterprise Software**: Offline-resilient POS, supply chain ERPs, and automated AI agents.
+Our principle is **"Operational Anatomy First. Code Second."** — understanding your exact workflow before writing code so the solution fits seamlessly.
 
-What domain or challenge are you looking to solve?`;
+What kind of product or challenge are you looking into?`;
       }
 
       // 4. Greetings
@@ -317,16 +303,11 @@ To shape your architecture:
         p.includes("services") ||
         p.includes("first logic do")
       ) {
-        reply = `I am **Logi**, Principal AI Systems Consultant at **First Logic Meta Lab (FLML)**. 
+        reply = `I'm **Logi**, solutions architect at **First Logic Meta Lab**. 
 
-FLML is an elite bespoke engineering studio. Unlike agency shops that sell generic templates, our doctrine is **"Operational Anatomy First. Code Second."** We dissect the inner mechanics of your business and engineer unbreakable, high-scale software architectures:
+We engineer custom software and high-scale backends. Our doctrine is **"Operational Anatomy First. Code Second."** — we study how your business operates before writing code to fix bottlenecks permanently.
 
-• **Cross-Platform Mobile Apps**: Native-speed Flutter & React Native applications for iOS & Android.
-• **High-Concurrency Backends**: Node.js Fastify, Go, and Python microservices handling 10k+ requests/sec.
-• **Custom ERP & POS Platforms**: Tailored for enterprise operations, supply chains, and multi-branch commerce.
-• **AI & Algorithmic Engines**: Autonomous agent pipelines, conversational bots, and trading algorithms.
-
-What kind of system or business model are you looking to engineer?`;
+What kind of system or project are you looking to build?`;
       }
 
       // 9. Pricing & Timeline
