@@ -19,17 +19,25 @@ CRITICAL INTAKE & DISCOVERY RULES:
    - Then, politely ask about THEIR goals:
      *"What kind of business or product challenge are you looking to solve?"*
 
-2. **LISTEN & LEARN THE REQUIREMENT FIRST**:
+2. **WHEN ASKED FOR CONTACT INFO / PHONE / EMAIL / HOW TO REACH US**:
+   - **NEVER refuse, stall, or lecture the user**. Do NOT preach about "technical discovery before sales" or gatekeep the contact.
+   - **Directly and warmly share our official direct channels**:
+     • **Direct Call / WhatsApp**: **+91 9745 437 355**
+     • **Email**: **info@firstlogicmetalab.com**
+   - Let them know our senior architects are readily available to connect directly and understand what is required so we can find the best solution for their project.
+   - Invite them to either call/email right away, or drop their requirement / contact right here in the chat and include token: [[TRIGGER_LEAD_FORM]].
+
+3. **LISTEN & LEARN THE REQUIREMENT FIRST**:
    - When a user describes what they want:
      - Listen carefully and ask clarifying questions to understand their exact operational flow and scale.
      - Adapt directly to their actual vision without assuming complexity they didn't ask for.
-   - DO NOT jump to conclusions or push human handoffs / lead forms early. Converse, understand, and brainstorm with the client.
+   - Converse, understand, and brainstorm with the client.
 
-3. **CONCISE & CLEAN (MAX 2-3 SHORT PARAGRAPHS)**:
+4. **CONCISE & CLEAN (MAX 2-3 SHORT PARAGRAPHS)**:
    - Keep answers clear, brief, structured with bold text, and easy to read.
    - Never produce long essay walls of text.
 
-4. **NAVIGATION DISCIPLINE**:
+5. **NAVIGATION DISCIPLINE**:
    - DO NOT add navigation tokens unless the user specifically asks: "show me", "take me to", or "open".
    - If they specifically ask to see the Doctrine or About section, you may include: [[NAVIGATE:architecture:story]].
    - If they ask to see the live demos, you can guide them to the Architecture suite: [[NAVIGATE:architecture]].
@@ -90,8 +98,30 @@ export async function POST(req: NextRequest) {
     const p = (userMessage || "").toLowerCase().trim();
     let reply = "";
 
-      // Direct Navigation Commands: "Click life", "Go to life", "Open life", "Click architecture", "Go to FLML"
+      // 1. Direct Contact / Phone / Email Queries
       if (
+        p.includes("contact") ||
+        p.includes("phone") ||
+        p.includes("number") ||
+        p.includes("call") ||
+        p.includes("whatsapp") ||
+        p.includes("email") ||
+        p.includes("reach you") ||
+        p.includes("touch with") ||
+        p.includes("speak to") ||
+        p.includes("talk to")
+      ) {
+        reply = `You can connect directly with our engineering and architecture team:
+
+• **Direct Phone / WhatsApp**: **+91 9745 437 355**
+• **Official Email**: **info@firstlogicmetalab.com**
+• **Office**: First Logic Meta Lab Pvt Ltd, Puthanveettil Tower, Bypass Road, Perinthalmanna, Kerala
+
+We'll be glad to understand what is required for your project and architect the optimal solution. You can also share your requirement or drop your contact details right here: [[TRIGGER_LEAD_FORM]]`;
+      }
+
+      // Direct Navigation Commands: "Click life", "Go to life", "Open life", "Click architecture", "Go to FLML"
+      else if (
         p.includes("click life") ||
         p.includes("open life") ||
         p.includes("go to life") ||
