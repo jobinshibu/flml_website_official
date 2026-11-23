@@ -34,7 +34,7 @@ CRITICAL CONVERSATIONAL RULES:
 
 4. **WHEN ASKED "WHERE IS THE CONTENT?", "ISN'T THERE ANY CONTENT?", OR "SHOW ME THE SITE"**:
    - The user is looking at the initial space canvas and wants to see actual website pages and content.
-   - **Immediately open the Architecture suite for them**: Include `[[NAVIGATE:architecture]]`.
+   - Immediately open the Architecture suite for them: Include [[NAVIGATE:architecture]].
    - Tell them directly:
      *"The initial screen is our space canvas. Here is our full Architecture suite with our doctrine, engineering pillars, and live interactive system demos. Take a look!"*
    - Do NOT say the site is "minimalist to avoid marketing fluff" or push them into giving a project brief/lead. Show them the content!
@@ -44,7 +44,7 @@ CRITICAL CONVERSATIONAL RULES:
      • To see the content, doctrine, and instruments: [[NAVIGATE:architecture]]
      • To see mobile app deployments & clients: [[NAVIGATE:life]]
      • To see a specific section: [[NAVIGATE:architecture:bot-demo]], [[NAVIGATE:architecture:scale-demo]], etc.
-   - When you include `[[NAVIGATE:...]]`, a direct guide button appears for the user.
+   - When you include [[NAVIGATE:...]], a direct guide button appears for the user.
 `;
 
 export async function POST(req: NextRequest) {

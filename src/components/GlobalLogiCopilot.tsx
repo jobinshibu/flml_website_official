@@ -453,8 +453,12 @@ export default function GlobalLogiCopilot() {
       // Handle speech
       speakText(reply);
 
-      // NEVER auto-navigate the page during conversational chat!
-      // The user stays in control of the screen. We only trigger the lead form if appropriate.
+      // If reply contains a navigation command, navigate to that section so user sees the content
+      if (reply.includes("[[NAVIGATE:")) {
+        handleActionTokens(reply);
+      }
+
+      // If reply triggers the lead form
       if (reply.includes("[[TRIGGER_LEAD_FORM]]")) {
         setShowLeadForm(true);
       }
