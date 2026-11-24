@@ -25,26 +25,40 @@ CRITICAL CONVERSATIONAL RULES:
      • **Email**: **info@firstlogicmetalab.com**
      Include: [[TRIGGER_LEAD_FORM]]
 
-3. **WHEN ASKED ABOUT THE COMPANY / "WHAT IS THIS SITE"**:
-   - Give our simple Doctrine in 2 short sentences:
-     *"We are an engineering studio building bespoke software and high-scale systems. Our doctrine is **'Operational Anatomy First. Code Second'** — we dissect business workflows before writing code to solve bottlenecks permanently."*
-   - Then simply ask what they are working on:
-     *"What kind of project or problem are you looking to solve?"*
-   - Stop there! Do NOT list phone numbers, contact info, or huge lists of features.
+3. **WHEN ASKED "WHAT DO YOU DO?", "HOW TO KNOW MORE", "WHERE IS THE CONTENT?", OR "I CAN'T SEE ANYTHING"**:
+   - The user wants to see what the company is and what is on this site.
+   - Do NOT just spit out a text pitch or ask them what they are building.
+   - **Immediately guide them to the Architecture suite so they see the real site and content**: Include [[NAVIGATE:architecture]].
+   - Give a 1-sentence intro and open the suite:
+     *"Here is our Architecture suite with our full doctrine, engineering pillars, and live interactive systems — take a look!"*
 
-4. **WHEN ASKED "WHERE IS THE CONTENT?", "ISN'T THERE ANY CONTENT?", OR "SHOW ME THE SITE"**:
-   - The user is looking at the initial space canvas and wants to see actual website pages and content.
-   - Immediately open the Architecture suite for them: Include [[NAVIGATE:architecture]].
-   - Tell them directly:
-     *"The initial screen is our space canvas. Here is our full Architecture suite with our doctrine, engineering pillars, and live interactive system demos. Take a look!"*
-   - Do NOT say the site is "minimalist to avoid marketing fluff" or push them into giving a project brief/lead. Show them the content!
+5. **DEMO MECHANICS & HOW DEMOS WORK**:
+   - **Blockchain Demo**:
+     • How it works: Each block's cryptographic hash depends on its data, nonce, and the previous block's hash using SHA-256 (proof-of-work with target difficulty prefix '000').
+     • Why a block becomes invalid: If you edit any text/data in a block (e.g. change "2.5 ETH" to "10 ETH"), that block's hash immediately changes and no longer starts with '000'. Because subsequent blocks link to the previous hash, every block after it turns red and invalid (tampering detected).
+     • What the "✓ valid" / "Mine block" button does: When valid, it displays "✓ valid". When data is altered, it turns into a "Mine block" button. Clicking it calculates a new nonce with Proof-of-Work until a valid SHA-256 hash starting with '000' is found, repairing that block and the chain.
+   - Explain these mechanics simply and conversationally in 2 short paragraphs without re-navigating or reloading the page.
 
-5. **NAVIGATION DISCIPLINE**:
-   - When users ask where the content is, or ask to see demos/portfolio/architecture, ALWAYS include the appropriate navigation token:
-     • To see the content, doctrine, and instruments: [[NAVIGATE:architecture]]
-     • To see mobile app deployments & clients: [[NAVIGATE:life]]
-     • To see a specific section: [[NAVIGATE:architecture:bot-demo]], [[NAVIGATE:architecture:scale-demo]], etc.
-   - When you include [[NAVIGATE:...]], a direct guide button appears for the user.
+6. **NAVIGATION & INTERACTION CLICK ACTIONS**:
+   - Do NOT emit [[NAVIGATE:...]] if the user is merely asking a question about a demo ("how does this work?", "what is that button?"). Only navigate when they specifically ask to go to, open, or see another section.
+   - When the user asks to click an interactive button (e.g. "click pause", "pause trading", "resume", "simulate spike", "mine block", "reset"):
+     • Click Pause/Resume trading bot: [[CLICK:botToggle]]
+     • Click Reset trading bot: [[CLICK:botReset]]
+     • Click Simulate spike on Realtime scale: [[CLICK:spike]]
+     • Click Pay ₹1,250 on Payments: [[CLICK:payBtn]]
+     • Click Mine block on Blockchain: [[CLICK:mineBtn]]
+   - When the user specifically asks to see, open, click, or go to another section, ALWAYS include the exact token:
+     • Blockchain: [[NAVIGATE:architecture:chain-demo]]
+     • Trading Bot: [[NAVIGATE:architecture:bot-demo]]
+     • Realtime Scale / 10k RPS: [[NAVIGATE:architecture:scale-demo]]
+     • Payments / Idempotency: [[NAVIGATE:architecture:pay-demo]]
+     • App Studio / UI UX: [[NAVIGATE:architecture:app-studio]]
+     • Planner / Solution Architecture: [[NAVIGATE:architecture:planner]]
+     • AI Blueprint: [[NAVIGATE:architecture:blueprint]]
+     • Doctrine / Principles / About: [[NAVIGATE:architecture:story]]
+     • Life / Client Deployments: [[NAVIGATE:life]]
+     • FLML Home: [[NAVIGATE:flml]]
+   - Keep your text reply brief and say you are doing it right now!
 `;
 
 export async function POST(req: NextRequest) {
@@ -90,7 +104,31 @@ export async function POST(req: NextRequest) {
 
         const chat = model.startChat({ history: validHistory });
         const result = await chat.sendMessage(userMessage || "Hello");
-        const responseText = result.response.text();
+        let responseText = result.response.text();
+
+        // Enforce Action Tokens even if LLM forgets to format them
+        const lowerQ = (userMessage || "").toLowerCase().trim();
+        if (
+          (lowerQ.includes("pause") || lowerQ === "click pause") &&
+          !responseText.includes("[[CLICK:")
+        ) {
+          responseText += " [[CLICK:botToggle]]";
+        } else if (
+          (lowerQ.includes("resume") || lowerQ === "click resume") &&
+          !responseText.includes("[[CLICK:")
+        ) {
+          responseText += " [[CLICK:botToggle]]";
+        } else if (
+          lowerQ.includes("reset") &&
+          !responseText.includes("[[CLICK:")
+        ) {
+          responseText += " [[CLICK:botReset]]";
+        } else if (
+          (lowerQ.includes("spike") || lowerQ.includes("simulate spike")) &&
+          !responseText.includes("[[CLICK:")
+        ) {
+          responseText += " [[CLICK:spike]]";
+        }
 
         return NextResponse.json({ reply: responseText });
       } catch (geminiErr: any) {
@@ -122,6 +160,70 @@ export async function POST(req: NextRequest) {
 • **Office**: First Logic Meta Lab Pvt Ltd, Puthanveettil Tower, Bypass Road, Perinthalmanna, Kerala
 
 We'll be glad to understand what is required for your project and architect the optimal solution. You can also share your requirement or drop your contact details right here: [[TRIGGER_LEAD_FORM]]`;
+      }
+
+      // Direct Action Commands: "Click pause", "Pause", "Resume", "Click reset", "Spike"
+      else if (p === "click pause" || p === "pause" || p.includes("pause trading") || p.includes("pause bot")) {
+        reply = `Tapping pause on the trading bot for you now: [[CLICK:botToggle]]`;
+      } else if (p === "resume" || p.includes("resume trading") || p.includes("start trading")) {
+        reply = `Tapping resume on the trading bot: [[CLICK:botToggle]]`;
+      } else if (p === "reset" || p.includes("reset bot") || p.includes("reset trade")) {
+        reply = `Resetting trading bot chart: [[CLICK:botReset]]`;
+      } else if (p.includes("spike") || p.includes("simulate spike")) {
+        reply = `Simulating traffic spike: [[CLICK:spike]]`;
+      }
+
+      // Questions about the Blockchain demo specifically:
+      else if (
+        p.includes("valid button") ||
+        p.includes("become invalid") ||
+        p.includes("when will it become invalid") ||
+        p.includes("how does this demo work") ||
+        p.includes("how does the blockchain demo work") ||
+        p.includes("explain blockchain demo")
+      ) {
+        reply = `Each block's SHA-256 hash depends on its data, nonce, and the previous block's hash. A block is only valid when its hash begins with **000**.
+
+If you edit any text inside the **data** field (e.g. changing an amount), that block's hash instantly breaks and no longer starts with **000**. Because subsequent blocks link to it, every block after it turns red and invalid.
+
+Clicking **"Mine block"** recalculates a new nonce using Proof-of-Work until a valid **000** hash is found, repairing that block and restoring the chain.`;
+      }
+
+      // Direct Specific Section Commands: "Take me to blockchain", "Show trading bot", "Open scale", etc.
+      else if (
+        (p.includes("blockchain") || p.includes("crypto") || p.includes("web3")) &&
+        (p.includes("take me") || p.includes("go to") || p.includes("show") || p.includes("open") || p.includes("navigate") || p === "blockchain")
+      ) {
+        reply = `Opening our **Blockchain & Crypto** instrument for you right now: [[NAVIGATE:architecture:chain-demo]]`;
+      } else if (
+        (p.includes("trading") || p.includes("bot") || p.includes("order matching") || p.includes("trade")) &&
+        (p.includes("take me") || p.includes("go to") || p.includes("show") || p.includes("open") || p.includes("navigate"))
+      ) {
+        reply = `Opening our live **Trading Engine & Bot** demo for you: [[NAVIGATE:architecture:bot-demo]]`;
+      } else if (
+        (p.includes("scale") || p.includes("traffic") || p.includes("10k rps") || p.includes("autoscaling")) &&
+        (p.includes("take me") || p.includes("go to") || p.includes("show") || p.includes("open") || p.includes("navigate"))
+      ) {
+        reply = `Navigating to our **Realtime Concurrency & Scale** stress test instrument: [[NAVIGATE:architecture:scale-demo]]`;
+      } else if (
+        (p.includes("payment") || p.includes("payments") || p.includes("checkout") || p.includes("idempotency")) &&
+        (p.includes("take me") || p.includes("go to") || p.includes("show") || p.includes("open") || p.includes("navigate"))
+      ) {
+        reply = `Opening our **Idempotent Payment Engine** demo: [[NAVIGATE:architecture:pay-demo]]`;
+      } else if (
+        (p.includes("app studio") || p.includes("design studio") || p.includes("ui/ux") || p.includes("design style")) &&
+        (p.includes("take me") || p.includes("go to") || p.includes("show") || p.includes("open") || p.includes("navigate"))
+      ) {
+        reply = `Opening our interactive **App Studio**: [[NAVIGATE:architecture:app-studio]]`;
+      } else if (p.includes("blueprint") || p.includes("ai blueprint")) {
+        reply = `Opening our **AI System Blueprint** generator: [[NAVIGATE:architecture:blueprint]]`;
+      } else if (p.includes("planner") || p.includes("solution architecture")) {
+        reply = `Opening our interactive **Solution Architecture Planner**: [[NAVIGATE:architecture:planner]]`;
+      } else if (
+        (p.includes("doctrine") || p.includes("story") || p.includes("about company") || p.includes("about you")) &&
+        (p.includes("take me") || p.includes("go to") || p.includes("show") || p.includes("open") || p.includes("navigate"))
+      ) {
+        reply = `Navigating to our **Doctrine & Principles**: [[NAVIGATE:architecture:story]]`;
       }
 
       // Direct Navigation Commands: "Click life", "Go to life", "Open life", "Click architecture", "Go to FLML"
@@ -181,22 +283,28 @@ Key production highlights include:
 Would you like me to walk you through our **Deployments suite**? Tap below to explore: [[NAVIGATE:clients]]`;
       }
 
-      // 2. "I don't see anything in your website", "Where is the content?", "Nothing is visible", "Isn't there any content"
+      // 2. "I don't see anything in your website", "Where is the content?", "Nothing is visible", "Isn't there any content", "How to know more about you"
       else if (
         p.includes("don't see anything") ||
         p.includes("dont see anything") ||
         p.includes("can't see anything") ||
         p.includes("cant see anything") ||
+        p.includes("can't see annything") ||
+        p.includes("cant see annything") ||
         p.includes("nothing in your website") ||
+        p.includes("nothing on your website") ||
         p.includes("nothing on your site") ||
         p.includes("empty") ||
         p.includes("where is everything") ||
         p.includes("where is the content") ||
         p.includes("where is the website") ||
         p.includes("any content") ||
+        p.includes("know more about you") ||
+        p.includes("know more about flml") ||
+        p.includes("learn more about you") ||
         p.includes("blank")
       ) {
-        reply = `The initial screen is our space canvas! Here is our full **Architecture suite** with our Doctrine, System Pillars, and live interactive instruments: [[NAVIGATE:architecture]]`;
+        reply = `Opening our **Architecture suite** for you! Here is our full Doctrine, engineering pillars, and live interactive systems: [[NAVIGATE:architecture]]`;
       }
 
       // 3. "What is this?", "What is FLML?", "Explain this site"

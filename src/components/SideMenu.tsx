@@ -111,6 +111,7 @@ function SideMenuInner({ items }: { items: SideMenuItem[] }) {
         return (
           <button
             key={item.id}
+            id={`sidemenu-${item.id}`}
             onClick={() => handleScrollTo(item.id)}
             className={`text-left transition-all duration-300 py-0.5 cursor-pointer ${
               isActive

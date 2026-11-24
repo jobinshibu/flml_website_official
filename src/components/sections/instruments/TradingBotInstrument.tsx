@@ -350,6 +350,7 @@ export default function TradingBotInstrument() {
               </select>
 
               <button
+                id="botToggle"
                 className="btn"
                 style={{ minHeight: "40px" }}
                 onClick={() => setIsRunning(!isRunning)}
@@ -358,6 +359,7 @@ export default function TradingBotInstrument() {
               </button>
 
               <button
+                id="botReset"
                 className="btn"
                 style={{ minHeight: "40px" }}
                 onClick={() => {

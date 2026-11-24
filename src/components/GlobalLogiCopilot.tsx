@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { 
   Mic, MicOff, Volume2, VolumeX, Send, Sparkles, 
-  X, ArrowRight, ShieldCheck, Compass, Move
+  X, ArrowRight, ShieldCheck, Compass, Move, Maximize2, Minimize2
 } from "lucide-react";
 
 interface ChatMessage {
@@ -64,6 +64,7 @@ export default function GlobalLogiCopilot() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isInitialized, setIsInitialized] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const hasUserMovedRef = useRef(false); // Track if user has manually moved the mascot
 
   // Chat message state
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -76,9 +77,10 @@ export default function GlobalLogiCopilot() {
   ]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [botState, setBotState] = useState<"idle" | "wave" | "listen" | "happy" | "speaking" | "flight">("idle");
+  const [botState, setBotState] = useState<"idle" | "wave" | "listen" | "happy" | "speaking" | "flight" | "tap" | "move">("idle");
   const [speechBubbleText, setSpeechBubbleText] = useState("Hi there! Welcome to First Logic Meta Lab. How can I help you today? ✨");
   const [showSpeechBubble, setShowSpeechBubble] = useState(true);
+  const [isExpandedHistory, setIsExpandedHistory] = useState(false); // Controls compact vs full history mode
   
   // Voice Controls
   const [isVoiceMuted, setIsVoiceMuted] = useState(false);
@@ -97,14 +99,24 @@ export default function GlobalLogiCopilot() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const bubbleTimeoutRef = useRef<any>(null);
   const chatDrawerRef = useRef<HTMLDivElement>(null);
+  const mascotRef = useRef<HTMLDivElement>(null);
 
-  // Close chat when clicking outside
+  // Close chat when clicking outside (ignore clicks inside drawer or on mascot)
   useEffect(() => {
     if (!isOpen) return;
 
     const handleClickOutside = (e: MouseEvent) => {
-      if (chatDrawerRef.current && !chatDrawerRef.current.contains(e.target as Node)) {
+      const target = e.target as Node;
+      if (
+        chatDrawerRef.current &&
+        !chatDrawerRef.current.contains(target) &&
+        mascotRef.current &&
+        !mascotRef.current.contains(target)
+      ) {
         setIsOpen(false);
+        if (!hasUserMovedRef.current) {
+          flyMascotTo(window.innerWidth - 120, Math.max(window.innerHeight - 150, 20));
+        }
       }
     };
 
@@ -114,11 +126,11 @@ export default function GlobalLogiCopilot() {
     };
   }, [isOpen]);
 
-  // Initialize Mascot Position to bottom-right (above brand logo)
+  // Initialize Mascot Position to bottom-right corner
   useEffect(() => {
     if (typeof window !== "undefined") {
       const initX = Math.max(window.innerWidth - 120, 20);
-      const initY = Math.max(window.innerHeight - 170, 20);
+      const initY = Math.max(window.innerHeight - 150, 20); // Initial bottom right corner
       setPosition({ x: initX, y: initY });
       setIsInitialized(true);
 
@@ -295,11 +307,51 @@ export default function GlobalLogiCopilot() {
     }, 900);
   };
 
+  // Safe return: only bring mascot back if user hasn't explicitly moved him elsewhere!
+  const returnMascotToRest = () => {
+    if (hasUserMovedRef.current) {
+      // Respect user's chosen location!
+      setBotState("idle");
+    } else {
+      flyMascotTo(window.innerWidth - 100, Math.max(40, window.innerHeight - 380));
+    }
+  };
+
   // Execute Site Navigation Actions from AI token tags (e.g. [[NAVIGATE:clients:healine]])
   const handleActionTokens = (text: string) => {
     // Check for Lead Form trigger token
     if (text.includes("[[TRIGGER_LEAD_FORM]]")) {
       setShowLeadForm(true);
+    }
+
+    // Check for Direct Click Action tokens (e.g. [[CLICK:botToggle]])
+    const clickMatch = text.match(/\[\[CLICK:([a-zA-Z0-9_-]+)\]\]/);
+    if (clickMatch && typeof window !== "undefined") {
+      const targetBtnId = clickMatch[1];
+      const btnEl = document.getElementById(targetBtnId);
+      if (btnEl) {
+        // Bring button into view smoothly first if not visible
+        btnEl.scrollIntoView({ behavior: "smooth", block: "center" });
+
+        setTimeout(() => {
+          const rect = btnEl.getBoundingClientRect();
+          setBotState("flight");
+          // Fly mascot right to the button's coordinates on viewport
+          flyMascotTo(Math.max(rect.left - 20, 20), Math.max(rect.top - 65, 40));
+          triggerBubble(`Clicking ${btnEl.textContent?.trim() || "button"}… ⚡`, 1800);
+
+          setTimeout(() => {
+            setBotState("tap");
+            btnEl.click();
+            setTimeout(() => {
+              setBotState("happy");
+              setTimeout(() => {
+                returnMascotToRest();
+              }, 1600);
+            }, 350);
+          }, 700);
+        }, 300);
+      }
     }
 
     // Check for navigation tokens
@@ -332,45 +384,90 @@ export default function GlobalLogiCopilot() {
         }
       } else if (tabOrSection === "architecture") {
         if (typeof window !== "undefined") {
-          // If specific bay requested (e.g. bot-demo, scale-demo, app-studio, pay-demo)
-          const targetSubEl = targetSub ? document.getElementById(targetSub) : null;
+          // 1. Map aliases to exact element IDs
+          let targetId = targetSub || "";
+          if (targetId === "blockchain" || targetId === "crypto" || targetId === "chain") targetId = "chain-demo";
+          if (targetId === "trading" || targetId === "trade" || targetId === "bot") targetId = "bot-demo";
+          if (targetId === "scale" || targetId === "traffic" || targetId === "autoscaling") targetId = "scale-demo";
+          if (targetId === "payment" || targetId === "payments") targetId = "pay-demo";
+          if (targetId === "studio") targetId = "app-studio";
 
-          // 1. Switch tab if not already on architecture
+          // If user is already on the target section in viewport, do NOT re-scroll or re-transition!
+          const targetEl = targetId ? document.getElementById(targetId) : null;
+          if (targetEl) {
+            const rect = targetEl.getBoundingClientRect();
+            // If already in middle of viewport (visible on screen), do nothing!
+            if (rect.top >= -100 && rect.top <= window.innerHeight * 0.75) {
+              return;
+            }
+          }
+
+          // 2. Switch tab if not already on architecture
           window.dispatchEvent(new CustomEvent("flml:tab_transition", { detail: "architecture" }));
 
-          // 2. Locate the specific section or the navbar
-          if (targetSubEl) {
-            const rect = targetSubEl.getBoundingClientRect();
-            setBotState("flight");
-            // Fly directly to the specific instrument bay
-            setPosition({ x: Math.max(window.innerWidth / 2 - 40, 20), y: Math.max(window.innerHeight / 2 - 60, 40) });
-            triggerBubble(`Opening ${targetSub.replace("-demo", "").toUpperCase()} demo… ⚡`, 2200);
+          const findAndFlyToSection = () => {
+            // First check if side menu button exists (e.g. sidemenu-planner)
+            const sideBtn = document.getElementById(`sidemenu-${targetId}`);
+            const el = targetId ? document.getElementById(targetId) : null;
 
-            setTimeout(() => {
-              targetSubEl.scrollIntoView({ behavior: "smooth", block: "center" });
-              setBotState("happy");
+            if (sideBtn && sideBtn.offsetParent !== null) {
+              // Fly mascot directly to the side menu item and click it!
+              const rect = sideBtn.getBoundingClientRect();
+              setBotState("flight");
+              flyMascotTo(Math.max(rect.left + rect.width + 10, 20), Math.max(rect.top - 20, 20));
+              triggerBubble(`Navigating to ${targetId.toUpperCase()}… ⚡`, 2000);
+
               setTimeout(() => {
-                setBotState("idle");
-                flyMascotTo(window.innerWidth - 120, window.innerHeight - 170);
-              }, 2200);
-            }, 500);
-          } else {
-            // General architecture view
-            const targetNavBtn = document.getElementById("nav-tab-architecture");
-            const rect = targetNavBtn ? targetNavBtn.getBoundingClientRect() : { left: 140, top: 40 };
+                setBotState("tap");
+                sideBtn.click();
+                setTimeout(() => {
+                  setBotState("happy");
+                  setTimeout(() => {
+                    returnMascotToRest();
+                  }, 1800);
+                }, 350);
+              }, 600);
+            } else if (el) {
+              const rect = el.getBoundingClientRect();
+              setBotState("flight");
+              // Fly mascot directly to the target section title
+              flyMascotTo(Math.max(window.innerWidth / 2 - 40, 20), Math.max(rect.top - 40, 60));
+              triggerBubble(`Opening ${targetId.replace("-demo", "").toUpperCase()}… ⚡`, 2200);
 
-            setBotState("flight");
-            setPosition({ x: Math.max(rect.left - 30, 20), y: Math.max(rect.top + 10, 20) });
-            triggerBubble("Opening Architecture… ⚡", 2200);
-
-            setTimeout(() => {
-              setBotState("happy");
               setTimeout(() => {
-                setBotState("idle");
-                flyMascotTo(window.innerWidth - 120, window.innerHeight - 170);
-              }, 1800);
-            }, 1100);
-          }
+                el.scrollIntoView({ behavior: "smooth", block: "center" });
+                setBotState("tap");
+                setTimeout(() => {
+                  setBotState("happy");
+                  setTimeout(() => {
+                    returnMascotToRest();
+                  }, 1800);
+                }, 400);
+              }, 400);
+            } else {
+              // General architecture view
+              const targetNavBtn = document.getElementById("nav-tab-architecture");
+              const rect = targetNavBtn ? targetNavBtn.getBoundingClientRect() : { left: 140, top: 40 };
+
+              setBotState("flight");
+              flyMascotTo(Math.max(rect.left - 20, 20), Math.max(rect.top - 50, 20));
+              triggerBubble("Opening Architecture… ⚡", 2200);
+
+              setTimeout(() => {
+                setBotState("tap");
+                targetNavBtn?.click();
+                setTimeout(() => {
+                  setBotState("happy");
+                  setTimeout(() => {
+                    returnMascotToRest();
+                  }, 1800);
+                }, 300);
+              }, 700);
+            }
+          };
+
+          // Give DOM 100ms in case tab switch renders sections
+          setTimeout(findAndFlyToSection, 120);
         }
       } else if (tabOrSection === "flml") {
         if (typeof window !== "undefined") {
@@ -453,14 +550,9 @@ export default function GlobalLogiCopilot() {
       // Handle speech
       speakText(reply);
 
-      // If reply contains a navigation command, navigate to that section so user sees the content
-      if (reply.includes("[[NAVIGATE:")) {
+      // If reply contains an action command (navigation, click, or lead form)
+      if (reply.includes("[[NAVIGATE:") || reply.includes("[[CLICK:") || reply.includes("[[TRIGGER_LEAD_FORM]]")) {
         handleActionTokens(reply);
-      }
-
-      // If reply triggers the lead form
-      if (reply.includes("[[TRIGGER_LEAD_FORM]]")) {
-        setShowLeadForm(true);
       }
 
       // Show floating bubble on mascot (ensure balanced ** markers so bold doesn't get cut in half)
@@ -511,6 +603,7 @@ export default function GlobalLogiCopilot() {
         onDragStart={() => setIsDragging(true)}
         onDragEnd={(_, info) => {
           setTimeout(() => setIsDragging(false), 100);
+          hasUserMovedRef.current = true; // User intentionally placed mascot here
           setPosition({
             x: Math.max(10, Math.min(window.innerWidth - 85, position.x + info.offset.x)),
             y: Math.max(10, Math.min(window.innerHeight - 95, position.y + info.offset.y))
@@ -521,7 +614,7 @@ export default function GlobalLogiCopilot() {
           y: position.y,
           transition: { type: "spring", stiffness: 120, damping: 18 }
         }}
-        className="fixed top-0 left-0 z-[80] cursor-grab active:cursor-grabbing select-none"
+        className="fixed top-0 left-0 z-[100] cursor-grab active:cursor-grabbing select-none"
         style={{ touchAction: "none" }}
       >
         {/* Holographic Speech Bubble that travels directly with Logi */}
@@ -565,63 +658,205 @@ export default function GlobalLogiCopilot() {
 
         {/* The Animated Mascot Vector */}
         <div
-          onClick={() => {
+          ref={mascotRef}
+          onClick={(e) => {
+            e.stopPropagation();
             if (!isDragging) {
-              setIsOpen(true);
-              setBotState("wave");
-              setTimeout(() => setBotState("idle"), 1600);
+              setIsOpen((prev) => {
+                const nextOpen = !prev;
+                if (!nextOpen) {
+                  // Closing:
+                  setBotState("happy");
+                  if (!hasUserMovedRef.current) {
+                    flyMascotTo(window.innerWidth - 120, Math.max(window.innerHeight - 150, 20));
+                  }
+                  setTimeout(() => setBotState("idle"), 1200);
+                } else {
+                  // Opening:
+                  setBotState("wave");
+                  if (!hasUserMovedRef.current) {
+                    flyMascotTo(window.innerWidth - 100, Math.max(40, window.innerHeight - 380));
+                  }
+                  setTimeout(() => setBotState("idle"), 1600);
+                }
+                return nextOpen;
+              });
             }
           }}
-          className="relative w-20 h-20 group filter drop-shadow-[0_8px_25px_rgba(6,182,212,0.45)]"
+          className="relative w-20 h-20 group filter drop-shadow-[0_8px_25px_rgba(6,182,212,0.45)] cursor-pointer"
         >
-          {/* Glowing Aura Ring */}
-          <div className="absolute inset-0 rounded-full bg-cyan-500/15 filter blur-lg animate-pulse" />
-
-          {/* SVG Mascot Character */}
-          <svg viewBox="0 0 72 80" className="w-full h-full overflow-visible relative z-10 transition-transform group-hover:scale-110">
+          {/* SVG Mascot Character with Arms, Headlight, Floating Animation & Tapping Hand */}
+          <svg viewBox="0 0 72 80" className="w-full h-full overflow-visible relative z-10 transition-transform group-hover:scale-105">
             <defs>
               <linearGradient id="copilotHead" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stopColor="#FFFFFF" />
                 <stop offset="1" stopColor="#DCE4F7" />
               </linearGradient>
+              <filter id="copilotGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
             </defs>
-            <ellipse cx="36" cy="77" rx="16" ry="3" fill="#000" opacity="0.35" />
-            <g className={botState === "speaking" ? "animate-bounce" : botState === "flight" ? "-rotate-12" : ""}>
+
+            {/* Ground / Air Shadow with Scale Animation */}
+            <ellipse 
+              cx="36" 
+              cy="77" 
+              rx="16" 
+              ry="3" 
+              fill="#000" 
+              opacity="0.35" 
+              style={{
+                transformOrigin: "36px 77px",
+                animation: "copilotShadow 3.2s ease-in-out infinite"
+              }}
+            />
+
+            {/* Whole Robot Body with Floating/Bobbing Animation */}
+            <g 
+              style={{
+                transformOrigin: "36px 60px",
+                animation: botState === "flight" || botState === "move" || botState === "tap" ? "none" : "copilotBob 3.2s ease-in-out infinite",
+                transform: botState === "flight" || botState === "move" ? "rotate(-8deg)" : botState === "tap" ? "rotate(-8deg) scale(0.92)" : undefined,
+                transition: "transform 0.25s ease"
+              }}
+            >
+              {/* Antenna Stem */}
               <line x1="36" y1="5" x2="36" y2="13" stroke="#C9D3EC" strokeWidth="2.6" strokeLinecap="round" />
+
+              {/* Antenna Light Bulb with Glowing Filter and Pulse */}
               <circle
                 cx="36"
                 cy="5"
                 r="4.5"
                 fill={isListening ? "#FF4D4D" : botState === "speaking" ? "#22D3EE" : "#FFB02E"}
-                className={isListening ? "animate-ping" : ""}
+                filter="url(#copilotGlow)"
+                style={{
+                  animation: "copilotLightPulse 2s ease-in-out infinite"
+                }}
               />
+
+              {/* Ears */}
               <circle cx="8" cy="32" r="5.5" fill="#8FB1FF" />
               <circle cx="64" cy="32" r="5.5" fill="#8FB1FF" />
+
+              {/* Head Shell */}
               <rect x="8" y="12" width="56" height="42" rx="21" fill="url(#copilotHead)" />
+
+              {/* Face Screen */}
               <rect x="14" y="19" width="44" height="28" rx="14" fill="#0D1430" />
               
-              {/* Animated Expressions */}
+              {/* Animated Eyes / Happy Eyes */}
               {botState === "happy" ? (
-                <g fill="none" stroke="#7CF3FF" strokeWidth="3" strokeLinecap="round">
+                <g fill="none" stroke="#7CF3FF" strokeWidth="3" strokeLinecap="round" filter="url(#copilotGlow)">
                   <path d="M22 33 q5 -6 10 0" />
                   <path d="M40 33 q5 -6 10 0" />
                 </g>
               ) : (
-                <g fill="#7CF3FF">
-                  <ellipse cx="27" cy="31.5" rx="5" ry="6" />
-                  <ellipse cx="45" cy="31.5" rx="5" ry="6" />
+                <g fill="#7CF3FF" filter="url(#copilotGlow)">
+                  <ellipse 
+                    cx="27" 
+                    cy="31.5" 
+                    rx="5" 
+                    ry="6" 
+                    style={{
+                      transformOrigin: "27px 31.5px",
+                      animation: "copilotBlink 4.6s infinite"
+                    }}
+                  />
+                  <ellipse 
+                    cx="45" 
+                    cy="31.5" 
+                    rx="5" 
+                    ry="6" 
+                    style={{
+                      transformOrigin: "45px 31.5px",
+                      animation: "copilotBlink 4.6s infinite"
+                    }}
+                  />
                   <circle cx="29" cy="29" r="1.8" fill="#fff" />
                   <circle cx="47" cy="29" r="1.8" fill="#fff" />
                 </g>
               )}
               
+              {/* Cheeks / Blush */}
               <ellipse cx="19.5" cy="39" rx="3.2" ry="2" fill="#FF8FA3" opacity="0.75" />
               <ellipse cx="52.5" cy="39" rx="3.2" ry="2" fill="#FF8FA3" opacity="0.75" />
+
+              {/* Smile Mouth */}
               <path d="M32.5 39.5 q3.5 3 7 0" fill="none" stroke="#7CF3FF" strokeWidth="2" strokeLinecap="round" />
+
+              {/* Left Arm (Waves when greeting/clicked) */}
+              <path 
+                d="M22 61 q-8 2 -9 9" 
+                fill="none" 
+                stroke="#DCE4F7" 
+                strokeWidth="5.5" 
+                strokeLinecap="round"
+                style={{
+                  transformOrigin: "22px 60px",
+                  animation: botState === "wave" ? "copilotWave 0.5s ease-in-out 3" : "none"
+                }}
+              />
+
+              {/* Body */}
               <rect x="21" y="54" width="30" height="18" rx="9" fill="url(#copilotHead)" />
-              <path d="M36 67.5 c-3.5-2.4-5-4-5-6 a2.5 2.5 0 0 1 5-1 a2.5 2.5 0 0 1 5 1 c0 2-1.5 3.6-5 6z" fill="#FF6B8A" />
+
+              {/* Beating Heart on Chest */}
+              <path 
+                d="M36 67.5 c-3.5-2.4-5-4-5-6 a2.5 2.5 0 0 1 5-1 a2.5 2.5 0 0 1 5 1 c0 2-1.5 3.6-5 6z" 
+                fill="#FF6B8A" 
+                style={{
+                  transformOrigin: "36px 63px",
+                  animation: "copilotBeat 1.2s ease-in-out infinite"
+                }}
+              />
+
+              {/* Right Arm & Pointing/Tapping Finger */}
+              <g 
+                style={{
+                  transformOrigin: "50px 60px",
+                  transform: botState === "tap" ? "rotate(14deg)" : botState === "move" || botState === "flight" ? "rotate(-10deg)" : "rotate(0deg)",
+                  transition: "transform 0.22s ease-out"
+                }}
+              >
+                <path d="M50 61 q7 -3 8 -11" fill="none" stroke="#DCE4F7" strokeWidth="5.5" strokeLinecap="round" />
+                <circle cx="58" cy="47" r="3.8" fill="#F4F7FF" />
+              </g>
             </g>
           </svg>
+
+          {/* Embedded Custom Keyframe Animations */}
+          <style jsx>{`
+            @keyframes copilotBob {
+              0%, 100% { transform: translateY(0); }
+              50% { transform: translateY(-7px); }
+            }
+            @keyframes copilotShadow {
+              0%, 100% { transform: scaleX(1); opacity: 0.35; }
+              50% { transform: scaleX(0.78); opacity: 0.2; }
+            }
+            @keyframes copilotLightPulse {
+              0%, 100% { opacity: 1; filter: drop-shadow(0 0 5px rgba(255, 176, 46, 0.95)); }
+              50% { opacity: 0.6; filter: drop-shadow(0 0 2px rgba(255, 176, 46, 0.4)); }
+            }
+            @keyframes copilotBlink {
+              0%, 92%, 100% { transform: scaleY(1); }
+              95% { transform: scaleY(0.08); }
+            }
+            @keyframes copilotBeat {
+              0%, 100% { transform: scale(1); }
+              15%, 45% { transform: scale(1.18); }
+              30% { transform: scale(0.95); }
+            }
+            @keyframes copilotWave {
+              0%, 100% { transform: rotate(0deg); }
+              50% { transform: rotate(38deg); }
+            }
+          `}</style>
         </div>
       </motion.div>
 
@@ -636,7 +871,11 @@ export default function GlobalLogiCopilot() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ duration: 0.22 }}
-            className="fixed inset-4 sm:inset-auto sm:bottom-12 sm:right-12 w-auto sm:w-[460px] h-auto sm:h-[620px] max-h-[90vh] bg-[#080D18]/95 border border-cyan-500/40 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.85)] backdrop-blur-2xl z-[90] flex flex-col overflow-hidden font-sans select-none"
+            className={`fixed inset-4 sm:inset-auto sm:bottom-10 sm:right-10 transition-all duration-300 ${
+              isExpandedHistory 
+                ? "w-auto sm:w-[440px] h-auto sm:h-[600px] max-h-[88vh]" 
+                : "w-auto sm:w-[380px] h-auto sm:h-[310px]"
+            } bg-[#080D18]/95 border border-cyan-500/40 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.85)] backdrop-blur-2xl z-[90] flex flex-col overflow-hidden font-sans select-none`}
           >
             {/* Minimal Header with First Logic Meta Lab Logo */}
             <div className="p-3 px-4 bg-slate-900/90 border-b border-white/10 flex items-center justify-between shrink-0">
@@ -657,8 +896,25 @@ export default function GlobalLogiCopilot() {
                 </div>
               </div>
 
-              {/* Clean Single Controls: Speaker, Mic, Close */}
+              {/* Clean Single Controls: History Expand/Shrink, Speaker, Mic, Close */}
               <div className="flex items-center gap-1.5">
+                {/* Toggle Expand / Shrink Size button */}
+                <button
+                  onClick={() => setIsExpandedHistory(!isExpandedHistory)}
+                  className={`p-1.5 rounded-lg border transition-all ${
+                    isExpandedHistory
+                      ? "bg-cyan-500/20 border-cyan-400 text-cyan-300"
+                      : "bg-slate-800/80 border-white/10 text-slate-400 hover:text-white"
+                  }`}
+                  title={isExpandedHistory ? "Shrink view" : "Expand view"}
+                >
+                  {isExpandedHistory ? (
+                    <Minimize2 className="w-3.5 h-3.5" />
+                  ) : (
+                    <Maximize2 className="w-3.5 h-3.5" />
+                  )}
+                </button>
+
                 {/* Speaker Toggle */}
                 <button
                   onClick={() => {
@@ -729,7 +985,8 @@ export default function GlobalLogiCopilot() {
 
             {/* Messages Feed */}
             <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3.5 scrollbar-thin">
-              {messages.map((m) => {
+              {/* Show only the latest conversation exchange in compact mode, or full history when expanded */}
+              {(isExpandedHistory ? messages : messages.slice(-2)).map((m) => {
                 const isUser = m.role === "user";
                 return (
                   <div key={m.id} className={`flex flex-col ${isUser ? "items-end" : "items-start"}`}>
@@ -742,25 +999,22 @@ export default function GlobalLogiCopilot() {
                     >
                       {/* Message Content with proper bold formatting */}
                       {renderFormattedMessage(m.content)}
-
-                      {/* Navigation Pill if Action Token is present */}
-                      {m.content.includes("[[NAVIGATE:") && (
-                        <div className="mt-2 pt-2 border-t border-white/10">
-                          <button
-                            onClick={() => handleActionTokens(m.content)}
-                            className="text-[8px] font-mono bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 px-2.5 py-1 rounded-lg flex items-center gap-1.5 font-bold transition-colors shadow"
-                          >
-                            <Compass className="w-3 h-3 text-cyan-400" />
-                            <span>Guide Me To This Section</span>
-                            <ArrowRight className="w-3 h-3" />
-                          </button>
-                        </div>
-                      )}
                     </div>
                     <span className="text-[7px] font-mono text-slate-500 mt-0.5 px-1">{m.timestamp}</span>
                   </div>
                 );
               })}
+
+              {!isExpandedHistory && messages.length > 2 && (
+                <div className="text-center pt-1">
+                  <button
+                    onClick={() => setIsExpandedHistory(true)}
+                    className="text-[9px] font-mono text-cyan-400/80 hover:text-cyan-300 underline underline-offset-4"
+                  >
+                    View previous {messages.length - 2} messages…
+                  </button>
+                </div>
+              )}
 
               {/* Real-time Voice Speech Indicator */}
               {interimTranscript && (
