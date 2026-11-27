@@ -4,85 +4,83 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const SYSTEM_PROMPT = `
 You are Logi, Principal Solutions Architect and AI Systems Consultant at First Logic Meta Lab (FLML).
 
-YOUR IDENTITY & REPRESENTATION:
-- You are First Logic Meta Lab's lead solutions architect.
-- NEVER mention "Gemini", "Google", "LLM", or external model providers. You represent FLML engineering directly.
-- You converse like a sharp, thoughtful human engineer: helpful, direct, warm, and concise.
+IDENTITY & PERSONA:
+- You are First Logic Meta Lab's lead engineer and architectural consultant.
+- Speak naturally, sharply, and politely like a senior tech lead. 
+- Keep responses short, concise, and conversational (1 to 2 short paragraphs max).
+- NEVER mention "Gemini", "Google", "LLM", or external AI platforms. You represent FLML engineering directly.
 
-CRITICAL CONVERSATIONAL RULES:
-1. **KEEP MESSAGES SHORT, CRISP, AND DIGESTIBLE (1-2 SHORT PARAGRAPHS MAX)**:
-   - Nobody wants to read long walls of text in a chat bubble.
-   - Speak directly to the point. Give quick, punchy, human answers.
-   - Do NOT write multi-section essays or repeat filler paragraphs.
+LANGUAGE & SCRIPT RULES (STRICT):
+- **ALWAYS RESPOND IN THE LANGUAGE & PROPER NATIVE SCRIPT OF THE USER**:
+  • If the user speaks or writes in Malayalam (whether Malayalam script or Malayalam words in English letters like "samsarikam", "entha", "para"):
+    Respond ENTIRELY in authentic Malayalam script (മലയാള ലിപിയിൽ മാത്രം). STRICT BAN ON MANGLISH.
+  • If the user speaks or writes in Kannada (whether Kannada script or Kannada words in English letters like "namde", "onthu", "madbeku", "maddu beku", "hegidira", "enu", "kannada dalli"):
+    YOU MUST RESPOND ENTIRELY IN PROPER KANNADA SCRIPT (ಕನ್ನಡ ಲಿಪಿಯಲ್ಲಿ ಮಾತ್ರ).
+    DO NOT CONFUSE KANNADA WITH MALAYALAM!
+    Example Kannada response: "ಖಂಡಿತವಾಗಿಯೂ, ನಾವು ನಿಮಗಾಗಿ ಅತ್ಯುತ್ತಮ ಹೈ-ಸ್ಪೀಡ್ ಟ್ರೇಡಿಂಗ್ ಬಾಟ್ ಮತ್ತು ರಿಸ್ಕ್ ಮ್ಯಾನೇಜ್ಮೆಂಟ್ ಸಿಸ್ಟಮ್ ಅನ್ನು ಅಭಿವೃದ್ಧಿಪಡಿಸಬಹುದು. ನಿಮಗೆ ಯಾವ ರೀತಿಯ ಸ್ಟ್ರಾಟಜಿ ಬೇಕು ಎಂದು ತಿಳಿಸಿ."
+  • If the user asks in Hindi: Respond in Hindi Devanagari script (हिंदी लिपि).
+  • If the user speaks or writes in Tamil (whether Tamil script or Romanized Tamil / Tanglish like "ithukku munnadi", "pannirukingala", "panreenga", "neenga", "solla mudiyuma", "vanakkam", "epdi irukinga", "theriyuma"):
+    YOU MUST RESPOND ENTIRELY IN PROPER TAMIL SCRIPT (தமிழ் எழுத்துக்களில் மட்டும்).
+    DO NOT CONFUSE TAMIL WITH MALAYALAM!
+    Example Tamil response: "நிச்சயமாக! ஃபர்ஸ்ட் லாஜிக் மெட்டா லேபில் நாங்கள் அதிவேக அல்காரிதமிக் டிரேடிங் பாட்களை வெற்றிகரமாக உருவாக்கியுள்ளோம். உங்களுக்கு எந்த வகையான ஸ்ட்ரேடஜி தேவை என்று கூறுங்கள்."
+  • If the user asks in Telugu: Respond in Telugu script (తెలుగు).
+  • If the user asks in Arabic, Spanish, French, German: Respond in that respective language with standard authentic script.
+  • If the user speaks in English: Respond in clean, professional English.
 
-2. **CONTACT DETAILS RULE — ONLY SHARE WHEN EXPLICITLY ASKED**:
-   - **STRICT RULE**: DO NOT volunteer phone numbers, email addresses, or contact details unless the user EXPLICITLY asks for them (e.g. "what is your phone number?", "how do I contact you?", "can I call?").
-   - NEVER drop phone or email into casual questions about the site, services, or architecture.
-   - YOU are the front-line architect capable of helping them right here in the chat. Converse with them directly.
-   - When (and ONLY when) the user explicitly asks for contact information:
-     Share it warmly and let them know you or our team can help them:
-     • **Direct Call / WhatsApp**: **+91 9745 437 355**
-     • **Email**: **info@firstlogicmetalab.com**
-     Include: [[TRIGGER_LEAD_FORM]]
+OUR WEBSITE CONTEXT:
+The user is viewing the First Logic Meta Lab website.
+- **Home / Hero**: Landing overview, capabilities, and solutions.
+- **Architecture Suite**: In-depth interactive engineering showcase (Quant Trading Bot, Kubernetes 10k RPS Autoscaling, Cryptographic Blockchain, Idempotent Payments, App Studio, Architecture Planner, AI Blueprint).
+- **Life / Client Deployments**: Production client systems and global deployments.
 
-3. **WHEN ASKED "WHAT DO YOU DO?", "HOW TO KNOW MORE", "WHERE IS THE CONTENT?", OR "I CAN'T SEE ANYTHING"**:
-   - The user wants to see what the company is and what is on this site.
-   - Do NOT just spit out a text pitch or ask them what they are building.
-   - **Immediately guide them to the Architecture suite so they see the real site and content**: Include [[NAVIGATE:architecture]].
-   - Give a 1-sentence intro and open the suite:
-     *"Here is our Architecture suite with our full doctrine, engineering pillars, and live interactive systems — take a look!"*
+CRITICAL NAVIGATION INSTRUCTIONS (STRICT):
+1. **NEVER NAVIGATE THE USER UNLESS THEY EXPLICITLY TELL YOU TO NAVIGATE**:
+   - GREETINGS: If the user says "hi", "hello", "namaskaram", "hey", or introduces themselves, DO NOT NAVIGATE. NEVER emit [[NAVIGATE:...]]. Just reply warmly, introduce yourself, and ask how you can help them.
+   - CASUAL CHAT & QUESTIONS: If the user asks general questions, brainstorms an idea, or is simply reading the hero or current page, STAY WHERE THEY ARE. NEVER open pages uninvited.
+   - ONLY emit [[NAVIGATE:...]] when the user EXPLICITLY gives a direct navigational command, such as:
+     • "open architecture" / "take me to architecture" / "go to architecture" -> [[NAVIGATE:architecture]]
+     • "open life" / "show client deployments" / "take me to life" -> [[NAVIGATE:life]]
+     • "go home" / "back to home" -> [[NAVIGATE:flml]]
+   - If they did NOT use navigation words like "open", "take me to", "show me page", or "navigate to", DO NOT emit any [[NAVIGATE:...]] token!
 
-5. **DEMO MECHANICS & HOW DEMOS WORK**:
-   - **Blockchain Demo**:
-     • How it works: Each block's cryptographic hash depends on its data, nonce, and the previous block's hash using SHA-256 (proof-of-work with target difficulty prefix '000').
-     • Why a block becomes invalid: If you edit any text/data in a block (e.g. change "2.5 ETH" to "10 ETH"), that block's hash immediately changes and no longer starts with '000'. Because subsequent blocks link to the previous hash, every block after it turns red and invalid (tampering detected).
-     • What the "✓ valid" / "Mine block" button does: When valid, it displays "✓ valid". When data is altered, it turns into a "Mine block" button. Clicking it calculates a new nonce with Proof-of-Work until a valid SHA-256 hash starting with '000' is found, repairing that block and the chain.
-   - Explain these mechanics simply and conversationally in 2 short paragraphs without re-navigating or reloading the page.
-
-6. **NAVIGATION & INTERACTION CLICK ACTIONS**:
-   - Do NOT emit [[NAVIGATE:...]] if the user is merely asking a question about a demo ("how does this work?", "what is that button?"). Only navigate when they specifically ask to go to, open, or see another section.
-   - When the user asks to click an interactive button (e.g. "click pause", "pause trading", "resume", "simulate spike", "mine block", "reset"):
-     • Click Pause/Resume trading bot: [[CLICK:botToggle]]
-     • Click Reset trading bot: [[CLICK:botReset]]
-     • Click Simulate spike on Realtime scale: [[CLICK:spike]]
-     • Click Pay ₹1,250 on Payments: [[CLICK:payBtn]]
-     • Click Mine block on Blockchain: [[CLICK:mineBtn]]
-   - When the user specifically asks to see, open, click, or go to another section, ALWAYS include the exact token:
-     • Blockchain: [[NAVIGATE:architecture:chain-demo]]
-     • Trading Bot: [[NAVIGATE:architecture:bot-demo]]
-     • Realtime Scale / 10k RPS: [[NAVIGATE:architecture:scale-demo]]
-     • Payments / Idempotency: [[NAVIGATE:architecture:pay-demo]]
-     • App Studio / UI UX: [[NAVIGATE:architecture:app-studio]]
-     • Planner / Solution Architecture: [[NAVIGATE:architecture:planner]]
-     • AI Blueprint: [[NAVIGATE:architecture:blueprint]]
-     • Doctrine / Principles / About: [[NAVIGATE:architecture:story]]
-     • Life / Client Deployments: [[NAVIGATE:life]]
-     • FLML Home: [[NAVIGATE:flml]]
-   - Keep your text reply brief and say you are doing it right now!
+2. **ACTION TOKENS (ONLY ON EXPLICIT BUTTON / DEMO COMMANDS)**:
+   Append tokens ONLY when the user asks to trigger that specific action:
+   • Blockchain Tamper: [[CLICK:tamperBtn]]
+   • Blockchain Mine: [[CLICK:mineBtn]]
+   • Trading Bot Flash Dump: [[CLICK:dumpBtn]]
+   • Trading Bot Bullish Pump: [[CLICK:pumpBtn]]
+   • Trading Bot Whale Squeeze: [[CLICK:squeezeBtn]]
+   • Trading Bot Pause/Resume: [[CLICK:botToggle]]
+   • Trading Bot Reset: [[CLICK:botReset]]
+   • Realtime Traffic Spike: [[CLICK:spike]]
+   • Payments Charge: [[CLICK:payBtn]]
+   • Payments Cross-Border Dup Webhook: [[MULTI_CLICK:rail-crossborder,chaos-dup-webhook,payBtn]]
+   • Video Consultation Booking: [[CLICK:svc-telehealth]]
+   • App Studio Themes: [[STUDIO:theme:aurum]], [[STUDIO:theme:vita]], [[STUDIO:theme:nova]], [[STUDIO:theme:bloom]], [[STUDIO:theme:maison]], [[STUDIO:theme:atlas]]
 `;
 
 export async function POST(req: NextRequest) {
   try {
-    const { messages, userMessage } = await req.json();
+    const { messages, userMessage, currentSection } = await req.json();
     const historyList = messages || [];
-    const turnCount = historyList.length;
 
-    // Read from process.env with hardcoded backup to guarantee it is always active
+    let dynamicSystemPrompt = SYSTEM_PROMPT;
+    if (currentSection) {
+      dynamicSystemPrompt += `\n\nCURRENT USER VIEWPORT CONTEXT:
+The user is currently on the section: "${currentSection.toUpperCase()}".
+`;
+    }
+
     const apiKey = process.env.GEMINI_API_KEY;
 
-    // Call Google Generative AI with history using the active stable model
     if (apiKey) {
       try {
         const genAI = new GoogleGenerativeAI(apiKey);
-        // Use gemini-3.1-flash-lite (high speed, sub-second latency, ultra reliable)
         const model = genAI.getGenerativeModel({
-          model: "gemini-3.1-flash-lite",
-          systemInstruction: SYSTEM_PROMPT,
+          model: "gemini-flash-lite-latest",
+          systemInstruction: dynamicSystemPrompt,
         });
 
-        // Clean history: Google Generative AI requires:
-        // 1. History must start with a 'user' turn (never 'model').
-        // 2. Roles must strictly alternate user -> model -> user.
         const validHistory: { role: "user" | "model"; parts: { text: string }[] }[] = [];
         let expectedRole: "user" | "model" = "user";
 
@@ -97,7 +95,6 @@ export async function POST(req: NextRequest) {
           }
         }
 
-        // If history ended on a user turn, remove it because sendMessage sends the latest userMessage
         if (validHistory.length > 0 && validHistory[validHistory.length - 1].role === "user") {
           validHistory.pop();
         }
@@ -106,28 +103,25 @@ export async function POST(req: NextRequest) {
         const result = await chat.sendMessage(userMessage || "Hello");
         let responseText = result.response.text();
 
-        // Enforce Action Tokens even if LLM forgets to format them
         const lowerQ = (userMessage || "").toLowerCase().trim();
+        const lastBotMsg = (historyList[historyList.length - 1]?.content || "").toLowerCase();
+
+        // STRICT GUARD: If user message is a greeting or casual chat without navigation words, strip any unsolicited [[NAVIGATE:...]]
+        const isGreeting = /^(hi|hello|hey|namaskaram|namaste|good\s*(morning|afternoon|evening)|hola|vanakkam|salam)\b/i.test(lowerQ);
+        const hasExplicitNavRequest = /(open|take me to|navigate to|go to|switch to|show me\s*(the\s*)?(page|section|architecture|life))/i.test(lowerQ);
+
+        if (!hasExplicitNavRequest) {
+          responseText = responseText.replace(/\[\[NAVIGATE:[^\]]+\]\]/g, "");
+        }
+
+        // Action confirmation safety net
         if (
-          (lowerQ.includes("pause") || lowerQ === "click pause") &&
-          !responseText.includes("[[CLICK:")
+          (lowerQ.includes("break it") || lowerQ.includes("tamper") || lowerQ.includes("corrupt") || lowerQ.includes("break chain")) ||
+          ((lowerQ === "yes" || lowerQ === "yeah" || lowerQ === "do it") && lastBotMsg.includes("tamper"))
         ) {
-          responseText += " [[CLICK:botToggle]]";
-        } else if (
-          (lowerQ.includes("resume") || lowerQ === "click resume") &&
-          !responseText.includes("[[CLICK:")
-        ) {
-          responseText += " [[CLICK:botToggle]]";
-        } else if (
-          lowerQ.includes("reset") &&
-          !responseText.includes("[[CLICK:")
-        ) {
-          responseText += " [[CLICK:botReset]]";
-        } else if (
-          (lowerQ.includes("spike") || lowerQ.includes("simulate spike")) &&
-          !responseText.includes("[[CLICK:")
-        ) {
-          responseText += " [[CLICK:spike]]";
+          if (!responseText.includes("[[CLICK:")) responseText += " [[CLICK:tamperBtn]]";
+        } else if (lowerQ.includes("mine") || lowerQ.includes("fix chain") || lowerQ.includes("repair chain")) {
+          if (!responseText.includes("[[CLICK:")) responseText += " [[CLICK:mineBtn]]";
         }
 
         return NextResponse.json({ reply: responseText });
@@ -136,326 +130,32 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Robust Conversational AI Brain Fallback
+    // Contextual Fallback
     const p = (userMessage || "").toLowerCase().trim();
-    let reply = "";
+    let reply = "Hello! I'm Logi, Principal Solutions Architect at First Logic Meta Lab. How can I assist you with your system architecture or development needs today?";
 
-      // 1. Direct Contact / Phone / Email Queries
-      if (
-        p.includes("contact") ||
-        p.includes("phone") ||
-        p.includes("number") ||
-        p.includes("call") ||
-        p.includes("whatsapp") ||
-        p.includes("email") ||
-        p.includes("reach you") ||
-        p.includes("touch with") ||
-        p.includes("speak to") ||
-        p.includes("talk to")
-      ) {
-        reply = `You can connect directly with our engineering and architecture team:
+    // If user asked in Malayalam / Manglish:
+    if (/[\u0D00-\u0D7F]/.test(userMessage || "") || p.includes("malayala") || p.includes("samsari") || p.includes("namaskaram") || p.includes("manglish")) {
+      reply = "നമസ്കാരം! ഞാൻ ഫസ്റ്റ് ലോജിക് മെറ്റാ ലാബിന്റെ പ്രിൻസിപ്പൽ സൊല്യൂഷൻസ് ആർക്കിടെക്റ്റ് ആയ ലോഗി (Logi). താങ്കളുടെ സോഫ്റ്റ്‌വെയർ അല്ലെങ്കിൽ സിസ്റ്റം ആർക്കിടെക്ചർ ആവശ്യങ്ങൾക്ക് ഞാൻ എങ്ങനെയാണ് സഹായിക്കേണ്ടത്?";
+    } else if (p.includes("tamper") || p.includes("break it") || p.includes("corrupt")) {
+      reply = "Corrupting Block #1 data right now to demonstrate cryptographic hash failure across the chain: [[CLICK:tamperBtn]]";
+    } else if (p.includes("mine") || p.includes("fix chain")) {
+      reply = "Mining proof-of-work hashes to restore chain consensus: [[CLICK:mineBtn]]";
+    } else if (p.includes("dump") || p.includes("crash")) {
+      reply = "Simulating a severe market drop right now: [[CLICK:dumpBtn]]";
+    } else if (p.includes("pump") || p.includes("surge")) {
+      reply = "Injecting a high-volume bullish breakout into the order book: [[CLICK:pumpBtn]]";
+    } else if (p.includes("spike")) {
+      reply = "Triggering a 6x traffic spike on the cluster: [[CLICK:spike]]";
+    } else if (p.includes("pay") || p.includes("charge")) {
+      reply = "Initiating transaction to test distributed idempotency: [[CLICK:payBtn]]";
+    } else if (p.includes("architecture") && (p.includes("open") || p.includes("go to") || p.includes("show"))) {
+      reply = "Opening our interactive Architecture Suite for you now: [[NAVIGATE:architecture]]";
+    }
 
-• **Direct Phone / WhatsApp**: **+91 9745 437 355**
-• **Official Email**: **info@firstlogicmetalab.com**
-• **Office**: First Logic Meta Lab Pvt Ltd, Puthanveettil Tower, Bypass Road, Perinthalmanna, Kerala
-
-We'll be glad to understand what is required for your project and architect the optimal solution. You can also share your requirement or drop your contact details right here: [[TRIGGER_LEAD_FORM]]`;
-      }
-
-      // Direct Action Commands: "Click pause", "Pause", "Resume", "Click reset", "Spike"
-      else if (p === "click pause" || p === "pause" || p.includes("pause trading") || p.includes("pause bot")) {
-        reply = `Tapping pause on the trading bot for you now: [[CLICK:botToggle]]`;
-      } else if (p === "resume" || p.includes("resume trading") || p.includes("start trading")) {
-        reply = `Tapping resume on the trading bot: [[CLICK:botToggle]]`;
-      } else if (p === "reset" || p.includes("reset bot") || p.includes("reset trade")) {
-        reply = `Resetting trading bot chart: [[CLICK:botReset]]`;
-      } else if (p.includes("spike") || p.includes("simulate spike")) {
-        reply = `Simulating traffic spike: [[CLICK:spike]]`;
-      }
-
-      // Questions about the Blockchain demo specifically:
-      else if (
-        p.includes("valid button") ||
-        p.includes("become invalid") ||
-        p.includes("when will it become invalid") ||
-        p.includes("how does this demo work") ||
-        p.includes("how does the blockchain demo work") ||
-        p.includes("explain blockchain demo")
-      ) {
-        reply = `Each block's SHA-256 hash depends on its data, nonce, and the previous block's hash. A block is only valid when its hash begins with **000**.
-
-If you edit any text inside the **data** field (e.g. changing an amount), that block's hash instantly breaks and no longer starts with **000**. Because subsequent blocks link to it, every block after it turns red and invalid.
-
-Clicking **"Mine block"** recalculates a new nonce using Proof-of-Work until a valid **000** hash is found, repairing that block and restoring the chain.`;
-      }
-
-      // Direct Specific Section Commands: "Take me to blockchain", "Show trading bot", "Open scale", etc.
-      else if (
-        (p.includes("blockchain") || p.includes("crypto") || p.includes("web3")) &&
-        (p.includes("take me") || p.includes("go to") || p.includes("show") || p.includes("open") || p.includes("navigate") || p === "blockchain")
-      ) {
-        reply = `Opening our **Blockchain & Crypto** instrument for you right now: [[NAVIGATE:architecture:chain-demo]]`;
-      } else if (
-        (p.includes("trading") || p.includes("bot") || p.includes("order matching") || p.includes("trade")) &&
-        (p.includes("take me") || p.includes("go to") || p.includes("show") || p.includes("open") || p.includes("navigate"))
-      ) {
-        reply = `Opening our live **Trading Engine & Bot** demo for you: [[NAVIGATE:architecture:bot-demo]]`;
-      } else if (
-        (p.includes("scale") || p.includes("traffic") || p.includes("10k rps") || p.includes("autoscaling")) &&
-        (p.includes("take me") || p.includes("go to") || p.includes("show") || p.includes("open") || p.includes("navigate"))
-      ) {
-        reply = `Navigating to our **Realtime Concurrency & Scale** stress test instrument: [[NAVIGATE:architecture:scale-demo]]`;
-      } else if (
-        (p.includes("payment") || p.includes("payments") || p.includes("checkout") || p.includes("idempotency")) &&
-        (p.includes("take me") || p.includes("go to") || p.includes("show") || p.includes("open") || p.includes("navigate"))
-      ) {
-        reply = `Opening our **Idempotent Payment Engine** demo: [[NAVIGATE:architecture:pay-demo]]`;
-      } else if (
-        (p.includes("app studio") || p.includes("design studio") || p.includes("ui/ux") || p.includes("design style")) &&
-        (p.includes("take me") || p.includes("go to") || p.includes("show") || p.includes("open") || p.includes("navigate"))
-      ) {
-        reply = `Opening our interactive **App Studio**: [[NAVIGATE:architecture:app-studio]]`;
-      } else if (p.includes("blueprint") || p.includes("ai blueprint")) {
-        reply = `Opening our **AI System Blueprint** generator: [[NAVIGATE:architecture:blueprint]]`;
-      } else if (p.includes("planner") || p.includes("solution architecture")) {
-        reply = `Opening our interactive **Solution Architecture Planner**: [[NAVIGATE:architecture:planner]]`;
-      } else if (
-        (p.includes("doctrine") || p.includes("story") || p.includes("about company") || p.includes("about you")) &&
-        (p.includes("take me") || p.includes("go to") || p.includes("show") || p.includes("open") || p.includes("navigate"))
-      ) {
-        reply = `Navigating to our **Doctrine & Principles**: [[NAVIGATE:architecture:story]]`;
-      }
-
-      // Direct Navigation Commands: "Click life", "Go to life", "Open life", "Click architecture", "Go to FLML"
-      else if (
-        p.includes("click life") ||
-        p.includes("open life") ||
-        p.includes("go to life") ||
-        p.includes("show life") ||
-        p.includes("switch to life") ||
-        p === "life" ||
-        p.includes("click lyf") ||
-        p.includes("open lyf") ||
-        p.includes("go to lyf")
-      ) {
-        reply = `Opening the **Life** suite for you right now! Here is our catalog of production client deployments and interactive mobile apps: [[NAVIGATE:life]]`;
-      } else if (
-        p.includes("click architecture") ||
-        p.includes("open architecture") ||
-        p.includes("go to architecture") ||
-        p.includes("show architecture") ||
-        p.includes("switch to architecture") ||
-        p === "architecture"
-      ) {
-        reply = `Navigating to the **Architecture** suite! Here you can explore our Doctrine, System Pillars, and 8 live technical instrument suites: [[NAVIGATE:architecture]]`;
-      } else if (
-        p.includes("click flml") ||
-        p.includes("go home") ||
-        p.includes("go to flml") ||
-        p.includes("hero canvas")
-      ) {
-        reply = `Taking you back to the **FLML** cinematic hero canvas: [[NAVIGATE:flml]]`;
-      }
-
-      // 1. "Can I see works you have done?", "Show me past work", "Portfolio", "Deployments"
-      else if (
-        p.includes("works you have done") ||
-        p.includes("work you have done") ||
-        p.includes("past work") ||
-        p.includes("show me work") ||
-        p.includes("see works") ||
-        p.includes("show me works") ||
-        p.includes("portfolio") ||
-        p.includes("your projects") ||
-        p.includes("deployments") ||
-        p.includes("what you have built") ||
-        p.includes("what have you done")
-      ) {
-        reply = `We engineer and deploy production-grade software ecosystems across fintech, healthcare, mobility, logistics, and enterprise ERPs.
-
-Key production highlights include:
-• **Karikku & Thara Cart**: High-throughput D2C & B2B multi-vendor commodity commerce.
-• **My Healine (UAE)**: HIPAA-compliant healthcare super-app for doctor bookings & digital prescriptions.
-• **Foodzer**: Hyperlocal multi-vendor food delivery with real-time kitchen routing.
-• **Cabco & Qaro**: Low-latency GPS ride-hailing and emergency roadside recovery dispatch.
-• **FinalFX & ClubQ**: Offline-first restaurant POS and floor management engines.
-
-Would you like me to walk you through our **Deployments suite**? Tap below to explore: [[NAVIGATE:clients]]`;
-      }
-
-      // 2. "I don't see anything in your website", "Where is the content?", "Nothing is visible", "Isn't there any content", "How to know more about you"
-      else if (
-        p.includes("don't see anything") ||
-        p.includes("dont see anything") ||
-        p.includes("can't see anything") ||
-        p.includes("cant see anything") ||
-        p.includes("can't see annything") ||
-        p.includes("cant see annything") ||
-        p.includes("nothing in your website") ||
-        p.includes("nothing on your website") ||
-        p.includes("nothing on your site") ||
-        p.includes("empty") ||
-        p.includes("where is everything") ||
-        p.includes("where is the content") ||
-        p.includes("where is the website") ||
-        p.includes("any content") ||
-        p.includes("know more about you") ||
-        p.includes("know more about flml") ||
-        p.includes("learn more about you") ||
-        p.includes("blank")
-      ) {
-        reply = `Opening our **Architecture suite** for you! Here is our full Doctrine, engineering pillars, and live interactive systems: [[NAVIGATE:architecture]]`;
-      }
-
-      // 3. "What is this?", "What is FLML?", "Explain this site"
-      else if (
-        p === "what is this" ||
-        p === "what is this?" ||
-        p.includes("what is this site") ||
-        p.includes("what is this website") ||
-        p.includes("explain this") ||
-        p.includes("what am i looking at")
-      ) {
-        reply = `This is **First Logic Meta Lab** — we engineer custom high-performance software and mobile platforms.
-
-Our principle is **"Operational Anatomy First. Code Second."** — understanding your exact workflow before writing code so the solution fits seamlessly.
-
-What kind of product or challenge are you looking into?`;
-      }
-
-      // 4. Greetings
-      else if (
-        p === "hi" ||
-        p === "hello" ||
-        p === "hey" ||
-        p.startsWith("hi ") ||
-        p.startsWith("hello ")
-      ) {
-        reply = `Hello! I'm **Logi**, Principal AI Systems Consultant at **First Logic Meta Lab**.
-
-I can evaluate your project requirements, recommend system architecture, or guide you through our production deployments. Are you planning a mobile app, web platform, or custom enterprise software?`;
-      }
-
-      // 5. Healthcare Queries
-      else if (p.includes("health") || p.includes("hospital") || p.includes("clinic") || p.includes("doctor") || p.includes("telehealth") || p.includes("medical") || p.includes("patient")) {
-        const wantsPastWork = p.includes("past work") || p.includes("portfolio") || p.includes("done before") || p.includes("example") || p.includes("show me") || p.includes("deploy") || p.includes("see it");
-
-        if (wantsPastWork) {
-          reply = `Yes, absolutely! We architected **My Healine (UAE)** — a HIPAA-verified digital health super-app covering telemedicine, e-prescriptions, diagnostic lab dispatch, and corporate wellness packages across the UAE. We also built **Live to Smile**, a specialist orthodontic 3D smile design and aligner tracking platform.
-
-Would you like to examine our live mobile deployment of **My Healine**? [[NAVIGATE:clients:healine]]`;
-        } else if (turnCount <= 2) {
-          reply = `Building an enterprise healthcare ecosystem requires extreme attention to **data compliance (HIPAA/GDPR), real-time doctor availability dispatch, and frictionless patient onboarding**.
-
-To engineer the ideal architecture for your vision:
-• **Care Delivery Model**: Are you focusing on virtual telemedicine consultations, in-clinic physical appointments, or home-visit doctor/nurse dispatch?
-• **Operational Modules**: Do you plan to incorporate an e-pharmacy prescription delivery pipeline, diagnostic lab test reservations, or health insurance claim verification?
-• **Target Geography**: Which country or region are you launching in, so we can align regulatory health data residency and payment gateways?
-
-Tell me a bit about your operational flow, and I can outline the exact technical stack and database schema we recommend.`;
-        } else {
-          reply = `Here is how we architect high-reliability healthcare platforms:
-
-• **HIPAA-Compliant Core**: Encrypted patient record vaults (EHR/EMR) with strict role-based access control and tamper-proof audit trails.
-• **Dual Mobile Apps**: Clean, zero-friction patient booking app (Flutter iOS/Android) paired with a specialized doctor console for video calls and digital prescriptions.
-• **Instant Settlement & Insurance**: Dual-currency checkout with automatic provider split payouts and insurer pre-authorization.
-
-We've battle-tested this architecture in enterprise production. Would you like our senior engineering team to prepare a tailored technical blueprint and discovery session for your project? [[TRIGGER_LEAD_FORM]]`;
-        }
-      }
-
-      // 6. Food Delivery & Restaurant POS
-      else if (p.includes("food") || p.includes("restaurant") || p.includes("delivery") || p.includes("biryani") || p.includes("kitchen") || p.includes("pos")) {
-        const wantsPastWork = p.includes("past work") || p.includes("done before") || p.includes("example") || p.includes("show me") || p.includes("portfolio");
-        if (wantsPastWork) {
-          reply = `We've engineered multiple end-to-end food systems: **Foodzer** (hyperlocal multi-vendor food delivery with 30-min live kitchen dispatch), **ClubQ POS** (touchscreen table KOT and bill splits), and **FinalFX** (multi-tenant restaurant floor suite).
-
-Let me show you our live mobile deployment of **Foodzer**: [[NAVIGATE:clients:foodzer]]`;
-        } else if (turnCount <= 2) {
-          reply = `Food delivery and restaurant POS systems succeed or fail on three critical bottlenecks: **peak-hour concurrency, kitchen display dispatch latency, and offline network resilience** when dining room internet drops.
-
-To help tailor the system architecture:
-• Is this for a single restaurant brand, a multi-outlet franchise, or a multi-vendor aggregator marketplace like Swiggy/DoorDash?
-• Do you need hardware integration (thermal receipt printers, kitchen display screens, barcode scanners)?
-• Will you manage your own delivery fleet with live GPS driver dispatch, or third-party logistics?`;
-        } else {
-          reply = `Here is the architecture we deploy for high-volume food ecosystems:
-
-• **Offline-First POS Terminal**: Local SQLite database with bidirectional cloud sync, guaranteeing billing never halts even if internet goes down.
-• **Real-Time KOT Dispatch**: Sub-50ms WebSocket ticket firing straight to kitchen display stations with preparation timers.
-• **Driver GPS Telematics**: Low-battery background geo-tracking with dynamic polygon geofencing.
-
-Would you like our engineering team to review your floor plan and delivery requirements to structure a formal scope? [[TRIGGER_LEAD_FORM]]`;
-        }
-      }
-
-      // 7. Ride Hailing, Logistics & Towing
-      else if (p.includes("cab") || p.includes("ride") || p.includes("taxi") || p.includes("uber") || p.includes("logistics") || p.includes("truck") || p.includes("towing") || p.includes("fleet")) {
-        const wantsPastWork = p.includes("past work") || p.includes("done before") || p.includes("example") || p.includes("show me");
-        if (wantsPastWork) {
-          reply = `We engineered **Cabco Ride-Hailing** (real-time vector map GPS dispatch with dual driver/passenger matching) and **Qaro Roadside SOS** (emergency flatbed tow truck recovery across UAE highways).
-
-Here is the live **Cabco** application deployment: [[NAVIGATE:clients:cabco]]`;
-        } else {
-          reply = `Mobility and on-demand dispatch systems require a specialized spatial backbone: **PostGIS spatial indexing, low-latency WebSocket driver pings, and surge-pricing dispatch engines**.
-
-To shape your architecture:
-• Are you operating passenger transport (cabs/bikes) or specialized freight/recovery dispatch?
-• Do you require wallet-based driver payouts with automated platform commission splits?
-• Which city or region is your launch market?`;
-        }
-      }
-
-      // 8. General Company & Who We Are
-      else if (
-        p.includes("who are you") ||
-        p.includes("what is flml") ||
-        p.includes("about first logic") ||
-        p.includes("what does first logic do") ||
-        p.includes("what do you do") ||
-        p.includes("what first logic does") ||
-        p.includes("services") ||
-        p.includes("first logic do")
-      ) {
-        reply = `I'm **Logi**, solutions architect at **First Logic Meta Lab**. 
-
-We engineer custom software and high-scale backends. Our doctrine is **"Operational Anatomy First. Code Second."** — we study how your business operates before writing code to fix bottlenecks permanently.
-
-What kind of system or project are you looking to build?`;
-      }
-
-      // 9. Pricing & Timeline
-      else if (p.includes("price") || p.includes("cost") || p.includes("how much") || p.includes("quote") || p.includes("budget") || p.includes("timeline")) {
-        reply = `Because FLML builds custom, high-scale bespoke software rather than off-the-shelf templates, investment and timelines are determined by **system complexity, concurrency requirements, and integrations**.
-
-Our process involves:
-1. **Architecture Blueprinting** (1–2 weeks): Technical specifications, database schemas, and wireframes.
-2. **Core Engineering**: Modular sprints with continuous staging access.
-3. **QA & Stress Testing**: Rigorous load testing and security audits before launch.
-
-Would you like our engineering team to review your specifications and prepare an estimate? [[TRIGGER_LEAD_FORM]]`;
-      }
-
-      // 10. Dynamic Contextual Default
-      else {
-        reply = `At **First Logic Meta Lab**, we evaluate and architect every platform around three core tenets: **operational throughput, system resilience, and clean product execution**.
-
-Whether you're developing a mobile app, designing a distributed cloud backend, or automating business workflows:
-• Are you launching a new product from scratch, or re-engineering an existing system to handle scale?
-• Which platforms are you targeting (iOS, Android, Web, or Desktop)?
-
-Tell me about your product vision, and I'll walk you through how we'd engineer the architecture.`;
-      }
-
-      return NextResponse.json({ reply, isFallback: true });
+    return NextResponse.json({ reply, isFallback: true });
   } catch (error) {
-    console.error("Gemini API Route Error:", error);
-    return NextResponse.json(
-      {
-        reply: "I'd be glad to discuss your project scope in detail. What are you looking to build?",
-        error: String(error),
-      },
-      { status: 500 }
-    );
+    console.error("Chat route critical error:", error);
+    return NextResponse.json({ reply: "Our systems are operational. Please try your request again." }, { status: 500 });
   }
 }

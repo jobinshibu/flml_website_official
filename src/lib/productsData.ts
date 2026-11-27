@@ -30,23 +30,23 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
     year: "2021 - Present",
     overview: "Karikku is a premier Direct-to-Consumer (D2C) e-commerce enterprise under the Thara Cart Group. First Logic Meta Lab architected a complete end-to-end e-commerce ecosystem featuring customer shopping storefronts, secure checkout pipelines, and a centralized administrative management portal.",
     challenge: "Building a unified e-commerce infrastructure capable of synchronizing fresh perishable inventory, real-time payment state reconciliation, and multi-location fulfillment dispatch with zero catalog latency.",
-    solution: "FLML engineered a dual-module e-commerce platform encompassing an intuitive customer storefront and an executive administration console. The system leverages Firebase real-time database architecture, Razorpay payment gateway integration, and automated transactional order dispatch.",
+    solution: "FLML engineered a dual-module e-commerce platform encompassing an intuitive customer storefront and an executive administration console. The system leverages cloud database architecture, multi-rail encrypted payment gateway integration, and automated transactional order dispatch.",
     impact: "Streamlined order processing for perishable coconut goods, enabled instant payment verification, and unified customer and administrative operations under a single cloud infrastructure.",
     stats: [
-      { label: "Payment Architecture", value: "Razorpay Secure" },
-      { label: "Cloud Database", value: "Firebase Real-Time" },
+      { label: "Payment Architecture", value: "Encrypted Checkout" },
+      { label: "Cloud Database", value: "Cloud Firestore" },
       { label: "System Modules", value: "Customer & Admin" },
       { label: "Order Sync Speed", value: "Instant Real-Time" }
     ],
     techStack: [
       { category: "Frontend Web & Mobile App", items: ["React", "JavaScript / TypeScript"] },
       { category: "Backend Engine", items: ["Node.js", "Express.js"] },
-      { category: "Cloud & Realtime DB", items: ["Firebase Realtime DB", "Firebase Auth"] },
-      { category: "Payment Gateway", items: ["Razorpay Gateway API"] }
+      { category: "Cloud Database & Identity", items: ["Cloud Firestore", "Identity & Access Management (IAM)"] },
+      { category: "Payment Gateway", items: ["Enterprise Payment Gateway"] }
     ],
     features: [
       { title: "Dual Storefront & Admin Modules", description: "Seamless customer shopping interface paired with a centralized management portal for live inventory and fulfillment." },
-      { title: "Razorpay Payment Gateway Integration", description: "Secure checkout supporting UPI, cards, net banking, and instant automated webhook reconciliation." },
+      { title: "Encrypted Payment Gateway Integration", description: "Secure checkout supporting UPI, cards, net banking, and instant automated webhook reconciliation." },
       { title: "Real-Time Inventory & Dispatch Sync", description: "Live stock tracking and fulfillment dispatch tailored for organic coconut water and oil products." }
     ]
   },
@@ -62,20 +62,20 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
     year: "",
     overview: "My Healine is a leading HIPAA-verified comprehensive healthcare platform operating across the United Arab Emirates (UAE). First Logic Meta Lab architected an end-to-end digital health ecosystem supporting patient doctor bookings, lab test reservations, e-pharmacy delivery, a full hospital/clinic directory with insurance coverage details, and dedicated B2B corporate employee wellness packages.",
     challenge: "Building an integrated healthcare platform capable of handling real-time medical appointment dispatch, multi-partner pharmacy inventory, diagnostic lab booking workflows, and corporate employee benefit administration while ensuring strict HIPAA compliance and enterprise-grade cloud security.",
-    solution: "FLML engineered a high-availability mobile and web architecture powered by Flutter and React, backed by Node.js microservices hosted on AWS cloud infrastructure (EC2, ALB, Auto Scaling Groups, Amazon Aurora). Integrated with Infobip for multi-channel communication and Stripe for secure global payment processing.",
+    solution: "FLML engineered a high-availability mobile and web architecture powered by Flutter and React, backed by Node.js microservices hosted on AWS cloud infrastructure (EC2, ALB, Auto Scaling Groups, Amazon Aurora). Integrated with Infobip for multi-channel communication and secure PCI-DSS compliant global payment processing.",
     impact: "Unified UAE healthcare services under a single HIPAA-verified digital backbone, streamlined corporate B2B employee wellness management, and ensured 99.99% cloud infrastructure availability.",
     stats: [
       { label: "Security Compliance", value: "HIPAA Verified" },
       { label: "Cloud Infrastructure", value: "AWS EC2 / ALB / ASG" },
       { label: "Database Engine", value: "Amazon Aurora SQL" },
-      { label: "Payment Architecture", value: "Stripe Secure" }
+      { label: "Payment Architecture", value: "PCI-DSS Compliant Gateway" }
     ],
     techStack: [
       { category: "Mobile Application", items: ["Flutter (iOS & Android)"] },
       { category: "Web Platform", items: ["React", "JavaScript / TypeScript"] },
       { category: "Backend Architecture", items: ["Node.js Microservices", "Express.js"] },
-      { category: "Cloud & Security Infrastructure", items: ["AWS EC2", "Application Load Balancer (ALB)", "Auto Scaling Groups (ASG)", "Amazon Aurora", "HIPAA Compliance Vault"] },
-      { category: "Payment & Messaging", items: ["Stripe API", "Infobip Gateway"] }
+      { category: "Cloud & Security Infrastructure", items: ["AWS EC2", "Application Load Balancer (ALB)", "Auto Scaling Groups (ASG)", "Amazon Aurora", "Healthcare Compliance Encryption"] },
+      { category: "Payment & Messaging", items: ["Multi-Currency Payment Gateway", "Infobip Gateway"] }
     ],
     features: [
       { title: "HIPAA-Verified Doctor, Lab & E-Pharmacy Super-App", description: "Omnichannel portal allowing patients to schedule doctor visits, order medicines, and book lab diagnostic tests across the UAE with strict HIPAA data security." },
@@ -95,19 +95,19 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
     year: "",
     overview: "Thara Cart is the ultimate multi-vendor e-commerce platform under the Thara Cart Group. First Logic Meta Lab architected an all-in-one retail and wholesale ecosystem connecting third-party sellers, corporate B2B buyers, retail consumers, and central platform administrators.",
     challenge: "Unifying four complex operational environments—Customer Retail, Third-Party Seller Onboarding, B2B Bulk Wholesale, and Platform Administration—under a scalable, low-latency cloud infrastructure.",
-    solution: "FLML engineered a modular multi-tier application architecture utilizing Flutter for cross-platform mobile apps and React for web portals, powered by Node.js microservices and Firebase real-time data storage.",
+    solution: "FLML engineered a modular multi-tier application architecture utilizing Flutter for cross-platform mobile apps and React for web portals, powered by Node.js microservices and cloud document database.",
     impact: "Empowered independent sellers to list and manage catalogs, streamlined B2B trade orders, and unified multi-channel retail under a single cloud infrastructure.",
     stats: [
       { label: "Platform Architecture", value: "Multi-Vendor Marketplace" },
       { label: "Core System Modules", value: "Customer, Seller, B2B, Admin" },
-      { label: "Database Infra", value: "Firebase Realtime DB" },
+      { label: "Database Infra", value: "Cloud Firestore" },
       { label: "App Framework", value: "Flutter & React" }
     ],
     techStack: [
       { category: "Mobile Application", items: ["Flutter (iOS & Android)"] },
       { category: "Web Portals", items: ["React", "JavaScript / TypeScript"] },
       { category: "Backend Services", items: ["Node.js Microservices", "Express.js"] },
-      { category: "Cloud & Realtime Storage", items: ["Firebase Realtime DB", "Firestore", "Firebase Auth"] }
+      { category: "Cloud & Realtime Storage", items: ["Cloud Firestore", "Firestore", "Identity & Access Management (IAM)"] }
     ],
     features: [
       { title: "4 Integrated Operational Modules", description: "Customer Storefront, Third-Party Seller Portal, B2B Wholesale Trading Engine, and Centralized Admin Console." },
@@ -126,18 +126,18 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
     year: "",
     overview: "3MS (Multi Money Matter Solutions) is a comprehensive multi-service digital platform. First Logic Meta Lab architected an all-in-one application ecosystem combining integrated e-commerce retail shopping, real-time personal/business expense management, and digital utility service payments under a single cloud infrastructure.",
     challenge: "Building a unified cross-platform mobile ecosystem capable of seamlessly handling multi-category transactions—combining retail product orders, real-time financial expense calculations, and instant digital utility bill settlement without user friction.",
-    solution: "FLML engineered a high-availability mobile platform built with Flutter and powered by Firebase cloud infrastructure. The architecture utilizes Firebase Realtime Database for instant state updates, Firestore for structured financial tracking, and Cloud Functions for automated transactional processing.",
+    solution: "FLML engineered a high-availability mobile platform built with Flutter and powered by Firebase cloud infrastructure. The architecture utilizes Firebase Cloud Firestore for instant state updates, Firestore for structured financial tracking, and Cloud Functions for automated transactional processing.",
     impact: "Unified retail, expense management, and utility bill payments into a single mobile application, eliminating multi-app overhead and delivering real-time financial tracking for users.",
     stats: [
       { label: "Platform Architecture", value: "Multi-Service Ecosystem" },
       { label: "Core Modules", value: "E-Commerce, Expenses, Utilities" },
-      { label: "Database & Cloud", value: "Firebase Realtime Infra" },
+      { label: "Database & Cloud", value: "Cloud Firestore Database" },
       { label: "Mobile Framework", value: "Flutter Cross-Platform" }
     ],
     techStack: [
       { category: "Mobile Application", items: ["Flutter (iOS & Android)"] },
-      { category: "Cloud & Realtime Storage", items: ["Firebase Realtime DB", "Cloud Firestore"] },
-      { category: "Cloud Services & Functions", items: ["Firebase Auth", "Firebase Cloud Functions"] },
+      { category: "Cloud & Realtime Storage", items: ["Cloud Firestore Document DB", "Secure Object Storage"] },
+      { category: "Cloud Services & Functions", items: ["Identity & Access Management (IAM)", "Serverless Cloud Functions"] },
       { category: "Security & Analytics", items: ["Firebase Security Rules", "Firebase Crashlytics"] }
     ],
     features: [
@@ -190,19 +190,19 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
     year: "",
     overview: "Foodzer is a complete, end-to-end on-demand food delivery system. First Logic Meta Lab architected a comprehensive 4-tier ecosystem encompassing Customer Ordering Apps, Restaurant Kitchen & Merchant Portals, Delivery Driver Dispatch Apps, and a Centralized Super Admin Management Console.",
     challenge: "Engineering a synchronized 4-way communication network between food lovers, restaurant kitchens, active delivery drivers, and platform dispatchers—ensuring live GPS order tracking, real-time status transitions, dynamic menu updates, and instant push notifications with zero latency.",
-    solution: "FLML engineered a high-performance cross-platform mobile and cloud platform built with Flutter and powered by Firebase cloud infrastructure (Cloud Firestore, Realtime DB, Firebase Auth, Cloud Functions, and Firebase Cloud Messaging). Integrated with Google Maps API for live driver routing, geofencing, and distance estimation.",
+    solution: "FLML engineered a high-performance cross-platform mobile and cloud platform built with Flutter and powered by Firebase cloud infrastructure (Cloud Firestore, Firebase Auth, Cloud Functions, and Firebase Cloud Messaging). Integrated with Google Maps API for live driver routing, geofencing, and distance estimation.",
     impact: "Streamlined food ordering and kitchen dispatch operations, enabled live door-to-door GPS tracking, and empowered restaurant merchants to manage dynamic menus, addons, and kitchen thermal receipt printing seamlessly.",
     stats: [
       { label: "Platform Architecture", value: "4-Tier Food Ecosystem" },
       { label: "Mobile Framework", value: "Flutter Cross-Platform" },
-      { label: "Cloud Engine", value: "Firebase Real-Time Infrastructure" },
+      { label: "Cloud Engine", value: "Managed Cloud Database" },
       { label: "Core Modules", value: "Customer, Restaurant, Driver, Admin" }
     ],
     techStack: [
       { category: "Mobile Apps (Customer & Driver)", items: ["Flutter (iOS & Android)"] },
       { category: "Merchant & Management Portals", items: ["Flutter Web", "React", "JavaScript / TypeScript"] },
-      { category: "Cloud Database & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB", "Firebase Storage"] },
-      { category: "Serverless & Push Messaging", items: ["Firebase Cloud Functions", "Firebase Auth", "Firebase Cloud Messaging (FCM)"] },
+      { category: "Cloud Database & Realtime", items: ["Cloud Firestore Document DB", "Secure Object Storage", "Encrypted Cloud Storage"] },
+      { category: "Serverless & Push Messaging", items: ["Serverless Cloud Functions", "Identity & Access Management (IAM)", "Push Notification Service (FCM)"] },
       { category: "Location & Mapping API", items: ["Google Maps API", "Directions & Geofencing API"] }
     ],
     features: [
@@ -223,19 +223,19 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
     year: "",
     overview: "MyVaahan is an all-in-one automotive ecosystem connecting vehicle owners, auto workshops, and spare parts suppliers. First Logic Meta Lab architected a comprehensive platform delivering online garage bookings, auto spare parts e-commerce, verified pre-owned car & bike listings, and a full-featured Garage ERP for workshop operations.",
     challenge: "Engineered a multi-faceted platform capable of synchronizing consumer-facing services (garage service discovery, marketplace purchases, pre-owned car sales) with enterprise workshop ERP functions (digital job cards, mechanic assignments, spare parts inventory, and customer invoicing).",
-    solution: "FLML engineered a high-availability mobile and web suite built with Flutter and powered by Firebase cloud services (Cloud Firestore, Realtime DB, Firebase Auth, Cloud Functions, and Firebase Storage). Delivers real-time job card state tracking and automated inventory updates.",
+    solution: "FLML engineered a high-availability mobile and web suite built with Flutter and powered by Firebase cloud services (Cloud Firestore, Firebase Auth, Cloud Functions, and Firebase Storage). Delivers real-time job card state tracking and automated inventory updates.",
     impact: "Digitized garage workshop workflows, streamlined vehicle service bookings, and provided vehicle owners with a trusted marketplace for spare parts and pre-owned vehicle deals.",
     stats: [
       { label: "Platform Ecosystem", value: "Garage ERP & Marketplace" },
       { label: "Mobile Framework", value: "Flutter Cross-Platform" },
-      { label: "Cloud Infrastructure", value: "Firebase Real-Time DB" },
+      { label: "Cloud Infrastructure", value: "Cloud Firestore" },
       { label: "Core Modules", value: "ERP, Bookings, Marketplace, Used Cars" }
     ],
     techStack: [
       { category: "Mobile Apps (Customer & Garage)", items: ["Flutter (iOS & Android)"] },
       { category: "Garage ERP & Management Web", items: ["Flutter Web", "React", "JavaScript / TypeScript"] },
-      { category: "Cloud Database & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB", "Firebase Storage"] },
-      { category: "Serverless & Messaging", items: ["Firebase Cloud Functions", "Firebase Auth", "Firebase Cloud Messaging (FCM)"] }
+      { category: "Cloud Database & Realtime", items: ["Cloud Firestore Document DB", "Secure Object Storage", "Encrypted Cloud Storage"] },
+      { category: "Serverless & Messaging", items: ["Serverless Cloud Functions", "Identity & Access Management (IAM)", "Push Notification Service (FCM)"] }
     ],
     features: [
       { title: "Integrated Garage ERP & Workshop Management", description: "Comprehensive workshop module enabling digital job card creation, mechanic task assignments, inventory tracking, service history logs, and automated invoicing." },
@@ -254,24 +254,24 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
     tagline: "Specializing in cold-pressed virgin coconut oil, pure cooking oil, and organic coconut derivatives under Thara Cart Group.",
     year: "",
     overview: "Edhwi is a premier Direct-to-Consumer (D2C) organic coconut products e-commerce brand under the Thara Cart Group. First Logic Meta Lab architected an end-to-end e-commerce platform featuring customer shopping storefronts, secure payment checkout, real-time inventory management, and an administrative control portal.",
-    challenge: "Building a streamlined D2C e-commerce engine capable of synchronizing pure coconut product inventory, real-time Razorpay payment verification, and automated dispatch across customer orders.",
-    solution: "FLML engineered a high-performance web e-commerce platform built with React and Node.js microservices, powered by Firebase real-time infrastructure and Razorpay payment gateway integration for automated transaction reconciliation.",
+    challenge: "Building a streamlined D2C e-commerce engine capable of synchronizing pure coconut product inventory, real-time automated payment verification, and automated dispatch across customer orders.",
+    solution: "FLML engineered a high-performance web e-commerce platform built with React and Node.js microservices, powered by high-availability cloud database and multi-rail encrypted payment gateway integration for automated transaction reconciliation.",
     impact: "Streamlined order fulfillment for pure coconut oil and derivative products, enabled instant payment verification, and expanded Thara Cart Group's digital D2C footprint.",
     stats: [
-      { label: "Payment Architecture", value: "Razorpay Secure" },
-      { label: "Cloud Database", value: "Firebase Real-Time DB" },
+      { label: "Payment Architecture", value: "Encrypted Checkout" },
+      { label: "Cloud Database", value: "Cloud Firestore" },
       { label: "System Modules", value: "Customer & Admin Portal" },
       { label: "Order Sync Speed", value: "Instant Real-Time" }
     ],
     techStack: [
       { category: "Frontend Web Storefront", items: ["React", "JavaScript / TypeScript"] },
       { category: "Backend Engine", items: ["Node.js", "Express.js"] },
-      { category: "Cloud & Realtime DB", items: ["Firebase Realtime DB", "Firebase Auth"] },
-      { category: "Payment Gateway", items: ["Razorpay Gateway API"] }
+      { category: "Cloud Database & Identity", items: ["Cloud Firestore", "Identity & Access Management (IAM)"] },
+      { category: "Payment Gateway", items: ["Enterprise Payment Gateway"] }
     ],
     features: [
       { title: "Dual Storefront & Admin Modules", description: "Intuitive customer D2C shopping experience paired with a centralized management portal for inventory, catalog variations, and fulfillment tracking." },
-      { title: "Razorpay Payment Gateway Integration", description: "Secure checkout pipeline supporting UPI, credit/debit cards, net banking, and instant webhook payment status reconciliation." },
+      { title: "Encrypted Payment Gateway Integration", description: "Secure checkout pipeline supporting UPI, credit/debit cards, net banking, and instant webhook payment status reconciliation." },
       { title: "Real-Time Stock & Fulfillment Synchronization", description: "Instant inventory tracking and dispatch workflows tailored for organic coconut oil, virgin coconut derivatives, and packaged goods." }
     ]
   },
@@ -287,18 +287,18 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
     year: "",
     overview: "Vivlino (developed for Vivilino IT Solutions WLL) is a specialized SaaS mobile application engineered for retail store owners and business merchants. First Logic Meta Lab architected a digital debt ledger platform that replaces traditional paper credit notebooks, enabling merchants to record customer purchases on credit, manage receivables, and track balances in real time.",
     challenge: "Replacing manual paper-based store credit notebooks with an instant, low-latency mobile digital ledger capable of operating offline, synchronizing pending debt balances seamlessly across devices, and sending multi-channel payment collection notifications.",
-    solution: "FLML engineered a high-performance cross-platform SaaS mobile application using Flutter, backed by Firebase cloud infrastructure (Cloud Firestore, Firebase Realtime DB, Firebase Cloud Messaging, and Firebase Auth) for instant transaction logging and automated debt reminders.",
+    solution: "FLML engineered a high-performance cross-platform SaaS mobile application using Flutter, backed by Firebase cloud infrastructure (Cloud Firestore, Firebase Cloud Messaging, and Firebase Auth) for instant transaction logging and automated debt reminders.",
     impact: "Eliminated store credit bookkeeping errors, improved merchant debt collection speeds, and provided business owners with complete transparency into outstanding customer receivables.",
     stats: [
       { label: "Platform Architecture", value: "SaaS Digital Credit Ledger" },
       { label: "Mobile Framework", value: "Flutter Cross-Platform" },
-      { label: "Cloud Engine", value: "Firebase Real-Time Infrastructure" },
+      { label: "Cloud Engine", value: "Managed Cloud Database" },
       { label: "Target Market", value: "Retail Store Merchants" }
     ],
     techStack: [
       { category: "Mobile Application", items: ["Flutter (iOS & Android)"] },
-      { category: "Cloud Database & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB", "Firebase Storage"] },
-      { category: "Serverless & Reminders", items: ["Firebase Cloud Functions", "Firebase Auth", "Firebase Cloud Messaging (FCM)"] }
+      { category: "Cloud Database & Realtime", items: ["Cloud Firestore Document DB", "Secure Object Storage", "Encrypted Cloud Storage"] },
+      { category: "Serverless & Reminders", items: ["Serverless Cloud Functions", "Identity & Access Management (IAM)", "Push Notification Service (FCM)"] }
     ],
     features: [
       { title: "Digital Customer Credit & Debt Ledger", description: "Enables merchants to record instant store credit entries, attach digital receipt images, and maintain exact running debt balances per customer." },
@@ -318,19 +318,19 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
     year: "",
     overview: "Cabco is a comprehensive on-demand ride-hailing and taxi booking platform. First Logic Meta Lab architected an end-to-end taxi ecosystem encompassing Rider Booking Apps, Driver Dispatch Apps, and a Centralized Fleet Management Admin Console.",
     challenge: "Building a high-concurrency real-time ride dispatch platform capable of handling instant driver matching, live GPS vehicle tracking, dynamic fare calculation, and seamless payment collection with minimal latency.",
-    solution: "FLML engineered a high-performance cross-platform mobile suite using Flutter, backed by Firebase cloud services (Cloud Firestore, Realtime DB, Firebase Auth, Cloud Functions, FCM) and integrated with Google Maps API for live route navigation and geofencing.",
+    solution: "FLML engineered a high-performance cross-platform mobile suite using Flutter, backed by Firebase cloud services (Cloud Firestore, Firebase Auth, Cloud Functions, FCM) and integrated with Google Maps API for live route navigation and geofencing.",
     impact: "Optimized taxi ride dispatch times, provided riders with transparent fare estimation, and enabled fleet operators to monitor live driver activity seamlessly.",
     stats: [
       { label: "Platform Architecture", value: "3-Tier Taxi Ecosystem" },
       { label: "Mobile Framework", value: "Flutter Cross-Platform" },
-      { label: "Cloud Engine", value: "Firebase Real-Time DB" },
+      { label: "Cloud Engine", value: "Cloud Firestore" },
       { label: "Core Modules", value: "Rider, Driver, Fleet Admin" }
     ],
     techStack: [
       { category: "Mobile Applications (Rider & Driver)", items: ["Flutter (iOS & Android)"] },
       { category: "Fleet Admin Management Portal", items: ["Flutter Web", "React", "JavaScript / TypeScript"] },
-      { category: "Cloud Database & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB", "Firebase Storage"] },
-      { category: "Serverless & Geo Services", items: ["Firebase Cloud Functions", "Firebase Auth", "Firebase Cloud Messaging (FCM)", "Google Maps API"] }
+      { category: "Cloud Database & Realtime", items: ["Cloud Firestore Document DB", "Secure Object Storage", "Encrypted Cloud Storage"] },
+      { category: "Serverless & Geo Services", items: ["Serverless Cloud Functions", "Identity & Access Management (IAM)", "Push Notification Service (FCM)", "Google Maps API"] }
     ],
     features: [
       { title: "Instant Ride Booking & Live GPS Tracking", description: "Riders can request instant rides or schedule future pickups, with real-time map tracking of driver arrival and trip progress." },
@@ -350,19 +350,19 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
     year: "",
     overview: "ClubQ is an all-in-one hospitality management platform and Point of Sale (POS) ecosystem. First Logic Meta Lab architected a comprehensive restaurant operating engine encompassing Touchscreen POS Billing, Real-Time Kitchen Order Token (KOT) Dispatch, Table Reservation Bookings, Customer CRM, and Automated Marketing Campaign Tools.",
     challenge: "Unifying high-speed restaurant cashier billing, instant kitchen KOT printing/display synchronization, online table reservations, and automated customer marketing campaigns under a single low-latency cloud infrastructure.",
-    solution: "FLML engineered a high-performance cross-platform application built with Flutter and powered by Firebase cloud infrastructure (Cloud Firestore, Realtime DB, Firebase Auth, Cloud Functions, and Firebase Cloud Messaging) with offline POS caching and thermal receipt integration.",
+    solution: "FLML engineered a high-performance cross-platform application built with Flutter and powered by Firebase cloud infrastructure (Cloud Firestore, Firebase Auth, Cloud Functions, and Firebase Cloud Messaging) with offline POS caching and thermal receipt integration.",
     impact: "Accelerated dining room table turnover, eliminated kitchen ordering errors with real-time KOT routing, and boosted repeat customer visits through automated targeted promotional campaigns.",
     stats: [
       { label: "Platform Architecture", value: "Restaurant POS & KOT Ecosystem" },
       { label: "Mobile & POS Framework", value: "Flutter Cross-Platform" },
-      { label: "Cloud Infrastructure", value: "Firebase Real-Time DB" },
+      { label: "Cloud Infrastructure", value: "Cloud Firestore" },
       { label: "Core Modules", value: "POS, KOT, Bookings, Marketing" }
     ],
     techStack: [
       { category: "POS & Mobile Apps", items: ["Flutter (iOS, Android, Desktop POS)"] },
       { category: "Merchant & Admin Web Portals", items: ["Flutter Web", "React", "JavaScript / TypeScript"] },
-      { category: "Cloud Database & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB", "Firebase Storage"] },
-      { category: "Serverless & Messaging", items: ["Firebase Cloud Functions", "Firebase Auth", "Firebase Cloud Messaging (FCM)"] }
+      { category: "Cloud Database & Realtime", items: ["Cloud Firestore Document DB", "Secure Object Storage", "Encrypted Cloud Storage"] },
+      { category: "Serverless & Messaging", items: ["Serverless Cloud Functions", "Identity & Access Management (IAM)", "Push Notification Service (FCM)"] }
     ],
     features: [
       { title: "Touchscreen POS Billing & Real-Time KOT Dispatch", description: "High-speed cashier billing with split payment support, paired with instant Kitchen Order Token (KOT) routing to kitchen display screens and thermal printers." },
@@ -382,19 +382,19 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
     year: "",
     overview: "Cool Talk is an innovative social networking and voice calling mobile application. First Logic Meta Lab architected a real-time audio matchmaking platform that connects users with random strangers worldwide for anonymous, high-quality voice conversations.",
     challenge: "Engineering an ultra-low-latency real-time voice signaling engine capable of handling instant random user matchmaking, peer-to-peer audio streaming, dynamic call queueing, and user moderation filters without call drops.",
-    solution: "FLML engineered a high-performance cross-platform mobile application using Flutter, integrated with WebRTC audio streaming protocols and backed by Firebase cloud infrastructure (Cloud Firestore, Realtime DB, Firebase Auth, Cloud Functions, and Firebase Cloud Messaging).",
+    solution: "FLML engineered a high-performance cross-platform mobile application using Flutter, integrated with WebRTC audio streaming protocols and backed by Firebase cloud infrastructure (Cloud Firestore, Firebase Auth, Cloud Functions, and Firebase Cloud Messaging).",
     impact: "Delivered crystal-clear, low-latency random voice connections across international users, creating a safe social environment with real-time user moderation and privacy controls.",
     stats: [
       { label: "Platform Architecture", value: "Real-Time Audio Matchmaking" },
       { label: "Mobile Framework", value: "Flutter Cross-Platform" },
       { label: "Streaming Engine", value: "WebRTC Audio Protocol" },
-      { label: "Cloud Backend", value: "Firebase Real-Time DB" }
+      { label: "Cloud Backend", value: "Cloud Firestore" }
     ],
     techStack: [
       { category: "Mobile Application", items: ["Flutter (iOS & Android)"] },
       { category: "Real-Time Audio & Signaling", items: ["WebRTC Voice Protocol", "Agora / Twilio RTC Engine"] },
-      { category: "Cloud Database & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB"] },
-      { category: "Serverless & Notifications", items: ["Firebase Cloud Functions", "Firebase Auth", "Firebase Cloud Messaging (FCM)"] }
+      { category: "Cloud Database & Realtime", items: ["Cloud Firestore Document DB", "Secure Object Storage"] },
+      { category: "Serverless & Notifications", items: ["Serverless Cloud Functions", "Identity & Access Management (IAM)", "Push Notification Service (FCM)"] }
     ],
     features: [
       { title: "Instant Random Voice Matchmaking", description: "One-tap matchmaking algorithm that algorithmically pairs users globally based on language preference, region, and common interests for live voice calls." },
@@ -414,19 +414,19 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
     year: "",
     overview: "DCost is a comprehensive local business discovery and discount redemption platform. First Logic Meta Lab architected an omnichannel mobile ecosystem enabling users to explore local retail stores, shopping malls, dining venues, and tourist spots while unlocking exclusive digital discount vouchers and cashback offers.",
     challenge: "Building a geo-location aware merchant directory capable of indexing thousands of retail shops, restaurants, malls, and tourist destinations while ensuring instant offline/online QR code discount voucher redemption and real-time vendor offer management.",
-    solution: "FLML engineered a high-performance cross-platform mobile application using Flutter, backed by Firebase cloud infrastructure (Cloud Firestore, Realtime DB, Firebase Auth, Cloud Functions, and Firebase Cloud Messaging) with integrated Google Maps API location services for proximity merchant discovery.",
+    solution: "FLML engineered a high-performance cross-platform mobile application using Flutter, backed by Firebase cloud infrastructure (Cloud Firestore, Firebase Auth, Cloud Functions, and Firebase Cloud Messaging) with integrated Google Maps API location services for proximity merchant discovery.",
     impact: "Boosted foot traffic for local merchants, retail malls, and tourist destinations while delivering instant savings for consumers via QR code discount redemption.",
     stats: [
       { label: "Platform Architecture", value: "Merchant Discovery & Rewards" },
       { label: "Mobile Framework", value: "Flutter Cross-Platform" },
-      { label: "Cloud Engine", value: "Firebase Real-Time Infrastructure" },
+      { label: "Cloud Engine", value: "Managed Cloud Database" },
       { label: "Core Services", value: "Directory, Geo-Deals, QR Discounts" }
     ],
     techStack: [
       { category: "Mobile Application", items: ["Flutter (iOS & Android)"] },
       { category: "Merchant & Admin Portals", items: ["Flutter Web", "React", "JavaScript / TypeScript"] },
-      { category: "Cloud Database & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB", "Firebase Storage"] },
-      { category: "Serverless & Geo Services", items: ["Firebase Cloud Functions", "Firebase Auth", "Firebase Cloud Messaging (FCM)", "Google Maps API"] }
+      { category: "Cloud Database & Realtime", items: ["Cloud Firestore Document DB", "Secure Object Storage", "Encrypted Cloud Storage"] },
+      { category: "Serverless & Geo Services", items: ["Serverless Cloud Functions", "Identity & Access Management (IAM)", "Push Notification Service (FCM)", "Google Maps API"] }
     ],
     features: [
       { title: "Geo-Location Merchant & Tourist Spot Directory", description: "Proximity-based discovery tool listing local shops, shopping centers, top restaurants, and tourist landmarks with interactive map navigation." },
@@ -478,19 +478,19 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
     year: "",
     overview: "Relax Call is a popular audio social networking mobile application. First Logic Meta Lab architected a real-time voice matchmaking platform allowing users to discover and chat anonymously with new friends across the globe in a stress-free environment.",
     challenge: "Handling instant low-latency audio matchmaking across high concurrent active user calls, managing connection stability over varying mobile networks, and enforcing strict user privacy and community safety guidelines.",
-    solution: "FLML engineered a high-performance cross-platform application built with Flutter and WebRTC signaling protocols, backed by Firebase cloud infrastructure (Cloud Firestore, Realtime DB, Firebase Auth, Cloud Functions, and Firebase Cloud Messaging).",
+    solution: "FLML engineered a high-performance cross-platform application built with Flutter and WebRTC signaling protocols, backed by Firebase cloud infrastructure (Cloud Firestore, Firebase Auth, Cloud Functions, and Firebase Cloud Messaging).",
     impact: "Facilitated millions of global voice conversations with zero latency buffering, delivering an intuitive anonymous calling experience with end-to-end privacy.",
     stats: [
       { label: "Platform Architecture", value: "Real-Time Audio Matchmaking" },
       { label: "Mobile Framework", value: "Flutter Cross-Platform" },
       { label: "Streaming Engine", value: "WebRTC Audio Protocol" },
-      { label: "Cloud Engine", value: "Firebase Real-Time Infrastructure" }
+      { label: "Cloud Engine", value: "Managed Cloud Database" }
     ],
     techStack: [
       { category: "Mobile Application", items: ["Flutter (iOS & Android)"] },
       { category: "Real-Time Audio & Signaling", items: ["WebRTC Voice Protocol", "RTC Engine"] },
-      { category: "Cloud Database & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB"] },
-      { category: "Serverless & Notifications", items: ["Firebase Cloud Functions", "Firebase Auth", "Firebase Cloud Messaging (FCM)"] }
+      { category: "Cloud Database & Realtime", items: ["Cloud Firestore Document DB", "Secure Object Storage"] },
+      { category: "Serverless & Notifications", items: ["Serverless Cloud Functions", "Identity & Access Management (IAM)", "Push Notification Service (FCM)"] }
     ],
     features: [
       { title: "Mood-Based Stranger Voice Matchmaking", description: "Algorithmic matchmaking engine pairing users instantly based on topic tags, language filters, and mood categories for 1-on-1 voice calls." },
@@ -510,19 +510,19 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
     year: "",
     overview: "Vestido Nation is a premier Direct-to-Consumer (D2C) fashion and apparel e-commerce brand. First Logic Meta Lab architected a modern digital storefront featuring high-resolution fashion lookbooks, size recommendation guides, real-time inventory management, and an executive administration console.",
     challenge: "Engineering a high-performance fashion shopping web platform with low image load latency, dynamic size/color variant matrix management, real-time cart state synchronization, and secure checkout integration.",
-    solution: "FLML engineered a responsive web storefront using React, backed by Node.js microservices and Firebase real-time infrastructure (Cloud Firestore, Firebase Auth, Firebase Storage) for instant inventory updates and order fulfillment management.",
+    solution: "FLML engineered a responsive web storefront using React, backed by Node.js microservices and high-availability cloud database (Cloud Firestore, Firebase Auth, Firebase Storage) for instant inventory updates and order fulfillment management.",
     impact: "Elevated fashion brand presentation, reduced cart abandonment with fast checkout pipelines, and provided store managers with live catalog control.",
     stats: [
       { label: "Platform Architecture", value: "D2C Fashion E-Commerce" },
       { label: "Frontend Framework", value: "React & TypeScript" },
       { label: "Backend Engine", value: "Node.js & Express" },
-      { label: "Cloud & Database", value: "Firebase Real-Time DB" }
+      { label: "Cloud & Database", value: "Cloud Firestore" }
     ],
     techStack: [
       { category: "Frontend Web Storefront", items: ["React", "JavaScript / TypeScript"] },
       { category: "Backend Microservices", items: ["Node.js", "Express.js"] },
-      { category: "Cloud Infrastructure & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB", "Firebase Storage"] },
-      { category: "Security & Authentication", items: ["Firebase Auth", "SSL Cloud Vault"] }
+      { category: "Cloud Infrastructure & Realtime", items: ["Cloud Firestore Document DB", "Secure Object Storage", "Encrypted Cloud Storage"] },
+      { category: "Security & Authentication", items: ["Identity & Access Management (IAM)", "Zero-Trust Encryption"] }
     ],
     features: [
       { title: "Dynamic Fashion Catalog & Variant Matrix", description: "Interactive fashion catalog displaying multi-angle product photography, size/color variant matrices, and real-time stock availability." },
@@ -542,19 +542,19 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
     year: "",
     overview: "Kootukari is a regional voice social networking mobile application. First Logic Meta Lab architected a real-time audio matchmaking platform enabling users to connect and converse anonymously with new friends speaking their native languages.",
     challenge: "Building a fast regional language-aware voice matchmaking engine capable of handling high concurrent live calls, low-latency audio transmission over 3G/4G networks, and real-time community safety moderation.",
-    solution: "FLML engineered a high-performance cross-platform application built with Flutter and WebRTC protocols, backed by Firebase cloud infrastructure (Cloud Firestore, Realtime DB, Firebase Auth, Cloud Functions, and Firebase Cloud Messaging).",
+    solution: "FLML engineered a high-performance cross-platform application built with Flutter and WebRTC protocols, backed by Firebase cloud infrastructure (Cloud Firestore, Firebase Auth, Cloud Functions, and Firebase Cloud Messaging).",
     impact: "Fostered vibrant regional social communities with seamless low-latency voice calling, privacy protection, and automated safety moderation.",
     stats: [
       { label: "Platform Architecture", value: "Regional Voice Matchmaking" },
       { label: "Mobile Framework", value: "Flutter Cross-Platform" },
       { label: "Streaming Engine", value: "WebRTC Audio Protocol" },
-      { label: "Cloud Engine", value: "Firebase Real-Time Infrastructure" }
+      { label: "Cloud Engine", value: "Managed Cloud Database" }
     ],
     techStack: [
       { category: "Mobile Application", items: ["Flutter (iOS & Android)"] },
       { category: "Real-Time Audio & Signaling", items: ["WebRTC Voice Protocol", "RTC Engine"] },
-      { category: "Cloud Database & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB"] },
-      { category: "Serverless & Notifications", items: ["Firebase Cloud Functions", "Firebase Auth", "Firebase Cloud Messaging (FCM)"] }
+      { category: "Cloud Database & Realtime", items: ["Cloud Firestore Document DB", "Secure Object Storage"] },
+      { category: "Serverless & Notifications", items: ["Serverless Cloud Functions", "Identity & Access Management (IAM)", "Push Notification Service (FCM)"] }
     ],
     features: [
       { title: "Regional Language Voice Matchmaking", description: "Algorithmic matchmaking pairing users based on native language preferences, regional dialects, and common interests for 1-on-1 audio calls." },
@@ -574,19 +574,19 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
     year: "",
     overview: "Live to Smile is a dedicated healthcare and dental wellness platform. First Logic Meta Lab architected an end-to-end patient care ecosystem enabling users to book dental consultations, explore cosmetic smile design packages, manage appointment schedules, and access digital treatment records.",
     challenge: "Building a patient-centric healthcare platform capable of handling real-time dentist availability schedules, treatment plan tracking, pre/post-procedure guidelines, and multi-clinic appointment management with secure health record encryption.",
-    solution: "FLML engineered a high-performance cross-platform mobile and web application built with Flutter and powered by Firebase cloud services (Cloud Firestore, Realtime DB, Firebase Auth, Cloud Functions, and Firebase Storage) with end-to-end data security.",
+    solution: "FLML engineered a high-performance cross-platform mobile and web application built with Flutter and powered by Firebase cloud services (Cloud Firestore, Firebase Auth, Cloud Functions, and Firebase Storage) with end-to-end data security.",
     impact: "Streamlined dental appointment bookings, reduced patient waiting times, and provided clinics with a unified patient relationship management tool.",
     stats: [
       { label: "Platform Architecture", value: "Healthcare & Dental Care" },
       { label: "Mobile Framework", value: "Flutter Cross-Platform" },
-      { label: "Cloud Engine", value: "Firebase Real-Time DB" },
+      { label: "Cloud Engine", value: "Cloud Firestore" },
       { label: "Core Services", value: "Bookings, Records, Smile Design" }
     ],
     techStack: [
       { category: "Mobile Applications", items: ["Flutter (iOS & Android)"] },
       { category: "Clinic Management Portal", items: ["Flutter Web", "React", "JavaScript / TypeScript"] },
-      { category: "Cloud Database & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB", "Firebase Storage"] },
-      { category: "Serverless & Reminders", items: ["Firebase Cloud Functions", "Firebase Auth", "Firebase Cloud Messaging (FCM)"] }
+      { category: "Cloud Database & Realtime", items: ["Cloud Firestore Document DB", "Secure Object Storage", "Encrypted Cloud Storage"] },
+      { category: "Serverless & Reminders", items: ["Serverless Cloud Functions", "Identity & Access Management (IAM)", "Push Notification Service (FCM)"] }
     ],
     features: [
       { title: "Online Dentist & Specialist Consultation Booking", description: "Seamless appointment scheduling for general dentistry, orthodontics, and cosmetic smile transformation procedures." },
@@ -612,13 +612,13 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
       { label: "Platform Architecture", value: "NFC Smart Card & QR Engine" },
       { label: "Mobile Framework", value: "Flutter & Native NFC (NDEF)" },
       { label: "Web Profile Portal", value: "React & TypeScript" },
-      { label: "Cloud Infrastructure", value: "Firebase Real-Time DB" }
+      { label: "Cloud Infrastructure", value: "Cloud Firestore" }
     ],
     techStack: [
       { category: "Mobile Apps (NFC Writer & App)", items: ["Flutter (iOS & Android)", "Native CoreNFC / Android NFC (NDEF)"] },
       { category: "Digital Profile Web Storefront", items: ["React", "JavaScript / TypeScript"] },
-      { category: "Cloud Database & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB", "Firebase Storage"] },
-      { category: "Serverless & Analytics", items: ["Firebase Cloud Functions", "Firebase Auth", "Google Cloud Analytics"] }
+      { category: "Cloud Database & Realtime", items: ["Cloud Firestore Document DB", "Secure Object Storage", "Encrypted Cloud Storage"] },
+      { category: "Serverless & Analytics", items: ["Serverless Cloud Functions", "Identity & Access Management (IAM)", "Google Cloud Analytics"] }
     ],
     features: [
       { title: "Native NFC Smart Card Reader & Writer", description: "Enables users to program NDEF records, social links, contact vCards, and portfolio URLs directly onto physical NFC plastic, wood, or metal cards." },
@@ -638,7 +638,7 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
     year: "",
     overview: "Ebotto is an enterprise AI chatbot and conversational automation SaaS platform. First Logic Meta Lab architected an intelligent messaging engine enabling businesses to deploy automated AI chatbots across WhatsApp API, website widgets, and mobile apps to handle customer inquiries, capture sales leads, and route complex support tickets.",
     challenge: "Building a low-latency conversational AI engine capable of handling high-volume concurrent chat sessions, contextual NLP query resolution, multi-channel webhook integrations, and seamless human agent handoffs.",
-    solution: "FLML engineered a multi-tenant cloud SaaS platform built with React and Node.js microservices, powered by Firebase real-time messaging, Cloud Firestore session persistence, and NLP AI conversational models.",
+    solution: "FLML engineered a multi-tenant cloud SaaS platform built with React and Node.js microservices, powered by managed cloud messaging, Cloud Firestore session persistence, and NLP AI conversational models.",
     impact: "Reduced customer support response times by 80%, automated 24/7 lead qualification for sales teams, and streamlined WhatsApp business notifications.",
     stats: [
       { label: "Platform Architecture", value: "AI Conversational SaaS" },
@@ -649,8 +649,8 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
     techStack: [
       { category: "Web Dashboard & Bot Studio", items: ["React", "JavaScript / TypeScript"] },
       { category: "Backend & AI Engine", items: ["Node.js", "Express.js", "Python NLP Services"] },
-      { category: "Cloud Database & Session Vault", items: ["Cloud Firestore", "Firebase Realtime DB", "Redis Cache"] },
-      { category: "Messaging Channels", items: ["WhatsApp Business API", "Firebase Cloud Messaging", "WebSockets"] }
+      { category: "Cloud Database & Session Vault", items: ["Cloud Firestore Document DB", "Secure Object Storage", "Redis Cache"] },
+      { category: "Messaging Channels", items: ["WhatsApp Business API", "Push Notification Delivery", "WebSockets"] }
     ],
     features: [
       { title: "Visual AI Chatbot Flow Builder", description: "Drag-and-drop conversational bot builder allowing non-technical managers to create custom decision trees, auto-reply logic, and FAQ workflows." },
@@ -670,19 +670,19 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
     year: "",
     overview: "Schosys is a comprehensive enterprise School Management ERP and EdTech platform. First Logic Meta Lab architected an end-to-end educational management ecosystem supporting Student Portals, Teacher Gradebooks, Parent Communication Portals, Attendance Tracking, Fee Collection Pipelines, and Academic Performance Analytics.",
     challenge: "Unifying multi-role school workflows—synchronizing daily student attendance, teacher mark entry, term report card generation, digital fee payment reconciliation, and real-time parent notifications across desktop and mobile devices.",
-    solution: "FLML engineered a multi-tenant cross-platform mobile and web ERP suite built with Flutter and powered by Firebase cloud infrastructure (Cloud Firestore, Realtime DB, Firebase Auth, Cloud Functions, and Firebase Storage) with role-based access control (RBAC).",
+    solution: "FLML engineered a multi-tenant cross-platform mobile and web ERP suite built with Flutter and powered by Firebase cloud infrastructure (Cloud Firestore, Firebase Auth, Cloud Functions, and Firebase Storage) with role-based access control (RBAC).",
     impact: "Digitized school administrative workflows, eliminated report card errors, accelerated fee collection cycles, and enhanced parent-teacher transparency.",
     stats: [
       { label: "Platform Architecture", value: "School Management ERP" },
       { label: "Mobile & Web Framework", value: "Flutter Cross-Platform" },
-      { label: "Cloud Infrastructure", value: "Firebase Real-Time DB" },
+      { label: "Cloud Infrastructure", value: "Cloud Firestore" },
       { label: "Core Modules", value: "Attendance, Marks, Fees, Parents" }
     ],
     techStack: [
       { category: "Mobile Apps (Parents & Students)", items: ["Flutter (iOS & Android)"] },
       { category: "School Admin & Teacher Web Portals", items: ["Flutter Web", "React", "JavaScript / TypeScript"] },
-      { category: "Cloud Database & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB", "Firebase Storage"] },
-      { category: "Serverless & Messaging", items: ["Firebase Cloud Functions", "Firebase Auth", "Firebase Cloud Messaging (FCM)"] }
+      { category: "Cloud Database & Realtime", items: ["Cloud Firestore Document DB", "Secure Object Storage", "Encrypted Cloud Storage"] },
+      { category: "Serverless & Messaging", items: ["Serverless Cloud Functions", "Identity & Access Management (IAM)", "Push Notification Service (FCM)"] }
     ],
     features: [
       { title: "Daily Attendance & Leave Management", description: "Biometric and teacher mobile attendance marking with instant FCM push notification alerts sent to parents upon student check-in/absence." },
@@ -702,7 +702,7 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
     year: "",
     overview: "FinalFX is an enterprise multi-tenant Restaurant Point of Sale (POS) and Kitchen Order Token (KOT) management SaaS platform. First Logic Meta Lab architected a scalable hospitality operating system deployed across numerous restaurant branches, fine-dining establishments, and quick-service food chains.",
     challenge: "Architecting a multi-tenant cloud POS platform capable of operating synchronously across hundreds of restaurant outlets—ensuring zero-latency cashier billing, multi-kitchen KOT printing, offline payment queueing, and centralized chain-level inventory management.",
-    solution: "FLML engineered a high-concurrency cloud and desktop POS platform built with React, Node.js microservices, and Flutter, backed by Firebase real-time sync infrastructure, Cloud Firestore tenant isolation, and thermal printer hardware integrations.",
+    solution: "FLML engineered a high-concurrency cloud and desktop POS platform built with React, Node.js microservices, and Flutter, backed by managed cloud database synchronization, Cloud Firestore tenant isolation, and thermal printer hardware integrations.",
     impact: "Accelerated checkout speeds across partner restaurants, eliminated order miscommunication between dining rooms and kitchens, and provided restaurant chain owners with real-time multi-branch sales analytics.",
     stats: [
       { label: "Platform Architecture", value: "Multi-Tenant Restaurant POS" },
@@ -713,7 +713,7 @@ export const PROJECTS_DATA: Record<string, ProjectDetail> = {
     techStack: [
       { category: "POS Terminal & Tablet Apps", items: ["Flutter (Desktop & Mobile POS)", "React"] },
       { category: "Backend Microservices", items: ["Node.js", "Express.js"] },
-      { category: "Cloud Database & Realtime", items: ["Cloud Firestore", "Firebase Realtime DB", "Redis Cache"] },
+      { category: "Cloud Database & Realtime", items: ["Cloud Firestore Document DB", "Secure Object Storage", "Redis Cache"] },
       { category: "Hardware & Integration", items: ["Thermal ESC/POS Printers", "Barcode Scanners", "Payment Terminals"] }
     ],
     features: [

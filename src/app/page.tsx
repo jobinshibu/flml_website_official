@@ -22,46 +22,19 @@ const FirstLogicInstrumentSuite = dynamic(
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"flml" | "architecture" | "life">("flml");
-  const [contentVisible, setContentVisible] = useState(false);
 
   const handleSelectTab = (tab: "flml" | "architecture" | "life") => {
     if (tab === activeTab) return;
     
-    // Broadcast instant transition event directly so GalaxyCanvas scatters synchronously on click
+    // Broadcast transition event directly so GalaxyCanvas scatters synchronously on click
     if (typeof window !== "undefined") {
       window.dispatchEvent(new CustomEvent("flml:tab_transition", { detail: tab }));
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
     }
 
-    if (tab === "flml") {
-      // Returning to hero: fade out page content immediately so particles assemble into logo
-      setContentVisible(false);
-      setActiveTab(tab);
-      if (typeof window !== "undefined") {
-        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-      }
-    } else {
-      // Transitioning to Architecture or Life:
-      // Keep content hidden initially, set tab state
-      setContentVisible(false);
-      setActiveTab(tab);
-      if (typeof window !== "undefined") {
-        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-      }
-      
-      // Reveal page content smoothly mid-scatter once particles have burst outward
-      setTimeout(() => {
-        setContentVisible(true);
-        if (typeof window !== "undefined") {
-          window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-          document.documentElement.scrollTop = 0;
-          document.body.scrollTop = 0;
-        }
-      }, 420);
-    }
+    setActiveTab(tab);
   };
 
   useEffect(() => {
@@ -130,45 +103,47 @@ export default function Home() {
         </div>
 
         <div
+          key={`arch-${activeTab === "architecture" ? "active" : "inactive"}`}
           className={`${
             activeTab === "architecture" ? "block" : "hidden"
-          } w-full flex flex-col pt-16 transition-opacity duration-500 ease-out ${
-            contentVisible && activeTab === "architecture" ? "opacity-100" : "opacity-0"
-          }`}
+          } w-full flex flex-col pt-16`}
         >
           {/* Architecture Suite: Story, Pillars, Chronology, Capabilities, Exact FirstLogic Instrument Bays */}
-          <div id="about">
+          <div id="about" className="anim-stagger-1">
             <About />
           </div>
-          <div id="capabilities">
+          <div id="capabilities" className="anim-stagger-2">
             <WhatWeBuild />
           </div>
-          <div id="instrument-suite">
+          <div id="instrument-suite" className="anim-stagger-3">
             <FirstLogicInstrumentSuite />
           </div>
           {/* Footer at end of Architecture suite */}
-          <Footer />
+          <div className="anim-stagger-4">
+            <Footer />
+          </div>
         </div>
 
         <div
+          key={`life-${activeTab === "life" ? "active" : "inactive"}`}
           className={`${
             activeTab === "life" ? "block" : "hidden"
-          } w-full flex flex-col pt-16 transition-opacity duration-500 ease-out ${
-            contentVisible && activeTab === "life" ? "opacity-100" : "opacity-0"
-          }`}
+          } w-full flex flex-col pt-16`}
         >
           {/* Life & Deployments Suite: Projects, Gallery, Brief */}
-          <div id="clients">
+          <div id="clients" className="anim-stagger-1">
             <Clients />
           </div>
-          <div id="gallery">
+          <div id="gallery" className="anim-stagger-2">
             <Gallery />
           </div>
-          <div id="consultation">
+          <div id="consultation" className="anim-stagger-3">
             <ConsultationForm />
           </div>
           {/* Footer at end of Life suite */}
-          <Footer />
+          <div className="anim-stagger-4">
+            <Footer />
+          </div>
         </div>
       </div>
     </div>

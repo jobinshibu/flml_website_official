@@ -96,12 +96,69 @@ export default function GlobalLogiCopilot() {
 
   const speechRecRef = useRef<any>(null);
   const activeUtteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const audioPlayerRef = useRef<HTMLAudioElement | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const bubbleTimeoutRef = useRef<any>(null);
   const chatDrawerRef = useRef<HTMLDivElement>(null);
   const mascotRef = useRef<HTMLDivElement>(null);
 
-  // Close chat when clicking outside (ignore clicks inside drawer or on mascot)
+  // Track currently visible section in viewport
+  const [activeSection, setActiveSection] = useState<string>("general");
+  const activeSectionRef = useRef<string>("general");
+
+  useEffect(() => {
+    activeSectionRef.current = activeSection;
+  }, [activeSection]);
+
+  // Continuous scroll listener perfectly aligned with SideMenu active section
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const sections = [
+      { id: "story", name: "doctrine_history" },
+      { id: "pillars", name: "doctrine_history" },
+      { id: "history", name: "doctrine_history" },
+      { id: "capabilities", name: "doctrine_history" },
+      { id: "app-studio", name: "app_studio" },
+      { id: "design-system", name: "app_studio" },
+      { id: "planner", name: "architecture_planner" },
+      { id: "blueprint", name: "ai_blueprint" },
+      { id: "platform-demo", name: "platforms" },
+      { id: "chain-demo", name: "blockchain" },
+      { id: "bot-demo", name: "trading_bot" },
+      { id: "scale-demo", name: "realtime_scale" },
+      { id: "pay-demo", name: "payments" },
+      { id: "consultation", name: "consultation" },
+      { id: "footer", name: "footer" },
+    ];
+
+    const updateActiveSection = () => {
+      const offset = 260; // Exact same offset threshold as SideMenu
+      let current = sections[0].name;
+
+      for (const item of sections) {
+        const el = document.getElementById(item.id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= offset) {
+            current = item.name;
+          }
+        }
+      }
+
+      setActiveSection(current);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
+  }, []);
   useEffect(() => {
     if (!isOpen) return;
 
@@ -209,11 +266,22 @@ export default function GlobalLogiCopilot() {
     };
   }, []);
 
-  // Stop currently playing speech synthesis
+  // Stop currently playing speech synthesis or audio
   const stopSpeaking = () => {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
       try {
         window.speechSynthesis.cancel();
+      } catch (err) {}
+    }
+    if (audioPlayerRef.current) {
+      try {
+        audioPlayerRef.current.pause();
+        audioPlayerRef.current.currentTime = 0;
+      } catch (err) {}
+    }
+    if (audioContextRef.current && audioContextRef.current.state !== "closed") {
+      try {
+        audioContextRef.current.suspend();
       } catch (err) {}
     }
     activeUtteranceRef.current = null;
@@ -222,9 +290,51 @@ export default function GlobalLogiCopilot() {
     }
   };
 
-  // Speak AI text aloud
+  // Detect dominant language/script for speech synthesis
+  const detectLanguage = (text: string): { lang: string; voiceFilter?: (v: SpeechSynthesisVoice) => boolean } => {
+    // Malayalam: Unicode range \u0D00-\u0D7F
+    if (/[\u0D00-\u0D7F]/.test(text)) {
+      return { lang: "ml-IN" };
+    }
+    // Hindi / Devanagari: Unicode range \u0900-\u097F
+    if (/[\u0900-\u097F]/.test(text)) {
+      return { lang: "hi-IN" };
+    }
+    // Tamil: Unicode range \u0B80-\u0BFF
+    if (/[\u0B80-\u0BFF]/.test(text)) {
+      return { lang: "ta-IN" };
+    }
+    // Telugu: Unicode range \u0C00-\u0C7F
+    if (/[\u0C00-\u0C7F]/.test(text)) {
+      return { lang: "te-IN" };
+    }
+    // Kannada: Unicode range \u0C80-\u0CFF
+    if (/[\u0C80-\u0CFF]/.test(text)) {
+      return { lang: "kn-IN" };
+    }
+    // Arabic: Unicode range \u0600-\u06FF
+    if (/[\u0600-\u06FF]/.test(text)) {
+      return { lang: "ar-SA" };
+    }
+    // Spanish
+    if (/[áéíóúüñ¿¡]/i.test(text)) {
+      return { lang: "es-ES" };
+    }
+    // French
+    if (/[àâçéèêëîïôûùüÿœæ]/i.test(text)) {
+      return { lang: "fr-FR" };
+    }
+    // German
+    if (/[äöüß]/i.test(text)) {
+      return { lang: "de-DE" };
+    }
+    // Default to Indian English / English
+    return { lang: "en-IN" };
+  };
+
+  // Speak AI text aloud with intelligent multilingual detection and audio fallback
   const speakText = (text: string) => {
-    if (isVoiceMuted || typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    if (isVoiceMuted || typeof window === "undefined") return;
     
     stopSpeaking();
 
@@ -238,25 +348,93 @@ export default function GlobalLogiCopilot() {
     if (!cleanSpeech) return;
 
     try {
-      const utterance = new SpeechSynthesisUtterance(cleanSpeech);
-      utterance.rate = 1.05;
-      utterance.pitch = 1.25;
-      utterance.lang = "en-IN";
+      const { lang } = detectLanguage(cleanSpeech);
 
-      utterance.onstart = () => {
-        setBotState("speaking");
-      };
+      // Select best matching voice installed on user OS / browser, prioritizing male voices when available
+      const voices = (window.speechSynthesis && window.speechSynthesis.getVoices?.()) || [];
+      const langPrefix = lang.split("-")[0].toLowerCase();
+      
+      const candidateVoices = voices.filter(
+        (v) =>
+          v.lang.toLowerCase() === lang.toLowerCase() ||
+          v.lang.toLowerCase().startsWith(langPrefix) ||
+          v.lang.toLowerCase().includes(langPrefix)
+      );
 
-      utterance.onend = () => {
-        setBotState("idle");
-      };
+      const maleVoice = candidateVoices.find(
+        (v) =>
+          !v.name.toLowerCase().includes("female") &&
+          !v.name.toLowerCase().includes("zira") &&
+          !v.name.toLowerCase().includes("hazel") &&
+          !v.name.toLowerCase().includes("susan") &&
+          (v.name.toLowerCase().includes("male") ||
+            v.name.toLowerCase().includes("david") ||
+            v.name.toLowerCase().includes("george") ||
+            v.name.toLowerCase().includes("ravi") ||
+            v.name.toLowerCase().includes("manoj") ||
+            v.name.toLowerCase().includes("deepak") ||
+            v.name.toLowerCase().includes("guy"))
+      );
 
-      utterance.onerror = () => {
-        setBotState("idle");
-      };
+      const matchedVoice = maleVoice || candidateVoices[0];
 
-      activeUtteranceRef.current = utterance;
-      window.speechSynthesis.speak(utterance);
+      // If browser lacks a native voice for any supported language (Malayalam, Hindi, Tamil, Telugu, German, Spanish, French, Arabic, etc.), stream audio from /api/tts with male pitch transformation
+      if (!matchedVoice && lang !== "en-IN" && lang !== "en-US" && lang !== "en-GB") {
+        const audioUrl = `/api/tts?lang=${encodeURIComponent(langPrefix)}&text=${encodeURIComponent(cleanSpeech.slice(0, 200))}`;
+        const audio = new Audio(audioUrl);
+        audio.crossOrigin = "anonymous";
+        audioPlayerRef.current = audio;
+        
+        // Pitch shift down with playbackRate or Web Audio DSP to transform into an authentic, deeper male voice
+        audio.playbackRate = 0.88; // Lowers resonant pitch by 12% into natural male acoustic register
+
+        audio.onplay = () => {
+          setBotState("speaking");
+        };
+        audio.onended = () => {
+          setBotState("idle");
+        };
+        audio.onerror = (e) => {
+          console.warn("Audio element error:", e);
+          setBotState("idle");
+        };
+
+        audio.play().catch((playErr) => {
+          console.warn("Audio play fallback error:", playErr);
+          setBotState("idle");
+        });
+        return;
+      }
+
+      // Standard Web Speech API
+      if ("speechSynthesis" in window) {
+        const utterance = new SpeechSynthesisUtterance(cleanSpeech);
+        utterance.lang = lang;
+
+        if (matchedVoice) {
+          utterance.voice = matchedVoice;
+        }
+
+        const isIndic = ["ml-IN", "hi-IN", "ta-IN", "te-IN", "kn-IN"].includes(lang);
+        utterance.rate = isIndic ? 0.88 : 0.95;
+        // Pitch 0.72 forces the synthetic voice engine into a deeper male vocal formant
+        utterance.pitch = 0.72;
+
+        utterance.onstart = () => {
+          setBotState("speaking");
+        };
+
+        utterance.onend = () => {
+          setBotState("idle");
+        };
+
+        utterance.onerror = () => {
+          setBotState("idle");
+        };
+
+        activeUtteranceRef.current = utterance;
+        window.speechSynthesis.speak(utterance);
+      }
     } catch (e) {
       console.warn("TTS error:", e);
     }
@@ -324,34 +502,123 @@ export default function GlobalLogiCopilot() {
       setShowLeadForm(true);
     }
 
-    // Check for Direct Click Action tokens (e.g. [[CLICK:botToggle]])
-    const clickMatch = text.match(/\[\[CLICK:([a-zA-Z0-9_-]+)\]\]/);
-    if (clickMatch && typeof window !== "undefined") {
-      const targetBtnId = clickMatch[1];
-      const btnEl = document.getElementById(targetBtnId);
-      if (btnEl) {
-        // Bring button into view smoothly first if not visible
-        btnEl.scrollIntoView({ behavior: "smooth", block: "center" });
+    // Check for Sequential/Multi Click Action tokens (e.g. [[MULTI_CLICK:rail-crossborder,chaos-dup-webhook,payBtn]])
+    const multiClickMatch = text.match(/\[\[MULTI_CLICK:([^\]]+)\]\]/);
+    if (multiClickMatch && typeof window !== "undefined") {
+      const btnIds = multiClickMatch[1].split(",").map((s) => s.trim()).filter(Boolean);
+      let stepIndex = 0;
 
-        setTimeout(() => {
-          const rect = btnEl.getBoundingClientRect();
-          setBotState("flight");
-          // Fly mascot right to the button's coordinates on viewport
-          flyMascotTo(Math.max(rect.left - 20, 20), Math.max(rect.top - 65, 40));
-          triggerBubble(`Clicking ${btnEl.textContent?.trim() || "button"}… ⚡`, 1800);
+      const clickNextButton = () => {
+        if (stepIndex >= btnIds.length) {
+          setTimeout(() => {
+            setBotState("happy");
+            setTimeout(() => returnMascotToRest(), 1600);
+          }, 400);
+          return;
+        }
+
+        const targetId = btnIds[stepIndex];
+        stepIndex++;
+        const btnEl = document.getElementById(targetId);
+        if (btnEl) {
+          btnEl.scrollIntoView({ behavior: "smooth", block: "center" });
+          setTimeout(() => {
+            const rect = btnEl.getBoundingClientRect();
+            setBotState("flight");
+            flyMascotTo(Math.max(rect.left - 20, 20), Math.max(rect.top - 65, 40));
+            triggerBubble(`Clicking ${btnEl.textContent?.trim() || targetId}… ⚡`, 1600);
+
+            setTimeout(() => {
+              setBotState("tap");
+              btnEl.click();
+              setTimeout(() => {
+                clickNextButton();
+              }, 700);
+            }, 600);
+          }, 350);
+        } else {
+          clickNextButton();
+        }
+      };
+
+      clickNextButton();
+    } else {
+      // Check for Direct Single Click Action tokens (e.g. [[CLICK:botToggle]])
+      const clickMatch = text.match(/\[\[CLICK:([a-zA-Z0-9_-]+)\]\]/);
+      if (clickMatch && typeof window !== "undefined") {
+        const targetBtnId = clickMatch[1];
+        const btnEl = document.getElementById(targetBtnId);
+        if (btnEl) {
+          // Bring button into view smoothly first if not visible
+          btnEl.scrollIntoView({ behavior: "smooth", block: "center" });
 
           setTimeout(() => {
-            setBotState("tap");
-            btnEl.click();
+            const rect = btnEl.getBoundingClientRect();
+            setBotState("flight");
+            // Fly mascot right to the button's coordinates on viewport
+            flyMascotTo(Math.max(rect.left - 20, 20), Math.max(rect.top - 65, 40));
+            triggerBubble(`Clicking ${btnEl.textContent?.trim() || "button"}… ⚡`, 1800);
+
             setTimeout(() => {
-              setBotState("happy");
+              setBotState("tap");
+              btnEl.click();
               setTimeout(() => {
-                returnMascotToRest();
-              }, 1600);
-            }, 350);
-          }, 700);
-        }, 300);
+                setBotState("happy");
+                setTimeout(() => {
+                  returnMascotToRest();
+                }, 1600);
+              }, 350);
+            }, 700);
+          }, 300);
+        }
       }
+    }
+
+    // Check for Studio App Action tokens (e.g. [[STUDIO:theme:vita]] or [[STUDIO:cmd:book now]])
+    const studioMatch = text.match(/\[\[STUDIO:([a-zA-Z0-9_-]+):?([^\]]*)\]\]/);
+    if (studioMatch && typeof window !== "undefined") {
+      const actionType = studioMatch[1];
+      const actionArg = studioMatch[2] || "";
+      const studioSec = document.getElementById("app-studio");
+      if (studioSec) {
+        studioSec.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+
+      setTimeout(() => {
+        if (actionType === "theme") {
+          const themeBtn = document.querySelector(`[data-theme-pick="${actionArg}"]`) as HTMLElement;
+          if (themeBtn) {
+            const rect = themeBtn.getBoundingClientRect();
+            setBotState("flight");
+            flyMascotTo(Math.max(rect.left - 20, 20), Math.max(rect.top - 65, 40));
+            triggerBubble(`Switching style to ${actionArg.toUpperCase()}… ⚡`, 1800);
+            setTimeout(() => {
+              setBotState("tap");
+              themeBtn.click();
+              setTimeout(() => {
+                setBotState("happy");
+                setTimeout(() => returnMascotToRest(), 1600);
+              }, 350);
+            }, 700);
+          }
+        } else if (actionType === "cmd") {
+          window.dispatchEvent(new CustomEvent("flml:studio_cmd", { detail: actionArg }));
+          const previewApp = document.getElementById("stApp");
+          if (previewApp) {
+            const rect = previewApp.getBoundingClientRect();
+            setBotState("flight");
+            flyMascotTo(Math.max(rect.left + rect.width / 2 - 40, 20), Math.max(rect.top + 80, 40));
+            triggerBubble(`Interacting on preview: "${actionArg}"… ⚡`, 2000);
+            setTimeout(() => {
+              setBotState("tap");
+              setTimeout(() => {
+                setBotState("happy");
+                setTimeout(() => returnMascotToRest(), 1800);
+              }, 400);
+            }, 800);
+          }
+        }
+      }, 400);
     }
 
     // Check for navigation tokens
@@ -391,6 +658,7 @@ export default function GlobalLogiCopilot() {
           if (targetId === "scale" || targetId === "traffic" || targetId === "autoscaling") targetId = "scale-demo";
           if (targetId === "payment" || targetId === "payments") targetId = "pay-demo";
           if (targetId === "studio") targetId = "app-studio";
+          if (targetId === "doctrine") targetId = "story";
 
           // If user is already on the target section in viewport, do NOT re-scroll or re-transition!
           const targetEl = targetId ? document.getElementById(targetId) : null;
@@ -402,7 +670,7 @@ export default function GlobalLogiCopilot() {
             }
           }
 
-          // 2. Switch tab if not already on architecture
+          // 2. Switch tab if not already on architecture (unless targetSub is empty or general)
           window.dispatchEvent(new CustomEvent("flml:tab_transition", { detail: "architecture" }));
 
           const findAndFlyToSection = () => {
@@ -529,6 +797,7 @@ export default function GlobalLogiCopilot() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           userMessage: query,
+          currentSection: activeSectionRef.current,
           messages: messages.map((m) => ({ role: m.role, content: m.content }))
         })
       });
@@ -830,7 +1099,7 @@ export default function GlobalLogiCopilot() {
           </svg>
 
           {/* Embedded Custom Keyframe Animations */}
-          <style jsx>{`
+          <style dangerouslySetInnerHTML={{ __html: `
             @keyframes copilotBob {
               0%, 100% { transform: translateY(0); }
               50% { transform: translateY(-7px); }
@@ -856,7 +1125,7 @@ export default function GlobalLogiCopilot() {
               0%, 100% { transform: rotate(0deg); }
               50% { transform: rotate(38deg); }
             }
-          `}</style>
+          ` }} />
         </div>
       </motion.div>
 

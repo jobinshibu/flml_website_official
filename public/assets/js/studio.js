@@ -262,7 +262,109 @@ let auto=false;new IntersectionObserver((es,ob)=>{if(es[0].isIntersecting&&!auto
    ===================================================================== */
 const TK=$('#tok');
 if(TK){
-const PAIRS={editorial:["system-ui,-apple-system,sans-serif","system-ui,-apple-system,sans-serif",'System Sans / Sans'],geometric:["system-ui,-apple-system,sans-serif","system-ui,-apple-system,sans-serif",'System Sans / Sans'],friendly:["system-ui,-apple-system,sans-serif","system-ui,-apple-system,sans-serif",'System Sans / Sans'],technical:["'JetBrains Mono',monospace","system-ui,-apple-system,sans-serif",'JetBrains Mono / Sans']};
+const PAIRS={
+  editorial:["'Playfair Display', Georgia, serif","'Inter', system-ui, sans-serif",'Playfair Display / Inter'],
+  geometric:["'Syne', 'Inter', system-ui, sans-serif","'Inter', system-ui, sans-serif",'Syne / Inter'],
+  friendly:["'Plus Jakarta Sans', system-ui, sans-serif","'Plus Jakarta Sans', system-ui, sans-serif",'Plus Jakarta Sans'],
+  technical:["'JetBrains Mono', monospace","'Inter', system-ui, sans-serif",'JetBrains Mono / Inter']
+};
+
+const PRESETS = {
+  cloud: {
+    brand: '#2F5BEA',
+    pair: 'geometric',
+    r: 12,
+    dens: 1,
+    mode: 'dark',
+    navBrand: 'Pulse.io',
+    badge: 'v4.2 Production · Zero Latency',
+    title: 'Scale systems without limits.',
+    desc: 'Unified tokens govern every interface across our edge mesh. Instant dark/light contrast adaptation, calibrated typography, and responsive geometry.',
+    btnPrimary: 'Launch Cluster',
+    btnGhost: 'Live Metrics',
+    btnExtra: 'CLI Docs',
+    f1: ['99.999% Uptime', 'Multi-region automated failover nodes.'],
+    f2: ['Sub-millisecond', 'Global edge execution under 8ms.'],
+    f3: ['Audit Secured', 'SOC2 compliant cryptographic logs.'],
+    phoneSmall: 'System Health',
+    phoneTitle: 'Edge Mesh US-East',
+    slots: ['Healthy', '42ms', '0% err'],
+    phoneBtn: 'View Node Map',
+    card2Title: 'Throughput',
+    card2Small: '184,200 req/sec'
+  },
+  fintech: {
+    brand: '#0E9F8E',
+    pair: 'technical',
+    r: 6,
+    dens: 0.8,
+    mode: 'dark',
+    navBrand: 'NovaVault',
+    badge: 'Institutional Capital Custody',
+    title: 'Cryptographic liquidity & wealth.',
+    desc: 'Low-latency order matching, automated treasury routing, and real-time Merkle tree proof-of-reserves across all customer accounts.',
+    btnPrimary: 'Trade Assets',
+    btnGhost: 'Live Orderbook',
+    btnExtra: 'Audit Ledger',
+    f1: ['Sub-ms Latency', 'C++ memory mapped exchange engine.'],
+    f2: ['Multi-Sig MPC', '3-of-5 threshold institutional custody.'],
+    f3: ['Real-time Proof', 'Continuous block ledger verification.'],
+    phoneSmall: 'Portfolio Value',
+    phoneTitle: '₹24,85,600',
+    slots: ['+14.2%', 'Yield 8.4%', 'Audited'],
+    phoneBtn: 'Instant Deposit',
+    card2Title: 'Capital Reserve',
+    card2Small: '100% Fully Backed'
+  },
+  luxury: {
+    brand: '#B8893A',
+    pair: 'editorial',
+    r: 16,
+    dens: 1.25,
+    mode: 'dark',
+    navBrand: 'Aurum',
+    badge: 'Private Concierge Suite',
+    title: 'Bespoke living. Elevated moments.',
+    desc: 'Curated global residences, chartered transit, and tailored lifestyle management orchestrated for distinguished patrons.',
+    btnPrimary: 'Reserve Suite',
+    btnGhost: 'View Catalog',
+    btnExtra: 'Consultant',
+    f1: ['Private Villa', 'Curated architectural sanctuaries.'],
+    f2: ['Chauffeur VIP', 'Armored fleet on-demand in 40 cities.'],
+    f3: ['White-glove', 'Dedicated 24/7 personal estate aide.'],
+    phoneSmall: 'Next Reservation',
+    phoneTitle: 'Villa Bellissima · Lake Como',
+    slots: ['Confirmed', '2 Guests', 'Helipad'],
+    phoneBtn: 'Flight Check-in',
+    card2Title: 'Patron Tier',
+    card2Small: 'Centurion Elite Access'
+  },
+  health: {
+    brand: '#7B5CFF',
+    pair: 'friendly',
+    r: 14,
+    dens: 1,
+    mode: 'light',
+    navBrand: 'VitaCare',
+    badge: 'AI Diagnostic Telehealth',
+    title: 'Clinical intelligence at home.',
+    desc: 'Real-time vital tracking, instant pediatric video consults, and automated prescription delivery directly to your door.',
+    btnPrimary: 'Book Doctor',
+    btnGhost: 'View Records',
+    btnExtra: 'Vitals Lab',
+    f1: ['Fast Response', 'Board-certified clinician in 3 minutes.'],
+    f2: ['HIPAA Secured', 'End-to-end encrypted biometric telemetry.'],
+    f3: ['Lab Delivery', 'Home specimen kit delivered in 2 hours.'],
+    phoneSmall: 'Daily Health Score',
+    phoneTitle: 'Optimal · 94 / 100',
+    slots: ['Heart 68bpm', 'Sleep 8.2h', 'O2 99%'],
+    phoneBtn: 'Sync Apple Watch',
+    card2Title: 'Active Rx Plan',
+    card2Small: 'Refill scheduled for Thu'
+  }
+};
+
+let currentPreset = 'cloud';
 const t={brand:'#2F5BEA',pair:'geometric',r:12,dens:1,mode:'light'};
 const hex2rgb=h=>{h=h.replace('#','');if(h.length===3)h=h.split('').map(c=>c+c).join('');const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]};
 const rgb2hex=a=>'#'+a.map(v=>Math.round(Math.max(0,Math.min(255,v))).toString(16).padStart(2,'0')).join('').toUpperCase();
@@ -270,25 +372,157 @@ const mix=(a,b,p)=>rgb2hex(hex2rgb(a).map((v,i)=>v+(hex2rgb(b)[i]-v)*p));
 const lum=h=>{const c=hex2rgb(h).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]};
 const cr=(a,b)=>{const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)};
 const prev=$('#tp',TK),code=$('#tokCode',TK),scale=$('#tokScale',TK),checks=$('#tokChecks',TK),aa=$('#tokAA',TK);
-function apply(){const dark=t.mode==='dark';const b=t.brand;
+
+function updatePreviewContent(p) {
+  if (!prev) return;
+  const navB = $('.tp-nav b', prev); if (navB) navB.textContent = p.navBrand;
+  const badge = $('.tp-badge', prev); if (badge) badge.textContent = p.badge;
+  const title = $('.tp-h', prev); if (title) title.textContent = p.title;
+  const desc = $('.tp-p', prev); if (desc) desc.textContent = p.desc;
+  const ctas = $$('.tp-ctas .tp-btn', prev);
+  if (ctas[0]) ctas[0].textContent = p.btnPrimary;
+  if (ctas[1]) ctas[1].textContent = p.btnGhost;
+  if (ctas[2]) ctas[2].textContent = p.btnExtra;
+  
+  const feats = $$('.tp-feats > div', prev);
+  const featData = [p.f1, p.f2, p.f3];
+  featData.forEach((fd, i) => {
+    if (feats[i]) {
+      const b = $('b', feats[i]); if (b) b.textContent = fd[0];
+      const s = $('span:not(.tp-ic)', feats[i]); if (s) s.textContent = fd[1];
+    }
+  });
+
+  const phone = $('.tp-phone', prev);
+  if (phone) {
+    const pSmall = $('small', phone); if (pSmall) pSmall.textContent = p.phoneSmall;
+    const pTitle = $('.tp-card b', phone); if (pTitle) pTitle.textContent = p.phoneTitle;
+    const slotEls = $$('.tp-slots span', phone);
+    p.slots.forEach((sl, idx) => { if (slotEls[idx]) slotEls[idx].textContent = sl; });
+    const pBtn = $('.tp-card .tp-btn', phone); if (pBtn) pBtn.textContent = p.phoneBtn;
+    const card2 = $$('.tp-card', phone)[1];
+    if (card2) {
+      const c2b = $('b', card2); if (c2b) c2b.textContent = p.card2Title;
+      const c2s = $('small', card2); if (c2s) c2s.textContent = p.card2Small;
+    }
+  }
+}
+
+function apply(){
+ const scaleEl = $('#tokScale', TK) || scale;
+ const codeEl = $('#tokCode', TK) || code;
+ const checksEl = $('#tokChecks', TK) || checks;
+ const aaEl = $('#tokAA', TK) || aa;
+ const prevEl = $('#tp', TK) || prev;
+ const dark=t.mode==='dark';const b=t.brand;
  const steps=[50,100,200,300,400,500,600,700,800,900];const sc=steps.map((s,i)=>i<5?mix(b,'#FFFFFF',[.92,.82,.64,.42,.2][i]):i===5?b.toUpperCase():mix(b,'#000000',[.18,.36,.54,.7][i-6]));
  const bg=dark?mix(b,'#07090F',.9):mix(b,'#FFFFFF',.965),sf=dark?mix(b,'#0E121C',.86):'#FFFFFF',ink=dark?'#EEF1F8':'#121522',mut=dark?'#9AA3B8':'#5B6175',line=dark?mix(b,'#1A2030',.8):mix(b,'#E6E8EF',.9);
  const on=cr(b,'#FFFFFF')>=cr(b,'#111111')?'#FFFFFF':'#111111';const pf=PAIRS[t.pair];const sp=t.dens;
  const V={'--t-brand':b,'--t-on':on,'--t-bg':bg,'--t-sf':sf,'--t-ink':ink,'--t-mut':mut,'--t-line':line,'--t-soft':dark?mix(b,'#000000',.55):sc[1],'--t-r':t.r+'px','--t-sp':sp,'--t-fd':pf[0],'--t-fb':pf[1]};
- for(const k in V)prev.style.setProperty(k,V[k]);
- scale.innerHTML=sc.map((c,i)=>`<i style="background:${c}" title="brand-${steps[i]} ${c}"><span style="color:${cr(c,'#FFFFFF')>cr(c,'#111111')?'#fff':'#111'}">${steps[i]}</span></i>`).join('');
- code.textContent=`:root {\n  --color-brand: ${b.toUpperCase()};\n  --color-on-brand: ${on};\n  --color-bg: ${bg};\n  --color-surface: ${sf};\n  --color-text: ${ink};\n  --color-muted: ${mut};\n  --radius-md: ${t.r}px;\n  --radius-lg: ${Math.round(t.r*1.6)}px;\n  --space-unit: ${Math.round(8*sp)}px;\n  --font-display: ${pf[2].split(' / ')[0]};\n  --font-body: ${pf[2].split(' / ')[1]};\n}`;
+ if (prevEl) { for(const k in V) prevEl.style.setProperty(k,V[k]); }
+
+ if (PRESETS[currentPreset]) {
+   updatePreviewContent(PRESETS[currentPreset]);
+ }
+
+ if (scaleEl) scaleEl.innerHTML=sc.map((c,i)=>`<i style="background:${c}" title="brand-${steps[i]} ${c}"><span style="color:${cr(c,'#FFFFFF')>cr(c,'#111111')?'#fff':'#111'}">${steps[i]}</span></i>`).join('');
+ if (codeEl) codeEl.textContent=`:root {
+  --color-brand: ${b.toUpperCase()};
+  --color-on-brand: ${on};
+  --color-bg: ${bg};
+  --color-surface: ${sf};
+  --color-text: ${ink};
+  --color-muted: ${mut};
+  --radius-md: ${t.r}px;
+  --radius-lg: ${Math.round(t.r*1.6)}px;
+  --space-unit: ${Math.round(8*sp)}px;
+  --font-display: ${pf[2].split(' / ')[0]};
+  --font-body: ${pf[2].split(' / ')[1]};
+}`;
  const C=[['Button text on brand',on,b,4.5],['Body text on background',ink,bg,4.5],['Muted text on surface',mut,sf,4.5],['Brand as text on surface',b,sf,3]];
- let ok=0;checks.innerHTML=C.map(([n,f,g,min])=>{const r=cr(f,g);const p=r>=min;if(p)ok++;return `<div class="${p?'pass':'fail'}"><i style="background:${g};color:${f}">Aa</i><span>${n}<small>${r.toFixed(2)}:1 · needs ${min}:1</small></span><b>${p?'AA ✓':'Fails'}</b></div>`}).join('');
- aa.textContent=`WCAG AA · ${ok}/${C.length} pass`;
+ let ok=0;if (checksEl) checksEl.innerHTML=C.map(([n,f,g,min])=>{const r=cr(f,g);const p=r>=min;if(p)ok++;return `<div class="${p?'pass':'fail'}"><i style="background:${g};color:${f}">Aa</i><span>${n}<small>${r.toFixed(2)}:1 · needs ${min}:1</small></span><b>${p?'AA ✓':'Fails'}</b></div>`}).join('');
+ if (aaEl) aaEl.textContent=`WCAG AA · ${ok}/${C.length} pass`;
  $$('[data-brand]',TK).forEach(x=>x.setAttribute('aria-pressed',x.dataset.brand.toLowerCase()===b.toLowerCase()));
  $$('[data-pair]',TK).forEach(x=>x.setAttribute('aria-pressed',x.dataset.pair===t.pair));
  $$('[data-dens]',TK).forEach(x=>x.setAttribute('aria-pressed',+x.dataset.dens===t.dens));
  $$('[data-tmode]',TK).forEach(x=>x.setAttribute('aria-pressed',x.dataset.tmode===t.mode));
- $('#tokROut',TK).textContent=t.r+'px';}
-TK.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ $$('[data-tok-preset]',TK).forEach(x=>x.setAttribute('aria-pressed',x.dataset.tokPreset===currentPreset));
+ $('#tokROut',TK).textContent=t.r+'px';
+  // Update left widget dynamic values
+  const hexLabel = $('#tokActiveHex', TK); if (hexLabel) hexLabel.textContent = b.toUpperCase();
+  const radLabel = $('#tokActiveRadius', TK); if (radLabel) radLabel.textContent = t.r + 'px radius';
+  const fontSpec = $('#tokFontSpecName', TK); if (fontSpec) fontSpec.textContent = pf[2];
+  const glyph = $('#tokGlyphPreview', TK); if (glyph) glyph.style.fontFamily = pf[0];
+
+  const copyBtn = $('#tokCopyBtn', TK);
+  if (copyBtn && !copyBtn._bound) {
+    copyBtn._bound = true;
+    copyBtn.addEventListener('click', () => {
+      const cssText = code ? code.textContent : '';
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(cssText).then(() => {
+          const orig = copyBtn.textContent;
+          copyBtn.textContent = '✓ Copied!';
+          setTimeout(() => { copyBtn.textContent = orig; }, 1800);
+        });
+      }
+    });
+  }
+
+  const dlBtn = $('#tokDlBtn', TK);
+  if (dlBtn && !dlBtn._bound) {
+    dlBtn._bound = true;
+    dlBtn.addEventListener('click', () => {
+      const tokenObj = {
+        theme: currentPreset,
+        brand: t.brand,
+        onBrand: on,
+        surface: sf,
+        background: bg,
+        text: ink,
+        muted: mut,
+        radius: t.r,
+        density: t.dens,
+        typography: pf[2]
+      };
+      const blob = new Blob([JSON.stringify(tokenObj, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `flml-tokens-${currentPreset}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+  }
+
+}
+
+TK.addEventListener('click',e=>{
+ const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.tokPreset){
+   const pKey=b.dataset.tokPreset;
+   const p=PRESETS[pKey];
+   if(p){
+     currentPreset=pKey;
+     t.brand=p.brand;
+     t.pair=p.pair;
+     t.r=p.r;
+     t.dens=p.dens;
+     t.mode=p.mode;
+     $('#tokColor',TK).value=t.brand;
+     $('#tokR',TK).value=t.r;
+     apply();
+   }
+   return;
+ }
  if(b.dataset.brand){t.brand=b.dataset.brand;$('#tokColor',TK).value=t.brand}
- else if(b.dataset.pair)t.pair=b.dataset.pair;else if(b.dataset.dens)t.dens=+b.dataset.dens;else if(b.dataset.tmode)t.mode=b.dataset.tmode;else return;apply()});
+ else if(b.dataset.pair)t.pair=b.dataset.pair;
+ else if(b.dataset.dens)t.dens=+b.dataset.dens;
+ else if(b.dataset.tmode)t.mode=b.dataset.tmode;
+ else return;
+ apply();
+});
+
 $('#tokColor',TK).addEventListener('input',e=>{t.brand=e.target.value;apply()});
 $('#tokR',TK).addEventListener('input',e=>{t.r=+e.target.value;apply()});
 apply();
